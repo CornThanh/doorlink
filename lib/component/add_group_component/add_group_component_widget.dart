@@ -80,7 +80,8 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                     ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                 child: TextFormField(
                   controller: _model.textController,
                   focusNode: _model.textFieldFocusNode,
@@ -135,7 +136,8 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
               ),
               const Spacer(),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -166,7 +168,7 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                                     FlutterFlowTheme.of(context)
                                         .titleSmallFamily),
                               ),
-                          elevation: 0.0,
+                          elevation: 1.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
@@ -195,14 +197,15 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                                     context: context,
                                     builder: (dialogContext) {
                                       return Dialog(
-                                        elevation: 0,
+                                        elevation: 1,
                                         insetPadding: EdgeInsets.zero,
                                         backgroundColor: Colors.transparent,
                                         alignment:
                                             const AlignmentDirectional(0.0, 0.0)
                                                 .resolve(
                                                     Directionality.of(context)),
-                                        child: const SelectGroupDialogBoxWidget(),
+                                        child:
+                                            const SelectGroupDialogBoxWidget(),
                                       );
                                     },
                                   ).then((value) => setState(() {}));
@@ -211,19 +214,8 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                                   await actions.customSnackbar(
                                     context,
                                     FFLocalizations.of(context).getVariableText(
+                                      viText: 'Vui lòng nhập đúng tên nhóm',
                                       enText: 'Please enter valid Group name.',
-                                      arText: 'الرجاء إدخال اسم المجموعة صالح.',
-                                      zh_HansText: '请输入有效的组名称。',
-                                      frText:
-                                          'Veuillez saisir un nom de groupe valide.',
-                                      deText:
-                                          'Bitte geben Sie einen gültigen Gruppennamen ein.',
-                                      ptText: 'Insira um nome de grupo válido.',
-                                      ruText:
-                                          'Пожалуйста, введите правильное название группы.',
-                                      esText:
-                                          'Por favor ingrese un nombre de grupo válido.',
-                                      trText: 'Lütfen geçerli Grup adı girin.',
                                     ),
                                     FlutterFlowTheme.of(context).error,
                                   );
@@ -240,14 +232,15 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                                     context: context,
                                     builder: (dialogContext) {
                                       return Dialog(
-                                        elevation: 0,
+                                        elevation: 1,
                                         insetPadding: EdgeInsets.zero,
                                         backgroundColor: Colors.transparent,
                                         alignment:
                                             const AlignmentDirectional(0.0, 0.0)
                                                 .resolve(
                                                     Directionality.of(context)),
-                                        child: const SelectGroupDialogBoxWidget(),
+                                        child:
+                                            const SelectGroupDialogBoxWidget(),
                                       );
                                     },
                                   ).then((value) => setState(() {}));
@@ -256,19 +249,8 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                                   await actions.customSnackbar(
                                     context,
                                     FFLocalizations.of(context).getVariableText(
+                                      viText: 'Vui lòng nhập đúng tên nhóm',
                                       enText: 'Please enter valid Group name.',
-                                      arText: 'الرجاء إدخال اسم المجموعة صالح.',
-                                      zh_HansText: '请输入有效的组名称。',
-                                      frText:
-                                          'Veuillez saisir un nom de groupe valide.',
-                                      deText:
-                                          'Bitte geben Sie einen gültigen Gruppennamen ein.',
-                                      ptText: 'Insira um nome de grupo válido.',
-                                      ruText:
-                                          'Пожалуйста, введите правильное название группы.',
-                                      esText:
-                                          'Por favor ingrese un nombre de grupo válido.',
-                                      trText: 'Lütfen geçerli Grup adı girin.',
                                     ),
                                     FlutterFlowTheme.of(context).error,
                                   );
@@ -279,17 +261,8 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                               await actions.customSnackbar(
                                 context,
                                 FFLocalizations.of(context).getVariableText(
+                                  viText: 'Tên nhóm đã tồn tại',
                                   enText: 'Group name is already added.',
-                                  arText: 'تمت إضافة اسم المجموعة بالفعل.',
-                                  zh_HansText: '群组名称已添加.',
-                                  frText: 'Le nom du groupe est déjà ajouté.',
-                                  deText:
-                                      'Der Gruppenname wurde bereits hinzugefügt.',
-                                  ptText: ' O nome do grupo já foi adicionado.',
-                                  ruText: 'Название группы уже добавлено.',
-                                  esText:
-                                      'El nombre del grupo ya está agregado.',
-                                  trText: 'Grup adı zaten eklenmiş.',
                                 ),
                                 FlutterFlowTheme.of(context).error,
                               );
@@ -317,7 +290,7 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey('Nunito Sans'),
                                 ),
-                            elevation: 0.0,
+                            elevation: 1.0,
                             borderSide: const BorderSide(
                               color: Colors.transparent,
                               width: 1.0,

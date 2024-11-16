@@ -81,7 +81,7 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                 child: SizedBox(
                   width: 50.0,
                   height: 50.0,
-                  child: CupertinoActivityIndicator(),
+                  child: CupertinoActivityIndicator(color: Colors.white),
                 ),
               );
             }
@@ -142,6 +142,7 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
+                                    color: Colors.black,
                                     fontFamily: 'Nunito Sans',
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
@@ -178,7 +179,7 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 5.0, 0.0, 0.0),
                               child: Text(
-                                'Created at : ${functions.formatDate(valueOrDefault<String>(
+                                'Ngày tạo: ${functions.formatDate(valueOrDefault<String>(
                                   VcardGroup.singleVcardsCall.createdAt(
                                     columnSingleVcardsResponse.jsonBody,
                                   ),
@@ -368,6 +369,7 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                                                               .of(context)
                                                           .bodyMedium
                                                           .override(
+                                                            color: Colors.black,
                                                             fontFamily:
                                                                 'Nunito Sans',
                                                             fontWeight:
@@ -439,12 +441,10 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                                             },
                                           );
 
-                                          setState(() {
-                                            FFAppState().isVcardAppointment =
-                                                true;
-                                            FFAppState().selectedDrawerPage =
-                                                'Appointments';
-                                          });
+                                          FFAppState().isVcardAppointment =
+                                              true;
+                                          FFAppState().selectedDrawerPage =
+                                              'Appointments';
                                         },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -481,6 +481,7 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                                                         context)
                                                     .bodyMedium
                                                     .override(
+                                                      color: Colors.black,
                                                       fontFamily: 'Nunito Sans',
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -523,12 +524,6 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
-                                          setState(() {
-                                            FFAppState().isVcardEnquiry = true;
-                                            FFAppState().selectedDrawerPage =
-                                                'Enquiries';
-                                          });
-
                                           context.pushNamed(
                                             'enquiries_screen',
                                             queryParameters: {
@@ -551,6 +546,10 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                                               ),
                                             },
                                           );
+
+                                          FFAppState().isVcardEnquiry = true;
+                                          FFAppState().selectedDrawerPage =
+                                              'Enquiries';
                                         },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -587,6 +586,7 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                                                         context)
                                                     .bodyMedium
                                                     .override(
+                                                      color: Colors.black,
                                                       fontFamily: 'Nunito Sans',
                                                       fontWeight:
                                                           FontWeight.bold,
@@ -611,12 +611,11 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
-                                        context.safePop();
-                                        await showDialog(
+                                        final success = await showDialog(
                                           context: context,
                                           builder: (dialogContext) {
                                             return Dialog(
-                                              elevation: 0,
+                                              elevation: 1,
                                               insetPadding: EdgeInsets.zero,
                                               backgroundColor:
                                                   Colors.transparent,
@@ -647,7 +646,9 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                                               ),
                                             );
                                           },
-                                        ).then((value) => setState(() {}));
+                                        );
+
+                                        context.pop(success);
                                       },
                                       child: Container(
                                         width: 100.0,
@@ -696,6 +697,7 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                                                           context)
                                                       .bodyMedium
                                                       .override(
+                                                        color: Colors.black,
                                                         fontFamily:
                                                             'Nunito Sans',
                                                         fontWeight:
@@ -850,6 +852,7 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
+                                                  color: Colors.black,
                                                   fontFamily: 'Nunito Sans',
                                                   fontWeight: FontWeight.bold,
                                                   useGoogleFonts:

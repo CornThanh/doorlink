@@ -97,7 +97,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 0.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -136,8 +137,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                           ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 40.0, 0.0, 0.0),
                       child: TextFormField(
                         controller: _model.firstNameController,
                         focusNode: _model.firstNameFocusNode,
@@ -190,7 +191,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: const Color(0xFFF6F8F9),
+                          fillColor: Colors.white.withOpacity(0.1),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
                         validator: _model.firstNameControllerValidator
@@ -198,8 +199,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 15.0, 0.0, 0.0),
                       child: TextFormField(
                         controller: _model.lastNameController,
                         focusNode: _model.lastNameFocusNode,
@@ -252,7 +253,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: const Color(0xFFF6F8F9),
+                          fillColor: Colors.white.withOpacity(0.1),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
                         validator: _model.lastNameControllerValidator
@@ -260,8 +261,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 15.0, 0.0, 0.0),
                       child: TextFormField(
                         controller: _model.emailController,
                         focusNode: _model.emailFocusNode,
@@ -314,7 +315,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: const Color(0xFFF6F8F9),
+                          fillColor: Colors.white.withOpacity(0.1),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
                         validator: _model.emailControllerValidator
@@ -322,8 +323,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 15.0, 0.0, 0.0),
                       child: TextFormField(
                         controller: _model.passwordController,
                         focusNode: _model.passwordFocusNode,
@@ -376,7 +377,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: const Color(0xFFF6F8F9),
+                          fillColor: Colors.white.withOpacity(0.1),
                           suffixIcon: InkWell(
                             onTap: () => setState(
                               () => _model.passwordVisibility =
@@ -398,8 +399,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 15.0, 0.0, 0.0),
                       child: TextFormField(
                         controller: _model.confirmPasswordController,
                         focusNode: _model.confirmPasswordFocusNode,
@@ -452,7 +453,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: const Color(0xFFF6F8F9),
+                          fillColor: Colors.white.withOpacity(0.1),
                           suffixIcon: InkWell(
                             onTap: () => setState(
                               () => _model.confirmPasswordVisibility =
@@ -474,8 +475,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 50.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           if ((_model.firstNameController.text != '') &&
@@ -532,18 +533,9 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                             context,
                                             FFLocalizations.of(context)
                                                 .getVariableText(
+                                              viText: 'Đăng ký thành công.',
                                               enText:
                                                   'Registration successfully.',
-                                              arText: 'تم التسجيل بنجاح.',
-                                              zh_HansText: '注册成功',
-                                              frText: 'Inscription réussie.',
-                                              deText:
-                                                  ' Registrierung erfolgreich.',
-                                              ptText: ' Registro com sucesso.',
-                                              ruText:
-                                                  'Регистрация прошла успешно.',
-                                              esText: 'Registro exitoso.',
-                                              trText: 'Kayıt başarıyla.',
                                             ),
                                             const Color(0xFF46A44D),
                                           );
@@ -566,22 +558,10 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                           context,
                                           FFLocalizations.of(context)
                                               .getVariableText(
+                                            viText:
+                                                'Vui lòng nhập mật khẩu đúng.',
                                             enText:
                                                 'Please Enter Valid Password.',
-                                            arText:
-                                                'الرجاء إدخال كلمة مرور صالحة.',
-                                            zh_HansText: '请输入有效密码',
-                                            frText:
-                                                'Veuillez saisir un mot de passe valide.',
-                                            deText:
-                                                'Bitte geben Sie ein gültiges Passwort ein.',
-                                            ptText: 'Digite uma senha válida.',
-                                            ruText:
-                                                'Пожалуйста, введите действительный пароль.',
-                                            esText:
-                                                'Por favor ingrese una contraseña válida.',
-                                            trText:
-                                                'Lütfen Geçerli Şifre Giriniz.',
                                           ),
                                           FlutterFlowTheme.of(context).error,
                                         );
@@ -591,22 +571,10 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                         context,
                                         FFLocalizations.of(context)
                                             .getVariableText(
+                                          viText:
+                                              'Vui lòng Nhập Xác nhận Mật khẩu.',
                                           enText:
                                               'Please Enter Confirm Password.',
-                                          arText:
-                                              'الرجاء إدخال تأكيد كلمة المرور.',
-                                          zh_HansText: '请输入确认密码',
-                                          frText:
-                                              'Veuillez saisir le mot de passe confirmé.',
-                                          deText:
-                                              'Bitte geben Sie das Bestätigungskennwort ein.',
-                                          ptText:
-                                              'Por favor, insira a confirmação da senha.',
-                                          ruText:
-                                              'Пожалуйста, введите подтверждение пароля.',
-                                          esText:
-                                              'Por favor ingrese Confirmar contraseña.',
-                                          trText: 'Lütfen Şifreyi Doğrulayın.',
                                         ),
                                         FlutterFlowTheme.of(context).error,
                                       );
@@ -616,17 +584,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                       context,
                                       FFLocalizations.of(context)
                                           .getVariableText(
-                                        enText: 'Please Enter  Password.',
-                                        arText: 'الرجاء إدخال كلمة المرور.',
-                                        zh_HansText: '请输入密码.',
-                                        frText:
-                                            'Veuillez entrer le mot de passe.',
-                                        deText: 'Bitte Passwort eingeben.',
-                                        ptText: 'Por favor, digite a senha.',
-                                        ruText: 'Пожалуйста введите пароль.',
-                                        esText:
-                                            'Por favor, ingrese contraseña.',
-                                        trText: 'Lütfen şifre giriniz.',
+                                        viText: 'Vui lòng Nhập Mật khẩu.',
+                                        enText: 'Please Enter Password.',
                                       ),
                                       FlutterFlowTheme.of(context).error,
                                     );
@@ -635,18 +594,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                   await actions.customSnackbar(
                                     context,
                                     FFLocalizations.of(context).getVariableText(
+                                      viText: 'Vui lòng nhập email chính xác',
                                       enText: 'Please Enter Valid Email.',
-                                      arText: 'الرجاء إدخال البريد الإلكتروني.',
-                                      zh_HansText: ' 请输入电子邮件.',
-                                      frText: 'Veuillez saisir votre e-mail.',
-                                      deText:
-                                          'Bitte geben Sie Ihre E-Mail-Adresse ein.',
-                                      ptText: 'Por favor, insira o e-mail.',
-                                      ruText:
-                                          'Пожалуйста, введите адрес электронной почты.',
-                                      esText:
-                                          'Por favor ingrese el correo electrónico.',
-                                      trText: 'Lütfen e-posta giriniz.',
                                     ),
                                     FlutterFlowTheme.of(context).error,
                                   );
@@ -655,18 +604,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                 await actions.customSnackbar(
                                   context,
                                   FFLocalizations.of(context).getVariableText(
+                                    viText: 'Vui lòng nhập email.',
                                     enText: 'Please Enter Email.',
-                                    arText: 'الرجاء إدخال البريد الإلكتروني.',
-                                    zh_HansText: ' 请输入电子邮件.',
-                                    frText: 'Veuillez saisir votre e-mail.',
-                                    deText:
-                                        'Bitte geben Sie Ihre E-Mail-Adresse ein.',
-                                    ptText: 'Por favor, insira o e-mail.',
-                                    ruText:
-                                        'Пожалуйста, введите адрес электронной почты.',
-                                    esText:
-                                        'Por favor ingrese el correo electrónico.',
-                                    trText: 'Lütfen e-posta giriniz.',
                                   ),
                                   FlutterFlowTheme.of(context).error,
                                 );
@@ -675,16 +614,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                               await actions.customSnackbar(
                                 context,
                                 FFLocalizations.of(context).getVariableText(
+                                  viText: 'Vui lòng nhập họ.',
                                   enText: 'Please Enter Last name.',
-                                  arText: 'الرجاء إدخال الاسم الأخير.',
-                                  zh_HansText: '请输入姓氏',
-                                  frText:
-                                      'Veuillez saisir votre nom de famille.',
-                                  deText: 'Bitte geben Sie den Nachnamen ein.',
-                                  ptText: 'Lütfen Soyadınızı Giriniz.',
-                                  ruText: 'Lütfen Soyadınızı Giriniz.',
-                                  esText: 'Lütfen Soyadınızı Giriniz.',
-                                  trText: 'Lütfen Soyadınızı Giriniz.',
                                 ),
                                 FlutterFlowTheme.of(context).error,
                               );
@@ -693,15 +624,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             await actions.customSnackbar(
                               context,
                               FFLocalizations.of(context).getVariableText(
+                                viText: 'Vui lòng nhập tên.',
                                 enText: 'Please Enter First name.',
-                                arText: 'الرجاء إدخال الاسم الأول.',
-                                zh_HansText: '请输入名字.',
-                                frText: 'Veuillez saisir votre prénom.',
-                                deText: 'Bitte geben Sie den Vornamen ein.',
-                                ptText: 'Por favor, insira o primeiro nome.',
-                                ruText: 'Пожалуйста, введите имя.',
-                                esText: 'Por favor ingrese el nombre.',
-                                trText: 'Lütfen Adınızı Girin.',
                               ),
                               FlutterFlowTheme.of(context).error,
                             );
@@ -728,7 +652,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Nunito Sans'),
                                   ),
-                          elevation: 0.0,
+                          elevation: 1.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
@@ -740,8 +664,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                     Align(
                       alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 45.0, 0.0, 0.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             '0duuerwu' /* Already have an Account? */,
@@ -757,8 +681,8 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 12.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           context.pushNamed(
@@ -791,7 +715,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Nunito Sans'),
                                   ),
-                          elevation: 0.0,
+                          elevation: 1.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,

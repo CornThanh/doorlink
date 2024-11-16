@@ -116,7 +116,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
           ),
         ),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xff333333),
           automaticallyImplyLeading: false,
           leading: InkWell(
             splashColor: Colors.transparent,
@@ -128,21 +128,12 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
             },
             child: Container(
               decoration: const BoxDecoration(),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
-                child: Container(
+              child: const Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
+                child: SizedBox(
                   width: 100.0,
                   height: 100.0,
-                  decoration: BoxDecoration(
-                    color: const Color(0x00FFFFFF),
-                    image: DecorationImage(
-                      fit: BoxFit.contain,
-                      alignment: const AlignmentDirectional(0.0, 0.0),
-                      image: Image.asset(
-                        'assets/images/drawer.png',
-                      ).image,
-                    ),
-                  ),
+                  child: Icon(Icons.menu),
                 ),
               ),
             ),
@@ -153,7 +144,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Nunito Sans',
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts:
@@ -170,7 +161,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
             ),
           ],
           centerTitle: true,
-          elevation: 2.0,
+          elevation: 1.0,
         ),
         body: Builder(
           builder: (context) {
@@ -182,8 +173,8 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                     height: double.infinity,
                     decoration: const BoxDecoration(),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 10.0, 0.0, 10.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,8 +192,8 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
-                                    children:
-                                        List.generate(data.length, (dataIndex) {
+                                    children: List.generate(data.length,
+                                            (dataIndex) {
                                       final dataItem = data[dataIndex];
                                       return InkWell(
                                         splashColor: Colors.transparent,
@@ -240,12 +231,11 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                   : const Color(0x00FFFFFF),
                                             ),
                                           ),
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                          alignment: const AlignmentDirectional(
+                                              0.0, 0.0),
                                           child: Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    25.0, 0.0, 25.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(25.0, 0.0, 25.0, 0.0),
                                             child: Text(
                                               getJsonField(
                                                 dataItem,
@@ -259,8 +249,10 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                     color: dataIndex ==
                                                             FFAppState()
                                                                 .selectedBusinessGroupIndex
-                                                        ? const Color(0xFF1F69F6)
-                                                        : const Color(0xFF79818A),
+                                                        ? const Color(
+                                                            0xFF1F69F6)
+                                                        : const Color(
+                                                            0xFF79818A),
                                                     fontSize: 15.0,
                                                     fontWeight: FontWeight.bold,
                                                     useGoogleFonts:
@@ -273,9 +265,9 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                         ),
                                       );
                                     })
-                                            .divide(const SizedBox(width: 10.0))
-                                            .addToStart(const SizedBox(width: 5.0))
-                                            .addToEnd(const SizedBox(width: 5.0)),
+                                        .divide(const SizedBox(width: 10.0))
+                                        .addToStart(const SizedBox(width: 5.0))
+                                        .addToEnd(const SizedBox(width: 5.0)),
                                   ),
                                 );
                               },
@@ -313,9 +305,9 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                         itemBuilder: (context, cardsIndex) {
                                           final cardsItem = cards[cardsIndex];
                                           return Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    15.0, 15.0, 15.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(
+                                                15.0, 15.0, 15.0, 0.0),
                                             child: Container(
                                               decoration: const BoxDecoration(),
                                               child: SingleChildScrollView(
@@ -329,11 +321,8 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                     Padding(
                                                       padding:
                                                           const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  5.0),
+                                                              .fromSTEB(0.0,
+                                                              0.0, 0.0, 5.0),
                                                       child: Text(
                                                         getJsonField(
                                                           cardsItem,
@@ -405,7 +394,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                             child:
                                                                                 Material(
                                                                               color: Colors.transparent,
-                                                                              elevation: 2.0,
+                                                                              elevation: 1.0,
                                                                               shape: RoundedRectangleBorder(
                                                                                 borderRadius: BorderRadius.circular(10.0),
                                                                               ),
@@ -709,7 +698,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                             child:
                                                                                 Material(
                                                                               color: Colors.transparent,
-                                                                              elevation: 2.0,
+                                                                              elevation: 1.0,
                                                                               shape: RoundedRectangleBorder(
                                                                                 borderRadius: BorderRadius.circular(10.0),
                                                                               ),
@@ -1020,7 +1009,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                             child:
                                                                                 Material(
                                                                               color: Colors.transparent,
-                                                                              elevation: 2.0,
+                                                                              elevation: 1.0,
                                                                               shape: RoundedRectangleBorder(
                                                                                 borderRadius: BorderRadius.circular(10.0),
                                                                               ),
@@ -1174,7 +1163,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                             child:
                                                                                 Material(
                                                                               color: Colors.transparent,
-                                                                              elevation: 2.0,
+                                                                              elevation: 1.0,
                                                                               shape: RoundedRectangleBorder(
                                                                                 borderRadius: BorderRadius.circular(10.0),
                                                                               ),
@@ -1325,9 +1314,10 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                 },
                                                               );
                                                             })
-                                                                .divide(const SizedBox(
-                                                                    height:
-                                                                        10.0))
+                                                                .divide(
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            10.0))
                                                                 .addToStart(
                                                                     const SizedBox(
                                                                         height:
@@ -1354,8 +1344,8 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                     builder: (context) {
                                       if (FFAppState().isLoading) {
                                         return Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                          alignment: const AlignmentDirectional(
+                                              0.0, 0.0),
                                           child: Container(
                                             width: 60.0,
                                             height: 60.0,
@@ -1377,9 +1367,8 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                         );
                                       } else {
                                         return Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 15.0, 15.0, 0.0),
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(15.0, 15.0, 15.0, 0.0),
                                           child: Builder(
                                             builder: (context) {
                                               final cardData = functions
@@ -1425,8 +1414,9 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                       .selectLanguageIndex ==
                                                                   0) {
                                                                 return Padding(
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
+                                                                  padding:
+                                                                      const EdgeInsetsDirectional
+                                                                          .fromSTEB(
                                                                           5.0,
                                                                           2.0,
                                                                           2.0,
@@ -1436,7 +1426,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                     color: Colors
                                                                         .transparent,
                                                                     elevation:
-                                                                        2.0,
+                                                                        1.0,
                                                                     shape:
                                                                         RoundedRectangleBorder(
                                                                       borderRadius:
@@ -1466,7 +1456,8 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                       ),
                                                                       child:
                                                                           Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional
+                                                                            .fromSTEB(
                                                                             0.0,
                                                                             15.0,
                                                                             10.0,
@@ -1749,8 +1740,9 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                 );
                                                               } else {
                                                                 return Padding(
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
+                                                                  padding:
+                                                                      const EdgeInsetsDirectional
+                                                                          .fromSTEB(
                                                                           5.0,
                                                                           2.0,
                                                                           2.0,
@@ -1760,7 +1752,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                     color: Colors
                                                                         .transparent,
                                                                     elevation:
-                                                                        2.0,
+                                                                        1.0,
                                                                     shape:
                                                                         RoundedRectangleBorder(
                                                                       borderRadius:
@@ -1790,7 +1782,8 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                       ),
                                                                       child:
                                                                           Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional
+                                                                            .fromSTEB(
                                                                             10.0,
                                                                             15.0,
                                                                             0.0,
@@ -2081,8 +2074,9 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                       .selectLanguageIndex ==
                                                                   0) {
                                                                 return Padding(
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
+                                                                  padding:
+                                                                      const EdgeInsetsDirectional
+                                                                          .fromSTEB(
                                                                           2.0,
                                                                           2.0,
                                                                           5.0,
@@ -2092,7 +2086,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                     color: Colors
                                                                         .transparent,
                                                                     elevation:
-                                                                        2.0,
+                                                                        1.0,
                                                                     shape:
                                                                         RoundedRectangleBorder(
                                                                       borderRadius:
@@ -2122,7 +2116,8 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                       ),
                                                                       child:
                                                                           Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional
+                                                                            .fromSTEB(
                                                                             0.0,
                                                                             15.0,
                                                                             10.0,
@@ -2256,8 +2251,9 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                 );
                                                               } else {
                                                                 return Padding(
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
+                                                                  padding:
+                                                                      const EdgeInsetsDirectional
+                                                                          .fromSTEB(
                                                                           5.0,
                                                                           2.0,
                                                                           2.0,
@@ -2267,7 +2263,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                     color: Colors
                                                                         .transparent,
                                                                     elevation:
-                                                                        2.0,
+                                                                        1.0,
                                                                     shape:
                                                                         RoundedRectangleBorder(
                                                                       borderRadius:
@@ -2297,7 +2293,8 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                       ),
                                                                       child:
                                                                           Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: const EdgeInsetsDirectional
+                                                                            .fromSTEB(
                                                                             10.0,
                                                                             15.0,
                                                                             0.0,
@@ -2439,7 +2436,8 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                       .divide(const SizedBox(
                                                           height: 10.0))
                                                       .addToStart(
-                                                          const SizedBox(height: 5.0))
+                                                          const SizedBox(
+                                                              height: 5.0))
                                                       .addToEnd(const SizedBox(
                                                           height: 8.0)),
                                                 ),

@@ -33,7 +33,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
   @override
   Widget build(BuildContext context) {
     // return Container(height: 300, color: Colors.red);
-     return (widget.chartData == null)
+    return (widget.chartData == null)
         ? Container(
             height: 300,
             alignment: Alignment.center,
@@ -76,10 +76,13 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                       getTitlesWidget: (value, meta) {
                         if (value.toInt() >= 0 &&
                             value.toInt() < widget.weeklyLabels.length) {
-                          return Text(widget.weeklyLabels[value.toInt()]
-                              .toString()
-                              .split('-')
-                              .first,style: const TextStyle(height: 1.5),);
+                          return Text(
+                            widget.weeklyLabels[value.toInt()]
+                                .toString()
+                                .split('-')
+                                .first,
+                            style: const TextStyle(height: 1.5),
+                          );
                         }
                         return const Text('');
                       },
@@ -92,8 +95,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                     ),
                   ),
                   topTitles: const AxisTitles(),
-                  rightTitles: const AxisTitles(
-                  ),
+                  rightTitles: const AxisTitles(),
                 ),
                 borderData: FlBorderData(
                   show: true,

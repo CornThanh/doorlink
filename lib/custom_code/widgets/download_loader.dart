@@ -1,3 +1,4 @@
+import 'package:MeU/backend/schema/util/schema_util.dart';
 import 'package:flutter/cupertino.dart';
 
 class DownloadLoader extends StatefulWidget {
@@ -17,7 +18,7 @@ class DownloadLoader extends StatefulWidget {
 class _DownloadLoaderState extends State<DownloadLoader> {
   @override
   Widget build(BuildContext context) {
-    return const CupertinoActivityIndicator();
+    return const CupertinoActivityIndicator(color: Colors.white);
   }
 }
 

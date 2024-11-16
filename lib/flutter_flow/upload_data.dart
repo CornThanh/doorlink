@@ -57,25 +57,24 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
   bool includeDimensions = false,
   bool includeBlurHash = false,
 }) async {
-  final createUploadMediaListTile =
-      (String label, MediaSource mediaSource) => ListTile(
-            title: Text(
-              label,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.getFont(
-                pickerFontFamily,
-                color: textColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 20,
-              ),
-            ),
-            tileColor: backgroundColor,
-            dense: false,
-            onTap: () => Navigator.pop(
-              context,
-              mediaSource,
-            ),
-          );
+  createUploadMediaListTile(String label, MediaSource mediaSource) => ListTile(
+        title: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.getFont(
+            pickerFontFamily,
+            color: Colors.black,
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+          ),
+        ),
+        tileColor: backgroundColor,
+        dense: false,
+        onTap: () => Navigator.pop(
+          context,
+          mediaSource,
+        ),
+      );
   final mediaSource = await showModalBottomSheet<MediaSource>(
       context: context,
       backgroundColor: backgroundColor,
@@ -88,11 +87,12 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
                 padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                 child: ListTile(
                   title: Text(
-                    'Choose Source',
+                    FFLocalizations.of(context)
+                        .getText('x7y1wb4n'), // choose source
                     textAlign: TextAlign.center,
                     style: GoogleFonts.getFont(
                       pickerFontFamily,
-                      color: textColor.withOpacity(0.65),
+                      color: Colors.black,
                       fontWeight: FontWeight.w500,
                       fontSize: 20,
                     ),
@@ -105,27 +105,31 @@ Future<List<SelectedFile>?> selectMediaWithSourceBottomSheet({
             ],
             if (allowPhoto && allowVideo) ...[
               createUploadMediaListTile(
-                'Gallery (Photo)',
+                FFLocalizations.of(context)
+                    .getText('qvftghvv'), // gallery (photo),
                 MediaSource.photoGallery,
               ),
               const Divider(),
               createUploadMediaListTile(
-                'Gallery (Video)',
+                FFLocalizations.of(context)
+                    .getText('qvftghvv'), // gallery (video),
                 MediaSource.videoGallery,
               ),
             ] else if (allowPhoto)
               createUploadMediaListTile(
-                'Gallery',
+                FFLocalizations.of(context).getText('s3dvl2h2'), // gallery
                 MediaSource.photoGallery,
               )
             else
               createUploadMediaListTile(
-                'Gallery',
+                FFLocalizations.of(context).getText('s3dvl2h2'), // gallery
                 MediaSource.videoGallery,
               ),
             if (!kIsWeb) ...[
               const Divider(),
-              createUploadMediaListTile('Camera', MediaSource.camera),
+              createUploadMediaListTile(
+                  FFLocalizations.of(context).getText('lj4umspj'),
+                  MediaSource.camera),
               const Divider(),
             ],
             const SizedBox(height: 10),

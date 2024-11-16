@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 
 import '/backend/api_requests/api_calls.dart';
 import '/component/appointment_sheet/appointment_sheet_widget.dart';
@@ -67,34 +68,31 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
           ),
         ),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xff333333),
           automaticallyImplyLeading: false,
           leading: InkWell(
             splashColor: Colors.transparent,
             focusColor: Colors.transparent,
             hoverColor: Colors.transparent,
             highlightColor: Colors.transparent,
-            onTap: () async {
-              scaffoldKey.currentState!.openDrawer();
-            },
+            onTap: FFAppState().isVcardAppointment
+                ? () {
+                    context.pop();
+                  }
+                : () async {
+                    scaffoldKey.currentState!.openDrawer();
+                  },
             child: Container(
               decoration: const BoxDecoration(),
               child: Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(
-                    12.0, 17.0, 25.0, 17.0),
-                child: Container(
+                    12.0, 17.0, 12.0, 17.0),
+                child: SizedBox(
                   width: 100.0,
                   height: 100.0,
-                  decoration: BoxDecoration(
-                    color: const Color(0x00FFFFFF),
-                    image: DecorationImage(
-                      fit: BoxFit.contain,
-                      alignment: const AlignmentDirectional(0.0, 0.0),
-                      image: Image.asset(
-                        'assets/images/drawer.png',
-                      ).image,
-                    ),
-                  ),
+                  child: Icon(FFAppState().isVcardAppointment
+                      ? Icons.arrow_back_ios
+                      : Icons.menu),
                 ),
               ),
             ),
@@ -105,7 +103,7 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Nunito Sans',
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts:
@@ -153,7 +151,7 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
             ),
           ],
           centerTitle: true,
-          elevation: 2.0,
+          elevation: 1.0,
         ),
         body: Builder(
           builder: (context) {
@@ -175,7 +173,7 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
                   if (!FFAppState().isVcardAppointment) {
                     return Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
-                          15.0, 0.0, 15.0, 0.0),
+                          12.0, 0.0, 12.0, 0.0),
                       child: FutureBuilder<ApiCallResponse>(
                         future: (_model.apiRequestCompleter2 ??=
                                 Completer<ApiCallResponse>()
@@ -190,7 +188,8 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
                               child: SizedBox(
                                 width: 50.0,
                                 height: 50.0,
-                                child: CupertinoActivityIndicator(),
+                                child: CupertinoActivityIndicator(
+                                    color: Colors.white),
                               ),
                             );
                           }
@@ -237,802 +236,337 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
                                               5.0, 0.0, 0.0, 0.0),
                                       child: Builder(
                                         builder: (context) {
-                                          if (FFAppState()
-                                                  .selectLanguageIndex ==
-                                              0) {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                      0.0, 0.0, 8.0, 10.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () => _model
-                                                                .unfocusNode
-                                                                .canRequestFocus
-                                                            ? FocusScope.of(
-                                                                    context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode)
-                                                            : FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: SizedBox(
-                                                            height: 430.0,
-                                                            child:
-                                                                AppointmentSheetWidget(
-                                                              id: getJsonField(
-                                                                dataItem,
-                                                                r'''$.id''',
-                                                              ),
-                                                              status:
-                                                                  getJsonField(
-                                                                dataItem,
-                                                                r'''$.status''',
-                                                              ),
+                                          return Padding(
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(5.0, 0.0, 5.0, 10.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: SizedBox(
+                                                          height: 430.0,
+                                                          child:
+                                                              AppointmentSheetWidget(
+                                                            id: getJsonField(
+                                                              dataItem,
+                                                              r'''$.id''',
+                                                            ),
+                                                            status:
+                                                                getJsonField(
+                                                              dataItem,
+                                                              r'''$.status''',
                                                             ),
                                                           ),
                                                         ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                child: Material(
-                                                  color: Colors.transparent,
-                                                  elevation: 2.0,
-                                                  shape: RoundedRectangleBorder(
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              },
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                elevation: 1.0,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  height: 120.0,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondary,
+                                                    boxShadow: const [
+                                                      BoxShadow(
+                                                        blurRadius: 0.0,
+                                                        color:
+                                                            Color(0xFF1F69F6),
+                                                        offset:
+                                                            Offset(-5.0, 0.0),
+                                                      )
+                                                    ],
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.0),
                                                   ),
-                                                  child: Container(
-                                                    width: double.infinity,
-                                                    height: 120.0,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      boxShadow: const [
-                                                        BoxShadow(
-                                                          blurRadius: 0.0,
-                                                          color:
-                                                              Color(0xFF1F69F6),
-                                                          offset:
-                                                              Offset(-5.0, 0.0),
-                                                        )
-                                                      ],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(0.0,
-                                                              0.0, 15.0, 0.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        5.0),
-                                                                child:
-                                                                    Container(
-                                                                  width: 55.0,
-                                                                  height: 35.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: functions.getAppointmentPaidInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.paid_amount''',
-                                                                    ))
-                                                                        ? const Color(
-                                                                            0xFF1F69F6)
-                                                                        : const Color(
-                                                                            0xFFFF9900),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              15.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              0.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              0.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              10.0),
-                                                                    ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(12.0, 0.0,
+                                                            0.0, 0.0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              getJsonField(
+                                                                dataItem,
+                                                                r'''$.vcard_name''',
+                                                              ).toString(),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontFamily:
+                                                                        'Nunito Sans',
+                                                                    fontSize:
+                                                                        16.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            'Nunito Sans'),
                                                                   ),
-                                                                  alignment:
-                                                                      const AlignmentDirectional(
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Text(
-                                                                    functions.getAppointmentPaidInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.paid_amount''',
-                                                                    ))
-                                                                        ? 'Free'
-                                                                        : 'Paid',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Nunito Sans',
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontSize:
-                                                                              14.0,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.vcard_name''',
-                                                                ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                            child: RichText(
-                                                              textScaler:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .textScaler,
-                                                              text: TextSpan(
-                                                                children: [
-                                                                  TextSpan(
-                                                                    text: functions
-                                                                        .getAppointmentStatusInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.status''',
-                                                                    )),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Nunito Sans',
-                                                                          color: functions.getAppointmentStatusInfo(getJsonField(
-                                                                                    dataItem,
-                                                                                    r'''$.status''',
-                                                                                  )) ==
-                                                                                  'Pending'
-                                                                              ? const Color(0xFFFF9900)
-                                                                              : const Color(0xFF00B96D),
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                        ),
-                                                                  ),
-                                                                  TextSpan(
-                                                                    text: FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'j1qb796r' /*    |    */,
-                                                                    ),
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      color: Color(
-                                                                          0xFF79818A),
-                                                                    ),
-                                                                  ),
-                                                                  TextSpan(
-                                                                    text:
-                                                                        getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.name''',
-                                                                    ).toString(),
-                                                                    style: GoogleFonts
-                                                                        .getFont(
-                                                                      'Nunito Sans',
-                                                                      color: const Color(
-                                                                          0xFF79818A),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium,
-                                                              ),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .start,
                                                             ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                            child: Container(
-                                                              height: 35.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: const Color(
-                                                                    0xFFF6F8F9),
-                                                                borderRadius:
-                                                                    BorderRadius
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      5.0),
+                                                              child: Container(
+                                                                width: 55.0,
+                                                                height: 35.0,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: functions
+                                                                          .getAppointmentPaidInfo(
+                                                                              getJsonField(
+                                                                    dataItem,
+                                                                    r'''$.paid_amount''',
+                                                                  ))
+                                                                      ? const Color(
+                                                                          0xFF1F69F6)
+                                                                      : const Color(
+                                                                          0xFFFF9900),
+                                                                  borderRadius:
+                                                                      const BorderRadius
+                                                                          .only(
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            15.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            0.0),
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            0.0),
+                                                                    topRight: Radius
                                                                         .circular(
                                                                             10.0),
-                                                              ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                        10.0,
+                                                                  ),
+                                                                ),
+                                                                alignment:
+                                                                    const AlignmentDirectional(
                                                                         0.0,
-                                                                        10.0,
                                                                         0.0),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Text(
-                                                                      functions.getAppointmentFormatedTime(
+                                                                child: Text(
+                                                                  functions.getAppointmentPaidInfo(
                                                                           getJsonField(
-                                                                            dataItem,
-                                                                            r'''$.from_time''',
-                                                                          ).toString(),
-                                                                          getJsonField(
-                                                                            dataItem,
-                                                                            r'''$.to_time''',
-                                                                          ).toString()),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Nunito Sans',
-                                                                            color:
-                                                                                const Color(0xFF79818A),
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                          ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'j0a2339e' /* • */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: 'Nunito Sans',
-                                                                              color: const Color(0xFF79818A),
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                            ),
+                                                                    dataItem,
+                                                                    r'''$.paid_amount''',
+                                                                  ))
+                                                                      ? 'Free'
+                                                                      : 'Paid',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Nunito Sans',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey('Nunito Sans'),
                                                                       ),
-                                                                    ),
-                                                                    Text(
-                                                                      functions
-                                                                          .formatDate(
-                                                                              getJsonField(
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                  0.0,
+                                                                  5.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                          child: RichText(
+                                                            textScaler:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .textScaler,
+                                                            text: TextSpan(
+                                                              children: [
+                                                                TextSpan(
+                                                                  text: functions
+                                                                      .getAppointmentStatusInfo(
+                                                                          getJsonField(
+                                                                    dataItem,
+                                                                    r'''$.status''',
+                                                                  )),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Nunito Sans',
+                                                                        color: functions.getAppointmentStatusInfo(getJsonField(
+                                                                                  dataItem,
+                                                                                  r'''$.status''',
+                                                                                )) ==
+                                                                                'Pending'
+                                                                            ? const Color(0xFFFF9900)
+                                                                            : const Color(0xFF00B96D),
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey('Nunito Sans'),
+                                                                      ),
+                                                                ),
+                                                                TextSpan(
+                                                                  text: FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    '7q1plnq9' /*   |   */,
+                                                                  ),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    color: Color(
+                                                                        0xFF79818A),
+                                                                  ),
+                                                                ),
+                                                                TextSpan(
+                                                                  text:
+                                                                      getJsonField(
+                                                                    dataItem,
+                                                                    r'''$.name''',
+                                                                  ).toString(),
+                                                                  style: GoogleFonts
+                                                                      .getFont(
+                                                                    'Nunito Sans',
+                                                                    color: const Color(
+                                                                        0xFF79818A),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                                )
+                                                              ],
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium,
+                                                            ),
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                  0.0,
+                                                                  10.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                          child: Container(
+                                                            height: 35.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: const Color(
+                                                                  0xFFF6F8F9),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      10.0,
+                                                                      0.0,
+                                                                      16.0,
+                                                                      0.0),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .min,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  const Icon(
+                                                                    Icons
+                                                                        .watch_later_outlined,
+                                                                    color: Color(
+                                                                        0xFF1F69F6),
+                                                                    size: 24.0,
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                        8.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                                    child: Text(
+                                                                      getJsonField(
                                                                         dataItem,
                                                                         r'''$.date''',
-                                                                      ).toString()),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Nunito Sans',
-                                                                            color:
-                                                                                const Color(0xFF79818A),
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                          ),
-                                                                    ),
-                                                                    const Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .watch_later_outlined,
-                                                                        color: Color(
-                                                                            0xFF1F69F6),
-                                                                        size:
-                                                                            24.0,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          } else {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                      5.0, 0.0, 5.0, 10.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () => _model
-                                                                .unfocusNode
-                                                                .canRequestFocus
-                                                            ? FocusScope.of(
-                                                                    context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode)
-                                                            : FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: SizedBox(
-                                                            height: 430.0,
-                                                            child:
-                                                                AppointmentSheetWidget(
-                                                              id: getJsonField(
-                                                                dataItem,
-                                                                r'''$.id''',
-                                                              ),
-                                                              status:
-                                                                  getJsonField(
-                                                                dataItem,
-                                                                r'''$.status''',
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                child: Material(
-                                                  color: Colors.transparent,
-                                                  elevation: 2.0,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                  ),
-                                                  child: Container(
-                                                    width: double.infinity,
-                                                    height: 120.0,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      boxShadow: const [
-                                                        BoxShadow(
-                                                          blurRadius: 0.0,
-                                                          color:
-                                                              Color(0xFF1F69F6),
-                                                          offset:
-                                                              Offset(-5.0, 0.0),
-                                                        )
-                                                      ],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(15.0,
-                                                              0.0, 0.0, 0.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.vcard_name''',
-                                                                ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        5.0),
-                                                                child:
-                                                                    Container(
-                                                                  width: 55.0,
-                                                                  height: 35.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: functions.getAppointmentPaidInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.paid_amount''',
-                                                                    ))
-                                                                        ? const Color(
-                                                                            0xFF1F69F6)
-                                                                        : const Color(
-                                                                            0xFFFF9900),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              15.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              0.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              0.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              10.0),
-                                                                    ),
-                                                                  ),
-                                                                  alignment:
-                                                                      const AlignmentDirectional(
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Text(
-                                                                    functions.getAppointmentPaidInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.paid_amount''',
-                                                                    ))
-                                                                        ? 'Free'
-                                                                        : 'Paid',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Nunito Sans',
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontSize:
-                                                                              14.0,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                            child: RichText(
-                                                              textScaler:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .textScaler,
-                                                              text: TextSpan(
-                                                                children: [
-                                                                  TextSpan(
-                                                                    text: functions
-                                                                        .getAppointmentStatusInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.status''',
-                                                                    )),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Nunito Sans',
-                                                                          color: functions.getAppointmentStatusInfo(getJsonField(
-                                                                                    dataItem,
-                                                                                    r'''$.status''',
-                                                                                  )) ==
-                                                                                  'Pending'
-                                                                              ? const Color(0xFFFF9900)
-                                                                              : const Color(0xFF00B96D),
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                        ),
-                                                                  ),
-                                                                  TextSpan(
-                                                                    text: FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      '7q1plnq9' /*   |   */,
-                                                                    ),
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      color: Color(
-                                                                          0xFF79818A),
-                                                                    ),
-                                                                  ),
-                                                                  TextSpan(
-                                                                    text:
-                                                                        getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.name''',
-                                                                    ).toString(),
-                                                                    style: GoogleFonts
-                                                                        .getFont(
-                                                                      'Nunito Sans',
-                                                                      color: const Color(
-                                                                          0xFF79818A),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium,
-                                                              ),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .start,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                            child: Container(
-                                                              height: 35.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: const Color(
-                                                                    0xFFF6F8F9),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10.0),
-                                                              ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                        10.0,
-                                                                        0.0,
-                                                                        10.0,
-                                                                        0.0),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    const Icon(
-                                                                      Icons
-                                                                          .watch_later_outlined,
-                                                                      color: Color(
-                                                                          0xFF1F69F6),
-                                                                      size:
-                                                                          24.0,
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        functions
-                                                                            .formatDate(getJsonField(
-                                                                          dataItem,
-                                                                          r'''$.date''',
-                                                                        ).toString()),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: 'Nunito Sans',
-                                                                              color: const Color(0xFF79818A),
-                                                                              fontSize: 14.0,
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'xa87wpus' /* • */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: 'Nunito Sans',
-                                                                              color: const Color(0xFF79818A),
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                    Text(
-                                                                      functions.getAppointmentFormatedTime(
-                                                                          getJsonField(
-                                                                            dataItem,
-                                                                            r'''$.from_time''',
-                                                                          ).toString(),
-                                                                          getJsonField(
-                                                                            dataItem,
-                                                                            r'''$.to_time''',
-                                                                          ).toString()),
+                                                                      ).toString(),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
@@ -1049,19 +583,73 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
                                                                                 GoogleFonts.asMap().containsKey('Nunito Sans'),
                                                                           ),
                                                                     ),
-                                                                  ],
-                                                                ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                        8.0,
+                                                                        0.0,
+                                                                        8.0,
+                                                                        0.0),
+                                                                    child: Text(
+                                                                      FFLocalizations.of(
+                                                                              context)
+                                                                          .getText(
+                                                                        'xa87wpus' /* • */,
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Nunito Sans',
+                                                                            color:
+                                                                                const Color(0xFF79818A),
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey('Nunito Sans'),
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                  Expanded(
+                                                                    child:
+                                                                        FittedBox(
+                                                                      child:
+                                                                          Text(
+                                                                        functions.getAppointmentFormatedTime(
+                                                                            getJsonField(
+                                                                              dataItem,
+                                                                              r'''$.from_time''',
+                                                                            ).toString(),
+                                                                            getJsonField(
+                                                                              dataItem,
+                                                                              r'''$.to_time''',
+                                                                            ).toString()),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Nunito Sans',
+                                                                              color: const Color(0xFF79818A),
+                                                                              fontSize: 14.0,
+                                                                              fontWeight: FontWeight.bold,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey('Nunito Sans'),
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
                                                               ),
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            );
-                                          }
+                                            ),
+                                          );
                                         },
                                       ),
                                     );
@@ -1076,7 +664,7 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
                   } else {
                     return Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
-                          15.0, 0.0, 15.0, 0.0),
+                          4.0, 0.0, 4.0, 0.0),
                       child: FutureBuilder<ApiCallResponse>(
                         future: (_model.apiRequestCompleter1 ??= Completer<
                                 ApiCallResponse>()
@@ -1092,7 +680,8 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
                               child: SizedBox(
                                 width: 50.0,
                                 height: 50.0,
-                                child: CupertinoActivityIndicator(),
+                                child: CupertinoActivityIndicator(
+                                    color: Colors.white),
                               ),
                             );
                           }
@@ -1139,378 +728,337 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
                                               5.0, 0.0, 0.0, 0.0),
                                       child: Builder(
                                         builder: (context) {
-                                          if (FFAppState()
-                                                  .selectLanguageIndex ==
-                                              0) {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                      0.0, 0.0, 8.0, 10.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () => _model
-                                                                .unfocusNode
-                                                                .canRequestFocus
-                                                            ? FocusScope.of(
-                                                                    context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode)
-                                                            : FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: SizedBox(
-                                                            height: 430.0,
-                                                            child:
-                                                                AppointmentSheetWidget(
-                                                              id: getJsonField(
-                                                                dataItem,
-                                                                r'''$.id''',
-                                                              ),
-                                                              status:
-                                                                  getJsonField(
-                                                                dataItem,
-                                                                r'''$.status''',
-                                                              ),
+                                          return Padding(
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(5.0, 0.0, 5.0, 10.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  enableDrag: false,
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return GestureDetector(
+                                                      onTap: () => _model
+                                                              .unfocusNode
+                                                              .canRequestFocus
+                                                          ? FocusScope.of(
+                                                                  context)
+                                                              .requestFocus(_model
+                                                                  .unfocusNode)
+                                                          : FocusScope.of(
+                                                                  context)
+                                                              .unfocus(),
+                                                      child: Padding(
+                                                        padding: MediaQuery
+                                                            .viewInsetsOf(
+                                                                context),
+                                                        child: SizedBox(
+                                                          height: 430.0,
+                                                          child:
+                                                              AppointmentSheetWidget(
+                                                            id: getJsonField(
+                                                              dataItem,
+                                                              r'''$.id''',
+                                                            ),
+                                                            status:
+                                                                getJsonField(
+                                                              dataItem,
+                                                              r'''$.status''',
                                                             ),
                                                           ),
                                                         ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                child: Material(
-                                                  color: Colors.transparent,
-                                                  elevation: 2.0,
-                                                  shape: RoundedRectangleBorder(
+                                                      ),
+                                                    );
+                                                  },
+                                                ).then((value) =>
+                                                    safeSetState(() {}));
+                                              },
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                elevation: 1.0,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  height: 120.0,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondary,
+                                                    boxShadow: const [
+                                                      BoxShadow(
+                                                        blurRadius: 0.0,
+                                                        color:
+                                                            Color(0xFF1F69F6),
+                                                        offset:
+                                                            Offset(-5.0, 0.0),
+                                                      )
+                                                    ],
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.0),
                                                   ),
-                                                  child: Container(
-                                                    width: double.infinity,
-                                                    height: 120.0,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      boxShadow: const [
-                                                        BoxShadow(
-                                                          blurRadius: 0.0,
-                                                          color:
-                                                              Color(0xFF1F69F6),
-                                                          offset:
-                                                              Offset(-5.0, 0.0),
-                                                        )
-                                                      ],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(0.0,
-                                                              0.0, 15.0, 0.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                        0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        5.0),
-                                                                child:
-                                                                    Container(
-                                                                  width: 55.0,
-                                                                  height: 35.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: functions.getAppointmentPaidInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.paid_amount''',
-                                                                    ))
-                                                                        ? const Color(
-                                                                            0xFF1F69F6)
-                                                                        : const Color(
-                                                                            0xFFFF9900),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              15.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              0.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              0.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              10.0),
-                                                                    ),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(12.0, 0.0,
+                                                            0.0, 0.0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              getJsonField(
+                                                                dataItem,
+                                                                r'''$.vcard_name''',
+                                                              ).toString(),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontFamily:
+                                                                        'Nunito Sans',
+                                                                    fontSize:
+                                                                        16.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            'Nunito Sans'),
                                                                   ),
-                                                                  alignment:
-                                                                      const AlignmentDirectional(
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Text(
-                                                                    functions.getAppointmentPaidInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.paid_amount''',
-                                                                    ))
-                                                                        ? 'Free'
-                                                                        : 'Paid',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Nunito Sans',
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontSize:
-                                                                              14.0,
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.vcard_name''',
-                                                                ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                            child: RichText(
-                                                              textScaler:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .textScaler,
-                                                              text: TextSpan(
-                                                                children: [
-                                                                  TextSpan(
-                                                                    text: functions
-                                                                        .getAppointmentStatusInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.status''',
-                                                                    )),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Nunito Sans',
-                                                                          color: functions.getAppointmentStatusInfo(getJsonField(
-                                                                                    dataItem,
-                                                                                    r'''$.status''',
-                                                                                  )) ==
-                                                                                  'Pending'
-                                                                              ? const Color(0xFFFF9900)
-                                                                              : const Color(0xFF00B96D),
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                        ),
-                                                                  ),
-                                                                  TextSpan(
-                                                                    text: FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'gbdiajm8' /*    |    */,
-                                                                    ),
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      color: Color(
-                                                                          0xFF79818A),
-                                                                    ),
-                                                                  ),
-                                                                  TextSpan(
-                                                                    text:
-                                                                        getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.name''',
-                                                                    ).toString(),
-                                                                    style: GoogleFonts
-                                                                        .getFont(
-                                                                      'Nunito Sans',
-                                                                      color: const Color(
-                                                                          0xFF79818A),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium,
-                                                              ),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .start,
                                                             ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                            child: Container(
-                                                              height: 35.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: const Color(
-                                                                    0xFFF6F8F9),
-                                                                borderRadius:
-                                                                    BorderRadius
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      5.0),
+                                                              child: Container(
+                                                                width: 55.0,
+                                                                height: 35.0,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: functions
+                                                                          .getAppointmentPaidInfo(
+                                                                              getJsonField(
+                                                                    dataItem,
+                                                                    r'''$.paid_amount''',
+                                                                  ))
+                                                                      ? const Color(
+                                                                          0xFF1F69F6)
+                                                                      : const Color(
+                                                                          0xFFFF9900),
+                                                                  borderRadius:
+                                                                      const BorderRadius
+                                                                          .only(
+                                                                    bottomLeft:
+                                                                        Radius.circular(
+                                                                            15.0),
+                                                                    bottomRight:
+                                                                        Radius.circular(
+                                                                            0.0),
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            0.0),
+                                                                    topRight: Radius
                                                                         .circular(
                                                                             10.0),
-                                                              ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                        10.0,
+                                                                  ),
+                                                                ),
+                                                                alignment:
+                                                                    const AlignmentDirectional(
                                                                         0.0,
-                                                                        10.0,
                                                                         0.0),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Text(
-                                                                      functions.getAppointmentFormatedTime(
+                                                                child: Text(
+                                                                  functions.getAppointmentPaidInfo(
                                                                           getJsonField(
-                                                                            dataItem,
-                                                                            r'''$.from_time''',
-                                                                          ).toString(),
-                                                                          getJsonField(
-                                                                            dataItem,
-                                                                            r'''$.to_time''',
-                                                                          ).toString()),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Nunito Sans',
-                                                                            color:
-                                                                                const Color(0xFF79818A),
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                          ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'wz8dh3hs' /* • */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: 'Nunito Sans',
-                                                                              color: const Color(0xFF79818A),
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                            ),
+                                                                    dataItem,
+                                                                    r'''$.paid_amount''',
+                                                                  ))
+                                                                      ? 'Free'
+                                                                      : 'Paid',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Nunito Sans',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey('Nunito Sans'),
                                                                       ),
-                                                                    ),
-                                                                    Text(
-                                                                      functions
-                                                                          .formatDate(
-                                                                              getJsonField(
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                  0.0,
+                                                                  5.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                          child: RichText(
+                                                            textScaler:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .textScaler,
+                                                            text: TextSpan(
+                                                              children: [
+                                                                TextSpan(
+                                                                  text: functions
+                                                                      .getAppointmentStatusInfo(
+                                                                          getJsonField(
+                                                                    dataItem,
+                                                                    r'''$.status''',
+                                                                  )),
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Nunito Sans',
+                                                                        color: functions.getAppointmentStatusInfo(getJsonField(
+                                                                                  dataItem,
+                                                                                  r'''$.status''',
+                                                                                )) ==
+                                                                                'Pending'
+                                                                            ? const Color(0xFFFF9900)
+                                                                            : const Color(0xFF00B96D),
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        useGoogleFonts:
+                                                                            GoogleFonts.asMap().containsKey('Nunito Sans'),
+                                                                      ),
+                                                                ),
+                                                                TextSpan(
+                                                                  text: FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    'uz663lz8' /*   |   */,
+                                                                  ),
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    color: Color(
+                                                                        0xFF79818A),
+                                                                  ),
+                                                                ),
+                                                                TextSpan(
+                                                                  text:
+                                                                      getJsonField(
+                                                                    dataItem,
+                                                                    r'''$.name''',
+                                                                  ).toString(),
+                                                                  style: GoogleFonts
+                                                                      .getFont(
+                                                                    'Nunito Sans',
+                                                                    color: const Color(
+                                                                        0xFF79818A),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                                )
+                                                              ],
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium,
+                                                            ),
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                  0.0,
+                                                                  10.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                          child: Container(
+                                                            height: 35.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: const Color(
+                                                                  0xFFF6F8F9),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      10.0,
+                                                                      0.0,
+                                                                      10.0,
+                                                                      0.0),
+                                                              child: Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .min,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  const Icon(
+                                                                    Icons
+                                                                        .watch_later_outlined,
+                                                                    color: Color(
+                                                                        0xFF1F69F6),
+                                                                    size: 24.0,
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                        8.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                                    child: Text(
+                                                                      getJsonField(
                                                                         dataItem,
                                                                         r'''$.date''',
-                                                                      ).toString()),
+                                                                      ).toString(),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
@@ -1525,216 +1073,45 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
                                                                                 GoogleFonts.asMap().containsKey('Nunito Sans'),
                                                                           ),
                                                                     ),
-                                                                    const Padding(
-                                                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Icon(
-                                                                        Icons
-                                                                            .watch_later_outlined,
-                                                                        color: Color(
-                                                                            0xFF1F69F6),
-                                                                        size:
-                                                                            24.0,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          } else {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                      5.0, 0.0, 5.0, 10.0),
-                                              child: InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return GestureDetector(
-                                                        onTap: () => _model
-                                                                .unfocusNode
-                                                                .canRequestFocus
-                                                            ? FocusScope.of(
-                                                                    context)
-                                                                .requestFocus(_model
-                                                                    .unfocusNode)
-                                                            : FocusScope.of(
-                                                                    context)
-                                                                .unfocus(),
-                                                        child: Padding(
-                                                          padding: MediaQuery
-                                                              .viewInsetsOf(
-                                                                  context),
-                                                          child: SizedBox(
-                                                            height: 430.0,
-                                                            child:
-                                                                AppointmentSheetWidget(
-                                                              id: getJsonField(
-                                                                dataItem,
-                                                                r'''$.id''',
-                                                              ),
-                                                              status:
-                                                                  getJsonField(
-                                                                dataItem,
-                                                                r'''$.status''',
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      safeSetState(() {}));
-                                                },
-                                                child: Material(
-                                                  color: Colors.transparent,
-                                                  elevation: 2.0,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                  ),
-                                                  child: Container(
-                                                    width: double.infinity,
-                                                    height: 120.0,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      boxShadow: const [
-                                                        BoxShadow(
-                                                          blurRadius: 0.0,
-                                                          color:
-                                                              Color(0xFF1F69F6),
-                                                          offset:
-                                                              Offset(-5.0, 0.0),
-                                                        )
-                                                      ],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(15.0,
-                                                              0.0, 0.0, 0.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.vcard_name''',
-                                                                ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: const EdgeInsetsDirectional
                                                                         .fromSTEB(
+                                                                        8.0,
                                                                         0.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        5.0),
-                                                                child:
-                                                                    Container(
-                                                                  width: 55.0,
-                                                                  height: 35.0,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: functions.getAppointmentPaidInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.paid_amount''',
-                                                                    ))
-                                                                        ? const Color(
-                                                                            0xFF1F69F6)
-                                                                        : const Color(
-                                                                            0xFFFF9900),
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              15.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              0.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              0.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              10.0),
+                                                                        8.0,
+                                                                        0.0),
+                                                                    child: Text(
+                                                                      FFLocalizations.of(
+                                                                              context)
+                                                                          .getText(
+                                                                        '6haxvic0' /* • */,
+                                                                      ),
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Nunito Sans',
+                                                                            color:
+                                                                                const Color(0xFF79818A),
+                                                                            fontWeight:
+                                                                                FontWeight.bold,
+                                                                            useGoogleFonts:
+                                                                                GoogleFonts.asMap().containsKey('Nunito Sans'),
+                                                                          ),
                                                                     ),
                                                                   ),
-                                                                  alignment:
-                                                                      const AlignmentDirectional(
-                                                                          0.0,
-                                                                          0.0),
-                                                                  child: Text(
-                                                                    functions.getAppointmentPaidInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.paid_amount''',
-                                                                    ))
-                                                                        ? 'Free'
-                                                                        : 'Paid',
+                                                                  Text(
+                                                                    functions.getAppointmentFormatedTime(
+                                                                        getJsonField(
+                                                                          dataItem,
+                                                                          r'''$.from_time''',
+                                                                        ).toString(),
+                                                                        getJsonField(
+                                                                          dataItem,
+                                                                          r'''$.to_time''',
+                                                                        ).toString()),
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
                                                                         .bodyMedium
@@ -1742,225 +1119,25 @@ class _AppointmentScreenWidgetState extends State<AppointmentScreenWidget> {
                                                                           fontFamily:
                                                                               'Nunito Sans',
                                                                           color:
-                                                                              Colors.white,
-                                                                          fontSize:
-                                                                              14.0,
+                                                                              const Color(0xFF79818A),
                                                                           fontWeight:
                                                                               FontWeight.bold,
                                                                           useGoogleFonts:
                                                                               GoogleFonts.asMap().containsKey('Nunito Sans'),
                                                                         ),
                                                                   ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                            child: RichText(
-                                                              textScaler:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .textScaler,
-                                                              text: TextSpan(
-                                                                children: [
-                                                                  TextSpan(
-                                                                    text: functions
-                                                                        .getAppointmentStatusInfo(
-                                                                            getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.status''',
-                                                                    )),
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Nunito Sans',
-                                                                          color: functions.getAppointmentStatusInfo(getJsonField(
-                                                                                    dataItem,
-                                                                                    r'''$.status''',
-                                                                                  )) ==
-                                                                                  'Pending'
-                                                                              ? const Color(0xFFFF9900)
-                                                                              : const Color(0xFF00B96D),
-                                                                          fontWeight:
-                                                                              FontWeight.bold,
-                                                                          useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                        ),
-                                                                  ),
-                                                                  TextSpan(
-                                                                    text: FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'uz663lz8' /*   |   */,
-                                                                    ),
-                                                                    style:
-                                                                        const TextStyle(
-                                                                      color: Color(
-                                                                          0xFF79818A),
-                                                                    ),
-                                                                  ),
-                                                                  TextSpan(
-                                                                    text:
-                                                                        getJsonField(
-                                                                      dataItem,
-                                                                      r'''$.name''',
-                                                                    ).toString(),
-                                                                    style: GoogleFonts
-                                                                        .getFont(
-                                                                      'Nunito Sans',
-                                                                      color: const Color(
-                                                                          0xFF79818A),
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                    ),
-                                                                  )
                                                                 ],
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium,
-                                                              ),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .start,
-                                                            ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                            child: Container(
-                                                              height: 35.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: const Color(
-                                                                    0xFFF6F8F9),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10.0),
-                                                              ),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                        10.0,
-                                                                        0.0,
-                                                                        10.0,
-                                                                        0.0),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    const Icon(
-                                                                      Icons
-                                                                          .watch_later_outlined,
-                                                                      color: Color(
-                                                                          0xFF1F69F6),
-                                                                      size:
-                                                                          24.0,
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          0.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        functions
-                                                                            .formatDate(getJsonField(
-                                                                          dataItem,
-                                                                          r'''$.date''',
-                                                                        ).toString()),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: 'Nunito Sans',
-                                                                              color: const Color(0xFF79818A),
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                          8.0,
-                                                                          0.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                                      child:
-                                                                          Text(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          '6haxvic0' /* • */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: 'Nunito Sans',
-                                                                              color: const Color(0xFF79818A),
-                                                                              fontWeight: FontWeight.bold,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                            ),
-                                                                      ),
-                                                                    ),
-                                                                    Text(
-                                                                      functions.getAppointmentFormatedTime(
-                                                                          getJsonField(
-                                                                            dataItem,
-                                                                            r'''$.from_time''',
-                                                                          ).toString(),
-                                                                          getJsonField(
-                                                                            dataItem,
-                                                                            r'''$.to_time''',
-                                                                          ).toString()),
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Nunito Sans',
-                                                                            color:
-                                                                                const Color(0xFF79818A),
-                                                                            fontWeight:
-                                                                                FontWeight.bold,
-                                                                            useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey('Nunito Sans'),
-                                                                          ),
-                                                                    ),
-                                                                  ],
-                                                                ),
                                                               ),
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            );
-                                          }
+                                            ),
+                                          );
                                         },
                                       ),
                                     );

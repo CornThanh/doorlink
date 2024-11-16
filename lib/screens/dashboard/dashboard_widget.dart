@@ -61,7 +61,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
           ),
         ),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xff333333),
           automaticallyImplyLeading: false,
           leading: InkWell(
             splashColor: Colors.transparent,
@@ -73,22 +73,12 @@ class _DashboardWidgetState extends State<DashboardWidget> {
             },
             child: Container(
               decoration: const BoxDecoration(),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(
-                    12.0, 17.0, 25.0, 17.0),
-                child: Container(
+              child: const Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
+                child: SizedBox(
                   width: 100.0,
                   height: 100.0,
-                  decoration: BoxDecoration(
-                    color: const Color(0x00FFFFFF),
-                    image: DecorationImage(
-                      fit: BoxFit.contain,
-                      alignment: const AlignmentDirectional(0.0, 0.0),
-                      image: Image.asset(
-                        'assets/images/drawer.png',
-                      ).image,
-                    ),
-                  ),
+                  child: Icon(Icons.menu),
                 ),
               ),
             ),
@@ -99,7 +89,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Nunito Sans',
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts:
@@ -114,14 +104,14 @@ class _DashboardWidgetState extends State<DashboardWidget> {
             ),
           ],
           centerTitle: true,
-          elevation: 2.0,
+          elevation: 1.0,
         ),
         body: Builder(
           builder: (context) {
             if (FFAppState().role == 'Super Admin') {
               return Padding(
                 padding:
-                    const EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
+                    const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                 child: FutureBuilder<ApiCallResponse>(
                   future: VcardGroup.superDashboardCall.call(
                     authToken: FFAppState().authToken,
@@ -133,7 +123,8 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                         child: SizedBox(
                           width: 50.0,
                           height: 50.0,
-                          child: CupertinoActivityIndicator(),
+                          child:
+                              CupertinoActivityIndicator(color: Colors.white),
                         ),
                       );
                     }
@@ -147,7 +138,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                           children: [
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 15.0, 0.0, 5.0),
+                                  0.0, 12.0, 0.0, 5.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -158,7 +149,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                               5.0, 0.0, 6.0, 0.0),
                                       child: Material(
                                         color: Colors.transparent,
-                                        elevation: 2.0,
+                                        elevation: 1.0,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
@@ -173,7 +164,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                               1.0, -1.0),
                                           child: Padding(
                                             padding: const EdgeInsetsDirectional
-                                                .fromSTEB(15.0, 0.0, 0.0, 15.0),
+                                                .fromSTEB(12.0, 0.0, 0.0, 12.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               crossAxisAlignment:
@@ -268,7 +259,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsetsDirectional
-                                                                .fromSTEB(15.0,
+                                                                .fromSTEB(12.0,
                                                                 0.0, 0.0, 10.0),
                                                         child: ClipRRect(
                                                           borderRadius:
@@ -332,7 +323,7 @@ Users */
                                               6.0, 0.0, 5.0, 0.0),
                                       child: Material(
                                         color: Colors.transparent,
-                                        elevation: 2.0,
+                                        elevation: 1.0,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
@@ -347,7 +338,7 @@ Users */
                                               1.0, -1.0),
                                           child: Padding(
                                             padding: const EdgeInsetsDirectional
-                                                .fromSTEB(15.0, 0.0, 0.0, 15.0),
+                                                .fromSTEB(12.0, 0.0, 0.0, 12.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               crossAxisAlignment:
@@ -442,7 +433,7 @@ Users */
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsetsDirectional
-                                                                .fromSTEB(15.0,
+                                                                .fromSTEB(12.0,
                                                                 0.0, 0.0, 10.0),
                                                         child: ClipRRect(
                                                           borderRadius:
@@ -515,7 +506,7 @@ Users */
                                               5.0, 0.0, 6.0, 0.0),
                                       child: Material(
                                         color: Colors.transparent,
-                                        elevation: 2.0,
+                                        elevation: 1.0,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
@@ -530,7 +521,7 @@ Users */
                                               1.0, -1.0),
                                           child: Padding(
                                             padding: const EdgeInsetsDirectional
-                                                .fromSTEB(15.0, 0.0, 0.0, 15.0),
+                                                .fromSTEB(12.0, 0.0, 0.0, 12.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               crossAxisAlignment:
@@ -625,7 +616,7 @@ Users */
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsetsDirectional
-                                                                .fromSTEB(15.0,
+                                                                .fromSTEB(12.0,
                                                                 0.0, 0.0, 10.0),
                                                         child: ClipRRect(
                                                           borderRadius:
@@ -689,7 +680,7 @@ Vcards */
                                               6.0, 0.0, 5.0, 0.0),
                                       child: Material(
                                         color: Colors.transparent,
-                                        elevation: 2.0,
+                                        elevation: 1.0,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10.0),
@@ -704,7 +695,7 @@ Vcards */
                                               1.0, -1.0),
                                           child: Padding(
                                             padding: const EdgeInsetsDirectional
-                                                .fromSTEB(15.0, 0.0, 0.0, 15.0),
+                                                .fromSTEB(12.0, 0.0, 0.0, 12.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               crossAxisAlignment:
@@ -799,7 +790,7 @@ Vcards */
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsetsDirectional
-                                                                .fromSTEB(15.0,
+                                                                .fromSTEB(12.0,
                                                                 0.0, 0.0, 10.0),
                                                         child: ClipRRect(
                                                           borderRadius:
@@ -908,7 +899,8 @@ Vcards */
                                     child: SizedBox(
                                       width: 50.0,
                                       height: 50.0,
-                                      child: CupertinoActivityIndicator(),
+                                      child: CupertinoActivityIndicator(
+                                          color: Colors.white),
                                     ),
                                   );
                                 }
@@ -919,7 +911,7 @@ Vcards */
                                   child: Padding(
                                     padding:
                                         const EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 10.0, 15.0, 5.0),
+                                            10.0, 10.0, 12.0, 5.0),
                                     child: SizedBox(
                                       width: double.infinity,
                                       height: double.infinity,
@@ -1026,7 +1018,7 @@ Vcards */
                       child: SizedBox(
                         width: 50.0,
                         height: 50.0,
-                        child: CupertinoActivityIndicator(),
+                        child: CupertinoActivityIndicator(color: Colors.white),
                       ),
                     );
                   }
@@ -1035,7 +1027,7 @@ Vcards */
                     decoration: const BoxDecoration(),
                     child: Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
-                          15.0, 0.0, 15.0, 0.0),
+                          12.0, 0.0, 12.0, 0.0),
                       child: FutureBuilder<ApiCallResponse>(
                         future: VcardGroup.adminDashboardCall.call(
                           authToken: FFAppState().authToken,
@@ -1047,7 +1039,8 @@ Vcards */
                               child: SizedBox(
                                 width: 50.0,
                                 height: 50.0,
-                                child: CupertinoActivityIndicator(),
+                                child: CupertinoActivityIndicator(
+                                    color: Colors.white),
                               ),
                             );
                           }
@@ -1063,59 +1056,204 @@ Vcards */
                                   Padding(
                                     padding:
                                         const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 15.0, 0.0, 5.0),
+                                            0.0, 12.0, 0.0, 5.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(5.0, 0.0, 6.0, 0.0),
-                                            child: Material(
-                                              color: Colors.transparent,
-                                              elevation: 2.0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                              ),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              if (FFAppState()
+                                                      .selectedDrawerPage !=
+                                                  'VCards') {
+                                                context.goNamed(
+                                                  'vcard_screen',
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        const TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                      duration: Duration(
+                                                          milliseconds: 300),
+                                                    ),
+                                                  },
+                                                );
+                                              }
+                                              FFAppState().selectedDrawerPage =
+                                                  'VCards';
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      5.0, 0.0, 6.0, 0.0),
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                elevation: 1.0,
+                                                shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10.0),
                                                 ),
-                                                alignment:
-                                                    const AlignmentDirectional(
-                                                        1.0, -1.0),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          15.0, 0.0, 0.0, 15.0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Text(
-                                                            getJsonField(
-                                                              listViewAdminDashboardResponse
-                                                                  .jsonBody,
-                                                              r'''$.data.activeVcard''',
-                                                            ).toString(),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          1.0, -1.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(12.0, 0.0,
+                                                            0.0, 12.0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              getJsonField(
+                                                                listViewAdminDashboardResponse
+                                                                    .jsonBody,
+                                                                r'''$.data.activeVcard''',
+                                                              ).toString(),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Nunito Sans',
+                                                                    color: const Color(
+                                                                        0xFF1F69F6),
+                                                                    fontSize:
+                                                                        26.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            'Nunito Sans'),
+                                                                  ),
+                                                            ),
+                                                            Container(
+                                                              width: 60.0,
+                                                              height: 50.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: const Color(
+                                                                    0x1A1F69F6),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 0.0
+                                                                        : 300.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 300.0
+                                                                        : 0.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 50.0
+                                                                        : 0.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 0.0
+                                                                        : 50.0,
+                                                                    0.0,
+                                                                  )),
+                                                                ),
+                                                              ),
+                                                              alignment:
+                                                                  const AlignmentDirectional(
+                                                                      0.0, 0.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                        12.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        10.0),
+                                                                child:
+                                                                    ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    'assets/images/user-solid_1.png',
+                                                                    width: 30.0,
+                                                                    height:
+                                                                        20.0,
+                                                                    fit: BoxFit
+                                                                        .fitHeight,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                  0.0,
+                                                                  8.0,
+                                                                  5.0,
+                                                                  0.0),
+                                                          child: Text(
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              'w4yi1rza' /* Total Active
+                                            Vcards */
+                                                              ,
+                                                            ),
+                                                            maxLines: 2,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -1123,132 +1261,19 @@ Vcards */
                                                                   fontFamily:
                                                                       'Nunito Sans',
                                                                   color: const Color(
-                                                                      0xFF1F69F6),
-                                                                  fontSize:
-                                                                      26.0,
+                                                                      0xFF1E2935),
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .w800,
+                                                                          .bold,
                                                                   useGoogleFonts: GoogleFonts
                                                                           .asMap()
                                                                       .containsKey(
                                                                           'Nunito Sans'),
                                                                 ),
                                                           ),
-                                                          Container(
-                                                            width: 60.0,
-                                                            height: 50.0,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: const Color(
-                                                                  0x1A1F69F6),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 0.0
-                                                                      : 300.0,
-                                                                  0.0,
-                                                                )),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 300.0
-                                                                      : 0.0,
-                                                                  0.0,
-                                                                )),
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 50.0
-                                                                      : 0.0,
-                                                                  0.0,
-                                                                )),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 0.0
-                                                                      : 50.0,
-                                                                  0.0,
-                                                                )),
-                                                              ),
-                                                            ),
-                                                            alignment:
-                                                                const AlignmentDirectional(
-                                                                    0.0, 0.0),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                      15.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      10.0),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                child:
-                                                                    Image.asset(
-                                                                  'assets/images/user-solid_1.png',
-                                                                  width: 30.0,
-                                                                  height: 20.0,
-                                                                  fit: BoxFit
-                                                                      .fitHeight,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(0.0,
-                                                                8.0, 5.0, 0.0),
-                                                        child: Text(
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .getText(
-                                                            'w4yi1rza' /* Total Active
-Vcards */
-                                                            ,
-                                                          ),
-                                                          maxLines: 2,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito Sans',
-                                                                color: const Color(
-                                                                    0xFF1E2935),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        'Nunito Sans'),
-                                                              ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -1256,54 +1281,199 @@ Vcards */
                                           ),
                                         ),
                                         Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(6.0, 0.0, 5.0, 0.0),
-                                            child: Material(
-                                              color: Colors.transparent,
-                                              elevation: 2.0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                              ),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              if (FFAppState()
+                                                      .selectedDrawerPage !=
+                                                  'VCards') {
+                                                context.goNamed(
+                                                  'vcard_screen',
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        const TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                      duration: Duration(
+                                                          milliseconds: 300),
+                                                    ),
+                                                  },
+                                                );
+                                              }
+                                              FFAppState().selectedDrawerPage =
+                                                  'VCards';
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      6.0, 0.0, 5.0, 0.0),
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                elevation: 1.0,
+                                                shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10.0),
                                                 ),
-                                                alignment:
-                                                    const AlignmentDirectional(
-                                                        1.0, -1.0),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          15.0, 0.0, 0.0, 15.0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Text(
-                                                            getJsonField(
-                                                              listViewAdminDashboardResponse
-                                                                  .jsonBody,
-                                                              r'''$.data.deActiveVcard''',
-                                                            ).toString(),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          1.0, -1.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(12.0, 0.0,
+                                                            0.0, 12.0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              getJsonField(
+                                                                listViewAdminDashboardResponse
+                                                                    .jsonBody,
+                                                                r'''$.data.deActiveVcard''',
+                                                              ).toString(),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Nunito Sans',
+                                                                    color: const Color(
+                                                                        0xFFF35050),
+                                                                    fontSize:
+                                                                        26.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            'Nunito Sans'),
+                                                                  ),
+                                                            ),
+                                                            Container(
+                                                              width: 60.0,
+                                                              height: 50.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: const Color(
+                                                                    0x1AF35050),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 0.0
+                                                                        : 300.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 300.0
+                                                                        : 0.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 50.0
+                                                                        : 0.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 0.0
+                                                                        : 50.0,
+                                                                    0.0,
+                                                                  )),
+                                                                ),
+                                                              ),
+                                                              alignment:
+                                                                  const AlignmentDirectional(
+                                                                      0.0, 0.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                        12.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        10.0),
+                                                                child:
+                                                                    ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    'assets/images/deactivate.png',
+                                                                    width: 30.0,
+                                                                    height:
+                                                                        20.0,
+                                                                    fit: BoxFit
+                                                                        .fitHeight,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                  0.0,
+                                                                  8.0,
+                                                                  5.0,
+                                                                  0.0),
+                                                          child: Text(
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              'dx7jboeu' /* Total Deactivated
+                                            Vcards */
+                                                              ,
+                                                            ),
+                                                            maxLines: 2,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -1311,132 +1481,19 @@ Vcards */
                                                                   fontFamily:
                                                                       'Nunito Sans',
                                                                   color: const Color(
-                                                                      0xFFF35050),
-                                                                  fontSize:
-                                                                      26.0,
+                                                                      0xFF1E2935),
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .w800,
+                                                                          .bold,
                                                                   useGoogleFonts: GoogleFonts
                                                                           .asMap()
                                                                       .containsKey(
                                                                           'Nunito Sans'),
                                                                 ),
                                                           ),
-                                                          Container(
-                                                            width: 60.0,
-                                                            height: 50.0,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: const Color(
-                                                                  0x1AF35050),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 0.0
-                                                                      : 300.0,
-                                                                  0.0,
-                                                                )),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 300.0
-                                                                      : 0.0,
-                                                                  0.0,
-                                                                )),
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 50.0
-                                                                      : 0.0,
-                                                                  0.0,
-                                                                )),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 0.0
-                                                                      : 50.0,
-                                                                  0.0,
-                                                                )),
-                                                              ),
-                                                            ),
-                                                            alignment:
-                                                                const AlignmentDirectional(
-                                                                    0.0, 0.0),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                      15.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      10.0),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                child:
-                                                                    Image.asset(
-                                                                  'assets/images/deactivate.png',
-                                                                  width: 30.0,
-                                                                  height: 20.0,
-                                                                  fit: BoxFit
-                                                                      .fitHeight,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(0.0,
-                                                                8.0, 5.0, 0.0),
-                                                        child: Text(
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .getText(
-                                                            'dx7jboeu' /* Total Deactivated
-Vcards */
-                                                            ,
-                                                          ),
-                                                          maxLines: 2,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito Sans',
-                                                                color: const Color(
-                                                                    0xFF1E2935),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        'Nunito Sans'),
-                                                              ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -1454,54 +1511,201 @@ Vcards */
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(5.0, 0.0, 6.0, 0.0),
-                                            child: Material(
-                                              color: Colors.transparent,
-                                              elevation: 2.0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                              ),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              if (FFAppState()
+                                                      .selectedDrawerPage !=
+                                                  'Enquiries') {
+                                                context.goNamed(
+                                                  'enquiries_screen',
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        const TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                      duration: Duration(
+                                                          milliseconds: 300),
+                                                    ),
+                                                  },
+                                                );
+                                              }
+                                              FFAppState().selectedDrawerPage =
+                                                  'Enquiries';
+                                              FFAppState().isVcardEnquiry =
+                                                  false;
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      5.0, 0.0, 6.0, 0.0),
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                elevation: 1.0,
+                                                shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10.0),
                                                 ),
-                                                alignment:
-                                                    const AlignmentDirectional(
-                                                        1.0, -1.0),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          15.0, 0.0, 0.0, 15.0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Text(
-                                                            getJsonField(
-                                                              listViewAdminDashboardResponse
-                                                                  .jsonBody,
-                                                              r'''$.data.enquiry''',
-                                                            ).toString(),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          1.0, -1.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(12.0, 0.0,
+                                                            0.0, 12.0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              getJsonField(
+                                                                listViewAdminDashboardResponse
+                                                                    .jsonBody,
+                                                                r'''$.data.enquiry''',
+                                                              ).toString(),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Nunito Sans',
+                                                                    color: const Color(
+                                                                        0xFFFF9900),
+                                                                    fontSize:
+                                                                        26.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            'Nunito Sans'),
+                                                                  ),
+                                                            ),
+                                                            Container(
+                                                              width: 60.0,
+                                                              height: 50.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: const Color(
+                                                                    0x1AFF9900),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 0.0
+                                                                        : 300.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 300.0
+                                                                        : 0.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 50.0
+                                                                        : 0.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 0.0
+                                                                        : 50.0,
+                                                                    0.0,
+                                                                  )),
+                                                                ),
+                                                              ),
+                                                              alignment:
+                                                                  const AlignmentDirectional(
+                                                                      0.0, 0.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                        12.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        10.0),
+                                                                child:
+                                                                    ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    'assets/images/enquire.png',
+                                                                    width: 30.0,
+                                                                    height:
+                                                                        20.0,
+                                                                    fit: BoxFit
+                                                                        .fitHeight,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                  0.0,
+                                                                  8.0,
+                                                                  5.0,
+                                                                  0.0),
+                                                          child: Text(
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              '76c7kx4k' /* Today 
+                                            Enquiries */
+                                                              ,
+                                                            ),
+                                                            maxLines: 2,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -1509,132 +1713,19 @@ Vcards */
                                                                   fontFamily:
                                                                       'Nunito Sans',
                                                                   color: const Color(
-                                                                      0xFFFF9900),
-                                                                  fontSize:
-                                                                      26.0,
+                                                                      0xFF1E2935),
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .w800,
+                                                                          .bold,
                                                                   useGoogleFonts: GoogleFonts
                                                                           .asMap()
                                                                       .containsKey(
                                                                           'Nunito Sans'),
                                                                 ),
                                                           ),
-                                                          Container(
-                                                            width: 60.0,
-                                                            height: 50.0,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: const Color(
-                                                                  0x1AFF9900),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 0.0
-                                                                      : 300.0,
-                                                                  0.0,
-                                                                )),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 300.0
-                                                                      : 0.0,
-                                                                  0.0,
-                                                                )),
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 50.0
-                                                                      : 0.0,
-                                                                  0.0,
-                                                                )),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 0.0
-                                                                      : 50.0,
-                                                                  0.0,
-                                                                )),
-                                                              ),
-                                                            ),
-                                                            alignment:
-                                                                const AlignmentDirectional(
-                                                                    0.0, 0.0),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                      15.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      10.0),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                child:
-                                                                    Image.asset(
-                                                                  'assets/images/enquire.png',
-                                                                  width: 30.0,
-                                                                  height: 20.0,
-                                                                  fit: BoxFit
-                                                                      .fitHeight,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(0.0,
-                                                                8.0, 5.0, 0.0),
-                                                        child: Text(
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .getText(
-                                                            '76c7kx4k' /* Today 
-Enquiries */
-                                                            ,
-                                                          ),
-                                                          maxLines: 2,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito Sans',
-                                                                color: const Color(
-                                                                    0xFF1E2935),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        'Nunito Sans'),
-                                                              ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -1642,54 +1733,201 @@ Enquiries */
                                           ),
                                         ),
                                         Flexible(
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(6.0, 0.0, 5.0, 0.0),
-                                            child: Material(
-                                              color: Colors.transparent,
-                                              elevation: 2.0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.0),
-                                              ),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              if (FFAppState()
+                                                      .selectedDrawerPage !=
+                                                  'Appointments') {
+                                                context.goNamed(
+                                                  'appointment_screen',
+                                                  extra: <String, dynamic>{
+                                                    kTransitionInfoKey:
+                                                        const TransitionInfo(
+                                                      hasTransition: true,
+                                                      transitionType:
+                                                          PageTransitionType
+                                                              .fade,
+                                                      duration: Duration(
+                                                          milliseconds: 300),
+                                                    ),
+                                                  },
+                                                );
+                                              }
+                                              FFAppState().selectedDrawerPage =
+                                                  'Appointments';
+                                              FFAppState().isVcardAppointment =
+                                                  false;
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      6.0, 0.0, 5.0, 0.0),
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                elevation: 1.0,
+                                                shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10.0),
                                                 ),
-                                                alignment:
-                                                    const AlignmentDirectional(
-                                                        1.0, -1.0),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          15.0, 0.0, 0.0, 15.0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Text(
-                                                            getJsonField(
-                                                              listViewAdminDashboardResponse
-                                                                  .jsonBody,
-                                                              r'''$.data.appointment''',
-                                                            ).toString(),
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.0),
+                                                  ),
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          1.0, -1.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(12.0, 0.0,
+                                                            0.0, 12.0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              getJsonField(
+                                                                listViewAdminDashboardResponse
+                                                                    .jsonBody,
+                                                                r'''$.data.appointment''',
+                                                              ).toString(),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Nunito Sans',
+                                                                    color: const Color(
+                                                                        0xFF00B96D),
+                                                                    fontSize:
+                                                                        26.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w800,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            'Nunito Sans'),
+                                                                  ),
+                                                            ),
+                                                            Container(
+                                                              width: 60.0,
+                                                              height: 50.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: const Color(
+                                                                    0x1900B96D),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 0.0
+                                                                        : 300.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 300.0
+                                                                        : 0.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 50.0
+                                                                        : 0.0,
+                                                                    0.0,
+                                                                  )),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                    FFAppState().selectLanguageIndex ==
+                                                                            0
+                                                                        ? 0.0
+                                                                        : 50.0,
+                                                                    0.0,
+                                                                  )),
+                                                                ),
+                                                              ),
+                                                              alignment:
+                                                                  const AlignmentDirectional(
+                                                                      0.0, 0.0),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                        12.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        10.0),
+                                                                child:
+                                                                    ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                  child: Image
+                                                                      .asset(
+                                                                    'assets/images/appointment.png',
+                                                                    width: 30.0,
+                                                                    height:
+                                                                        20.0,
+                                                                    fit: BoxFit
+                                                                        .fitHeight,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                  0.0,
+                                                                  8.0,
+                                                                  5.0,
+                                                                  0.0),
+                                                          child: Text(
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              'zvfj14as' /* Today 
+                                            Appointments */
+                                                              ,
+                                                            ),
+                                                            maxLines: 2,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -1697,132 +1935,19 @@ Enquiries */
                                                                   fontFamily:
                                                                       'Nunito Sans',
                                                                   color: const Color(
-                                                                      0xFF00B96D),
-                                                                  fontSize:
-                                                                      26.0,
+                                                                      0xFF1E2935),
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .w800,
+                                                                          .bold,
                                                                   useGoogleFonts: GoogleFonts
                                                                           .asMap()
                                                                       .containsKey(
                                                                           'Nunito Sans'),
                                                                 ),
                                                           ),
-                                                          Container(
-                                                            width: 60.0,
-                                                            height: 50.0,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: const Color(
-                                                                  0x1900B96D),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 0.0
-                                                                      : 300.0,
-                                                                  0.0,
-                                                                )),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 300.0
-                                                                      : 0.0,
-                                                                  0.0,
-                                                                )),
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 50.0
-                                                                      : 0.0,
-                                                                  0.0,
-                                                                )),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                  FFAppState().selectLanguageIndex ==
-                                                                          0
-                                                                      ? 0.0
-                                                                      : 50.0,
-                                                                  0.0,
-                                                                )),
-                                                              ),
-                                                            ),
-                                                            alignment:
-                                                                const AlignmentDirectional(
-                                                                    0.0, 0.0),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                      15.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      10.0),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                child:
-                                                                    Image.asset(
-                                                                  'assets/images/appointment.png',
-                                                                  width: 30.0,
-                                                                  height: 20.0,
-                                                                  fit: BoxFit
-                                                                      .fitHeight,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(0.0,
-                                                                8.0, 5.0, 0.0),
-                                                        child: Text(
-                                                          FFLocalizations.of(
-                                                                  context)
-                                                              .getText(
-                                                            'zvfj14as' /* Today 
-Appointments */
-                                                            ,
-                                                          ),
-                                                          maxLines: 2,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Nunito Sans',
-                                                                color: const Color(
-                                                                    0xFF1E2935),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                useGoogleFonts: GoogleFonts
-                                                                        .asMap()
-                                                                    .containsKey(
-                                                                        'Nunito Sans'),
-                                                              ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -1882,14 +2007,18 @@ Appointments */
                                           child: SizedBox(
                                             width: 50.0,
                                             height: 50.0,
-                                            child: CupertinoActivityIndicator(),
+                                            child: CupertinoActivityIndicator(
+                                                color: Colors.white),
                                           ),
                                         );
                                       }
                                       final containerAdminIncomeChartResponse =
                                           snapshot.data!;
                                       return Container(
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
                                         child: SizedBox(
                                           width: double.infinity,
                                           height: double.infinity,
@@ -2067,7 +2196,7 @@ Appointments */
                                                       child: Material(
                                                         color:
                                                             Colors.transparent,
-                                                        elevation: 2.0,
+                                                        elevation: 1.0,
                                                         shape:
                                                             RoundedRectangleBorder(
                                                           borderRadius:
@@ -2449,7 +2578,7 @@ Appointments */
                                                       child: Material(
                                                         color:
                                                             Colors.transparent,
-                                                        elevation: 2.0,
+                                                        elevation: 1.0,
                                                         shape:
                                                             RoundedRectangleBorder(
                                                           borderRadius:

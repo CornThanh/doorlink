@@ -154,7 +154,7 @@ the... */
                         useGoogleFonts:
                             GoogleFonts.asMap().containsKey('Nunito Sans'),
                       ),
-                  elevation: 0.0,
+                  elevation: 1.0,
                   borderSide: const BorderSide(
                     color: Colors.transparent,
                     width: 1.0,

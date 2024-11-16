@@ -95,7 +95,7 @@ class _DeleteGroupDialogBoxWidgetState
                                     child: SizedBox(
                                       width: 50.0,
                                       height: 50.0,
-                                      child: CupertinoActivityIndicator(),
+                                      child: CupertinoActivityIndicator(color: Colors.white),
                                     ),
                                   );
                                 }
@@ -137,7 +137,7 @@ class _DeleteGroupDialogBoxWidgetState
                                             setState(() {
                                               FFAppState().selectedGroupIndex =
                                                   dataIndex;
-                                              FFAppState().SelectedGroupId =
+                                              FFAppState().selectedGroupId =
                                                   getJsonField(
                                                 dataItem,
                                                 r'''$.id''',
@@ -254,7 +254,7 @@ class _DeleteGroupDialogBoxWidgetState
                                     child: SizedBox(
                                       width: 50.0,
                                       height: 50.0,
-                                      child: CupertinoActivityIndicator(),
+                                      child: CupertinoActivityIndicator(color: Colors.white),
                                     ),
                                   );
                                 }
@@ -294,7 +294,7 @@ class _DeleteGroupDialogBoxWidgetState
                                             setState(() {
                                               FFAppState().selectedGroupIndex =
                                                   dataIndex;
-                                              FFAppState().SelectedGroupId =
+                                              FFAppState().selectedGroupId =
                                                   getJsonField(
                                                 dataItem,
                                                 r'''$.id''',
@@ -415,7 +415,7 @@ class _DeleteGroupDialogBoxWidgetState
                       _model.apiResulths7 =
                           await VcardGroup.deleteGroupCall.call(
                         authToken: FFAppState().authToken,
-                        id: FFAppState().SelectedGroupId,
+                        id: FFAppState().selectedGroupId,
                       );
                       if ((_model.apiResulths7?.succeeded ?? true)) {
                         FFAppState().update(() {
@@ -498,7 +498,7 @@ class _DeleteGroupDialogBoxWidgetState
                           context: context,
                           builder: (dialogContext) {
                             return Dialog(
-                              elevation: 0,
+                              elevation: 1,
                               insetPadding: EdgeInsets.zero,
                               backgroundColor: Colors.transparent,
                               alignment: const AlignmentDirectional(0.0, 0.0)
@@ -512,15 +512,8 @@ class _DeleteGroupDialogBoxWidgetState
                         await actions.customSnackbar(
                           context,
                           FFLocalizations.of(context).getVariableText(
+                            viText: 'Không thể xóa danh thiếp.',
                             enText: 'Business card not Deleted.',
-                            arText: 'لم تتم إضافة بطاقة العمل.',
-                            zh_HansText: '未添加名片。',
-                            frText: 'Carte de visite non ajoutée.',
-                            deText: 'Visitenkarte nicht hinzugefügt.',
-                            ptText: 'Cartão de visita não adicionado.',
-                            ruText: 'Визитка не добавлена.',
-                            esText: 'Tarjeta de presentación no agregada.',
-                            trText: 'Kartvizit eklenmedi.',
                           ),
                           FlutterFlowTheme.of(context).error,
                         );

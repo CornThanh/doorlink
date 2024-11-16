@@ -14,7 +14,7 @@ abstract class FlutterFlowTheme {
 
   static FlutterFlowTheme of(BuildContext context) {
     deviceSize = getDeviceSize(context);
-    return LightModeTheme();
+    return DarkModeTheme();
   }
 
   @Deprecated('Use primary instead')
@@ -40,6 +40,7 @@ abstract class FlutterFlowTheme {
   late Color warning;
   late Color error;
   late Color info;
+  late Color button;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -128,7 +129,7 @@ class LightModeTheme extends FlutterFlowTheme {
   Color get tertiaryColor => tertiary;
 
   late Color primary = const Color(0xFFFFFFFF);
-  late Color secondary = const Color(0xFF39D2C0);
+  late Color secondary = const Color(0xFF111111);
   late Color tertiary = const Color(0xFFEE8B60);
   late Color alternate = const Color(0xFFE0E3E7);
   late Color primaryText = const Color(0xFF000000);
@@ -143,6 +144,34 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color warning = const Color(0xFFF9CF58);
   late Color error = const Color(0xFFFF5963);
   late Color info = const Color(0xFFFFFFFF);
+  late Color button = const Color(0xFF1F69F6);
+}
+
+class DarkModeTheme extends FlutterFlowTheme {
+  @Deprecated('Use primary instead')
+  Color get primaryColor => primary;
+  @Deprecated('Use secondary instead')
+  Color get secondaryColor => secondary;
+  @Deprecated('Use tertiary instead')
+  Color get tertiaryColor => tertiary;
+
+  late Color primary = const Color(0xFF1A1A1A);
+  late Color secondary = const Color(0xFFFFFFFF);
+  late Color tertiary = const Color(0xFFEE8B60);
+  late Color alternate = const Color(0xFFE0E3E7);
+  late Color primaryText = const Color(0xFFFFFFFF);
+  late Color secondaryText = const Color(0xFF79818A);
+  late Color primaryBackground = const Color(0xFF1A1A1A);
+  late Color secondaryBackground = const Color(0xFF333333);
+  late Color accent1 = const Color(0x4C4B39EF);
+  late Color accent2 = const Color(0x4D39D2C0);
+  late Color accent3 = const Color(0x4DEE8B60);
+  late Color accent4 = const Color(0xCCFFFFFF);
+  late Color success = const Color(0xFF249689);
+  late Color warning = const Color(0xFFF9CF58);
+  late Color error = const Color(0xFFFF5963);
+  late Color info = const Color(0xFFFFFFFF);
+  late Color button = const Color(0xFF1F69F6);
 }
 
 abstract class Typography {

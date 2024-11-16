@@ -66,7 +66,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
           ),
         ),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xff333333),
           automaticallyImplyLeading: false,
           leading: InkWell(
             splashColor: Colors.transparent,
@@ -78,22 +78,12 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
             },
             child: Container(
               decoration: const BoxDecoration(),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(
-                    12.0, 17.0, 25.0, 17.0),
-                child: Container(
+              child: const Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
+                child: SizedBox(
                   width: 100.0,
                   height: 100.0,
-                  decoration: BoxDecoration(
-                    color: const Color(0x00FFFFFF),
-                    image: DecorationImage(
-                      fit: BoxFit.contain,
-                      alignment: const AlignmentDirectional(0.0, 0.0),
-                      image: Image.asset(
-                        'assets/images/drawer.png',
-                      ).image,
-                    ),
-                  ),
+                  child: Icon(Icons.menu),
                 ),
               ),
             ),
@@ -104,7 +94,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Nunito Sans',
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts:
@@ -112,7 +102,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                 ),
           ),
           centerTitle: true,
-          elevation: 2.0,
+          elevation: 1.0,
         ),
         body: Stack(
           children: [
@@ -179,7 +169,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Nunito Sans',
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold,
                                       useGoogleFonts: GoogleFonts.asMap()
@@ -285,196 +275,69 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 30.0, 0.0, 8.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    FFLocalizations.of(context).getText(
-                                      'y9n16027' /* Language */,
+                            InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () {
+                                context.pushNamed(
+                                  'language_screen',
+                                  queryParameters: {
+                                    'isChange': serializeParam(
+                                      true,
+                                      ParamType.bool,
                                     ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Nunito Sans',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey('Nunito Sans'),
-                                        ),
-                                  ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      context.pushNamed(
-                                        'language_screen',
-                                        queryParameters: {
-                                          'isChange': serializeParam(
-                                            true,
-                                            ParamType.bool,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey:
-                                              const TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.fade,
-                                            duration:
-                                                Duration(milliseconds: 300),
-                                          ),
-                                        },
-                                      );
-
-                                      if (VcardGroup.profileCall.language(
-                                            columnProfileResponse.jsonBody,
-                                          ) ==
-                                          'Arabic') {
-                                        setState(() {
-                                          FFAppState().selectLanguageIndex = 0;
-                                        });
-                                      } else {
-                                        if (VcardGroup.profileCall.language(
-                                              columnProfileResponse.jsonBody,
-                                            ) ==
-                                            'Chinese') {
-                                          setState(() {
-                                            FFAppState().selectLanguageIndex =
-                                                1;
-                                          });
-                                        } else {
-                                          if (VcardGroup.profileCall.language(
-                                                columnProfileResponse.jsonBody,
-                                              ) ==
-                                              'English') {
-                                            setState(() {
-                                              FFAppState().selectLanguageIndex =
-                                                  2;
-                                            });
-                                          } else {
-                                            if (VcardGroup.profileCall.language(
-                                                  columnProfileResponse
-                                                      .jsonBody,
-                                                ) ==
-                                                'French') {
-                                              setState(() {
-                                                FFAppState()
-                                                    .selectLanguageIndex = 3;
-                                              });
-                                            } else {
-                                              if (VcardGroup.profileCall
-                                                      .language(
-                                                    columnProfileResponse
-                                                        .jsonBody,
-                                                  ) ==
-                                                  'German') {
-                                                setState(() {
-                                                  FFAppState()
-                                                      .selectLanguageIndex = 4;
-                                                });
-                                              } else {
-                                                if (VcardGroup.profileCall
-                                                        .language(
-                                                      columnProfileResponse
-                                                          .jsonBody,
-                                                    ) ==
-                                                    'Portuguese') {
-                                                  setState(() {
-                                                    FFAppState()
-                                                        .selectLanguageIndex = 5;
-                                                  });
-                                                } else {
-                                                  if (VcardGroup.profileCall
-                                                          .language(
-                                                        columnProfileResponse
-                                                            .jsonBody,
-                                                      ) ==
-                                                      'Russian') {
-                                                    setState(() {
-                                                      FFAppState()
-                                                          .selectLanguageIndex = 6;
-                                                    });
-                                                  } else {
-                                                    if (VcardGroup.profileCall
-                                                            .language(
-                                                          columnProfileResponse
-                                                              .jsonBody,
-                                                        ) ==
-                                                        'Spanish') {
-                                                      setState(() {
-                                                        FFAppState()
-                                                            .selectLanguageIndex = 7;
-                                                      });
-                                                    } else {
-                                                      if (VcardGroup.profileCall
-                                                              .language(
-                                                            columnProfileResponse
-                                                                .jsonBody,
-                                                          ) ==
-                                                          'Turkish') {
-                                                        setState(() {
-                                                          FFAppState()
-                                                              .selectLanguageIndex = 8;
-                                                        });
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Text(
-                                          valueOrDefault<String>(
-                                            VcardGroup.profileCall.language(
-                                              columnProfileResponse.jsonBody,
-                                            ),
-                                            'language',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Nunito Sans',
-                                                color: const Color(0xFF79818A),
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w600,
-                                                useGoogleFonts:
-                                                    GoogleFonts.asMap()
-                                                        .containsKey(
-                                                            'Nunito Sans'),
-                                              ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsetsDirectional
-                                              .fromSTEB(10.0, 0.0, 0.0, 0.0),
-                                          child: Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 18.0,
-                                          ),
-                                        ),
-                                      ],
+                                  }.withoutNulls,
+                                  extra: <String, dynamic>{
+                                    kTransitionInfoKey: const TransitionInfo(
+                                      hasTransition: true,
+                                      transitionType: PageTransitionType.fade,
+                                      duration: Duration(milliseconds: 300),
                                     ),
-                                  ),
-                                ],
+                                  },
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 30.0, 0.0, 8.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      FFLocalizations.of(context).getText(
+                                        'y9n16027' /* Language */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Nunito Sans',
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey('Nunito Sans'),
+                                          ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              10.0, 0.0, 0.0, 0.0),
+                                      child: Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 18.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            const Divider(
-                              thickness: 1.0,
-                              color: Color(0xFFAAB0B8),
+                            Divider(
+                              thickness: 0.5,
+                              color: Colors.white.withOpacity(0.2),
                             ),
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
@@ -555,9 +418,9 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                               return Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  const Divider(
-                                    thickness: 1.0,
-                                    color: Color(0xFFAAB0B8),
+                                  Divider(
+                                    thickness: 0.5,
+                                    color: Colors.white.withOpacity(0.2),
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -662,9 +525,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                           }
                                         },
                                         activeColor: const Color(0xFF1F69F6),
-                                        activeTrackColor:
-                                            FlutterFlowTheme.of(context)
-                                                .accent1,
+                                        activeTrackColor: Colors.green,
                                         inactiveTrackColor:
                                             FlutterFlowTheme.of(context)
                                                 .alternate,
@@ -674,9 +535,9 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                       ),
                                     ],
                                   ),
-                                  const Divider(
-                                    thickness: 1.0,
-                                    color: Color(0xFFAAB0B8),
+                                  Divider(
+                                    thickness: 0.5,
+                                    color: Colors.white.withOpacity(0.2),
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -781,9 +642,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                           }
                                         },
                                         activeColor: const Color(0xFF1F69F6),
-                                        activeTrackColor:
-                                            FlutterFlowTheme.of(context)
-                                                .accent1,
+                                        activeTrackColor: Colors.green,
                                         inactiveTrackColor:
                                             FlutterFlowTheme.of(context)
                                                 .alternate,
@@ -793,9 +652,9 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                       ),
                                     ],
                                   ),
-                                  const Divider(
-                                    thickness: 1.0,
-                                    color: Color(0xFFAAB0B8),
+                                  Divider(
+                                    thickness: 0.5,
+                                    color: Colors.white.withOpacity(0.2),
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -900,9 +759,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                           }
                                         },
                                         activeColor: const Color(0xFF1F69F6),
-                                        activeTrackColor:
-                                            FlutterFlowTheme.of(context)
-                                                .accent1,
+                                        activeTrackColor: Colors.green,
                                         inactiveTrackColor:
                                             FlutterFlowTheme.of(context)
                                                 .alternate,
@@ -912,9 +769,9 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                       ),
                                     ],
                                   ),
-                                  const Divider(
-                                    thickness: 1.0,
-                                    color: Color(0xFFAAB0B8),
+                                  Divider(
+                                    thickness: 0.5,
+                                    color: Colors.white.withOpacity(0.2),
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1019,9 +876,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                           }
                                         },
                                         activeColor: const Color(0xFF1F69F6),
-                                        activeTrackColor:
-                                            FlutterFlowTheme.of(context)
-                                                .accent1,
+                                        activeTrackColor: Colors.green,
                                         inactiveTrackColor:
                                             FlutterFlowTheme.of(context)
                                                 .alternate,

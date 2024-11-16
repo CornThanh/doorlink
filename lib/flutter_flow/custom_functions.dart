@@ -34,10 +34,10 @@ String formatDate(String dateTime) {
   };
 
   String day = dateComponent[2];
-  String month = months[dateComponent[1]]!;
+  String month = dateComponent[1]!;
   String year = dateComponent[0];
 
-  return '$month $day, $year';
+  return ' $day-$month-$year';
 }
 
 List<dynamic> generateBusinessCard(
@@ -90,6 +90,16 @@ List<String> generateMonthList() {
 
 List<dynamic> generateBusinessGroupList(List<dynamic> groupList) {
   List groups = ['All'];
+
+  for (var group in groupList) {
+    groups.add(group['name']);
+  }
+
+  return groups;
+}
+
+List<dynamic> generateVcardGroupList(List<dynamic> groupList) {
+  List groups = ['Thông Tin', 'Mẫu Danh Thiếp', 'Mạng Xã Hội'];
 
   for (var group in groupList) {
     groups.add(group['name']);

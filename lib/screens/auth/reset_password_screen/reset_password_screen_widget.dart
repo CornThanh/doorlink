@@ -324,19 +324,8 @@ class _ResetPasswordScreenWidgetState extends State<ResetPasswordScreenWidget> {
                             await actions.customSnackbar(
                               context,
                               FFLocalizations.of(context).getVariableText(
+                                viText: 'Vui lòng nhập mật khẩu đúng.',
                                 enText: 'Please Enter Valid Password.',
-                                arText: 'الرجاء إدخال كلمة مرور صالحة.',
-                                zh_HansText: '请输入有效密码',
-                                frText:
-                                    'Veuillez saisir un mot de passe valide.',
-                                deText:
-                                    'Bitte geben Sie ein gültiges Passwort ein.',
-                                ptText: 'Digite uma senha válida.',
-                                ruText:
-                                    'Пожалуйста, введите действительный пароль.',
-                                esText:
-                                    'Por favor ingrese una contraseña válida.',
-                                trText: 'Lütfen Geçerli Şifre Giriniz.',
                               ),
                               FlutterFlowTheme.of(context).error,
                             );
@@ -363,7 +352,7 @@ class _ResetPasswordScreenWidgetState extends State<ResetPasswordScreenWidget> {
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Nunito Sans'),
                                   ),
-                          elevation: 0.0,
+                          elevation: 1.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,

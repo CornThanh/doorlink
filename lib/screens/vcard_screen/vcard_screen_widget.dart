@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:MeU/component/vcard_sheet/create_vcard_sheet_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/backend/api_requests/api_calls.dart';
@@ -61,13 +64,29 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color.fromRGBO(82, 170, 94, 1.0),
-          tooltip: 'Increment',
+          backgroundColor: const Color(0xFF1F69F6),
           child: const Icon(Icons.add, color: Colors.white, size: 28),
-          onPressed: () {},
+          onPressed: () async {
+            final shouldReload = await showModalBottomSheet(
+              isScrollControlled: true,
+              backgroundColor: Colors.transparent,
+              context: context,
+              builder: (context) {
+                return Padding(
+                  padding: MediaQuery.viewInsetsOf(context),
+                  child: const CreateVcardSheetWidget(),
+                );
+              },
+            );
+
+            if (shouldReload == true) {
+              setState(() => _model.apiRequestCompleter2 = null);
+              await _model.waitForApiRequestCompleted2();
+            }
+          },
         ),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xff333333),
           automaticallyImplyLeading: false,
           leading: InkWell(
             splashColor: Colors.transparent,
@@ -79,22 +98,12 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
             },
             child: Container(
               decoration: const BoxDecoration(),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(
-                    12.0, 17.0, 25.0, 17.0),
-                child: Container(
+              child: const Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
+                child: SizedBox(
                   width: 100.0,
                   height: 100.0,
-                  decoration: BoxDecoration(
-                    color: const Color(0x00FFFFFF),
-                    image: DecorationImage(
-                      fit: BoxFit.contain,
-                      alignment: const AlignmentDirectional(0.0, 0.0),
-                      image: Image.asset(
-                        'assets/images/drawer.png',
-                      ).image,
-                    ),
-                  ),
+                  child: Icon(Icons.menu),
                 ),
               ),
             ),
@@ -105,7 +114,7 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Nunito Sans',
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts:
@@ -120,7 +129,7 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
             ),
           ],
           centerTitle: true,
-          elevation: 2.0,
+          elevation: 1.0,
         ),
         body: Builder(
           builder: (context) {
@@ -141,7 +150,7 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                 builder: (context) {
                   if (FFAppState().role == 'Super Admin') {
                     return Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: FutureBuilder<ApiCallResponse>(
                         future: (_model.apiRequestCompleter1 ??=
                                 Completer<ApiCallResponse>()
@@ -156,7 +165,8 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                               child: SizedBox(
                                 width: 50.0,
                                 height: 50.0,
-                                child: CupertinoActivityIndicator(),
+                                child: CupertinoActivityIndicator(
+                                    color: Colors.white),
                               ),
                             );
                           }
@@ -195,108 +205,232 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                                     final dataItem = data[dataIndex];
                                     return Builder(
                                       builder: (context) {
-                                        if (FFAppState().selectLanguageIndex ==
-                                            0) {
-                                          return Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(5.0, 0.0, 7.0, 0.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                await showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return GestureDetector(
-                                                      onTap: () => _model
-                                                              .unfocusNode
-                                                              .canRequestFocus
-                                                          ? FocusScope.of(
-                                                                  context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode)
-                                                          : FocusScope.of(
-                                                                  context)
-                                                              .unfocus(),
-                                                      child: Padding(
-                                                        padding: MediaQuery
-                                                            .viewInsetsOf(
-                                                                context),
-                                                        child: VcardSheetWidget(
-                                                          vcardId: getJsonField(
-                                                            dataItem,
-                                                            r'''$.id''',
-                                                          ),
-                                                          url: getJsonField(
-                                                            dataItem,
-                                                            r'''$.url_alias''',
-                                                          ).toString(),
+                                        return Padding(
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(5.0, 0.0, 2.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              final result =
+                                                  await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                barrierColor:
+                                                    const Color(0x27000000),
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () => _model
+                                                            .unfocusNode
+                                                            .canRequestFocus
+                                                        ? FocusScope.of(context)
+                                                            .requestFocus(_model
+                                                                .unfocusNode)
+                                                        : FocusScope.of(context)
+                                                            .unfocus(),
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child: VcardSheetWidget(
+                                                        vcardId: getJsonField(
+                                                          dataItem,
+                                                          r'''$.id''',
                                                         ),
+                                                        url: getJsonField(
+                                                          dataItem,
+                                                          r'''$.url_alias''',
+                                                        ).toString(),
                                                       ),
-                                                    );
-                                                  },
-                                                ).then((value) =>
-                                                    safeSetState(() {}));
-                                              },
-                                              child: Material(
-                                                color: Colors.transparent,
-                                                elevation: 2.0,
-                                                shape: RoundedRectangleBorder(
+                                                    ),
+                                                  );
+                                                },
+                                              );
+                                              if (result == true) {
+                                                setState(() => _model
+                                                        .apiRequestCompleter2 =
+                                                    null);
+                                                await _model
+                                                    .waitForApiRequestCompleted2();
+                                              }
+                                            },
+                                            child: Material(
+                                              color: Colors.transparent,
+                                              elevation: 1.0,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10.0),
+                                              ),
+                                              child: Container(
+                                                width: double.infinity,
+                                                height: 80.0,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  boxShadow: const [
+                                                    BoxShadow(
+                                                      blurRadius: 0.0,
+                                                      color: Color(0xFF1F69F6),
+                                                      offset: Offset(-5.0, 0.0),
+                                                    )
+                                                  ],
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10.0),
                                                 ),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 80.0,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    boxShadow: const [
-                                                      BoxShadow(
-                                                        blurRadius: 0.0,
-                                                        color:
-                                                            Color(0xFF1F69F6),
-                                                        offset:
-                                                            Offset(-5.0, 0.0),
-                                                      )
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                            10.0, 0.0),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Align(
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  0.0, -1.0),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    5.0),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                          10.0, 0.0, 0.0, 0.0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            const BorderRadius
+                                                                .only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  50.0),
+                                                        ),
+                                                        child: Image.network(
+                                                          getJsonField(
+                                                            dataItem,
+                                                            r'''$.image''',
+                                                          ).toString(),
+                                                          width: 50.0,
+                                                          height: 50.0,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(10.0,
+                                                                0.0, 0.0, 0.0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Text(
+                                                              getJsonField(
+                                                                dataItem,
+                                                                r'''$.name''',
+                                                              )
+                                                                  .toString()
+                                                                  .maybeHandleOverflow(
+                                                                    maxChars:
+                                                                        20,
+                                                                    replacement:
+                                                                        '…',
+                                                                  ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Nunito Sans',
+                                                                    fontSize:
+                                                                        16.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            'Nunito Sans'),
+                                                                  ),
+                                                            ),
+                                                            Text(
+                                                              getJsonField(
+                                                                dataItem,
+                                                                r'''$.occupation''',
+                                                              )
+                                                                  .toString()
+                                                                  .maybeHandleOverflow(
+                                                                    maxChars:
+                                                                        20,
+                                                                    replacement:
+                                                                        '…',
+                                                                  ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Nunito Sans',
+                                                                    color: const Color(
+                                                                        0xFF79818A),
+                                                                    fontSize:
+                                                                        14.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                    useGoogleFonts: GoogleFonts
+                                                                            .asMap()
+                                                                        .containsKey(
+                                                                            'Nunito Sans'),
+                                                                  ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      const Spacer(),
+                                                      Align(
+                                                        alignment:
+                                                            const AlignmentDirectional(
+                                                                0.0, -1.0),
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  5.0),
+                                                          child: InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              await launchURL(
+                                                                  getJsonField(
+                                                                dataItem,
+                                                                r'''$.url_alias''',
+                                                              ).toString());
+                                                            },
                                                             child: Container(
                                                               width: 40.0,
                                                               height: 40.0,
@@ -337,403 +471,14 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                                                             ),
                                                           ),
                                                         ),
-                                                        const Spacer(),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  10.0,
-                                                                  0.0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.name''',
-                                                                )
-                                                                    .toString()
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          20,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
-                                                              ),
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.occupation''',
-                                                                )
-                                                                    .toString()
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          20,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      color: const Color(
-                                                                          0xFF79818A),
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        ClipRRect(
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                  .only(
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                          ),
-                                                          child: Image.network(
-                                                            getJsonField(
-                                                              dataItem,
-                                                              r'''$.image''',
-                                                            ).toString(),
-                                                            width: 50.0,
-                                                            height: 50.0,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        } else {
-                                          return Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(5.0, 0.0, 2.0, 0.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                await showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  barrierColor:
-                                                      const Color(0x27000000),
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return GestureDetector(
-                                                      onTap: () => _model
-                                                              .unfocusNode
-                                                              .canRequestFocus
-                                                          ? FocusScope.of(
-                                                                  context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode)
-                                                          : FocusScope.of(
-                                                                  context)
-                                                              .unfocus(),
-                                                      child: Padding(
-                                                        padding: MediaQuery
-                                                            .viewInsetsOf(
-                                                                context),
-                                                        child: VcardSheetWidget(
-                                                          vcardId: getJsonField(
-                                                            dataItem,
-                                                            r'''$.id''',
-                                                          ),
-                                                          url: getJsonField(
-                                                            dataItem,
-                                                            r'''$.url_alias''',
-                                                          ).toString(),
-                                                        ),
                                                       ),
-                                                    );
-                                                  },
-                                                ).then((value) =>
-                                                    safeSetState(() {}));
-                                              },
-                                              child: Material(
-                                                color: Colors.transparent,
-                                                elevation: 2.0,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 80.0,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    boxShadow: const [
-                                                      BoxShadow(
-                                                        blurRadius: 0.0,
-                                                        color:
-                                                            Color(0xFF1F69F6),
-                                                        offset:
-                                                            Offset(-5.0, 0.0),
-                                                      )
                                                     ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(10.0, 0.0,
-                                                            0.0, 0.0),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        ClipRRect(
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                  .only(
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                          ),
-                                                          child: Image.network(
-                                                            getJsonField(
-                                                              dataItem,
-                                                              r'''$.image''',
-                                                            ).toString(),
-                                                            width: 50.0,
-                                                            height: 50.0,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                  10.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.name''',
-                                                                )
-                                                                    .toString()
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          20,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
-                                                              ),
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.occupation''',
-                                                                )
-                                                                    .toString()
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          20,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      color: const Color(
-                                                                          0xFF79818A),
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        const Spacer(),
-                                                        Align(
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  0.0, -1.0),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    5.0),
-                                                            child: InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                await launchURL(
-                                                                    getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.url_alias''',
-                                                                ).toString());
-                                                              },
-                                                              child: Container(
-                                                                width: 40.0,
-                                                                height: 40.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                  image:
-                                                                      DecorationImage(
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    image: Image
-                                                                        .asset(
-                                                                      'assets/images/share.png',
-                                                                    ).image,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      const BorderRadius
-                                                                          .only(
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                            15.0),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            0.0),
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            0.0),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            10.0),
-                                                                  ),
-                                                                ),
-                                                                alignment:
-                                                                    const AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          );
-                                        }
+                                          ),
+                                        );
                                       },
                                     );
                                   },
@@ -746,7 +491,7 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                     );
                   } else {
                     return Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(12.0),
                       child: FutureBuilder<ApiCallResponse>(
                         future: (_model.apiRequestCompleter2 ??=
                                 Completer<ApiCallResponse>()
@@ -761,7 +506,8 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                               child: SizedBox(
                                 width: 50.0,
                                 height: 50.0,
-                                child: CupertinoActivityIndicator(),
+                                child: CupertinoActivityIndicator(
+                                    color: Colors.white),
                               ),
                             );
                           }
@@ -798,619 +544,340 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                                       const SizedBox(height: 10.0),
                                   itemBuilder: (context, dataIndex) {
                                     final dataItem = data[dataIndex];
-                                    return Builder(
-                                      builder: (context) {
-                                        if (FFAppState().selectLanguageIndex ==
-                                            0) {
-                                          return Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(5.0, 0.0, 7.0, 0.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                await showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return GestureDetector(
-                                                      onTap: () => _model
-                                                              .unfocusNode
-                                                              .canRequestFocus
-                                                          ? FocusScope.of(
-                                                                  context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode)
-                                                          : FocusScope.of(
-                                                                  context)
-                                                              .unfocus(),
-                                                      child: Padding(
-                                                        padding: MediaQuery
-                                                            .viewInsetsOf(
-                                                                context),
-                                                        child: VcardSheetWidget(
-                                                          vcardId: getJsonField(
-                                                            dataItem,
-                                                            r'''$.id''',
-                                                          ),
-                                                          url: getJsonField(
-                                                            dataItem,
-                                                            r'''$.url_alias''',
-                                                          ).toString(),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                ).then((value) =>
-                                                    safeSetState(() {}));
-                                              },
-                                              child: Material(
-                                                color: Colors.transparent,
-                                                elevation: 2.0,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 80.0,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    boxShadow: const [
-                                                      BoxShadow(
-                                                        blurRadius: 0.0,
-                                                        color:
-                                                            Color(0xFF1F69F6),
-                                                        offset:
-                                                            Offset(-5.0, 0.0),
-                                                      )
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
+                                    return Padding(
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              5.0, 0.0, 2.0, 0.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          final result =
+                                              await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            barrierColor:
+                                                const Color(0x27000000),
+                                            context: context,
+                                            builder: (context) {
+                                              return GestureDetector(
+                                                onTap: () => _model.unfocusNode
+                                                        .canRequestFocus
+                                                    ? FocusScope.of(context)
+                                                        .requestFocus(
+                                                            _model.unfocusNode)
+                                                    : FocusScope.of(context)
+                                                        .unfocus(),
+                                                child: Padding(
+                                                  padding:
+                                                      MediaQuery.viewInsetsOf(
+                                                          context),
+                                                  child: VcardSheetWidget(
+                                                    vcardId: getJsonField(
+                                                      dataItem,
+                                                      r'''$.id''',
+                                                    ),
+                                                    url: getJsonField(
+                                                      dataItem,
+                                                      r'''$.url_alias''',
+                                                    ).toString(),
                                                   ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                            10.0, 0.0),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Align(
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  0.0, -1.0),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    5.0),
-                                                            child: Container(
-                                                              width: 40.0,
-                                                              height: 40.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                                image:
-                                                                    DecorationImage(
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  image: Image
-                                                                      .asset(
-                                                                    'assets/images/share.png',
-                                                                  ).image,
-                                                                ),
-                                                                borderRadius:
-                                                                    const BorderRadius
-                                                                        .only(
-                                                                  bottomLeft: Radius
-                                                                      .circular(
-                                                                          15.0),
-                                                                  bottomRight: Radius
-                                                                      .circular(
-                                                                          0.0),
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          0.0),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          10.0),
-                                                                ),
-                                                              ),
-                                                              alignment:
-                                                                  const AlignmentDirectional(
-                                                                      0.0, 0.0),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        const Spacer(),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  10.0,
-                                                                  0.0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.name''',
-                                                                )
-                                                                    .toString()
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          20,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
-                                                              ),
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.occupation''',
-                                                                )
-                                                                    .toString()
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          20,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      color: const Color(
-                                                                          0xFF79818A),
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        ClipRRect(
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                  .only(
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                          ),
-                                                          child: Image.network(
-                                                            getJsonField(
-                                                              dataItem,
-                                                              r'''$.image''',
-                                                            ).toString(),
-                                                            width: 50.0,
-                                                            height: 50.0,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                      ],
+                                                ),
+                                              );
+                                            },
+                                          );
+
+                                          if (result == true) {
+                                            setState(() => _model
+                                                .apiRequestCompleter2 = null);
+                                            await _model
+                                                .waitForApiRequestCompleted2();
+                                          }
+                                        },
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          elevation: 1.0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                          child: Container(
+                                            width: double.infinity,
+                                            height: 80.0,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              boxShadow: const [
+                                                BoxShadow(
+                                                  blurRadius: 0.0,
+                                                  color: Color(0xFF1F69F6),
+                                                  offset: Offset(-5.0, 0.0),
+                                                )
+                                              ],
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      10.0, 0.0, 0.0, 0.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        const BorderRadius.only(
+                                                      bottomLeft:
+                                                          Radius.circular(50.0),
+                                                      bottomRight:
+                                                          Radius.circular(50.0),
+                                                      topLeft:
+                                                          Radius.circular(50.0),
+                                                      topRight:
+                                                          Radius.circular(50.0),
+                                                    ),
+                                                    child: Image.network(
+                                                      getJsonField(
+                                                        dataItem,
+                                                        r'''$.image''',
+                                                      ).toString(),
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      fit: BoxFit.cover,
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        } else {
-                                          return Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(5.0, 0.0, 2.0, 0.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                await showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  barrierColor:
-                                                      const Color(0x27000000),
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return GestureDetector(
-                                                      onTap: () => _model
-                                                              .unfocusNode
-                                                              .canRequestFocus
-                                                          ? FocusScope.of(
-                                                                  context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode)
-                                                          : FocusScope.of(
-                                                                  context)
-                                                              .unfocus(),
-                                                      child: Padding(
-                                                        padding: MediaQuery
-                                                            .viewInsetsOf(
-                                                                context),
-                                                        child: VcardSheetWidget(
-                                                          vcardId: getJsonField(
-                                                            dataItem,
-                                                            r'''$.id''',
-                                                          ),
-                                                          url: getJsonField(
-                                                            dataItem,
-                                                            r'''$.url_alias''',
-                                                          ).toString(),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                ).then((value) =>
-                                                    safeSetState(() {}));
-                                              },
-                                              child: Material(
-                                                color: Colors.transparent,
-                                                elevation: 2.0,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                ),
-                                                child: Container(
-                                                  width: double.infinity,
-                                                  height: 80.0,
-                                                  decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    boxShadow: const [
-                                                      BoxShadow(
-                                                        blurRadius: 0.0,
-                                                        color:
-                                                            Color(0xFF1F69F6),
-                                                        offset:
-                                                            Offset(-5.0, 0.0),
-                                                      )
-                                                    ],
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                  ),
-                                                  child: Padding(
+                                                  Padding(
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                             0.0, 0.0),
-                                                    child: Row(
+                                                    child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
-                                                              .spaceBetween,
+                                                              .center,
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
-                                                              .center,
+                                                              .start,
                                                       children: [
-                                                        ClipRRect(
-                                                          borderRadius:
-                                                              const BorderRadius
-                                                                  .only(
-                                                            bottomLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            bottomRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            topLeft:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    50.0),
-                                                          ),
-                                                          child: Image.network(
-                                                            getJsonField(
-                                                              dataItem,
-                                                              r'''$.image''',
-                                                            ).toString(),
-                                                            width: 50.0,
-                                                            height: 50.0,
-                                                            fit: BoxFit.cover,
-                                                          ),
+                                                        Text(
+                                                          getJsonField(
+                                                            dataItem,
+                                                            r'''$.name''',
+                                                          )
+                                                              .toString()
+                                                              .maybeHandleOverflow(
+                                                                maxChars: 20,
+                                                                replacement:
+                                                                    '…',
+                                                              ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontFamily:
+                                                                    'Nunito Sans',
+                                                                fontSize: 16.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        'Nunito Sans'),
+                                                              ),
                                                         ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                  10.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                          child: Column(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.name''',
-                                                                )
-                                                                    .toString()
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          20,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
+                                                        Text(
+                                                          getJsonField(
+                                                            dataItem,
+                                                            r'''$.occupation''',
+                                                          )
+                                                              .toString()
+                                                              .maybeHandleOverflow(
+                                                                maxChars: 20,
+                                                                replacement:
+                                                                    '…',
                                                               ),
-                                                              Text(
-                                                                getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.occupation''',
-                                                                )
-                                                                    .toString()
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          20,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Nunito Sans',
-                                                                      color: const Color(
-                                                                          0xFF79818A),
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts: GoogleFonts
-                                                                              .asMap()
-                                                                          .containsKey(
-                                                                              'Nunito Sans'),
-                                                                    ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Nunito Sans',
+                                                                color: const Color(
+                                                                    0xFF79818A),
+                                                                fontSize: 14.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        'Nunito Sans'),
                                                               ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        const Spacer(),
-                                                        Align(
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  0.0, -1.0),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    5.0),
-                                                            child: InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                await launchURL(
-                                                                    getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.url_alias''',
-                                                                ).toString());
-                                                              },
-                                                              child: Container(
-                                                                width: 40.0,
-                                                                height: 40.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                  image:
-                                                                      DecorationImage(
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    image: Image
-                                                                        .asset(
-                                                                      'assets/images/ic_vcard_edit.png',
-                                                                    ).image,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      const BorderRadius
-                                                                          .only(
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                            15.0),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            0.0),
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            0.0),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            10.0),
-                                                                  ),
-                                                                ),
-                                                                alignment:
-                                                                    const AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Align(
-                                                          alignment:
-                                                              const AlignmentDirectional(
-                                                                  0.0, -1.0),
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    0.0,
-                                                                    5.0),
-                                                            child: InkWell(
-                                                              splashColor: Colors
-                                                                  .transparent,
-                                                              focusColor: Colors
-                                                                  .transparent,
-                                                              hoverColor: Colors
-                                                                  .transparent,
-                                                              highlightColor:
-                                                                  Colors
-                                                                      .transparent,
-                                                              onTap: () async {
-                                                                await launchURL(
-                                                                    getJsonField(
-                                                                  dataItem,
-                                                                  r'''$.url_alias''',
-                                                                ).toString());
-                                                              },
-                                                              child: Container(
-                                                                width: 40.0,
-                                                                height: 40.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                  image:
-                                                                      DecorationImage(
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    image: Image
-                                                                        .asset(
-                                                                      'assets/images/share.png',
-                                                                    ).image,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      const BorderRadius
-                                                                          .only(
-                                                                    bottomLeft:
-                                                                        Radius.circular(
-                                                                            15.0),
-                                                                    bottomRight:
-                                                                        Radius.circular(
-                                                                            0.0),
-                                                                    topLeft: Radius
-                                                                        .circular(
-                                                                            0.0),
-                                                                    topRight: Radius
-                                                                        .circular(
-                                                                            10.0),
-                                                                  ),
-                                                                ),
-                                                                alignment:
-                                                                    const AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0),
-                                                              ),
-                                                            ),
-                                                          ),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
-                                                ),
+                                                  const Spacer(),
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            0.0, -1.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(0.0,
+                                                              0.0, 0.0, 5.0),
+                                                      child: InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          int? id =
+                                                              getJsonField(
+                                                            dataItem,
+                                                            r'''$.id''',
+                                                          );
+
+                                                          final shouldReload =
+                                                              await context
+                                                                  .pushNamed<
+                                                                      bool>(
+                                                            'update_vcard_screen',
+                                                            queryParameters: {
+                                                              "vcardID": "$id"
+                                                            },
+                                                          );
+
+                                                          if (shouldReload ==
+                                                              true) {
+                                                            setState(() => _model
+                                                                    .apiRequestCompleter2 =
+                                                                null);
+                                                            await _model
+                                                                .waitForApiRequestCompleted2();
+                                                          }
+                                                        },
+                                                        child: Container(
+                                                          width: 40.0,
+                                                          height: 40.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            image:
+                                                                DecorationImage(
+                                                              fit: BoxFit.cover,
+                                                              image:
+                                                                  Image.asset(
+                                                                'assets/images/ic_vcard_edit.png',
+                                                              ).image,
+                                                            ),
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                    .only(
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      15.0),
+                                                              bottomRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          0.0),
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                      0.0),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      10.0),
+                                                            ),
+                                                          ),
+                                                          alignment:
+                                                              const AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            0.0, -1.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(1.0,
+                                                              1.0, 1.0, 5.0),
+                                                      child: InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          await launchURL(
+                                                              getJsonField(
+                                                            dataItem,
+                                                            r'''$.url_alias''',
+                                                          ).toString());
+                                                        },
+                                                        child: Container(
+                                                          width: 40.0,
+                                                          height: 40.0,
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .only(
+                                                              bottomLeft: Radius
+                                                                  .circular(
+                                                                      15.0),
+                                                              bottomRight:
+                                                                  Radius
+                                                                      .circular(
+                                                                          0.0),
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                      0.0),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      10.0),
+                                                            ),
+                                                          ),
+                                                          alignment:
+                                                              const AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: const Icon(
+                                                            Icons
+                                                                .visibility_outlined,
+                                                            color: Colors.blue,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          );
-                                        }
-                                      },
+                                          ),
+                                        ),
+                                      ),
                                     );
                                   },
                                 ),

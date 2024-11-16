@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:MeU/screens/vcard_screen/update_vcard_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/auth/custom_auth/custom_auth_user_provider.dart';
@@ -152,7 +153,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'register_screen',
           path: '/registerScreen',
           builder: (context, params) => const RegisterScreenWidget(),
-        )
+        ),
+        FFRoute(
+          name: 'update_vcard_screen',
+          path: '/updateVcardScreen',
+          builder: (context, params) {
+            return UpdateVcardScreenWidget(
+              vcardID: params.getParam('vcardID', ParamType.int),
+            );
+          },
+        ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
@@ -335,7 +345,7 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: Colors.white,
+                  color: const Color(0xff1A1A1A),
                   child: Center(
                     child: Image.asset(
                       'assets/images/app_launcher_icon.png',

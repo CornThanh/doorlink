@@ -67,7 +67,8 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 10.0, 20.0),
+            padding:
+                const EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 10.0, 20.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -81,7 +82,8 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: Text(
                     valueOrDefault<String>(
                       widget.titile,
@@ -97,7 +99,8 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: Text(
                     valueOrDefault<String>(
                       widget.subtitle,
@@ -114,7 +117,8 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -144,7 +148,7 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey('Nunito Sans'),
                                 ),
-                            elevation: 0.0,
+                            elevation: 1.0,
                             borderSide: const BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
@@ -165,22 +169,15 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                               if (VcardGroup.deleteAppointmentCall.success(
                                 (_model.appointmentRes?.jsonBody ?? ''),
                               )!) {
-                                Navigator.pop(context);
+                                context.pop(true);
                                 FFAppState().update(() {
                                   FFAppState().isLoading = true;
                                 });
                                 await actions.customSnackbar(
                                   context,
                                   FFLocalizations.of(context).getVariableText(
+                                    viText: 'Xóa cuộc hẹn thành công.',
                                     enText: 'Appointment Delete Successfully.',
-                                    arText: 'تم حذف الموعد بنجاح.',
-                                    zh_HansText: '预约删除成功.',
-                                    frText: 'Rendez-vous supprimé avec succès.',
-                                    deText: 'Termin erfolgreich gelöscht.',
-                                    ptText: 'Compromisso excluído com sucesso.',
-                                    ruText: 'Встреча успешно удалена.',
-                                    esText: 'Eliminación de cita exitosa.',
-                                    trText: 'Randevu Başarıyla Silindi.',
                                   ),
                                   const Color(0xFF46A44D),
                                 );
@@ -190,21 +187,12 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                                   FFAppState().isLoading = false;
                                 });
                               } else {
-                                context.safePop();
+                                context.pop(false);
                                 await actions.customSnackbar(
                                   context,
                                   FFLocalizations.of(context).getVariableText(
+                                    viText: 'Không thể xóa cuộc hẹn.',
                                     enText: 'Failed to Delete Appointment.',
-                                    arText: 'فشل في حذف الموعد.',
-                                    zh_HansText: '删除约会失败.',
-                                    frText:
-                                        'Échec de la suppression du rendez-vous.',
-                                    deText:
-                                        'Der Termin konnte nicht gelöscht werden.',
-                                    ptText: 'Falha ao excluir compromisso.',
-                                    ruText: 'Не удалось удалить встречу.',
-                                    esText: 'No se pudo eliminar la cita.',
-                                    trText: 'Randevu Silinemedi.',
                                   ),
                                   FlutterFlowTheme.of(context).error,
                                 );
@@ -226,15 +214,8 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                                   await actions.customSnackbar(
                                     context,
                                     FFLocalizations.of(context).getVariableText(
+                                      viText: 'Xóa yêu cầu thành công.',
                                       enText: 'Enquiry Delete Successfully.',
-                                      arText: 'تم حذف الاستفسار بنجاح.',
-                                      zh_HansText: '查询删除成功.',
-                                      frText: 'Demande de suppression réussie.',
-                                      deText: 'Anfrage erfolgreich gelöscht.',
-                                      ptText: 'Consulta excluída com sucesso.',
-                                      ruText: 'Запрос успешно удален.',
-                                      esText: 'Consulta Eliminar con éxito.',
-                                      trText: 'Sorgu başarıyla silindi.',
                                     ),
                                     const Color(0xFF46A44D),
                                   );
@@ -248,18 +229,8 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                                   await actions.customSnackbar(
                                     context,
                                     FFLocalizations.of(context).getVariableText(
+                                      viText: 'Không thể xóa yêu cầu.',
                                       enText: 'Failed to Delete Enquiry.',
-                                      arText: 'فشل في حذف الاستفسار.',
-                                      zh_HansText: '删除查询失败.',
-                                      frText:
-                                          'Échec de la suppression de la demande.',
-                                      deText:
-                                          'Anfrage konnte nicht gelöscht werden.',
-                                      ptText: 'Falha ao excluir consulta.',
-                                      ruText: 'Не удалось удалить запрос.',
-                                      esText:
-                                          'No se pudo eliminar la consulta.',
-                                      trText: 'Sorgu Silinemedi.',
                                     ),
                                     FlutterFlowTheme.of(context).error,
                                   );
@@ -274,7 +245,7 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                                   if (VcardGroup.deleteVcardCall.success(
                                     (_model.apiResult510?.jsonBody ?? ''),
                                   )!) {
-                                    Navigator.pop(context);
+                                    Navigator.pop(context, true);
                                     FFAppState().update(() {
                                       FFAppState().isLoading = true;
                                     });
@@ -282,16 +253,8 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                                       context,
                                       FFLocalizations.of(context)
                                           .getVariableText(
+                                        viText: 'Xóa Vcard thành công.',
                                         enText: 'Vcard Delete Successfully.',
-                                        arText: 'تم حذف Vcard بنجاح.',
-                                        zh_HansText: '电子名片删除成功.',
-                                        frText:
-                                            'Suppression de la Vcard avec succès.',
-                                        deText: 'VCard erfolgreich gelöscht.',
-                                        ptText: 'Vcard excluído com sucesso.',
-                                        ruText: 'Vcard успешно удалена.',
-                                        esText: 'Vcard Eliminar con éxito.',
-                                        trText: 'Vcard Başarıyla Silindi.',
                                       ),
                                       const Color(0xFF46A44D),
                                     );
@@ -306,17 +269,8 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                                       context,
                                       FFLocalizations.of(context)
                                           .getVariableText(
+                                        viText: 'Không thể xóa Vcard.',
                                         enText: 'Failed to Delete Vcard.',
-                                        arText: 'فشل في حذف Vcard.',
-                                        zh_HansText: '删除 Vcard 失败.',
-                                        frText:
-                                            'Échec de la suppression de la Vcard.',
-                                        deText:
-                                            'Vcard konnte nicht gelöscht werden.',
-                                        ptText: 'Falha ao excluir Vcard.',
-                                        ruText: 'Не удалось удалить Vcard.',
-                                        esText: 'No se pudo eliminar Vcard.',
-                                        trText: 'Vcard Silinemedi.',
                                       ),
                                       FlutterFlowTheme.of(context).error,
                                     );
@@ -347,7 +301,7 @@ class _DeleteDialogBoxWidgetState extends State<DeleteDialogBoxWidget> {
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey('Nunito Sans'),
                                 ),
-                            elevation: 0.0,
+                            elevation: 1.0,
                             borderSide: const BorderSide(
                               color: Colors.transparent,
                               width: 1.0,

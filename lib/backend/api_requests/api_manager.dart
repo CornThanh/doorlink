@@ -172,6 +172,8 @@ class ApiManager {
       ApiCallType.PATCH: client != null ? client.patch : http.patch,
       ApiCallType.DELETE: client != null ? client.delete : http.delete,
     }[type]!;
+    final planets = <String, String>{'Accept': 'application/json'};
+    headers.addEntries(planets.entries);
     final response = await requestFn(Uri.parse(apiUrl),
         headers: toStringMap(headers), body: postBody);
     return ApiCallResponse.fromHttpResponse(response, returnBody, decodeUtf8);
@@ -216,6 +218,9 @@ class ApiManager {
         );
       }
     });
+
+    final planets = <String, String>{'Accept': 'application/json'};
+    headers.addEntries(planets.entries);
 
     final request = http.MultipartRequest(
         type.toString().split('.').last, Uri.parse(apiUrl))
@@ -300,9 +305,9 @@ class ApiManager {
     if (_accessToken != null) {
       headers[HttpHeaders.authorizationHeader] = 'Bearer $_accessToken';
     }
-    if (!apiUrl.startsWith('http')) {
-      apiUrl = 'https://$apiUrl';
-    }
+    // if (!apiUrl.startsWith('http')) {
+    //   apiUrl = 'http://$apiUrl';
+    // }
 
     // If we've already made this exact call before and caching is on,
     // return the cached result.

@@ -51,7 +51,7 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xff333333),
           automaticallyImplyLeading: false,
           leading: Container(
             width: 100.0,
@@ -62,7 +62,6 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: FlutterFlowIconButton(
-                borderColor: FlutterFlowTheme.of(context).primary,
                 borderRadius: 20.0,
                 borderWidth: 1.0,
                 buttonSize: 40.0,
@@ -84,7 +83,7 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Nunito Sans',
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts:
@@ -108,38 +107,10 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
                   );
                   if ((_model.apiResult?.succeeded ?? true)) {
                     if (FFAppState().selectLanguageIndex == 0) {
-                      setAppLanguage(context, 'ar');
+                      setAppLanguage(context, 'vi');
                     } else {
                       if (FFAppState().selectLanguageIndex == 1) {
-                        setAppLanguage(context, 'zh_Hans');
-                      } else {
-                        if (FFAppState().selectLanguageIndex == 2) {
-                          setAppLanguage(context, 'en');
-                        } else {
-                          if (FFAppState().selectLanguageIndex == 3) {
-                            setAppLanguage(context, 'fr');
-                          } else {
-                            if (FFAppState().selectLanguageIndex == 4) {
-                              setAppLanguage(context, 'de');
-                            } else {
-                              if (FFAppState().selectLanguageIndex == 5) {
-                                setAppLanguage(context, 'pt');
-                              } else {
-                                if (FFAppState().selectLanguageIndex == 6) {
-                                  setAppLanguage(context, 'ru');
-                                } else {
-                                  if (FFAppState().selectLanguageIndex == 7) {
-                                    setAppLanguage(context, 'es');
-                                  } else {
-                                    if (FFAppState().selectLanguageIndex == 8) {
-                                      setAppLanguage(context, 'tr');
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
+                        setAppLanguage(context, 'en');
                       }
                     }
                   }
@@ -158,8 +129,8 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
                   decoration: const BoxDecoration(),
                   alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 10.0, 0.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         'a0fyjqsm' /* Save */,
@@ -167,7 +138,8 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Nunito Sans',
                             color: const Color(0xFF1F69F6),
-                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
                             useGoogleFonts:
                                 GoogleFonts.asMap().containsKey('Nunito Sans'),
                           ),
@@ -178,7 +150,7 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
             ),
           ],
           centerTitle: true,
-          elevation: 2.0,
+          elevation: 0.0,
         ),
         body: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(8.0, 15.0, 8.0, 15.0),
@@ -198,7 +170,8 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
                 itemBuilder: (context, dataIndex) {
                   final dataItem = data[dataIndex];
                   return Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        8.0, 0.0, 8.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,

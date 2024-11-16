@@ -16,18 +16,11 @@
 	<string>6.0</string>
 	<key>CFBundleLocalizations</key>
 	<array>
+		<string>vi</string>
 		<string>en</string>
-		<string>ar</string>
-		<string>zh_Hans</string>
-		<string>fr</string>
-		<string>de</string>
-		<string>pt</string>
-		<string>ru</string>
-		<string>es</string>
-		<string>tr</string>
 	</array>
 	<key>CFBundleName</key>
-	<string>infy-vcard</string>
+	<string>MeU</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

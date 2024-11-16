@@ -155,7 +155,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       context: context,
                       builder: (dialogContext) {
                         return Dialog(
-                          elevation: 0,
+                          elevation: 1,
                           insetPadding: EdgeInsets.zero,
                           backgroundColor: Colors.transparent,
                           alignment: const AlignmentDirectional(0.0, 0.0)
@@ -338,54 +338,54 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
               ),
             ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-            child: InkWell(
-              splashColor: Colors.transparent,
-              focusColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onTap: () async {
-                context.safePop();
-                if (FFAppState().selectedDrawerPage != 'BusinessCards') {
-                  context.goNamed(
-                    'business_card_screen',
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: const TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
-                        duration: Duration(milliseconds: 300),
-                      ),
-                    },
-                  );
-                }
-                FFAppState().selectedDrawerPage = 'BusinessCards';
-                FFAppState().selectedBusinessGroupIndex = 0;
-              },
-              child: ListTile(
-                leading: Icon(
-                  Icons.perm_contact_cal_rounded,
-                  color: FFAppState().selectedDrawerPage == 'BusinessCards'
-                      ? const Color(0xFF1F69F6)
-                      : const Color(0xFFAAB0B8),
-                ),
-                title: Text(
-                  FFLocalizations.of(context).getText(
-                    '7myfbppy' /* Business Cards */,
-                  ),
-                  style: FlutterFlowTheme.of(context).titleLarge.override(
-                        fontFamily: 'Nunito Sans',
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                        useGoogleFonts:
-                            GoogleFonts.asMap().containsKey('Nunito Sans'),
-                      ),
-                ),
-                tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                dense: false,
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+          //   child: InkWell(
+          //     splashColor: Colors.transparent,
+          //     focusColor: Colors.transparent,
+          //     hoverColor: Colors.transparent,
+          //     highlightColor: Colors.transparent,
+          //     onTap: () async {
+          //       context.safePop();
+          //       if (FFAppState().selectedDrawerPage != 'BusinessCards') {
+          //         context.goNamed(
+          //           'business_card_screen',
+          //           extra: <String, dynamic>{
+          //             kTransitionInfoKey: const TransitionInfo(
+          //               hasTransition: true,
+          //               transitionType: PageTransitionType.fade,
+          //               duration: Duration(milliseconds: 300),
+          //             ),
+          //           },
+          //         );
+          //       }
+          //       FFAppState().selectedDrawerPage = 'BusinessCards';
+          //       FFAppState().selectedBusinessGroupIndex = 0;
+          //     },
+          //     child: ListTile(
+          //       leading: Icon(
+          //         Icons.perm_contact_cal_rounded,
+          //         color: FFAppState().selectedDrawerPage == 'BusinessCards'
+          //             ? const Color(0xFF1F69F6)
+          //             : const Color(0xFFAAB0B8),
+          //       ),
+          //       title: Text(
+          //         FFLocalizations.of(context).getText(
+          //           '7myfbppy' /* Business Cards */,
+          //         ),
+          //         style: FlutterFlowTheme.of(context).titleLarge.override(
+          //               fontFamily: 'Nunito Sans',
+          //               fontSize: 16.0,
+          //               fontWeight: FontWeight.bold,
+          //               useGoogleFonts:
+          //                   GoogleFonts.asMap().containsKey('Nunito Sans'),
+          //             ),
+          //       ),
+          //       tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+          //       dense: false,
+          //     ),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
             child: InkWell(
@@ -447,7 +447,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     context: context,
                     builder: (dialogContext) {
                       return Dialog(
-                        elevation: 0,
+                        elevation: 1,
                         insetPadding: EdgeInsets.zero,
                         backgroundColor: Colors.transparent,
                         alignment: const AlignmentDirectional(0.0, 0.0)

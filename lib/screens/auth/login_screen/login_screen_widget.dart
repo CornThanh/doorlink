@@ -92,7 +92,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 0.0),
               child: ListView(
                 padding: EdgeInsets.fromLTRB(
                   0,
@@ -119,8 +120,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 30.0, 0.0, 0.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         'th4sex5e' /* Welcome, */,
@@ -147,8 +148,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 30.0, 0.0, 0.0),
                     child: TextFormField(
                       controller: _model.emailController,
                       focusNode: _model.emailFocusNode,
@@ -195,7 +196,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
-                        fillColor: const Color(0xFFF6F8F9),
+                        fillColor: Colors.white.withOpacity(0.1),
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       keyboardType: TextInputType.emailAddress,
@@ -204,8 +205,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 10.0, 0.0, 0.0),
                     child: TextFormField(
                       controller: _model.passwordController,
                       focusNode: _model.passwordFocusNode,
@@ -226,14 +227,14 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
                             color: Color(0x0079818A),
-                            width: 0.0,
+                            width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
-                            color: Color(0xFFF6F8F9),
-                            width: 0.0,
+                            color: Colors.white,
+                            width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
@@ -252,7 +253,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
-                        fillColor: const Color(0xFFF6F8F9),
+                        fillColor: Colors.white.withOpacity(0.1),
                         suffixIcon: InkWell(
                           onTap: () => setState(
                             () => _model.passwordVisibility =
@@ -276,8 +277,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                   Align(
                     alignment: const AlignmentDirectional(1.0, 0.0),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 8.0, 0.0, 0.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -312,8 +313,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 50.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         Function() navigate = () {};
@@ -361,8 +362,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   if (VcardGroup.profileCall.language(
                                         (_model.profileRes?.jsonBody ?? ''),
                                       ) ==
-                                      'Chinese') {
-                                    setAppLanguage(context, 'zh_Hans');
+                                      'VietNam') {
+                                    setAppLanguage(context, 'vi');
                                     setState(() {
                                       FFAppState().selectLanguageIndex = 1;
                                     });
@@ -457,19 +458,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                 await actions.customSnackbar(
                                   context,
                                   FFLocalizations.of(context).getVariableText(
+                                    viText: 'Lỗi hồ sơ.',
                                     enText: 'Profile Error.',
-                                    arText: 'خطأ في اسم المستخدم أو كلمة مرور.',
-                                    zh_HansText: '用户名或密码无效.',
-                                    frText:
-                                        'Nom d\'utilisateur ou mot de passe invalide.',
-                                    deText:
-                                        'Ungültiger Benutzername oder Passwort.',
-                                    ptText:
-                                        'Nome de usuário ou senha inválidos.',
-                                    ruText: 'Неправильное имя  или пароль.',
-                                    esText: 'Usuario o contraseña invalido.',
-                                    trText:
-                                        'Geçersiz kullanıcı adı veya şifre.',
                                   ),
                                   FlutterFlowTheme.of(context).error,
                                 );
@@ -514,18 +504,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                             await actions.customSnackbar(
                               context,
                               FFLocalizations.of(context).getVariableText(
+                                viText: 'Vui lòng nhập email trước.',
                                 enText: 'Enter Email First.',
-                                arText: 'أدخل البريد الإلكتروني أولا.',
-                                zh_HansText: '首先输入电子邮件.',
-                                frText: 'Entrez d\'abord l\'e-mail.',
-                                deText:
-                                    'Geben Sie zuerst die E-Mail-Adresse ein.',
-                                ptText: 'Digite o e-mail primeiro.',
-                                ruText:
-                                    'Сначала введите адрес электронной почты.',
-                                esText:
-                                    'Ingrese el correo electrónico primero.',
-                                trText: 'Önce E-postayı Girin.',
                               ),
                               FlutterFlowTheme.of(context).error,
                             );
@@ -533,15 +513,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                             await actions.customSnackbar(
                               context,
                               FFLocalizations.of(context).getVariableText(
+                                viText: 'Vui lòng nhập mật khẩu trước.',
                                 enText: 'Enter Password First.',
-                                arText: 'أدخل كلمة المرور أولا.',
-                                zh_HansText: ' 首先输入密码.',
-                                frText: ' Entrez d\'abord le mot de passe.',
-                                deText: 'Geben Sie zuerst das Passwort ein.',
-                                ptText: ' Digite a senha primeiro.',
-                                ruText: 'Сначала введите пароль.',
-                                esText: 'Ingrese la contraseña primero.',
-                                trText: ' Önce Şifreyi Girin.',
                               ),
                               FlutterFlowTheme.of(context).error,
                             );
@@ -560,8 +533,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         height: 50.0,
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 0.0, 0.0),
                         color: const Color(0xFF1F69F6),
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -571,7 +544,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey('Nunito Sans'),
                                 ),
-                        elevation: 0.0,
+                        elevation: 1.0,
                         borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
@@ -583,8 +556,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                   Align(
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 45.0, 0.0, 0.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'anao6v0h' /* Don't have an Account? */,
@@ -599,8 +572,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 12.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         context.pushNamed(
@@ -622,8 +595,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         height: 50.0,
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 0.0, 0.0),
                         color: const Color(0xFFE9F0FF),
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -633,7 +606,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey('Nunito Sans'),
                                 ),
-                        elevation: 0.0,
+                        elevation: 1.0,
                         borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,

@@ -10,7 +10,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'select_group_dialog_box_model.dart';
@@ -100,7 +99,7 @@ class _SelectGroupDialogBoxWidgetState
                           context: context,
                           builder: (dialogContext) {
                             return Dialog(
-                              elevation: 0,
+                              elevation: 1,
                               insetPadding: EdgeInsets.zero,
                               backgroundColor: Colors.transparent,
                               alignment: const AlignmentDirectional(0.0, 0.0)
@@ -155,7 +154,7 @@ class _SelectGroupDialogBoxWidgetState
                                     child: SizedBox(
                                       width: 50.0,
                                       height: 50.0,
-                                      child: CupertinoActivityIndicator(),
+                                      child: CupertinoActivityIndicator(color: Colors.white),
                                     ),
                                   );
                                 }
@@ -198,7 +197,7 @@ class _SelectGroupDialogBoxWidgetState
                                                   FFAppState()
                                                           .selectedGroupIndex =
                                                       dataIndex;
-                                                  FFAppState().SelectedGroupId =
+                                                  FFAppState().selectedGroupId =
                                                       getJsonField(
                                                     dataItem,
                                                     r'''$.id''',
@@ -320,7 +319,7 @@ class _SelectGroupDialogBoxWidgetState
                                               context: context,
                                               builder: (dialogContext) {
                                                 return Dialog(
-                                                  elevation: 0,
+                                                  elevation: 1,
                                                   insetPadding: EdgeInsets.zero,
                                                   backgroundColor:
                                                       Colors.transparent,
@@ -392,7 +391,7 @@ class _SelectGroupDialogBoxWidgetState
                                     child: SizedBox(
                                       width: 50.0,
                                       height: 50.0,
-                                      child: CupertinoActivityIndicator(),
+                                      child: CupertinoActivityIndicator(color: Colors.white),
                                     ),
                                   );
                                 }
@@ -436,7 +435,7 @@ class _SelectGroupDialogBoxWidgetState
                                                   FFAppState()
                                                           .selectedGroupIndex =
                                                       dataIndex;
-                                                  FFAppState().SelectedGroupId =
+                                                  FFAppState().selectedGroupId =
                                                       getJsonField(
                                                     dataItem,
                                                     r'''$.id''',
@@ -558,7 +557,7 @@ class _SelectGroupDialogBoxWidgetState
                                               context: context,
                                               builder: (dialogContext) {
                                                 return Dialog(
-                                                  elevation: 0,
+                                                  elevation: 1,
                                                   insetPadding: EdgeInsets.zero,
                                                   backgroundColor:
                                                       Colors.transparent,
@@ -631,7 +630,7 @@ class _SelectGroupDialogBoxWidgetState
                     const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    if (FFAppState().SelectedGroupId != 0) {
+                    if (FFAppState().selectedGroupId != 0) {
                       if (FFAppState().role == 'Super Admin') {
                         _model.superBusinesscardRes =
                             await VcardGroup.businessCardCall.call(
@@ -679,7 +678,7 @@ class _SelectGroupDialogBoxWidgetState
                             await VcardGroup.businessCardCreateCall.call(
                           authToken: FFAppState().authToken,
                           urlAlias: FFAppState().scannedURL,
-                          groupId: FFAppState().SelectedGroupId.toString(),
+                          groupId: FFAppState().selectedGroupId.toString(),
                         );
                         if ((_model.apiResultzh2?.succeeded ?? true)) {
                           if (FFAppState().isBusinessScreenSelected) {
@@ -754,17 +753,8 @@ class _SelectGroupDialogBoxWidgetState
                           await actions.customSnackbar(
                             context,
                             FFLocalizations.of(context).getVariableText(
+                              viText: 'Add thẻ doanh nghiệp thành công.',
                               enText: 'Business card add successfully.',
-                              arText: 'تمت إضافة بطاقة العمل بنجاح.',
-                              zh_HansText: '名片添加成功。',
-                              frText: 'Carte de visite ajoutée avec succès.',
-                              deText: 'Visitenkarte erfolgreich hinzugefügt.',
-                              ptText:
-                                  'Cartão de visita adicionado com sucesso.',
-                              ruText: 'Визитка добавлена ​​успешно.',
-                              esText:
-                                  'La tarjeta de presentación se agregó correctamente.',
-                              trText: 'Kartvizit başarıyla eklendi.',
                             ),
                             const Color(0xFF46A44D),
                           );
@@ -773,15 +763,8 @@ class _SelectGroupDialogBoxWidgetState
                           await actions.customSnackbar(
                             context,
                             FFLocalizations.of(context).getVariableText(
+                              viText: 'Business card not added.',
                               enText: 'Business card not added.',
-                              arText: 'لم تتم إضافة بطاقة العمل.',
-                              zh_HansText: '未添加名片。',
-                              frText: 'Carte de visite non ajoutée.',
-                              deText: 'Visitenkarte nicht hinzugefügt.',
-                              ptText: 'Cartão de visita não adicionado.',
-                              ruText: 'Визитка не добавлена.',
-                              esText: 'Tarjeta de presentación no agregada.',
-                              trText: 'Kartvizit eklenmedi.',
                             ),
                             FlutterFlowTheme.of(context).error,
                           );
@@ -789,7 +772,7 @@ class _SelectGroupDialogBoxWidgetState
 
                         FFAppState().update(() {
                           FFAppState().scannedURL = '';
-                          FFAppState().SelectedGroupId = 0;
+                          FFAppState().selectedGroupId = 0;
                           FFAppState().selectedGroupIndex = 1000;
                         });
                       } else {
@@ -797,15 +780,8 @@ class _SelectGroupDialogBoxWidgetState
                         await actions.customSnackbar(
                           context,
                           FFLocalizations.of(context).getVariableText(
+                            viText: 'Thẻ kinh doanh đã tồn tại.',
                             enText: 'Business card already added.',
-                            arText: 'لم تتم إضافة بطاقة العمل.',
-                            zh_HansText: '未添加名片。',
-                            frText: 'Carte de visite non ajoutée.',
-                            deText: 'Visitenkarte nicht hinzugefügt.',
-                            ptText: 'Cartão de visita não adicionado.',
-                            ruText: 'Визитка не добавлена.',
-                            esText: 'Tarjeta de presentación no agregada.',
-                            trText: 'Kartvizit eklenmedi.',
                           ),
                           FlutterFlowTheme.of(context).error,
                         );
@@ -814,16 +790,8 @@ class _SelectGroupDialogBoxWidgetState
                       await actions.customSnackbar(
                         context,
                         FFLocalizations.of(context).getVariableText(
+                          viText: 'Vui lòng chọn nhóm kinh doanh.',
                           enText: 'Please Select Business Group.',
-                          arText: 'الرجاء تحديد مجموعة الأعمال.',
-                          zh_HansText: '请选择业务组。',
-                          frText:
-                              'Veuillez sélectionner un groupe d\'entreprises.',
-                          deText: 'Bitte wählen Sie Unternehmensgruppe aus.',
-                          ptText: 'Selecione o grupo empresarial.',
-                          ruText: 'Пожалуйста, выберите Бизнес-группу.',
-                          esText: 'Por favor seleccione grupo empresarial.',
-                          trText: 'Lütfen İşletme Grubunu Seçiniz.',
                         ),
                         FlutterFlowTheme.of(context).error,
                       );

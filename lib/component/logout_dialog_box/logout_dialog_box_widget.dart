@@ -59,7 +59,8 @@ class _LogoutDialogBoxWidgetState extends State<LogoutDialogBoxWidget> {
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 10.0, 15.0),
+            padding:
+                const EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 10.0, 15.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -73,7 +74,8 @@ class _LogoutDialogBoxWidgetState extends State<LogoutDialogBoxWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'zhbckfxu' /* Logout */,
@@ -88,7 +90,8 @@ class _LogoutDialogBoxWidgetState extends State<LogoutDialogBoxWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'j446pvul' /* Are you sure want to Logout? */,
@@ -104,7 +107,8 @@ class _LogoutDialogBoxWidgetState extends State<LogoutDialogBoxWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -134,7 +138,7 @@ class _LogoutDialogBoxWidgetState extends State<LogoutDialogBoxWidget> {
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey('Nunito Sans'),
                                 ),
-                            elevation: 0.0,
+                            elevation: 1.0,
                             borderSide: const BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
@@ -153,7 +157,7 @@ class _LogoutDialogBoxWidgetState extends State<LogoutDialogBoxWidget> {
                               email: FFAppState().email,
                             );
                             if ((_model.apiResult2xw?.succeeded ?? true)) {
-                              setAppLanguage(context, 'en');
+                              setAppLanguage(context, 'vi');
                               FFAppState().authToken = '';
                               FFAppState().email = '';
                               FFAppState().role = '';
@@ -166,15 +170,8 @@ class _LogoutDialogBoxWidgetState extends State<LogoutDialogBoxWidget> {
                               await actions.customSnackbar(
                                 context,
                                 FFLocalizations.of(context).getVariableText(
+                                  viText: 'Đăng xuất thành công.',
                                   enText: 'Logout Successfully.',
-                                  arText: 'تم تسجيل الخروج بنجاح.',
-                                  zh_HansText: '注销成功。',
-                                  frText: 'Déconnexion réussie.',
-                                  deText: 'Abmelden erfolgreich.',
-                                  ptText: 'Sair com sucesso.',
-                                  ruText: 'Выйти успешно.',
-                                  esText: 'Cerrar sesión correctamente.',
-                                  trText: 'Başarıyla Oturumu Kapatın.',
                                 ),
                                 const Color(0xFF46A44D),
                               );
@@ -204,7 +201,7 @@ class _LogoutDialogBoxWidgetState extends State<LogoutDialogBoxWidget> {
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey('Nunito Sans'),
                                 ),
-                            elevation: 0.0,
+                            elevation: 1.0,
                             borderSide: const BorderSide(
                               color: Colors.transparent,
                               width: 1.0,

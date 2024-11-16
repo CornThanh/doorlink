@@ -68,65 +68,39 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_email', value);
   }
 
-  List<LanguageDataStruct> _languages = [
+  List<LanguageDataStruct> languages = [
     LanguageDataStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"Arabic\",\"iso_code\":\"ar\",\"image\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDSl3M4CYdtPe21nVgmJfRGHSbW8we1zm-sg&usqp=CAU\"}')),
+        '{\"id\":\"0\",\"name\":\"VietNam\",\"iso_code\":\"vi\",\"image\":\"https://meu.ntiot.vn/assets/img/LanguageImage/vietnam.png\"}')),
     LanguageDataStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"1\",\"name\":\"Chinese (Simplified)\",\"iso_code\":\"zh\",\"image\":\"https://vcards.infyom.com/assets/img/LanguageImage/china.png\"}')),
-    LanguageDataStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"2\",\"name\":\"English\",\"iso_code\":\"en\",\"image\":\"https://vcards.infyom.com/assets/img/LanguageImage/english.png\"}')),
-    LanguageDataStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"3\",\"name\":\"French\",\"iso_code\":\"fr\",\"image\":\"https://vcards.infyom.com/assets/img/LanguageImage/france.png\"}')),
-    LanguageDataStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"4\",\"name\":\"German\",\"iso_code\":\"de\",\"image\":\"https://vcards.infyom.com/assets/img/LanguageImage/german.png\"}')),
-    LanguageDataStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"5\",\"name\":\"Portuguese\",\"iso_code\":\"pt\",\"image\":\"https://vcards.infyom.com/assets/img/LanguageImage/portuguese.png\"}')),
-    LanguageDataStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"6\",\"name\":\"Russian\",\"iso_code\":\"ru\",\"image\":\"https://vcards.infyom.com/assets/img/LanguageImage/russian.jpeg\"}')),
-    LanguageDataStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"7\",\"name\":\"Spanish\",\"iso_code\":\"es\",\"image\":\"https://vcards.infyom.com/assets/img/LanguageImage/spain.png\"}')),
-    LanguageDataStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"8\",\"name\":\"Turkish\",\"iso_code\":\"tr\",\"image\":\"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjQE-TIhwT4-G04c72eFfn_vV8ZA_U4pKGhg&usqp=CAU\"}'))
+        '{\"id\":\"1\",\"name\":\"English\",\"iso_code\":\"en\",\"image\":\"https://meu.ntiot.vn/assets/img/LanguageImage/english.png\"}')),
   ];
-  List<LanguageDataStruct> get languages => _languages;
-  set languages(List<LanguageDataStruct> value) {
-    _languages = value;
-  }
 
   void addToLanguages(LanguageDataStruct value) {
-    _languages.add(value);
+    languages.add(value);
   }
 
   void removeFromLanguages(LanguageDataStruct value) {
-    _languages.remove(value);
+    languages.remove(value);
   }
 
   void removeAtIndexFromLanguages(int index) {
-    _languages.removeAt(index);
+    languages.removeAt(index);
   }
 
   void updateLanguagesAtIndex(
     int index,
     LanguageDataStruct Function(LanguageDataStruct) updateFn,
   ) {
-    _languages[index] = updateFn(_languages[index]);
+    languages[index] = updateFn(languages[index]);
   }
 
   void insertAtIndexInLanguages(int index, LanguageDataStruct value) {
-    _languages.insert(index, value);
+    languages.insert(index, value);
   }
 
-  int _selectedGroupIndex = 1000;
-  int get selectedGroupIndex => _selectedGroupIndex;
-  set selectedGroupIndex(int value) {
-    _selectedGroupIndex = value;
-  }
+  int selectedGroupIndex = 1000;
 
-  String _scannedURL = '';
-  String get scannedURL => _scannedURL;
-  set scannedURL(String value) {
-    _scannedURL = value;
-  }
+  String scannedURL = '';
 
   String _role = '';
   String get role => _role;
@@ -135,17 +109,11 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_role', value);
   }
 
-  int _selectedBusinessGroupIndex = 0;
-  int get selectedBusinessGroupIndex => _selectedBusinessGroupIndex;
-  set selectedBusinessGroupIndex(int value) {
-    _selectedBusinessGroupIndex = value;
-  }
+  int selectedBusinessGroupIndex = 0;
 
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
-  set isLoading(bool value) {
-    _isLoading = value;
-  }
+  int selectedVcardGroupIndex = 0;
+
+  bool isLoading = false;
 
   String prefixCode = '';
 
@@ -155,7 +123,7 @@ class FFAppState extends ChangeNotifier {
 
   bool isAPILoading = false;
 
-  int SelectedGroupId = 0;
+  int selectedGroupId = 0;
 
   bool _isInstructionDialogShow = false;
   bool get isInstructionDialogShow => _isInstructionDialogShow;
@@ -164,75 +132,84 @@ class FFAppState extends ChangeNotifier {
     prefs.setBool('ff_isInstructionDialogShow', value);
   }
 
-  List<dynamic> _businessGroupList = [];
-  List<dynamic> get businessGroupList => _businessGroupList;
-  set businessGroupList(List<dynamic> value) {
-    _businessGroupList = value;
-  }
+  List<dynamic> businessGroupList = [];
 
   void addToBusinessGroupList(dynamic value) {
-    _businessGroupList.add(value);
+    businessGroupList.add(value);
   }
 
   void removeFromBusinessGroupList(dynamic value) {
-    _businessGroupList.remove(value);
+    businessGroupList.remove(value);
   }
 
   void removeAtIndexFromBusinessGroupList(int index) {
-    _businessGroupList.removeAt(index);
+    businessGroupList.removeAt(index);
   }
 
   void updateBusinessGroupListAtIndex(
     int index,
     dynamic Function(dynamic) updateFn,
   ) {
-    _businessGroupList[index] = updateFn(_businessGroupList[index]);
+    businessGroupList[index] = updateFn(businessGroupList[index]);
   }
 
   void insertAtIndexInBusinessGroupList(int index, dynamic value) {
-    _businessGroupList.insert(index, value);
+    businessGroupList.insert(index, value);
   }
 
-  List<dynamic> _businessCardList = [];
-  List<dynamic> get businessCardList => _businessCardList;
-  set businessCardList(List<dynamic> value) {
-    _businessCardList = value;
+  List<dynamic> vcardGroupList = [];
+
+  void addToVcardGroupList(dynamic value) {
+    businessGroupList.add(value);
   }
+
+  void removeFromVcardGroupList(dynamic value) {
+    businessGroupList.remove(value);
+  }
+
+  void removeAtIndexFromVcardGroupList(int index) {
+    businessGroupList.removeAt(index);
+  }
+
+  void updateVcardGroupListAtIndex(
+    int index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    businessGroupList[index] = updateFn(businessGroupList[index]);
+  }
+
+  void insertAtIndexInVcardGroupList(int index, dynamic value) {
+    businessGroupList.insert(index, value);
+  }
+
+  List<dynamic> businessCardList = [];
 
   void addToBusinessCardList(dynamic value) {
-    _businessCardList.add(value);
+    businessCardList.add(value);
   }
 
   void removeFromBusinessCardList(dynamic value) {
-    _businessCardList.remove(value);
+    businessCardList.remove(value);
   }
 
   void removeAtIndexFromBusinessCardList(int index) {
-    _businessCardList.removeAt(index);
+    businessCardList.removeAt(index);
   }
 
   void updateBusinessCardListAtIndex(
     int index,
     dynamic Function(dynamic) updateFn,
   ) {
-    _businessCardList[index] = updateFn(_businessCardList[index]);
+    businessCardList[index] = updateFn(businessCardList[index]);
   }
 
   void insertAtIndexInBusinessCardList(int index, dynamic value) {
-    _businessCardList.insert(index, value);
+    businessCardList.insert(index, value);
   }
 
-  bool _isBusinessScreenSelected = false;
-  bool get isBusinessScreenSelected => _isBusinessScreenSelected;
-  set isBusinessScreenSelected(bool value) {
-    _isBusinessScreenSelected = value;
-  }
+  bool isBusinessScreenSelected = false;
 
-  bool _isContactSaving = false;
-  bool get isContactSaving => _isContactSaving;
-  set isContactSaving(bool value) {
-    _isContactSaving = value;
-  }
+  bool isContactSaving = false;
 }
 
 void _safeInit(Function() initializeField) {

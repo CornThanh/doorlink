@@ -89,7 +89,7 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                   child: SizedBox(
                     width: 50.0,
                     height: 50.0,
-                    child: CupertinoActivityIndicator(),
+                    child: CupertinoActivityIndicator(color: Colors.white),
                   ),
                 );
               }
@@ -192,12 +192,12 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               8.0, 0.0, 0.0, 0.0),
                           child: Text(
-                            functions.formatDate(valueOrDefault<String>(
+                            valueOrDefault<String>(
                               VcardGroup.singleAppointmentCall.date(
                                 listViewSingleAppointmentResponse.jsonBody,
                               ),
                               'date',
-                            )),
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
@@ -300,7 +300,7 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                         5.0, 20.0, 0.0, 10.0),
                     child: Material(
                       color: Colors.transparent,
-                      elevation: 2.0,
+                      elevation: 1.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -338,6 +338,7 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
+                                      color: Colors.black,
                                       fontFamily: 'Nunito Sans',
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.bold,
@@ -440,17 +441,8 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                             await actions.customSnackbar(
                               context,
                               FFLocalizations.of(context).getVariableText(
+                                viText: 'Cuộc hẹn đã hoàn thành',
                                 enText: 'Apponintment Mark As Completed.',
-                                arText: 'علامة التعيين كمكتمل.',
-                                zh_HansText: '约会标记为已完成。',
-                                frText: 'Marquer le rendez-vous comme terminé.',
-                                deText: 'Termin als abgeschlossen markieren.',
-                                ptText:
-                                    'Marcação de compromisso como concluída.',
-                                ruText: 'Назначение пометить как завершенное.',
-                                esText: 'Marcar la cita como completada.',
-                                trText:
-                                    ' Randevu Tamamlandı Olarak İşaretleyin.',
                               ),
                               const Color(0xFF46A44D),
                             );
@@ -477,7 +469,7 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Nunito Sans'),
                                   ),
-                          elevation: 0.0,
+                          elevation: 1.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
@@ -497,7 +489,7 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                             context: context,
                             builder: (dialogContext) {
                               return Dialog(
-                                elevation: 0,
+                                elevation: 1,
                                 insetPadding: EdgeInsets.zero,
                                 backgroundColor: Colors.transparent,
                                 alignment: const AlignmentDirectional(0.0, 0.0)
@@ -530,12 +522,12 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Nunito Sans',
-                                    color: const Color(0xFFF35050),
+                                    color: Colors.red,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Nunito Sans'),
                                   ),
-                          elevation: 0.0,
+                          elevation: 1.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,

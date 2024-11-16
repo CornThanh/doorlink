@@ -10,7 +10,6 @@ import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'edit_profile_screen_model.dart';
@@ -67,7 +66,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xff333333),
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
@@ -76,8 +75,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
             buttonSize: 60.0,
             icon: const Icon(
               Icons.arrow_back_ios_rounded,
-              color: Colors.black,
-              size: 30.0,
+              color: Colors.white,
+              size: 24.0,
             ),
             onPressed: () async {
               context.pop();
@@ -89,7 +88,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Nunito Sans',
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts:
@@ -97,7 +96,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                 ),
           ),
           centerTitle: true,
-          elevation: 2.0,
+          elevation: 1.0,
         ),
         body: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -119,7 +118,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                         child: SizedBox(
                           width: 50.0,
                           height: 50.0,
-                          child: CupertinoActivityIndicator(),
+                          child: CupertinoActivityIndicator(color: Colors.white),
                         ),
                       );
                     }
@@ -174,15 +173,12 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                         height: 45.0,
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
+                                              .secondary,
                                           shape: BoxShape.circle,
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.all(2.0),
                                           child: FlutterFlowIconButton(
-                                            borderColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
                                             borderRadius: 20.0,
                                             borderWidth: 1.0,
                                             buttonSize: 40.0,
@@ -260,7 +256,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                             ),
                           ),
                           const Divider(
-                            thickness: 1.0,
+                            thickness: 0.5,
                             color: Color(0xFFAAB0B8),
                           ),
                           Padding(
@@ -302,35 +298,36 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                 hintStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 2.0,
+                                  borderSide: const BorderSide(
+                                    color: Color(0x0079818A),
+                                    width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color:
                                         FlutterFlowTheme.of(context).alternate,
-                                    width: 2.0,
+                                    width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
-                                    width: 2.0,
+                                    width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
-                                    width: 2.0,
+                                    width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
+                                filled: true,
+                                fillColor: Colors.white.withOpacity(0.1),
                               ),
                               style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.firstNameControllerValidator
@@ -358,35 +355,36 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                 hintStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 2.0,
+                                  borderSide: const BorderSide(
+                                    color: Color(0x0079818A),
+                                    width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color:
                                         FlutterFlowTheme.of(context).alternate,
-                                    width: 2.0,
+                                    width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
-                                    width: 2.0,
+                                    width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
-                                    width: 2.0,
+                                    width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
+                                filled: true,
+                                fillColor: Colors.white.withOpacity(0.1),
                               ),
                               style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.lastNameControllerValidator
@@ -451,35 +449,36 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                 hintStyle:
                                     FlutterFlowTheme.of(context).labelMedium,
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 2.0,
+                                  borderSide: const BorderSide(
+                                    color: Color(0x0079818A),
+                                    width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color:
                                         FlutterFlowTheme.of(context).alternate,
-                                    width: 2.0,
+                                    width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
-                                    width: 2.0,
+                                    width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
-                                    width: 2.0,
+                                    width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
+                                filled: true,
+                                fillColor: Colors.white.withOpacity(0.1),
                               ),
                               style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.emailControllerValidator
@@ -660,22 +659,10 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                         context,
                                         FFLocalizations.of(context)
                                             .getVariableText(
+                                          viText:
+                                              'Profile Update Successfully.',
                                           enText:
                                               'Profile Update Successfully.',
-                                          arText:
-                                              'تم تحديث الملف الشخصي بنجاح.',
-                                          zh_HansText: '个人资料更新成功。',
-                                          frText:
-                                              'Mise à jour du profil réussie.',
-                                          deText:
-                                              'Profilaktualisierung erfolgreich.',
-                                          ptText:
-                                              'Atualização do perfil com sucesso.',
-                                          ruText: 'Обновление профиля успешно.',
-                                          esText:
-                                              'Actualización de perfil exitosa.',
-                                          trText:
-                                              'Profil Güncellemesi Başarıyla.',
                                         ),
                                         const Color(0xFF46A44D),
                                       );
@@ -684,21 +671,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                         context,
                                         FFLocalizations.of(context)
                                             .getVariableText(
+                                          viText: 'Cập nhật hồ sơ thất bại.',
                                           enText: 'Profile Update Failed.',
-                                          arText: 'فشل تحديث الملف الشخصي.',
-                                          zh_HansText: '配置文件更新失败。',
-                                          frText:
-                                              'Échec de la mise à jour du profil.',
-                                          deText:
-                                              'Profilaktualisierung fehlgeschlagen.',
-                                          ptText:
-                                              'Falha na atualização do perfil.',
-                                          ruText:
-                                              'Обновление профиля не удалось.',
-                                          esText:
-                                              'Error al actualizar el perfil.',
-                                          trText:
-                                              'Profil Güncellemesi Başarısız.',
                                         ),
                                         FlutterFlowTheme.of(context).error,
                                       );
@@ -709,21 +683,9 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                         context,
                                         FFLocalizations.of(context)
                                             .getVariableText(
+                                          viText:
+                                              'Vui lòng nhập thông tin liên hệ.',
                                           enText: 'Please Enter Contact no.',
-                                          arText: 'الرجاء إدخال رقم الاتصال.',
-                                          zh_HansText: '请输入联络号码',
-                                          frText:
-                                              'Veuillez entrer le numéro de contact.',
-                                          deText:
-                                              'Bitte geben Sie die Kontakt-Nr. ein.',
-                                          ptText:
-                                              'Por favor, insira o número de contato.',
-                                          ruText:
-                                              'Пожалуйста, введите контактный номер.',
-                                          esText:
-                                              'Por favor ingrese el número de contacto.',
-                                          trText:
-                                              'Lütfen İletişim numarasını giriniz.',
                                         ),
                                         FlutterFlowTheme.of(context).error,
                                       );
@@ -732,22 +694,10 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                         context,
                                         FFLocalizations.of(context)
                                             .getVariableText(
+                                          viText:
+                                              'Vui lòng nhập thông tin liên hệ đúng.',
                                           enText:
                                               'Please Enter Valid Contact no.',
-                                          arText: 'الرجاء إدخال رقم الاتصال.',
-                                          zh_HansText: '请输入联络号码',
-                                          frText:
-                                              'Veuillez entrer le numéro de contact.',
-                                          deText:
-                                              'Bitte geben Sie die Kontakt-Nr. ein.',
-                                          ptText:
-                                              'Por favor, insira o número de contato.',
-                                          ruText:
-                                              'Пожалуйста, введите контактный номер.',
-                                          esText:
-                                              'Por favor ingrese el número de contacto.',
-                                          trText:
-                                              'Lütfen İletişim numarasını giriniz.',
                                         ),
                                         FlutterFlowTheme.of(context).error,
                                       );
@@ -759,19 +709,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                       context,
                                       FFLocalizations.of(context)
                                           .getVariableText(
+                                        viText: 'Vui lòng nhập email.',
                                         enText: 'Please Enter Email.',
-                                        arText:
-                                            'الرجاء إدخال البريد الإلكتروني.',
-                                        zh_HansText: ' 请输入电子邮件.',
-                                        frText: 'Veuillez saisir votre e-mail.',
-                                        deText:
-                                            'Bitte geben Sie Ihre E-Mail-Adresse ein.',
-                                        ptText: 'Por favor, insira o e-mail.',
-                                        ruText:
-                                            'Пожалуйста, введите адрес электронной почты.',
-                                        esText:
-                                            'Por favor ingrese el correo electrónico.',
-                                        trText: 'Lütfen e-posta giriniz.',
                                       ),
                                       FlutterFlowTheme.of(context).error,
                                     );
@@ -780,19 +719,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                       context,
                                       FFLocalizations.of(context)
                                           .getVariableText(
+                                        viText: 'Vui lòng nhập email chính xác',
                                         enText: 'Please Enter Valid Email.',
-                                        arText:
-                                            'الرجاء إدخال البريد الإلكتروني.',
-                                        zh_HansText: ' 请输入电子邮件.',
-                                        frText: 'Veuillez saisir votre e-mail.',
-                                        deText:
-                                            'Bitte geben Sie Ihre E-Mail-Adresse ein.',
-                                        ptText: 'Por favor, insira o e-mail.',
-                                        ruText:
-                                            'Пожалуйста, введите адрес электронной почты.',
-                                        esText:
-                                            'Por favor ingrese el correo electrónico.',
-                                        trText: 'Lütfen e-posta giriniz.',
                                       ),
                                       FlutterFlowTheme.of(context).error,
                                     );
@@ -802,18 +730,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                 await actions.customSnackbar(
                                   context,
                                   FFLocalizations.of(context).getVariableText(
+                                    viText: 'Vui lòng nhập email chính xác',
                                     enText: 'Please Enter Valid Email.',
-                                    arText: 'الرجاء إدخال البريد الإلكتروني.',
-                                    zh_HansText: ' 请输入电子邮件.',
-                                    frText: 'Veuillez saisir votre e-mail.',
-                                    deText:
-                                        'Bitte geben Sie Ihre E-Mail-Adresse ein.',
-                                    ptText: 'Por favor, insira o e-mail.',
-                                    ruText:
-                                        'Пожалуйста, введите адрес электронной почты.',
-                                    esText:
-                                        'Por favor ingrese el correo electrónico.',
-                                    trText: 'Lütfen e-posta giriniz.',
                                   ),
                                   FlutterFlowTheme.of(context).error,
                                 );
@@ -823,17 +741,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                 await actions.customSnackbar(
                                   context,
                                   FFLocalizations.of(context).getVariableText(
+                                    viText: 'Vui lòng nhập họ.',
                                     enText: 'Please Enter Last name.',
-                                    arText: 'الرجاء إدخال الاسم الأخير.',
-                                    zh_HansText: '请输入姓氏',
-                                    frText:
-                                        'Veuillez saisir votre nom de famille.',
-                                    deText:
-                                        'Bitte geben Sie den Nachnamen ein.',
-                                    ptText: 'Lütfen Soyadınızı Giriniz.',
-                                    ruText: 'Lütfen Soyadınızı Giriniz.',
-                                    esText: 'Lütfen Soyadınızı Giriniz.',
-                                    trText: 'Lütfen Soyadınızı Giriniz.',
                                   ),
                                   FlutterFlowTheme.of(context).error,
                                 );
@@ -841,19 +750,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                 await actions.customSnackbar(
                                   context,
                                   FFLocalizations.of(context).getVariableText(
+                                    viText: 'Vui lòng nhập họ đúng.',
                                     enText: 'Please Enter Valid Last name.',
-                                    arText: 'الرجاء إدخال اسم العائلة صالح.',
-                                    zh_HansText: '请输入有效的姓氏.',
-                                    frText:
-                                        'Veuillez saisir un nom de famille valide.',
-                                    deText:
-                                        'Bitte geben Sie einen gültigen Nachnamen ein.',
-                                    ptText: 'Insira um sobrenome válido.',
-                                    ruText:
-                                        'Пожалуйста, введите действительную фамилию.',
-                                    esText:
-                                        'Por favor ingrese un apellido válido.',
-                                    trText: 'Lütfen Geçerli Soyadı Girin.',
                                   ),
                                   FlutterFlowTheme.of(context).error,
                                 );
@@ -864,15 +762,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                               await actions.customSnackbar(
                                 context,
                                 FFLocalizations.of(context).getVariableText(
+                                  viText: 'Vui lòng nhập tên',
                                   enText: 'Please Enter First name.',
-                                  arText: 'الرجاء إدخال الاسم الأول.',
-                                  zh_HansText: '请输入名字.',
-                                  frText: 'Veuillez saisir votre prénom.',
-                                  deText: 'Bitte geben Sie den Vornamen ein.',
-                                  ptText: 'Por favor, insira o primeiro nome.',
-                                  ruText: 'Пожалуйста, введите имя.',
-                                  esText: 'Por favor ingrese el nombre.',
-                                  trText: 'Lütfen Adınızı Girin.',
                                 ),
                                 FlutterFlowTheme.of(context).error,
                               );
@@ -880,17 +771,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                               await actions.customSnackbar(
                                 context,
                                 FFLocalizations.of(context).getVariableText(
+                                  viText: 'Vui lòng nhập tên đúng.',
                                   enText: 'Please Enter Valid First name.',
-                                  arText: 'الرجاء إدخال الاسم الأول الصحيح.',
-                                  zh_HansText: '请输入有效的名字.',
-                                  frText: 'Veuillez saisir un prénom valide.',
-                                  deText:
-                                      'Bitte geben Sie einen gültigen Vornamen ein.',
-                                  ptText: 'Insira um nome válido.',
-                                  ruText:
-                                      'Пожалуйста, введите действительное имя.',
-                                  esText: 'Por favor ingrese un nombre válido.',
-                                  trText: 'Lütfen Geçerli Ad Girin.',
                                 ),
                                 FlutterFlowTheme.of(context).error,
                               );
@@ -918,7 +800,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Nunito Sans'),
                                   ),
-                          elevation: 0.0,
+                          elevation: 1.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
@@ -953,7 +835,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                     FlutterFlowTheme.of(context)
                                         .titleSmallFamily),
                               ),
-                          elevation: 0.0,
+                          elevation: 1.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,

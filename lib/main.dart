@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'infy-vcard',
+      title: 'MeU',
       localizationsDelegates: const [
         FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -77,15 +77,8 @@ class _MyAppState extends State<MyApp> {
       ],
       locale: _locale,
       supportedLocales: const [
+        Locale('vi'),
         Locale('en'),
-        Locale('ar'),
-        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
-        Locale('fr'),
-        Locale('de'),
-        Locale('pt'),
-        Locale('ru'),
-        Locale('es'),
-        Locale('tr'),
       ],
       theme: ThemeData(
         brightness: Brightness.light,

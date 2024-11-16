@@ -58,7 +58,7 @@ class _ChangePasswordScreenWidgetState
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color(0xff333333),
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
@@ -67,8 +67,8 @@ class _ChangePasswordScreenWidgetState
             buttonSize: 60.0,
             icon: const Icon(
               Icons.arrow_back_ios_rounded,
-              color: Colors.black,
-              size: 30.0,
+              color: Colors.white,
+              size: 24.0,
             ),
             onPressed: () async {
               context.pop();
@@ -80,7 +80,7 @@ class _ChangePasswordScreenWidgetState
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Nunito Sans',
-                  color: Colors.black,
+                  color: Colors.white,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts:
@@ -88,7 +88,7 @@ class _ChangePasswordScreenWidgetState
                 ),
           ),
           centerTitle: true,
-          elevation: 2.0,
+          elevation: 1.0,
         ),
         body: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -97,7 +97,8 @@ class _ChangePasswordScreenWidgetState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: RichText(
                   textScaler: MediaQuery.of(context).textScaler,
                   text: TextSpan(
@@ -130,7 +131,8 @@ class _ChangePasswordScreenWidgetState
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: TextFormField(
                   controller: _model.currentPasswordController,
                   focusNode: _model.currentPasswordFocusNode,
@@ -141,31 +143,24 @@ class _ChangePasswordScreenWidgetState
                       'rm8akjbc' /* Current Password */,
                     ),
                     hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).alternate,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
                         color: Color(0xFFE0E3E7),
-                        width: 2.0,
+                        width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
+                        width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
+                        width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -183,6 +178,15 @@ class _ChangePasswordScreenWidgetState
                         size: 20.0,
                       ),
                     ),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.1),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color(0x0079818A),
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium,
                   validator: _model.currentPasswordControllerValidator
@@ -190,7 +194,8 @@ class _ChangePasswordScreenWidgetState
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                 child: RichText(
                   textScaler: MediaQuery.of(context).textScaler,
                   text: TextSpan(
@@ -223,7 +228,8 @@ class _ChangePasswordScreenWidgetState
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: TextFormField(
                   controller: _model.newPasswordController,
                   focusNode: _model.newPasswordFocusNode,
@@ -235,30 +241,30 @@ class _ChangePasswordScreenWidgetState
                     ),
                     hintStyle: FlutterFlowTheme.of(context).labelMedium,
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).alternate,
-                        width: 2.0,
+                      borderSide: const BorderSide(
+                        color: Color(0x0079818A),
+                        width: 1.0,
                       ),
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).alternate,
-                        width: 2.0,
+                        width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
+                        width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
+                        width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -276,6 +282,8 @@ class _ChangePasswordScreenWidgetState
                         size: 20.0,
                       ),
                     ),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.1),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium,
                   validator: _model.newPasswordControllerValidator
@@ -283,7 +291,8 @@ class _ChangePasswordScreenWidgetState
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                 child: RichText(
                   textScaler: MediaQuery.of(context).textScaler,
                   text: TextSpan(
@@ -316,7 +325,8 @@ class _ChangePasswordScreenWidgetState
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: TextFormField(
                   controller: _model.confirmPasswordController,
                   focusNode: _model.confirmPasswordFocusNode,
@@ -328,30 +338,30 @@ class _ChangePasswordScreenWidgetState
                     ),
                     hintStyle: FlutterFlowTheme.of(context).labelMedium,
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).alternate,
-                        width: 2.0,
+                      borderSide: const BorderSide(
+                        color: Color(0x0079818A),
+                        width: 1.0,
                       ),
-                      borderRadius: BorderRadius.circular(10.0),
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).alternate,
-                        width: 2.0,
+                        width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
+                        width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                         color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
+                        width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -369,6 +379,8 @@ class _ChangePasswordScreenWidgetState
                         size: 20.0,
                       ),
                     ),
+                    filled: true,
+                    fillColor: Colors.white.withOpacity(0.1),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium,
                   validator: _model.confirmPasswordControllerValidator
@@ -377,7 +389,8 @@ class _ChangePasswordScreenWidgetState
               ),
               const Spacer(),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 25.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -408,20 +421,9 @@ class _ChangePasswordScreenWidgetState
                                       context,
                                       FFLocalizations.of(context)
                                           .getVariableText(
+                                        viText: 'Thay đổi mật khẩu thành công.',
                                         enText:
                                             'Password Changed Successfully.',
-                                        arText: 'تم تغيير الرقم السري بنجاح.',
-                                        zh_HansText: '密码修改成功',
-                                        frText:
-                                            'Le mot de passe a été changé avec succès.',
-                                        deText:
-                                            'Das Passwort wurde erfolgreich geändert.',
-                                        ptText: 'Senha alterada com sucesso.',
-                                        ruText: 'Пароль успешно изменен.',
-                                        esText:
-                                            'Contraseña cambiada con éxito.',
-                                        trText:
-                                            'Parola başarıyla değiştirildi.',
                                       ),
                                       const Color(0xFF46A44D),
                                     );
@@ -430,19 +432,8 @@ class _ChangePasswordScreenWidgetState
                                       context,
                                       FFLocalizations.of(context)
                                           .getVariableText(
+                                        viText: 'Thay đổi mật khẩu thất bại.',
                                         enText: 'Password change failed.',
-                                        arText: 'فشل تغيير كلمة المرور',
-                                        zh_HansText: '修改密码失败',
-                                        frText:
-                                            'La modification du mot de passe a échoué',
-                                        deText:
-                                            'Passwortänderung fehlgeschlagen',
-                                        ptText: 'Falha na alteração da senha',
-                                        ruText: 'Смена пароля не удалась',
-                                        esText:
-                                            'Error al cambiar la contraseña',
-                                        trText:
-                                            'Şifre değiştirme başarısız oldu',
                                       ),
                                       FlutterFlowTheme.of(context).error,
                                     );
@@ -451,21 +442,8 @@ class _ChangePasswordScreenWidgetState
                                   await actions.customSnackbar(
                                     context,
                                     FFLocalizations.of(context).getVariableText(
+                                      viText: 'Vui lòng nhập đúng mật khẩu.',
                                       enText: 'Please enter correct password.',
-                                      arText:
-                                          'الرجاء إدخال كلمة المرور الصحيحة.',
-                                      zh_HansText: '请输入正确的密码',
-                                      frText:
-                                          'Veuillez saisir le mot de passe correct.',
-                                      deText:
-                                          'Bitte geben Sie das richtige Passwort ein.',
-                                      ptText:
-                                          'Por favor insira a senha correta.',
-                                      ruText:
-                                          'Пожалуйста, введите правильный пароль.',
-                                      esText:
-                                          'Por favor ingrese la contraseña correcta.',
-                                      trText: 'Lütfen doğru şifreyi girin.',
                                     ),
                                     FlutterFlowTheme.of(context).error,
                                   );
@@ -474,20 +452,8 @@ class _ChangePasswordScreenWidgetState
                                 await actions.customSnackbar(
                                   context,
                                   FFLocalizations.of(context).getVariableText(
+                                    viText: 'Vui lòng Nhập Xác nhận Mật khẩu.',
                                     enText: 'Please Enter Confirm Password.',
-                                    arText: 'الرجاء إدخال تأكيد كلمة المرور.',
-                                    zh_HansText: '请输入确认密码',
-                                    frText:
-                                        'Veuillez saisir le mot de passe confirmé.',
-                                    deText:
-                                        'Bitte geben Sie das Bestätigungskennwort ein.',
-                                    ptText:
-                                        'Por favor, insira a confirmação da senha.',
-                                    ruText:
-                                        'Пожалуйста, введите подтверждение пароля.',
-                                    esText:
-                                        'Por favor ingrese Confirmar contraseña.',
-                                    trText: 'Lütfen Şifreyi Doğrulayın.',
                                   ),
                                   FlutterFlowTheme.of(context).error,
                                 );
@@ -496,21 +462,8 @@ class _ChangePasswordScreenWidgetState
                               await actions.customSnackbar(
                                 context,
                                 FFLocalizations.of(context).getVariableText(
+                                  viText: 'Vui lòng nhập mật khẩu mới.',
                                   enText: 'Please Enter New Password.',
-                                  arText:
-                                      'الرجاء إدخال كلمة المرور الجديدة أولاً.',
-                                  zh_HansText: '请先输入新密码。',
-                                  frText:
-                                      'Veuillez d\'abord saisir un nouveau mot de passe.',
-                                  deText:
-                                      'Bitte geben Sie zuerst ein neues Passwort ein.',
-                                  ptText:
-                                      'Bitte geben Sie zuerst ein neues Passwort ein.',
-                                  ruText:
-                                      'Пожалуйста, сначала введите новый пароль.',
-                                  esText:
-                                      'Ingrese primero la nueva contraseña.',
-                                  trText: 'Lütfen Önce Yeni Şifrenizi Girin.',
                                 ),
                                 FlutterFlowTheme.of(context).error,
                               );
@@ -519,15 +472,8 @@ class _ChangePasswordScreenWidgetState
                             await actions.customSnackbar(
                               context,
                               FFLocalizations.of(context).getVariableText(
+                                viText: 'Please Enter Password.',
                                 enText: 'Please Enter Password.',
-                                arText: 'الرجاء إدخال كلمة المرور.',
-                                zh_HansText: '请输入密码.',
-                                frText: 'Veuillez entrer le mot de passe.',
-                                deText: 'Bitte Passwort eingeben.',
-                                ptText: 'Por favor, digite a senha.',
-                                ruText: 'Пожалуйста введите пароль.',
-                                esText: 'Por favor, ingrese contraseña.',
-                                trText: 'Lütfen şifre giriniz.',
                               ),
                               FlutterFlowTheme.of(context).error,
                             );
@@ -554,7 +500,7 @@ class _ChangePasswordScreenWidgetState
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Nunito Sans'),
                                   ),
-                          elevation: 0.0,
+                          elevation: 1.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
@@ -589,7 +535,7 @@ class _ChangePasswordScreenWidgetState
                                     FlutterFlowTheme.of(context)
                                         .titleSmallFamily),
                               ),
-                          elevation: 0.0,
+                          elevation: 1.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,

@@ -12,6 +12,8 @@ class VcardGroup {
   static LogoutCall logoutCall = LogoutCall();
   static SuperDashboardCall superDashboardCall = SuperDashboardCall();
   static AdminVcardCall adminVcardCall = AdminVcardCall();
+  static CreateAdminVcardCall createAdminVcardCall = CreateAdminVcardCall();
+  static UpdateAdminVcardCall updateAddminVcardCall = UpdateAdminVcardCall();
   static VcardsCall vcardsCall = VcardsCall();
   static AppointmentCall appointmentCall = AppointmentCall();
   static SingleAppointmentCall singleAppointmentCall = SingleAppointmentCall();
@@ -22,6 +24,7 @@ class VcardGroup {
   static DeleteEnquiryCall deleteEnquiryCall = DeleteEnquiryCall();
   static ProfileCall profileCall = ProfileCall();
   static SingleVcardsCall singleVcardsCall = SingleVcardsCall();
+  static SingleAdminVcardsCall singleAdminVcardsCall = SingleAdminVcardsCall();
   static DeleteVcardCall deleteVcardCall = DeleteVcardCall();
   static RegisterCall registerCall = RegisterCall();
   static GroupCreateCall groupCreateCall = GroupCreateCall();
@@ -168,6 +171,135 @@ class AdminVcardCall {
           .map((x) => castToType<int>(x))
           .withoutNulls
           .toList();
+}
+
+class UpdateAdminVcardCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+    required String urlAlias,
+    required String name,
+    required String firstName,
+    required String lastName,
+    required int templateID,
+    String? occupation,
+    String? description,
+    FFUploadedFile? avatar,
+    FFUploadedFile? background,
+    String? email,
+    String? phone,
+    String? location,
+    String? company,
+    String? position,
+    String? dob,
+    String? website,
+    String? zalo,
+    String? facebook,
+    String? tiktok,
+    String? instagram,
+    String? youtube,
+    String? linkedin,
+    String? whatsapp,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Admin Vcard Update',
+      apiUrl: '${VcardGroup.baseUrl}/admin/vcard-update',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+      },
+      params: {
+        'url_alias': urlAlias,
+        'name': name,
+        'occupation': occupation,
+        'description': description,
+        'profile_img': avatar,
+        'cover_img': background,
+        'first_name': firstName,
+        'last_name': lastName,
+        'email': email,
+        'phone': phone,
+        'location': location,
+        'dob': dob,
+        'company': company,
+        'job_title': position,
+        'template_id': templateID,
+        'website': website,
+        'zalo': zalo,
+        'facebook': facebook,
+        'tiktok': tiktok,
+        'instagram': instagram,
+        'youtube': youtube,
+        'linkedin': linkedin,
+        'whatsapp': whatsapp,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  List? data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      ) as List?;
+  List<int>? id(dynamic response) => (getJsonField(
+        response,
+        r'''$.data[:].id''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+}
+
+class CreateAdminVcardCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+    required String urlAlias,
+    required String name,
+    String? firstName,
+    String? lastName,
+    FFUploadedFile? avatar,
+    FFUploadedFile? background,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Admin Vcard Update',
+      apiUrl: '${VcardGroup.baseUrl}/admin/vcard-create',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+      },
+      params: {
+        'url_alias': urlAlias,
+        'name': name,
+        'first_name': firstName,
+        'last_name': lastName,
+        'profile_img': avatar,
+        'cover_img': background
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data[:].message''',
+      ));
 }
 
 class VcardsCall {
@@ -566,6 +698,10 @@ class SingleVcardsCall {
         response,
         r'''$.data[:].id''',
       ));
+  String? alias(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data[:].url_alias''',
+      ));
   String? name(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.data[:].name''',
@@ -574,6 +710,10 @@ class SingleVcardsCall {
         response,
         r'''$.data[:].occupation''',
       ));
+  String? description(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data[:].description''',
+      ));
   String? image(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.data[:].image''',
@@ -581,6 +721,131 @@ class SingleVcardsCall {
   String? createdAt(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.data[:].created_at''',
+      ));
+}
+
+class SingleAdminVcardsCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+    int? id,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Single Vcards',
+      apiUrl: '${VcardGroup.baseUrl}/admin/vcard/$id',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+      },
+      params: {
+        'auth_token': authToken,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  int? id(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.data.id''',
+      ));
+  String? alias(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.url_alias''',
+      ));
+  String? name(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.name''',
+      ));
+  String? occupation(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.occupation''',
+      ));
+  String? description(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.description''',
+      ));
+
+  String? avatar(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.profile_url''',
+      ));
+  String? background(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.cover_url''',
+      ));
+
+  String? firstName(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.first_name''',
+      ));
+  String? lastName(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.last_name''',
+      ));
+  String? email(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.email''',
+      ));
+  String? phone(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.phone''',
+      ));
+  String? location(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.location''',
+      ));
+  String? dob(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.dob''',
+      ));
+  String? company(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.company''',
+      ));
+
+  String? position(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.job_title''',
+      ));
+
+  int? templateID(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.data.template_id''',
+      ));
+  String? website(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.website''',
+      ));
+  String? facebook(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.facebook''',
+      ));
+  String? zalo(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.zalo''',
+      ));
+  String? tiktok(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.tiktok''',
+      ));
+  String? instagram(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.instagram''',
+      ));
+  String? youtube(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.youtube''',
+      ));
+  String? linkedin(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.linkedin''',
+      ));
+  String? whatsapp(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.data.whatsapp''',
       ));
 }
 

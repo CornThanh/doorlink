@@ -68,7 +68,7 @@ class _ScanComponentWidgetState extends State<ScanComponentWidget> {
               context: context,
               builder: (dialogContext) {
                 return Dialog(
-                  elevation: 0,
+                  elevation: 1,
                   insetPadding: EdgeInsets.zero,
                   backgroundColor: Colors.transparent,
                   alignment: const AlignmentDirectional(0.0, 0.0)
@@ -91,16 +91,7 @@ class _ScanComponentWidgetState extends State<ScanComponentWidget> {
           child: Container(
             width: 23.0,
             height: 23.0,
-            decoration: BoxDecoration(
-              color: const Color(0x00FFFFFF),
-              image: DecorationImage(
-                fit: BoxFit.contain,
-                alignment: const AlignmentDirectional(0.0, 0.0),
-                image: Image.asset(
-                  'assets/images/scan.png',
-                ).image,
-              ),
-            ),
+            child: const Icon(Icons.qr_code_scanner),
           ),
         ),
       ),

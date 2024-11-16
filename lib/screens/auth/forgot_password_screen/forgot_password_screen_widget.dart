@@ -220,7 +220,7 @@ class _ForgotPasswordScreenWidgetState
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               filled: true,
-                              fillColor: const Color(0xFFF6F8F9),
+                              fillColor: Colors.white.withOpacity(0.1),
                             ),
                             style: FlutterFlowTheme.of(context).bodyMedium,
                             validator: _model.emailControllerValidator
@@ -254,7 +254,7 @@ class _ForgotPasswordScreenWidgetState
                                       context: context,
                                       builder: (dialogContext) {
                                         return Dialog(
-                                          elevation: 0,
+                                          elevation: 1,
                                           insetPadding: EdgeInsets.zero,
                                           backgroundColor: Colors.transparent,
                                           alignment: const AlignmentDirectional(
@@ -312,7 +312,7 @@ class _ForgotPasswordScreenWidgetState
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey('Nunito Sans'),
                                     ),
-                                elevation: 0.0,
+                                elevation: 1.0,
                                 borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,

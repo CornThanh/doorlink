@@ -76,7 +76,7 @@ class _EnquirySheetWidgetState extends State<EnquirySheetWidget> {
                 child: SizedBox(
                   width: 50.0,
                   height: 50.0,
-                  child: CupertinoActivityIndicator(),
+                  child: CupertinoActivityIndicator(color: Colors.white),
                 ),
               );
             }
@@ -158,7 +158,7 @@ class _EnquirySheetWidgetState extends State<EnquirySheetWidget> {
                         5.0, 20.0, 0.0, 10.0),
                     child: Material(
                       color: Colors.transparent,
-                      elevation: 2.0,
+                      elevation: 1.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -193,6 +193,7 @@ class _EnquirySheetWidgetState extends State<EnquirySheetWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
+                                      color: Colors.black,
                                       fontFamily: 'Nunito Sans',
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.bold,
@@ -300,7 +301,7 @@ class _EnquirySheetWidgetState extends State<EnquirySheetWidget> {
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Nunito Sans',
                             color: const Color(0xFF79818A),
-                            fontSize: 12.0,
+                            fontSize: 14.0,
                             fontWeight: FontWeight.w600,
                             useGoogleFonts:
                                 GoogleFonts.asMap().containsKey('Nunito Sans'),
@@ -318,7 +319,7 @@ class _EnquirySheetWidgetState extends State<EnquirySheetWidget> {
                             context: context,
                             builder: (dialogContext) {
                               return Dialog(
-                                elevation: 0,
+                                elevation: 1,
                                 insetPadding: EdgeInsets.zero,
                                 backgroundColor: Colors.transparent,
                                 alignment: const AlignmentDirectional(0.0, 0.0)
@@ -356,7 +357,7 @@ class _EnquirySheetWidgetState extends State<EnquirySheetWidget> {
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Nunito Sans'),
                                   ),
-                          elevation: 0.0,
+                          elevation: 1.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
