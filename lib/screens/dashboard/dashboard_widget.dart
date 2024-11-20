@@ -1,3 +1,4 @@
+import 'package:MeU/component/vcard_sheet/create_vcard_sheet_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/backend/api_requests/api_calls.dart';
@@ -59,6 +60,26 @@ class _DashboardWidgetState extends State<DashboardWidget> {
             updateCallback: () => setState(() {}),
             child: const DrawerWidget(),
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: const Color(0xFF1F69F6),
+          child: const Icon(Icons.add, color: Colors.white, size: 28),
+          onPressed: () async {
+            if (FFAppState().selectedDrawerPage != 'VCards') {
+              context.goNamed(
+                'vcard_screen',
+                queryParameters: {'isCreate': 'true'},
+                extra: <String, dynamic>{
+                  kTransitionInfoKey: const TransitionInfo(
+                    hasTransition: true,
+                    transitionType: PageTransitionType.fade,
+                    duration: Duration(milliseconds: 300),
+                  ),
+                },
+              );
+            }
+            FFAppState().selectedDrawerPage = 'VCards';
+          },
         ),
         appBar: AppBar(
           backgroundColor: const Color(0xff333333),

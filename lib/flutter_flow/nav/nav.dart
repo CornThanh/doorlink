@@ -111,7 +111,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'vcard_screen',
           path: '/vcardScreen',
-          builder: (context, params) => const VcardScreenWidget(),
+          builder: (context, params) => VcardScreenWidget(
+            isCreate: params.getParam('isCreate', ParamType.bool) ?? false,
+          ),
         ),
         FFRoute(
           name: 'appointment_screen',

@@ -51,7 +51,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NFCReaderUsageDescription</key>
-	<string>Allow NFC Permission for Read and Write NFC Cards.</string>
+	<string>MeU requires NFC Permission for Read and Write NFC Cards.</string>
 	<key>NSAdvertisingAttributionReportEndpoint</key>
 	<string>https://postbacks-is.com</string>
 	<key>NSAppTransportSecurity</key>
@@ -60,11 +60,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>In order to scan for barcodes and QR codes, this app requires permission to access the camera.</string>
+	<string>MeU requires permission to access the camera to scan for barcodes and QR codes</string>
 	<key>NSContactsUsageDescription</key>
-	<string>In order to save contact, this app requires permission to access the contact</string>
+	<string>Meu requires permission to access the contact to save contact</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>In order to upload data, this app requires permission to access the photo library.</string>
+	<string>Meu requires permission to access the photo library to upload image</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

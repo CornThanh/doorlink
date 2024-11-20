@@ -20,7 +20,12 @@ import 'vcard_screen_model.dart';
 export 'vcard_screen_model.dart';
 
 class VcardScreenWidget extends StatefulWidget {
-  const VcardScreenWidget({super.key});
+  const VcardScreenWidget({
+    super.key,
+    this.isCreate = false,
+  });
+
+  final bool isCreate;
 
   @override
   State<VcardScreenWidget> createState() => _VcardScreenWidgetState();
@@ -33,8 +38,36 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
 
   @override
   void initState() {
-    super.initState();
+    log('isCreate ${widget.isCreate}');
+
+    if (widget.isCreate) {
+      init();
+    }
+
     _model = createModel(context, () => VcardScreenModel());
+
+    super.initState();
+  }
+
+  Future init() async {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      final shouldReload = await showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context) {
+          return Padding(
+            padding: MediaQuery.viewInsetsOf(context),
+            child: const CreateVcardSheetWidget(),
+          );
+        },
+      );
+
+      if (shouldReload == true) {
+        setState(() => _model.apiRequestCompleter2 = null);
+        await _model.waitForApiRequestCompleted2();
+      }
+    });
   }
 
   @override
