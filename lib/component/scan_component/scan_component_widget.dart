@@ -88,10 +88,10 @@ class _ScanComponentWidgetState extends State<ScanComponentWidget> {
             color: Color(0x00FFFFFF),
           ),
           alignment: const AlignmentDirectional(0.0, 0.0),
-          child: Container(
+          child: const SizedBox(
             width: 23.0,
             height: 23.0,
-            child: const Icon(Icons.qr_code_scanner),
+            child: Icon(Icons.qr_code_scanner),
           ),
         ),
       ),

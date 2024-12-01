@@ -1,4 +1,3 @@
-import 'package:MeU/app_state.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/backend/api_requests/api_calls.dart';

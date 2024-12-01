@@ -90,7 +90,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                   ),
                   leftTitles: const AxisTitles(
                     sideTitles: SideTitles(
-                      reservedSize: 28,
+                      reservedSize: 30,
                       showTitles: true,
                     ),
                   ),
@@ -107,7 +107,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                 lineTouchData: LineTouchData(
                   touchTooltipData: LineTouchTooltipData(
                     fitInsideHorizontally: true,
-                    tooltipBgColor: Colors.blueGrey.shade50,
+                    tooltipMargin: 0,
                     getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
                       return touchedBarSpots.map((barSpot) {
                         final flSpot = barSpot;

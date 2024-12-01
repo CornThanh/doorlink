@@ -34,7 +34,7 @@ String formatDate(String dateTime) {
   };
 
   String day = dateComponent[2];
-  String month = dateComponent[1]!;
+  String month = dateComponent[1];
   String year = dateComponent[0];
 
   return ' $day-$month-$year';
@@ -66,9 +66,9 @@ String getAppointmentFormatedTime(
 ) {
   String from = fromTime.split(" ").first;
   String to = toTime.split(" ").first;
-  int to_hour = int.parse(to.split(":").first);
+  int toHour = int.parse(to.split(":").first);
 
-  if (to_hour <= 12) {
+  if (toHour <= 12) {
     return "$from - $to AM";
   } else {
     return "$from - $to PM";

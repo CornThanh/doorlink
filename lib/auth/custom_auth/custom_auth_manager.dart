@@ -83,7 +83,7 @@ class CustomAuthManager {
     this.authenticationToken = authenticationToken;
     this.refreshToken = refreshToken;
     this.tokenExpiration = tokenExpiration;
-    this.uid = authUid;
+    uid = authUid;
     this.userData = userData;
     // Update the current user stream.
     final updatedUser = InfyVcardAuthUser(

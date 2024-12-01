@@ -7,6 +7,7 @@ Future customSnackbar(
 ) async {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
+      dismissDirection: DismissDirection.up,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -19,6 +20,10 @@ Future customSnackbar(
           ),
         ],
       ),
+      margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height - 150,
+          left: 10,
+          right: 10),
       behavior: SnackBarBehavior.floating,
       backgroundColor: bgColor,
       duration: const Duration(seconds: 3),

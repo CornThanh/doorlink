@@ -31,9 +31,7 @@ class FlutterFlowLineChart extends StatelessWidget {
         LineChartData(
           lineTouchData: LineTouchData(
             handleBuiltInTouches: chartStylingInfo.enableTooltip,
-            touchTooltipData: LineTouchTooltipData(
-              tooltipBgColor: chartStylingInfo.tooltipBackgroundColor!,
-            ),
+            touchTooltipData: LineTouchTooltipData(),
           ),
           gridData: FlGridData(show: chartStylingInfo.showGrid),
           borderData: FlBorderData(
@@ -152,9 +150,7 @@ class FlutterFlowBarChart extends StatelessWidget {
       BarChartData(
         barTouchData: BarTouchData(
           handleBuiltInTouches: chartStylingInfo.enableTooltip,
-          touchTooltipData: BarTouchTooltipData(
-            tooltipBgColor: chartStylingInfo.tooltipBackgroundColor,
-          ),
+          touchTooltipData: BarTouchTooltipData(),
         ),
         alignment: alignment,
         gridData: FlGridData(show: chartStylingInfo.showGrid),

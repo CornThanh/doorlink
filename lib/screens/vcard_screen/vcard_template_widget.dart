@@ -1,5 +1,4 @@
 import 'package:MeU/screens/vcard_screen/update_vcard_screen_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class VcardTemplateWidget extends StatefulWidget {

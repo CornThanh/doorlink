@@ -1,4 +1,3 @@
-import 'package:MeU/component/vcard_sheet/create_vcard_sheet_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/backend/api_requests/api_calls.dart';

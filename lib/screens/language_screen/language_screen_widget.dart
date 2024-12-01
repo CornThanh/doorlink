@@ -188,8 +188,8 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
                         decoration: BoxDecoration(
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
-                          boxShadow: [
-                            const BoxShadow(
+                          boxShadow: const [
+                            BoxShadow(
                               blurRadius: 4.0,
                               color: Color(0x33000000),
                               offset: Offset(0.0, 2.0),
