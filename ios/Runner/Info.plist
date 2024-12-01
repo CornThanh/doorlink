@@ -64,7 +64,7 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Meu requires permission to access the contact to save contact</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Meu requires permission to access the photo library to upload image</string>
+	<string>MeU need access to your photo library to let you attach images to your avatar and cover photo.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
