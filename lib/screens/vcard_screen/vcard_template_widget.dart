@@ -42,7 +42,7 @@ class _VcardTemplateWidgetState extends State<VcardTemplateWidget> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.asset(
-                        'assets/images/vcard${list[index]}.png',
+                        'assets/images/vcard${list[index]}.webp',
                         fit: BoxFit.fitHeight,
                       ),
                     ),

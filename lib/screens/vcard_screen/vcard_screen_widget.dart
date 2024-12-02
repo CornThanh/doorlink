@@ -404,14 +404,13 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                                                               getJsonField(
                                                                 dataItem,
                                                                 r'''$.occupation''',
-                                                              )
-                                                                  .toString()
+                                                              )?.toString()
                                                                   .maybeHandleOverflow(
                                                                     maxChars:
                                                                         20,
                                                                     replacement:
                                                                         '…',
-                                                                  ),
+                                                                  ) ?? "",
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
@@ -734,13 +733,12 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                                                           getJsonField(
                                                             dataItem,
                                                             r'''$.occupation''',
-                                                          )
-                                                              .toString()
+                                                          )?.toString()
                                                               .maybeHandleOverflow(
                                                                 maxChars: 20,
                                                                 replacement:
                                                                     '…',
-                                                              ),
+                                                              ) ?? "",
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium

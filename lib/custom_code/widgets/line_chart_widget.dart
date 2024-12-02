@@ -1,5 +1,8 @@
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LineChartWidget extends StatefulWidget {
   const LineChartWidget({
@@ -37,12 +40,16 @@ class _LineChartWidgetState extends State<LineChartWidget> {
         ? Container(
             height: 300,
             alignment: Alignment.center,
-            child: const Text(
-              'No Data Available!!',
-              style: TextStyle(
-                fontSize: 15,
+            child: Text(
+              FFLocalizations.of(context).getText(
+                '94l07cwi' /* No Data Available!! */,
+              ),
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                fontFamily: 'Nunito Sans',
+                fontSize: 15.0,
                 color: Colors.black,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.bold,
+                useGoogleFonts: GoogleFonts.asMap().containsKey('Nunito Sans'),
               ),
             ),
           )
