@@ -4,27 +4,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'login_screen_model.dart';
+import '../../../auth/custom_auth/auth_util.dart';
+import 'otp_screen_model.dart';
 
-export 'login_screen_model.dart';
+export 'otp_screen_model.dart';
 
-class LoginScreenWidget extends StatefulWidget {
-  const LoginScreenWidget({super.key});
+class OtpScreenWidget extends StatefulWidget {
+  const OtpScreenWidget({
+    super.key,
+    required this.phoneNumber,
+  });
+
+  final String phoneNumber;
 
   @override
-  State<LoginScreenWidget> createState() => _LoginScreenWidgetState();
+  State<OtpScreenWidget> createState() => _OtpScreenWidgetState();
 }
 
-class _LoginScreenWidgetState extends State<LoginScreenWidget> {
-  late LoginScreenModel _model;
+class _OtpScreenWidgetState extends State<OtpScreenWidget> {
+  late OtpScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   late StreamSubscription<bool> _keyboardVisibilitySubscription;
@@ -33,7 +38,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoginScreenModel());
+    _model = createModel(context, () => OtpScreenModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -51,11 +56,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
       });
     }
 
-    _model.emailController ??= TextEditingController();
-    _model.emailFocusNode ??= FocusNode();
-
-    _model.passwordController ??= TextEditingController();
-    _model.passwordFocusNode ??= FocusNode();
+    _model.otpController ??= TextEditingController();
   }
 
   @override
@@ -70,8 +71,6 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -84,11 +83,10 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
           alignment: const AlignmentDirectional(0.0, 0.0),
           child: Container(
             width: double.infinity,
-            height: _model.height,
+            height: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                alignment: const AlignmentDirectional(0.0, 0.0),
                 image: Image.asset(
                   'assets/images/BG_(2).png',
                 ).image,
@@ -127,7 +125,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         0.0, 30.0, 0.0, 0.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
-                        'th4sex5e' /* Welcome, */,
+                        '7n1kbue5' /* Login */,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Nunito Sans',
@@ -140,207 +138,82 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                   ),
                   Text(
                     FFLocalizations.of(context).getText(
-                      'l0fds6fb' /* Sign In to continue */,
+                      'j2119ttc' /* OTP code has been sent */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Nunito Sans',
                           color: FlutterFlowTheme.of(context).secondaryText,
-                          fontSize: 18.0,
+                          fontSize: 16.0,
                           useGoogleFonts:
                               GoogleFonts.asMap().containsKey('Nunito Sans'),
                         ),
                   ),
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 30.0, 0.0, 0.0),
-                    child: TextFormField(
-                      controller: _model.emailController,
-                      focusNode: _model.emailFocusNode,
-                      textInputAction: TextInputAction.next,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Nunito Sans',
-                                  color: Colors.black,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Nunito Sans'),
-                                ),
-                        hintText: FFLocalizations.of(context).getText(
-                          'imh1zi9g' /* Email Address */,
-                        ),
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x0079818A),
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0xFFF6F8F9),
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white.withOpacity(0.1),
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                      keyboardType: TextInputType.emailAddress,
-                      validator:
-                          _model.emailControllerValidator.asValidator(context),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 10.0, 0.0, 0.0),
-                    child: TextFormField(
-                      controller: _model.passwordController,
-                      focusNode: _model.passwordFocusNode,
-                      textInputAction: TextInputAction.done,
-                      obscureText: !_model.passwordVisibility,
-                      decoration: InputDecoration(
-                        labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Nunito Sans',
-                                  color: Colors.black,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Nunito Sans'),
-                                ),
-                        hintText: FFLocalizations.of(context).getText(
-                          '497bukjd' /* Password */,
-                        ),
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: Color(0x0079818A),
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
+                        0.0, 16.0, 0.0, 8.0),
+                    child: PinCodeTextField(
+                      autoDisposeControllers: false,
+                      appContext: context,
+                      length: 6,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .bodyLarge
+                          .override(
+                            fontFamily: 'Nunito Sans',
                             color: Colors.white,
-                            width: 1.0,
+                            fontWeight: FontWeight.bold,
+                            useGoogleFonts:
+                                GoogleFonts.asMap().containsKey('Nunito Sans'),
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      enableActiveFill: false,
+                      autoFocus: true,
+                      enablePinAutofill: false,
+                      errorTextSpace: 16.0,
+                      showCursor: true,
+                      cursorColor: FlutterFlowTheme.of(context).secondary,
+                      obscureText: false,
+                      hintCharacter: '-',
+                      keyboardType: TextInputType.number,
+                      pinTheme: PinTheme(
+                        fieldHeight: 50.0,
+                        fieldWidth: 50.0,
+                        borderWidth: 1.0,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12.0),
                         ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 0.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 0.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white.withOpacity(0.1),
-                        suffixIcon: InkWell(
-                          onTap: () => setState(
-                            () => _model.passwordVisibility =
-                                !_model.passwordVisibility,
-                          ),
-                          focusNode: FocusNode(skipTraversal: true),
-                          child: Icon(
-                            _model.passwordVisibility
-                                ? Icons.visibility_outlined
-                                : Icons.visibility_off_outlined,
-                            color: const Color(0xFF79818A),
-                            size: 20.0,
-                          ),
-                        ),
+                        shape: PinCodeFieldShape.box,
+                        activeColor: FlutterFlowTheme.of(context).secondary,
+                        inactiveColor: FlutterFlowTheme.of(context).secondary,
+                        selectedColor: FlutterFlowTheme.of(context).secondary,
                       ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                      validator: _model.passwordControllerValidator
-                          .asValidator(context),
-                    ),
-                  ),
-                  Align(
-                    alignment: const AlignmentDirectional(1.0, 0.0),
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          0.0, 8.0, 0.0, 0.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed(
-                            'forgot_password_screen',
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: const TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.fade,
-                                duration: Duration(milliseconds: 300),
-                              ),
-                            },
-                          );
-                        },
-                        child: Text(
-                          FFLocalizations.of(context).getText(
-                            'ycnv65i3' /* Forgot Password? */,
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Nunito Sans',
-                                    color: const Color(0xFF1F69F6),
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey('Nunito Sans'),
-                                  ),
-                        ),
-                      ),
+                      controller: _model.otpController,
+                      onChanged: (_) {},
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 24.0, 0.0, 0.0),
+                        0.0, 80.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         Function() navigate = () {};
-                        if ((_model.emailController.text != '') &&
-                            (_model.passwordController.text != '')) {
-                          _model.apiResult88p = await VcardGroup.loginCall.call(
-                            email: _model.emailController.text,
-                            password: _model.passwordController.text,
-                          );
-                          if ((_model.apiResult88p?.succeeded ?? true)) {
+                        if (_model.otpController.text != '') {
+                          _model.otpRes = await VcardGroup.verifiedOTPCall.call(
+                              verificationPhone: widget.phoneNumber,
+                              verificationCode: _model.otpController.text);
+
+                          if ((_model.otpRes?.succeeded ?? true)) {
                             if (getJsonField(
-                              (_model.apiResult88p?.jsonBody ?? ''),
+                              (_model.otpRes?.jsonBody ?? ''),
                               r'''$.success''',
                             )) {
                               setState(() {
                                 FFAppState().authToken = getJsonField(
-                                  (_model.apiResult88p?.jsonBody ?? ''),
+                                  (_model.otpRes?.jsonBody ?? ''),
                                   r'''$.data.token''',
                                 ).toString();
-                                FFAppState().email =
-                                    _model.emailController.text;
                                 FFAppState().role = getJsonField(
-                                  (_model.apiResult88p?.jsonBody ?? ''),
+                                  (_model.otpRes?.jsonBody ?? ''),
                                   r'''$.data.role''',
                                 ).toString();
                                 FFAppState().selectedDrawerPage = 'Dashboard';
@@ -348,7 +221,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                               _model.profileRes =
                                   await VcardGroup.profileCall.call(
                                 authToken: getJsonField(
-                                  (_model.apiResult88p?.jsonBody ?? ''),
+                                  (_model.otpRes?.jsonBody ?? ''),
                                   r'''$.data.token''',
                                 ).toString(),
                               );
@@ -481,12 +354,12 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                               );
                             } else {
                               setState(() {
-                                _model.emailController?.clear();
+                                _model.otpController?.clear();
                               });
                               await actions.customSnackbar(
                                 context,
                                 getJsonField(
-                                  (_model.apiResult88p?.jsonBody ?? ''),
+                                  (_model.otpRes?.jsonBody ?? ''),
                                   r'''$.message''',
                                 ).toString(),
                                 FlutterFlowTheme.of(context).error,
@@ -496,32 +369,21 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                             await actions.customSnackbar(
                               context,
                               getJsonField(
-                                (_model.apiResult88p?.jsonBody ?? ''),
+                                (_model.otpRes?.jsonBody ?? ''),
                                 r'''$.message''',
                               ).toString(),
                               FlutterFlowTheme.of(context).error,
                             );
                           }
                         } else {
-                          if (_model.emailController.text == '') {
-                            await actions.customSnackbar(
-                              context,
-                              FFLocalizations.of(context).getVariableText(
-                                viText: 'Vui lòng nhập email trước.',
-                                enText: 'Enter Email First.',
-                              ),
-                              FlutterFlowTheme.of(context).error,
-                            );
-                          } else {
-                            await actions.customSnackbar(
-                              context,
-                              FFLocalizations.of(context).getVariableText(
-                                viText: 'Vui lòng nhập mật khẩu trước.',
-                                enText: 'Enter Password First.',
-                              ),
-                              FlutterFlowTheme.of(context).error,
-                            );
-                          }
+                          await actions.customSnackbar(
+                            context,
+                            FFLocalizations.of(context).getVariableText(
+                              viText: 'Vui lòng nhập mã OTP.',
+                              enText: 'Please Enter OTP Code.',
+                            ),
+                            FlutterFlowTheme.of(context).error,
+                          );
                         }
 
                         navigate();
@@ -529,7 +391,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         setState(() {});
                       },
                       text: FFLocalizations.of(context).getText(
-                        'bltmxua3' /* Login */,
+                        'bj2tmfun' /* Send */,
                       ),
                       options: FFButtonOptions(
                         width: double.infinity,
@@ -561,19 +423,10 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         0.0, 12.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed(
-                          'phone_number',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 300),
-                            ),
-                          },
-                        );
+                        context.pop();
                       },
                       text: FFLocalizations.of(context).getText(
-                        'nnbxrxo7' /* Login with phone number */,
+                        'y9tifkv3' /* Back */,
                       ),
                       options: FFButtonOptions(
                         width: double.infinity,
@@ -600,69 +453,12 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          0.0, 45.0, 0.0, 0.0),
-                      child: Text(
-                        FFLocalizations.of(context).getText(
-                          'anao6v0h' /* Don't have an Account? */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Nunito Sans',
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: GoogleFonts.asMap()
-                                  .containsKey('Nunito Sans'),
-                            ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 12.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        context.pushNamed(
-                          'register_screen',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 300),
-                            ),
-                          },
-                        );
-                      },
-                      text: FFLocalizations.of(context).getText(
-                        'nnbrrxo7' /* Register */,
-                      ),
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 50.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 0.0, 0.0, 0.0),
-                        color: const Color(0xFFE9F0FF),
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Nunito Sans',
-                                  color: const Color(0xFF1F69F6),
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Nunito Sans'),
-                                ),
-                        elevation: 1.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
-                ],
+                ].addToEnd(SizedBox(
+                    height: (isWeb
+                            ? MediaQuery.viewInsetsOf(context).bottom > 0
+                            : _isKeyboardVisible)
+                        ? 300.0
+                        : 20.0)),
               ),
             ),
           ),

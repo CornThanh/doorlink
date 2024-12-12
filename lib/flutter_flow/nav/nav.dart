@@ -1,11 +1,15 @@
 import 'dart:async';
+
 import 'package:MeU/screens/vcard_screen/update_vcard_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '/auth/custom_auth/custom_auth_user_provider.dart';
-import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
+
 export 'package:go_router/go_router.dart';
+
 export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
@@ -150,6 +154,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'business_card_screen',
           path: '/businessCardScreen',
           builder: (context, params) => const BusinessCardScreenWidget(),
+        ),
+        FFRoute(
+          name: 'phone_number',
+          path: '/phoneNumber',
+          builder: (context, params) => const PhoneNumberScreenWidget(),
+        ),
+        FFRoute(
+          name: 'otp',
+          path: '/otp',
+          builder: (context, params) => OtpScreenWidget(
+            phoneNumber: params.getParam('phoneNumber', ParamType.String),
+          ),
         ),
         FFRoute(
           name: 'register_screen',

@@ -27,6 +27,8 @@ class VcardGroup {
   static SingleAdminVcardsCall singleAdminVcardsCall = SingleAdminVcardsCall();
   static DeleteVcardCall deleteVcardCall = DeleteVcardCall();
   static RegisterCall registerCall = RegisterCall();
+  static PhoneNumberLoginCall phoneNumberLoginCall = PhoneNumberLoginCall();
+  static VerifiedOTPCall verifiedOTPCall = VerifiedOTPCall();
   static GroupCreateCall groupCreateCall = GroupCreateCall();
   static GroupsCall groupsCall = GroupsCall();
   static AdminGroupCall adminGroupCall = AdminGroupCall();
@@ -895,6 +897,68 @@ class RegisterCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Register',
       apiUrl: '${VcardGroup.baseUrl}/register',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+}
+
+class PhoneNumberLoginCall {
+  Future<ApiCallResponse> call({
+    String? verificationPhone = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "verification_phone": "+84$verificationPhone"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Phone Number',
+      apiUrl: '${VcardGroup.baseUrl}/login-phone',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+}
+
+class VerifiedOTPCall {
+  Future<ApiCallResponse> call({
+    String? verificationPhone = '',
+    String? verificationCode = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "verification_phone": "+84$verificationPhone",
+  "verification_code": "$verificationCode"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Verify OTP',
+      apiUrl: '${VcardGroup.baseUrl}/verify-otp',
       callType: ApiCallType.POST,
       headers: {},
       params: {},

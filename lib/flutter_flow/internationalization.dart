@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _kLocaleStorageKey = '__locale_key__';
@@ -137,6 +137,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'nnbrrxo7': {
       'en': 'Register',
       'vi': 'Đăng ký',
+    },
+    'nnbxrxo7': {
+      'en': 'Log in with phone number',
+      'vi': 'Đăng nhập bằng số điện thoại',
     },
     'bqwu8rgt': {
       'en': 'Home',
@@ -540,6 +544,47 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'oxp3unm3': {
       'en': 'Home',
       'vi': 'Trang chủ',
+    },
+  },
+  // phone_number_screen
+  {
+    '6hyvkz90': {
+      'en': 'Login',
+      'vi': 'Đăng nhập',
+    },
+    'fgce4hqx': {
+      'en':
+          'Enter your phone number, MeU will send a confirmation code to your phone',
+      'vi': 'Nhập số điện thoại, MeU sẽ gửi mã xác nhận đến điện thoại của bạn',
+    },
+    'jznj5x2j': {
+      'en': 'Phone number',
+      'vi': 'Số điện thoại',
+    },
+    'bj2tmfun': {
+      'en': 'Send',
+      'vi': 'Gửi',
+    },
+    'y9tifkv3': {
+      'en': 'Back',
+      'vi': 'Quay lại',
+    },
+  },
+  // otp_screen
+  {
+    '7n1kbue5': {
+      'en': 'Enter OTP',
+      'vi': 'Nhập OTP',
+    },
+    'j2119ttc': {
+      'en':
+          'OTP code has been sent to your phone number, please check your message and enter OTP in the box',
+      'vi':
+          'Mã OTP đã được gửi đến số điện thoại của bạn, vui lòng kiểm tra tin nhắn và nhập OTP vào ô trống',
+    },
+    '168q6tn6': {
+      'en': 'Cancel',
+      'vi': 'Hủy',
     },
   },
   // register_screen
