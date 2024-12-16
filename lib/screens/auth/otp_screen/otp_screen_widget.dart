@@ -167,11 +167,9 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       enableActiveFill: false,
                       autoFocus: true,
-                      enablePinAutofill: false,
                       errorTextSpace: 16.0,
                       showCursor: true,
                       cursorColor: FlutterFlowTheme.of(context).secondary,
-                      obscureText: false,
                       hintCharacter: '-',
                       keyboardType: TextInputType.number,
                       pinTheme: PinTheme(
@@ -188,7 +186,7 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                       ),
                       controller: _model.otpController,
                       onChanged: (_) {},
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      autovalidateMode: AutovalidateMode.always,
                     ),
                   ),
                   Padding(
@@ -347,11 +345,6 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                               );
                               navigate = () => context.goNamedAuth(
                                   'dashboard', context.mounted);
-                              await actions.customSnackbar(
-                                context,
-                                'Login Successfully.',
-                                const Color(0xFF46A44D),
-                              );
                             } else {
                               setState(() {
                                 _model.otpController?.clear();

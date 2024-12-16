@@ -474,11 +474,6 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                               );
                               navigate = () => context.goNamedAuth(
                                   'dashboard', context.mounted);
-                              await actions.customSnackbar(
-                                context,
-                                'Login Successfully.',
-                                const Color(0xFF46A44D),
-                              );
                             } else {
                               setState(() {
                                 _model.emailController?.clear();
