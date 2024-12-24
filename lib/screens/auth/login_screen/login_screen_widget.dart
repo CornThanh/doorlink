@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -345,6 +346,18 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                                 ).toString();
                                 FFAppState().selectedDrawerPage = 'Dashboard';
                               });
+
+                              await VcardGroup.notificationCall.call(
+                                  authToken: getJsonField(
+                                    (_model.apiResult88p?.jsonBody ?? ''),
+                                    r'''$.data.token''',
+                                  ).toString(),
+                                  userId: getJsonField(
+                                    (_model.apiResult88p?.jsonBody ?? ''),
+                                    r'''$.data.user_id''',
+                                  ),
+                                  fcmToken: (await FirebaseMessaging.instance
+                                      .getToken()));
                               _model.profileRes =
                                   await VcardGroup.profileCall.call(
                                 authToken: getJsonField(

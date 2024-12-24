@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "1000186163055",
+    "project_id": "me-and-you-1228b",
+    "storage_bucket": "me-and-you-1228b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000186163055:android:e4f8114023cd36747a429a",
+        "android_client_info": {
+          "package_name": "vn.ntiot.meandyou"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000186163055-ap2mmoodv9g06qo3fk11boc3d290d4vj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.ntiot.meandyou",
+            "certificate_hash": "c3db5ad70e6173fc164fced37093a5d1596ea944"
+          }
+        },
+        {
+          "client_id": "1000186163055-cqe037n0ffgk7ugn2ktefff0u1d6s9mq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.ntiot.meandyou",
+            "certificate_hash": "7adca3a9f318753cae80e211fb830394af23570f"
+          }
+        },
+        {
+          "client_id": "1000186163055-f7qbtaurbifvi9qoq0q89q4d42r081gj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.ntiot.meandyou",
+            "certificate_hash": "9b0b01d9e6e8c1b6cd4290e17d8b6db323651a09"
+          }
+        },
+        {
+          "client_id": "1000186163055-bn0dd36anh7lca9ncell7m9o71ed5cpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBop423WMseywU35lPhdftnMvYeXedMJ7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1000186163055-bn0dd36anh7lca9ncell7m9o71ed5cpt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1000186163055-1jcllm0nn8gigm90p85424e4p14412cs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "vn.ntiot.meandyou.AppClip"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

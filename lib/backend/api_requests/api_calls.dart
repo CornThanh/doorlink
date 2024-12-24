@@ -9,6 +9,7 @@ class VcardGroup {
   static String baseUrl = 'https://meu.ntiot.vn/api';
   static Map<String, String> headers = {};
   static LoginCall loginCall = LoginCall();
+  static NotificationCall notificationCall = NotificationCall();
   static LogoutCall logoutCall = LogoutCall();
   static SuperDashboardCall superDashboardCall = SuperDashboardCall();
   static AdminVcardCall adminVcardCall = AdminVcardCall();
@@ -944,6 +945,34 @@ class PhoneNumberLoginCall {
         response,
         r'''$.success''',
       ));
+}
+
+class NotificationCall {
+  Future<ApiCallResponse> call(
+      {String? authToken = '', int? userId, String? fcmToken = ''}) async {
+    final ffApiRequestBody = '''
+{
+  "user_id": $userId,
+  "fcm_token": "$fcmToken"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'FCM Token',
+      apiUrl: '${VcardGroup.baseUrl}/update-device-token',
+      callType: ApiCallType.PUT,
+      // headers: {
+      //   'Authorization': 'Bearer $authToken',
+      // },
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 class VerifiedOTPCall {

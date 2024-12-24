@@ -1,13 +1,14 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:core';
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:collection/collection.dart';
-import 'package:http/http.dart' as http;
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:mime_type/mime_type.dart';
+import 'package:pretty_http_logger/pretty_http_logger.dart';
 
 import '../../flutter_flow/uploaded_file.dart';
 
@@ -119,45 +120,49 @@ class ApiManager {
       .join('&');
 
   static Future<ApiCallResponse> urlRequest(
-    ApiCallType callType,
-    String apiUrl,
-    Map<String, dynamic> headers,
-    Map<String, dynamic> params,
-    bool returnBody,
-    bool decodeUtf8, {
-    http.Client? client,
-  }) async {
+      ApiCallType callType,
+      String apiUrl,
+      Map<String, dynamic> headers,
+      Map<String, dynamic> params,
+      bool returnBody,
+      bool decodeUtf8) async {
     if (params.isNotEmpty) {
       final specifier =
           Uri.parse(apiUrl).queryParameters.isNotEmpty ? '&' : '?';
       apiUrl = '$apiUrl$specifier${asQueryParams(params)}';
     }
+    HttpWithMiddleware httpWithMiddleware =
+        HttpWithMiddleware.build(middlewares: [
+      if (kDebugMode) HttpLogger(logLevel: LogLevel.BODY),
+    ]);
     final makeRequest = callType == ApiCallType.GET
-        ? (client != null ? client.get : http.get)
-        : (client != null ? client.delete : http.delete);
+        ? httpWithMiddleware.get
+        : httpWithMiddleware.delete;
     final response =
         await makeRequest(Uri.parse(apiUrl), headers: toStringMap(headers));
     return ApiCallResponse.fromHttpResponse(response, returnBody, decodeUtf8);
   }
 
   static Future<ApiCallResponse> requestWithBody(
-    ApiCallType type,
-    String apiUrl,
-    Map<String, dynamic> headers,
-    Map<String, dynamic> params,
-    String? body,
-    BodyType? bodyType,
-    bool returnBody,
-    bool encodeBodyUtf8,
-    bool decodeUtf8,
-    bool alwaysAllowBody, {
-    http.Client? client,
-  }) async {
+      ApiCallType type,
+      String apiUrl,
+      Map<String, dynamic> headers,
+      Map<String, dynamic> params,
+      String? body,
+      BodyType? bodyType,
+      bool returnBody,
+      bool encodeBodyUtf8,
+      bool decodeUtf8,
+      bool alwaysAllowBody) async {
     assert(
       {ApiCallType.POST, ApiCallType.PUT, ApiCallType.PATCH}.contains(type) ||
           (alwaysAllowBody && type == ApiCallType.DELETE),
       'Invalid ApiCallType $type for request with body',
     );
+    HttpWithMiddleware httpWithMiddleware =
+        HttpWithMiddleware.build(middlewares: [
+      if (kDebugMode) HttpLogger(logLevel: LogLevel.BODY),
+    ]);
     final postBody =
         createBody(headers, params, body, bodyType, encodeBodyUtf8);
 
@@ -167,10 +172,10 @@ class ApiManager {
     }
 
     final requestFn = {
-      ApiCallType.POST: client != null ? client.post : http.post,
-      ApiCallType.PUT: client != null ? client.put : http.put,
-      ApiCallType.PATCH: client != null ? client.patch : http.patch,
-      ApiCallType.DELETE: client != null ? client.delete : http.delete,
+      ApiCallType.POST: httpWithMiddleware.post,
+      ApiCallType.PUT: httpWithMiddleware.put,
+      ApiCallType.PATCH: httpWithMiddleware.patch,
+      ApiCallType.DELETE: httpWithMiddleware.delete,
     }[type]!;
     final planets = <String, String>{'Accept': 'application/json'};
     headers.addEntries(planets.entries);
@@ -296,9 +301,7 @@ class ApiManager {
     bool encodeBodyUtf8 = false,
     bool decodeUtf8 = false,
     bool cache = false,
-    bool alwaysAllowBody = false,
-    http.Client? client,
-  }) async {
+    bool alwaysAllowBody = false}) async {
     final callRecord =
         ApiCallRecord(callName, apiUrl, headers, params, body, bodyType);
     // Modify for your specific needs if this differs from your API.
@@ -326,7 +329,6 @@ class ApiManager {
             params,
             returnBody,
             decodeUtf8,
-            client: client,
           );
           break;
         case ApiCallType.DELETE:
@@ -342,7 +344,6 @@ class ApiManager {
                   encodeBodyUtf8,
                   decodeUtf8,
                   alwaysAllowBody,
-                  client: client,
                 )
               : await urlRequest(
                   callType,
@@ -351,7 +352,6 @@ class ApiManager {
                   params,
                   returnBody,
                   decodeUtf8,
-                  client: client,
                 );
           break;
         case ApiCallType.POST:
@@ -368,7 +368,6 @@ class ApiManager {
             encodeBodyUtf8,
             decodeUtf8,
             alwaysAllowBody,
-            client: client,
           );
           break;
       }

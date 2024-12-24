@@ -1,19 +1,27 @@
-import 'package:provider/provider.dart';
+import 'package:MeU/service/notification_service.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
+
 import 'auth/custom_auth/auth_util.dart';
 import 'auth/custom_auth/custom_auth_user_provider.dart';
+import 'firebase_options.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await authManager.initialize();
   await FFLocalizations.initialize();
 
   final appState = FFAppState();
   await appState.initializePersistedState();
+
+  await NotificationService().instance();
 
   runApp(ChangeNotifierProvider(
     create: (context) => appState,
@@ -51,7 +59,7 @@ class _MyAppState extends State<MyApp> {
 
     Future.delayed(
       const Duration(milliseconds: 2000),
-      () => _appStateNotifier.stopShowingSplashImage(),
+          () => _appStateNotifier.stopShowingSplashImage(),
     );
   }
 
@@ -61,8 +69,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   void setThemeMode(ThemeMode mode) => setState(() {
-        _themeMode = mode;
-      });
+    _themeMode = mode;
+  });
 
   @override
   Widget build(BuildContext context) {
