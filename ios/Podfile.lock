@@ -208,36 +208,36 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/video_player_avfoundation/darwin"
 
 SPEC CHECKSUMS:
-  app_settings: 017320c6a680cdc94c799949d95b84cb69389ebc
+  app_settings: 3507c575c2b18a462c99948f61d5de21d4420999
   DKImagePickerController: a7836546cfdfe014171694f643a7d575bc8ace7f
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
-  file_picker: 09aa5ec1ab24135ccd7a1621c46c84134bfd6655
+  file_picker: 9b3292d7c8bc68c8a7bf8eb78f730e49c8efc517
   Firebase: 797fd7297b7e1be954432743a0b3f90038e45a71
-  firebase_core: 100945864b4aedce3cfef0c62ab864858bf013cf
-  firebase_messaging: e65050bf9b187511d80ea3a4de7cf5573d2c7543
+  firebase_core: 2a80983e98480c7f02ff001358621c8d7f1ff8f0
+  firebase_messaging: 879b396d2be7aa1eaf044d50d2407d24c971b934
   FirebaseCore: 0326ec9b05fbed8f8716cddbf0e36894a13837f7
   FirebaseCoreInternal: df84dd300b561c27d5571684f389bf60b0a5c934
   FirebaseInstallations: 913cf60d0400ebd5d6b63a28b290372ab44590dd
   FirebaseMessaging: 9f71037fd9db3376a4caa54e5a3949d1027b4b6e
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_barcode_scanner: 7a1144744c28dc0c57a8de7218ffe5ec59a9e4bf
-  flutter_contacts: edb1c5ce76aa433e20e6cb14c615f4c0b66e0983
-  flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
-  flutter_local_notifications: df98d66e515e1ca797af436137b4459b160ad8c9
+  flutter_barcode_scanner: c5aa9f51c150a6242fa392386bd52b64bb27fcb5
+  flutter_contacts: 5383945387e7ca37cf963d4be57c21f2fc15ca9f
+  flutter_keyboard_visibility: 4625131e43015dbbe759d9b20daaf77e0e3f6619
+  flutter_local_notifications: 395056b3175ba4f08480a7c5de30cd36d69827e4
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
-  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
+  image_picker_ios: afb77645f1e1060a27edb6793996ff9b42256909
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
-  nfc_manager: d7da7cb781f7744b94df5fe9dbca904ac4a0939e
-  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
+  nfc_manager: 9c40fe22528ab871ca11e52ea8b95790e9d92ca2
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   SDWebImage: 40b0b4053e36c660a764958bff99eed16610acbb
-  share_plus: c3fef564749587fc939ef86ffb283ceac0baf9f5
-  shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
-  sqflite_darwin: 5a7236e3b501866c1c9befc6771dfd73ffb8702d
+  share_plus: de6030e33b4e106470e09322d87cf2a4258d2d1d
+  shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
+  sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
-  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
-  video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
+  url_launcher_ios: 694010445543906933d732453a59da0a173ae33d
+  video_player_avfoundation: 2cef49524dd1f16c5300b9cd6efd9611ce03639b
 
 PODFILE CHECKSUM: eae4152c3630e172b84de35121c0831e1f634c9d
 
