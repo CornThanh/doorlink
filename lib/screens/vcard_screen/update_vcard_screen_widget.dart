@@ -283,7 +283,7 @@ class _UpdateVcardScreenWidgetState extends State<UpdateVcardScreenWidget> {
                     );
                   },
                 );
-                await _model.save(context);
+                await _model.save(context, widget.vcardID);
 
                 await customSnackbar(
                   context,

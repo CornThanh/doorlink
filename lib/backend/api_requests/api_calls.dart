@@ -179,6 +179,7 @@ class AdminVcardCall {
 class UpdateAdminVcardCall {
   Future<ApiCallResponse> call({
     String? authToken = '',
+    required int id,
     required String urlAlias,
     required String name,
     required String firstName,
@@ -211,6 +212,7 @@ class UpdateAdminVcardCall {
         'Authorization': 'Bearer $authToken',
       },
       params: {
+        'id': id,
         'url_alias': urlAlias,
         'name': name,
         'occupation': occupation,

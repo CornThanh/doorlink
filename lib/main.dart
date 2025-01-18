@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
 
     Future.delayed(
       const Duration(milliseconds: 2000),
-          () => _appStateNotifier.stopShowingSplashImage(),
+      () => _appStateNotifier.stopShowingSplashImage(),
     );
   }
 
@@ -69,8 +69,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   void setThemeMode(ThemeMode mode) => setState(() {
-    _themeMode = mode;
-  });
+        _themeMode = mode;
+      });
 
   @override
   Widget build(BuildContext context) {

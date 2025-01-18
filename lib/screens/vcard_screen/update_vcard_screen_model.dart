@@ -168,7 +168,7 @@ class UpdateVcardScreenModel extends FlutterFlowModel<VcardScreenWidget> {
     descriptionController?.dispose();
   }
 
-  Future<void> save(BuildContext context) async {
+  Future<void> save(BuildContext context, int id) async {
     final urlAlias = aliasController.text.trim();
     final name = nameController.text.trim();
     final occupation = occupationController.text.trim();
@@ -215,6 +215,7 @@ class UpdateVcardScreenModel extends FlutterFlowModel<VcardScreenWidget> {
 
     if (formKey.currentState?.validate() == true) {
       final result = await VcardGroup.updateAddminVcardCall.call(
+        id: id,
         authToken: FFAppState().authToken,
         urlAlias: urlAlias,
         name: name,
