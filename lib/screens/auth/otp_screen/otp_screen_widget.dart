@@ -217,17 +217,17 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                                 ).toString();
                                 FFAppState().selectedDrawerPage = 'Dashboard';
                               });
-                              await VcardGroup.notificationCall.call(
-                                  authToken: getJsonField(
-                                    (_model.otpRes?.jsonBody ?? ''),
-                                    r'''$.data.token''',
-                                  ).toString(),
-                                  userId: getJsonField(
-                                    (_model.otpRes?.jsonBody ?? ''),
-                                    r'''$.data.user_id''',
-                                  ),
-                                  fcmToken: (await FirebaseMessaging.instance
-                                      .getToken()));
+                              // await VcardGroup.notificationCall.call(
+                              //     authToken: getJsonField(
+                              //       (_model.otpRes?.jsonBody ?? ''),
+                              //       r'''$.data.token''',
+                              //     ).toString(),
+                              //     userId: getJsonField(
+                              //       (_model.otpRes?.jsonBody ?? ''),
+                              //       r'''$.data.user_id''',
+                              //     ),
+                              //     fcmToken: (await FirebaseMessaging.instance
+                              //         .getToken()));
                               _model.profileRes =
                                   await VcardGroup.profileCall.call(
                                 authToken: getJsonField(
