@@ -1,8 +1,12 @@
 import 'dart:async';
+
 import 'package:MeU/backend/api_requests/api_calls.dart';
 import 'package:MeU/component/vcard_sheet/create_vcard_sheet_widget.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image/image.dart' as img;
+
+import '/flutter_flow/flutter_flow_util.dart';
 
 class CreateVcardSheetModel extends FlutterFlowModel<CreateVcardSheetWidget> {
   ///  State fields for stateful widgets in this component.
@@ -106,12 +110,31 @@ class CreateVcardSheetModel extends FlutterFlowModel<CreateVcardSheetWidget> {
     final firstName = firstNameController.text.trim();
     final lastName = lastNameController.text.trim();
 
-    if (avatarUploadedLocalFile.bytes?.isEmpty == true ||
-        backgroundUploadedLocalFile.bytes?.isEmpty == true) {
-      return;
-    }
-
     if (formKey.currentState?.validate() == true) {
+      if (avatarUploadedLocalFile.bytes?.isEmpty == true) {
+        String assetPath = 'assets/images/default_avatar.png';
+        Uint8List bytes =
+            (await rootBundle.load(assetPath)).buffer.asUint8List();
+
+        avatarUploadedLocalFile = FFUploadedFile(
+          name: assetPath.split('/').last,
+          bytes: bytes,
+          height: (img.decodeImage(bytes)?.height ?? 0).toDouble(),
+          width: (img.decodeImage(bytes)?.width ?? 0).toDouble(),
+        );
+      }
+      if (backgroundUploadedLocalFile.bytes?.isEmpty == true) {
+        String assetPath = 'assets/images/cover_photo.png';
+        Uint8List bytes =
+            (await rootBundle.load(assetPath)).buffer.asUint8List();
+
+        backgroundUploadedLocalFile = FFUploadedFile(
+          name: assetPath.split('/').last,
+          bytes: bytes,
+          height: (img.decodeImage(bytes)?.height ?? 0).toDouble(),
+          width: (img.decodeImage(bytes)?.width ?? 0).toDouble(),
+        );
+      }
       final result = await VcardGroup.createAdminVcardCall.call(
         authToken: FFAppState().authToken,
         urlAlias: urlAlias,

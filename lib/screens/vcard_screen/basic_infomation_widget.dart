@@ -48,7 +48,8 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                               ? Image.network(
                                   widget.model.backgroundImage,
                                 ).image
-                              : Image.asset('assets/images/bg_thumb.png').image,
+                              : Image.asset('assets/images/cover_photo.png')
+                                  .image,
                     ),
                     borderRadius: BorderRadius.circular(8),
                   ),

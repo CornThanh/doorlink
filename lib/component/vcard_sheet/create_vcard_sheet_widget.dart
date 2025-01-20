@@ -1,13 +1,14 @@
 import 'package:MeU/flutter_flow/flutter_flow_theme.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '/flutter_flow/flutter_flow_util.dart';
 import '../../flutter_flow/flutter_flow_icon_button.dart';
 import '../../flutter_flow/flutter_flow_widgets.dart';
 import '../../flutter_flow/upload_data.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'create_vcard_sheet_model.dart';
+
 export 'vcard_sheet_model.dart';
 
 class CreateVcardSheetWidget extends StatefulWidget {
@@ -108,7 +109,7 @@ class _VcardSheetWidgetState extends State<CreateVcardSheetWidget> {
                                               .bytes ??
                                           Uint8List.fromList([]),
                                     ).image
-                                  : Image.asset('assets/images/bg_thumb.png')
+                                  : Image.asset('assets/images/cover_photo.png')
                                       .image,
                             ),
                             shape: BoxShape.rectangle,
@@ -207,7 +208,7 @@ class _VcardSheetWidgetState extends State<CreateVcardSheetWidget> {
                                     : DecorationImage(
                                         fit: BoxFit.contain,
                                         image: Image.asset(
-                                          'assets/images/user-icon.png',
+                                          'assets/images/default_avatar.png',
                                         ).image,
                                       ),
                                 shape: BoxShape.circle,
@@ -291,36 +292,6 @@ class _VcardSheetWidgetState extends State<CreateVcardSheetWidget> {
                         ),
                       ],
                     ),
-                  ),
-                  Visibility(
-                    visible:
-                        _model.avatarUploadedLocalFile.bytes?.isEmpty == true ||
-                            _model.backgroundUploadedLocalFile.bytes?.isEmpty ==
-                                true ||
-                            _model.isFailed,
-                    child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Text(
-                          _model.isFailed
-                              ? FFLocalizations.of(context).getVariableText(
-                                  viText: _model.map['message'],
-                                  enText: _model.map['message'],
-                                )
-                              : FFLocalizations.of(context).getVariableText(
-                                  viText:
-                                      'Vui lòng thay đổi hình đại diện và hình nền',
-                                  enText:
-                                      'Please change avatar and cover photo',
-                                ),
-                          style:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Nunito Sans',
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.w600,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey('Nunito Sans'),
-                                  ),
-                        )),
                   ),
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(

@@ -227,13 +227,19 @@ class ApiManager {
     final planets = <String, String>{'Accept': 'application/json'};
     headers.addEntries(planets.entries);
 
+    HttpClientWithMiddleware httpClient =
+        HttpClientWithMiddleware.build(middlewares: [
+      if (kDebugMode) HttpLogger(logLevel: LogLevel.BODY),
+    ]);
+
     final request = http.MultipartRequest(
         type.toString().split('.').last, Uri.parse(apiUrl))
       ..headers.addAll(toStringMap(headers))
       ..files.addAll(files);
     nonFileParams.forEach((key, value) => request.fields[key] = value);
 
-    final response = await http.Response.fromStream(await request.send());
+    final response =
+        await http.Response.fromStream(await httpClient.send(request));
     return ApiCallResponse.fromHttpResponse(response, returnBody, decodeUtf8);
   }
 
