@@ -298,6 +298,10 @@ void showSnackbar(
         ],
       ),
       duration: Duration(seconds: duration),
+      margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height - 200,
+          left: 10,
+          right: 10),
     ),
   );
 }

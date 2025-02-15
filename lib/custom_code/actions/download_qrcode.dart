@@ -25,7 +25,7 @@ Future<String> downloadQrcode(
 
     File imageFile = File(filePath);
     await imageFile.writeAsBytes(encodePng(img1));
-    return 'Image downloaded successfully at: Document/Vcard';
+    return 'QR code đã được tải xuống';
   } catch (e) {
     return '';
   }

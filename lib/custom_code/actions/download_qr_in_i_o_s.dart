@@ -26,8 +26,8 @@ Future<String> downloadQrInIOS(String url) async {
 
     File imageFile = File(filePath);
     await imageFile.writeAsBytes(encodePng(img1));
-    return 'Image downloaded successfully at: Files/On My iPhone/Vcard/$imageName';
+    return 'QR code đã được tải xuống';
   } catch (e) {
-    return 'image not download';
+    return 'QR code không được tải xuống';
   }
 }

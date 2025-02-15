@@ -9,6 +9,7 @@ Future downloadNotification(
   // Add your function code here!
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
+      dismissDirection: DismissDirection.up,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -21,13 +22,13 @@ Future downloadNotification(
           ),
         ],
       ),
+      margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height - 200,
+          left: 10,
+          right: 10),
       behavior: SnackBarBehavior.floating,
       backgroundColor: bgColor,
       duration: const Duration(seconds: 3),
-      margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height - 150,
-          right: 10,
-          left: 10),
     ),
   );
 }

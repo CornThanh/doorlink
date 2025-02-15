@@ -15,51 +15,91 @@ class _VcardTemplateWidgetState extends State<VcardTemplateWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-            child: ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: list.length,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      widget.model.selectedTemplateID = list[index];
-                    });
-                  },
-                  child: Card(
-                    elevation: 2,
-                    borderOnForeground: true,
-                    shape: RoundedRectangleBorder(
-                      side: widget.model.selectedTemplateID == list[index]
-                          ? const BorderSide(color: Colors.green, width: 3)
-                          : BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        'assets/images/vcard${list[index]}.webp',
-                        fit: BoxFit.fitHeight,
+    return SingleChildScrollView(
+      child: Column(
+        children: list
+            .map((e) => Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          widget.model.selectedTemplateID = e;
+                        });
+                      },
+                      child: Card(
+                        elevation: 2,
+                        borderOnForeground: true,
+                        shape: RoundedRectangleBorder(
+                          side: widget.model.selectedTemplateID == e
+                              ? const BorderSide(color: Colors.green, width: 3)
+                              : BorderSide.none,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            'assets/images/vcard$e.webp',
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Divider(
-                    height: 2,
-                    color: Colors.white,
-                  ),
-                )
-              ],
-            );
-          },
-        ))
-      ],
+                    const Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Divider(
+                        height: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ))
+            .toList(),
+      
+        //  [
+        // Expanded(
+        //     child: ListView.builder(
+        //   padding: const EdgeInsets.symmetric(horizontal: 16),
+        //   itemCount: list.length,
+        //   itemBuilder: (context, index) {
+        //     return Column(
+        //       children: [
+        //         GestureDetector(
+        //           onTap: () {
+        //             setState(() {
+        //               widget.model.selectedTemplateID = list[index];
+        //             });
+        //           },
+        //           child: Card(
+        //             elevation: 2,
+        //             borderOnForeground: true,
+        //             shape: RoundedRectangleBorder(
+        //               side: widget.model.selectedTemplateID == list[index]
+        //                   ? const BorderSide(color: Colors.green, width: 3)
+        //                   : BorderSide.none,
+        //               borderRadius: BorderRadius.circular(10),
+        //             ),
+        //             child: ClipRRect(
+        //               borderRadius: BorderRadius.circular(8),
+        //               child: Image.asset(
+        //                 'assets/images/vcard${list[index]}.webp',
+        //                 fit: BoxFit.fitHeight,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //         const Padding(
+        //           padding: EdgeInsets.all(8),
+        //           child: Divider(
+        //             height: 2,
+        //             color: Colors.white,
+        //           ),
+        //         )
+        //       ],
+        //     );
+        //   },
+        // ))
+        // ],
+      ),
     );
   }
 }
