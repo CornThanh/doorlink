@@ -235,6 +235,7 @@ class UpdateAdminVcardCall {
         'instagram': instagram,
         'youtube': youtube,
         'linkedin': linkedin,
+        'whatsapp': whatsapp,
         'enable_affiliation': 0,
         'enable_contact': 0,
         'hide_stickybar': 1,

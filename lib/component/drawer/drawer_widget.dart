@@ -136,37 +136,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     ScanMode.QR,
                   );
 
-                  context.safePop();
-                  if (_model.url != '-1') {
-                    setState(() {
-                      FFAppState().scannedURL = _model.url;
-                    });
-                    if (FFAppState().selectedDrawerPage == 'BusinessCards') {
-                      setState(() {
-                        FFAppState().isBusinessScreenSelected = true;
-                      });
-                    } else {
-                      setState(() {
-                        FFAppState().isBusinessScreenSelected = false;
-                      });
-                    }
-
-                    await showDialog(
-                      context: context,
-                      builder: (dialogContext) {
-                        return Dialog(
-                          elevation: 1,
-                          insetPadding: EdgeInsets.zero,
-                          backgroundColor: Colors.transparent,
-                          alignment: const AlignmentDirectional(0.0, 0.0)
-                              .resolve(Directionality.of(context)),
-                          child: const SelectGroupDialogBoxWidget(),
-                        );
-                      },
-                    ).then((value) => setState(() {}));
-                  }
-
-                  setState(() {});
+                  await launchURL(_model.url);
                 },
                 child: ListTile(
                   leading: Icon(

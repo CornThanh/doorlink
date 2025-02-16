@@ -1,4 +1,3 @@
-import '/component/select_group_dialog_box/select_group_dialog_box_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -53,33 +52,11 @@ class _ScanComponentWidgetState extends State<ScanComponentWidget> {
             FFLocalizations.of(context).getText(
               'g6ibpxlk' /* Cancel */,
             ), // cancel button text
-            true, // whether to show the flash icon
+            false, // whether to show the flash icon
             ScanMode.QR,
           );
 
-          setState(() {
-            FFAppState().isBusinessScreenSelected = widget.isBusinessCardScreen;
-          });
-          if (_model.url != '-1') {
-            setState(() {
-              FFAppState().scannedURL = _model.url;
-            });
-            await showDialog(
-              context: context,
-              builder: (dialogContext) {
-                return Dialog(
-                  elevation: 1,
-                  insetPadding: EdgeInsets.zero,
-                  backgroundColor: Colors.transparent,
-                  alignment: const AlignmentDirectional(0.0, 0.0)
-                      .resolve(Directionality.of(context)),
-                  child: const SelectGroupDialogBoxWidget(),
-                );
-              },
-            ).then((value) => setState(() {}));
-          }
-
-          setState(() {});
+          await launchURL(_model.url);
         },
         child: Container(
           width: 60.0,
