@@ -1,4 +1,4 @@
-import '/backend/api_requests/api_calls.dart';
+import 'package:MeU/features/auth/forgot_password/repository/forgot_password_repository.dart';
 import '/component/instruction_dialog/instruction_dialog_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -231,65 +231,7 @@ class _ForgotPasswordScreenWidgetState
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 30.0, 0.0, 0.0),
                             child: FFButtonWidget(
-                              onPressed: () async {
-                                _model.apiResultiyn =
-                                    await VcardGroup.forgotPasswordCall.call(
-                                  email: _model.emailController.text,
-                                  urlDomain: isAndroid ? 'http:' : 'myapp:',
-                                );
-                                if ((_model.apiResultiyn?.succeeded ?? true)) {
-                                  await actions.customSnackbar(
-                                    context,
-                                    getJsonField(
-                                      (_model.apiResultiyn?.jsonBody ?? ''),
-                                      r'''$.message''',
-                                    ).toString(),
-                                    const Color(0xFF46A44D),
-                                  );
-                                  if ((FFAppState().isInstructionDialogShow ==
-                                          false) &&
-                                      isAndroid) {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (dialogContext) {
-                                        return Dialog(
-                                          elevation: 1,
-                                          insetPadding: EdgeInsets.zero,
-                                          backgroundColor: Colors.transparent,
-                                          alignment: const AlignmentDirectional(
-                                                  0.0, 0.0)
-                                              .resolve(
-                                                  Directionality.of(context)),
-                                          child: GestureDetector(
-                                            onTap: () => _model
-                                                    .unfocusNode.canRequestFocus
-                                                ? FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _model.unfocusNode)
-                                                : FocusScope.of(context)
-                                                    .unfocus(),
-                                            child:
-                                                const InstructionDialogWidget(),
-                                          ),
-                                        );
-                                      },
-                                    ).then((value) => setState(() {}));
-
-                                    FFAppState().isInstructionDialogShow = true;
-                                  }
-                                } else {
-                                  await actions.customSnackbar(
-                                    context,
-                                    getJsonField(
-                                      (_model.apiResultiyn?.jsonBody ?? ''),
-                                      r'''$.message''',
-                                    ).toString(),
-                                    FlutterFlowTheme.of(context).error,
-                                  );
-                                }
-
-                                setState(() {});
-                              },
+                              onPressed: () => _onPressedSendLink(),
                               text: FFLocalizations.of(context).getText(
                                 'v0tt8jx2' /* Send Link */,
                               ),
@@ -331,5 +273,60 @@ class _ForgotPasswordScreenWidgetState
         ),
       ),
     );
+  }
+
+  Future<void> _onPressedSendLink() async {
+    _model.apiResultiyn = await ForgotPasswordRepository.forgot(
+      email: _model.emailController.text,
+      urlDomain: isAndroid ? 'http:' : 'myapp:',
+    );
+    if ((_model.apiResultiyn?.succeeded ?? true) && mounted) {
+      await actions.customSnackbar(
+        context,
+        getJsonField(
+          (_model.apiResultiyn?.jsonBody ?? ''),
+          r'''$.message''',
+        ).toString(),
+        const Color(0xFF46A44D),
+      );
+
+      if ((FFAppState().isInstructionDialogShow == false) &&
+          isAndroid &&
+          mounted) {
+        await showDialog(
+          context: context,
+          builder: (dialogContext) {
+            return Dialog(
+              elevation: 1,
+              insetPadding: EdgeInsets.zero,
+              backgroundColor: Colors.transparent,
+              alignment: const AlignmentDirectional(0.0, 0.0)
+                  .resolve(Directionality.of(context)),
+              child: GestureDetector(
+                onTap: () => _model.unfocusNode.canRequestFocus
+                    ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+                    : FocusScope.of(context).unfocus(),
+                child: const InstructionDialogWidget(),
+              ),
+            );
+          },
+        ).then((value) => setState(() {}));
+
+        FFAppState().isInstructionDialogShow = true;
+      }
+    } else {
+      if (mounted) {
+        await actions.customSnackbar(
+          context,
+          getJsonField(
+            (_model.apiResultiyn?.jsonBody ?? ''),
+            r'''$.message''',
+          ).toString(),
+          FlutterFlowTheme.of(context).error,
+        );
+      }
+    }
+
+    setState(() {});
   }
 }

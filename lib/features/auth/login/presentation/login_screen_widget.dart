@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:MeU/features/auth/login/repository/login_repository.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -320,222 +321,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                     padding: const EdgeInsetsDirectional.fromSTEB(
                         0.0, 24.0, 0.0, 0.0),
                     child: FFButtonWidget(
-                      onPressed: () async {
-                        Function() navigate = () {};
-                        if ((_model.emailController.text != '') &&
-                            (_model.passwordController.text != '')) {
-                          _model.apiResult88p = await VcardGroup.loginCall.call(
-                            email: _model.emailController.text,
-                            password: _model.passwordController.text,
-                          );
-                          if ((_model.apiResult88p?.succeeded ?? true)) {
-                            if (getJsonField(
-                              (_model.apiResult88p?.jsonBody ?? ''),
-                              r'''$.success''',
-                            )) {
-                              setState(() {
-                                FFAppState().authToken = getJsonField(
-                                  (_model.apiResult88p?.jsonBody ?? ''),
-                                  r'''$.data.token''',
-                                ).toString();
-                                FFAppState().email =
-                                    _model.emailController.text;
-                                FFAppState().role = getJsonField(
-                                  (_model.apiResult88p?.jsonBody ?? ''),
-                                  r'''$.data.role''',
-                                ).toString();
-                                FFAppState().selectedDrawerPage = 'Dashboard';
-                              });
-
-                              await VcardGroup.notificationCall.call(
-                                  authToken: getJsonField(
-                                    (_model.apiResult88p?.jsonBody ?? ''),
-                                    r'''$.data.token''',
-                                  ).toString(),
-                                  userId: getJsonField(
-                                    (_model.apiResult88p?.jsonBody ?? ''),
-                                    r'''$.data.user_id''',
-                                  ),
-                                  fcmToken: (await FirebaseMessaging.instance
-                                      .getToken()));
-                              _model.profileRes =
-                                  await VcardGroup.profileCall.call(
-                                authToken: getJsonField(
-                                  (_model.apiResult88p?.jsonBody ?? ''),
-                                  r'''$.data.token''',
-                                ).toString(),
-                              );
-                              if ((_model.profileRes?.succeeded ?? true)) {
-                                if (VcardGroup.profileCall.language(
-                                      (_model.profileRes?.jsonBody ?? ''),
-                                    ) ==
-                                    'Arabic') {
-                                  setAppLanguage(context, 'ar');
-                                  setState(() {
-                                    FFAppState().selectLanguageIndex = 0;
-                                  });
-                                } else {
-                                  if (VcardGroup.profileCall.language(
-                                        (_model.profileRes?.jsonBody ?? ''),
-                                      ) ==
-                                      'VietNam') {
-                                    setAppLanguage(context, 'vi');
-                                    setState(() {
-                                      FFAppState().selectLanguageIndex = 1;
-                                    });
-                                  } else {
-                                    if (VcardGroup.profileCall.language(
-                                          (_model.profileRes?.jsonBody ?? ''),
-                                        ) ==
-                                        'English') {
-                                      setAppLanguage(context, 'en');
-                                      setState(() {
-                                        FFAppState().selectLanguageIndex = 2;
-                                      });
-                                    } else {
-                                      if (VcardGroup.profileCall.language(
-                                            (_model.profileRes?.jsonBody ?? ''),
-                                          ) ==
-                                          'French') {
-                                        setAppLanguage(context, 'fr');
-                                        setState(() {
-                                          FFAppState().selectLanguageIndex = 3;
-                                        });
-                                      } else {
-                                        if (VcardGroup.profileCall.language(
-                                              (_model.profileRes?.jsonBody ??
-                                                  ''),
-                                            ) ==
-                                            'German') {
-                                          setAppLanguage(context, 'de');
-                                          setState(() {
-                                            FFAppState().selectLanguageIndex =
-                                                4;
-                                          });
-                                        } else {
-                                          if (VcardGroup.profileCall.language(
-                                                (_model.profileRes?.jsonBody ??
-                                                    ''),
-                                              ) ==
-                                              'Portuguese') {
-                                            setAppLanguage(context, 'pt');
-                                            setState(() {
-                                              FFAppState().selectLanguageIndex =
-                                                  5;
-                                            });
-                                          } else {
-                                            if (VcardGroup.profileCall.language(
-                                                  (_model.profileRes
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ) ==
-                                                'Russian') {
-                                              setAppLanguage(context, 'ru');
-                                              setState(() {
-                                                FFAppState()
-                                                    .selectLanguageIndex = 6;
-                                              });
-                                            } else {
-                                              if (VcardGroup.profileCall
-                                                      .language(
-                                                    (_model.profileRes
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                  ) ==
-                                                  'Spanish') {
-                                                setAppLanguage(context, 'es');
-                                                setState(() {
-                                                  FFAppState()
-                                                      .selectLanguageIndex = 7;
-                                                });
-                                              } else {
-                                                if (VcardGroup.profileCall
-                                                        .language(
-                                                      (_model.profileRes
-                                                              ?.jsonBody ??
-                                                          ''),
-                                                    ) ==
-                                                    'Turkish') {
-                                                  setAppLanguage(context, 'tr');
-                                                  setState(() {
-                                                    FFAppState()
-                                                        .selectLanguageIndex = 8;
-                                                  });
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              } else {
-                                await actions.customSnackbar(
-                                  context,
-                                  FFLocalizations.of(context).getVariableText(
-                                    viText: 'Lỗi hồ sơ.',
-                                    enText: 'Profile Error.',
-                                  ),
-                                  FlutterFlowTheme.of(context).error,
-                                );
-                              }
-
-                              GoRouter.of(context).prepareAuthEvent();
-                              await authManager.signIn(
-                                authenticationToken: FFAppState().authToken,
-                              );
-                              navigate = () => context.goNamedAuth(
-                                  'dashboard', context.mounted);
-                            } else {
-                              setState(() {
-                                _model.emailController?.clear();
-                              });
-                              await actions.customSnackbar(
-                                context,
-                                getJsonField(
-                                  (_model.apiResult88p?.jsonBody ?? ''),
-                                  r'''$.message''',
-                                ).toString(),
-                                FlutterFlowTheme.of(context).error,
-                              );
-                            }
-                          } else {
-                            await actions.customSnackbar(
-                              context,
-                              getJsonField(
-                                (_model.apiResult88p?.jsonBody ?? ''),
-                                r'''$.message''',
-                              ).toString(),
-                              FlutterFlowTheme.of(context).error,
-                            );
-                          }
-                        } else {
-                          if (_model.emailController.text == '') {
-                            await actions.customSnackbar(
-                              context,
-                              FFLocalizations.of(context).getVariableText(
-                                viText: 'Vui lòng nhập email trước.',
-                                enText: 'Enter Email First.',
-                              ),
-                              FlutterFlowTheme.of(context).error,
-                            );
-                          } else {
-                            await actions.customSnackbar(
-                              context,
-                              FFLocalizations.of(context).getVariableText(
-                                viText: 'Vui lòng nhập mật khẩu trước.',
-                                enText: 'Enter Password First.',
-                              ),
-                              FlutterFlowTheme.of(context).error,
-                            );
-                          }
-                        }
-
-                        navigate();
-
-                        setState(() {});
-                      },
+                      onPressed: () => _onPressedLogin(),
                       text: FFLocalizations.of(context).getText(
                         'bltmxua3' /* Login */,
                       ),
@@ -568,18 +354,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                     padding: const EdgeInsetsDirectional.fromSTEB(
                         0.0, 12.0, 0.0, 0.0),
                     child: FFButtonWidget(
-                      onPressed: () async {
-                        context.pushNamed(
-                          'phone_number',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 300),
-                            ),
-                          },
-                        );
-                      },
+                      onPressed: () => _onPressedLoginByPhoneNumber(),
                       text: FFLocalizations.of(context).getText(
                         'nnbxrxo7' /* Login with phone number */,
                       ),
@@ -630,18 +405,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                     padding: const EdgeInsetsDirectional.fromSTEB(
                         0.0, 12.0, 0.0, 0.0),
                     child: FFButtonWidget(
-                      onPressed: () async {
-                        context.pushNamed(
-                          'register_screen',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: const TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                              duration: Duration(milliseconds: 300),
-                            ),
-                          },
-                        );
-                      },
+                      onPressed: () => _onPressedRegister(),
                       text: FFLocalizations.of(context).getText(
                         'nnbrrxo7' /* Register */,
                       ),
@@ -676,6 +440,251 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _onPressedLogin() async {
+    Function() navigate = () {};
+
+    if ((_model.emailController.text != '') &&
+        (_model.passwordController.text != '')) {
+      _model.apiResult88p = await LoginRepository.login(
+        email: _model.emailController.text,
+        password: _model.passwordController.text,
+      );
+
+      if ((_model.apiResult88p?.succeeded ?? true)) {
+        if (getJsonField(
+          (_model.apiResult88p?.jsonBody ?? ''),
+          r'''$.success''',
+        )) {
+          setState(() {
+            FFAppState().authToken = getJsonField(
+              (_model.apiResult88p?.jsonBody ?? ''),
+              r'''$.data.token''',
+            ).toString();
+            FFAppState().email = _model.emailController.text;
+            FFAppState().role = getJsonField(
+              (_model.apiResult88p?.jsonBody ?? ''),
+              r'''$.data.role''',
+            ).toString();
+            FFAppState().selectedDrawerPage = 'Dashboard';
+          });
+
+          await VcardGroup.notificationCall.call(
+              authToken: getJsonField(
+                (_model.apiResult88p?.jsonBody ?? ''),
+                r'''$.data.token''',
+              ).toString(),
+              userId: getJsonField(
+                (_model.apiResult88p?.jsonBody ?? ''),
+                r'''$.data.user_id''',
+              ),
+              fcmToken: (await FirebaseMessaging.instance.getToken()));
+          _model.profileRes = await VcardGroup.profileCall.call(
+            authToken: getJsonField(
+              (_model.apiResult88p?.jsonBody ?? ''),
+              r'''$.data.token''',
+            ).toString(),
+          );
+
+          if ((_model.profileRes?.succeeded ?? true) && mounted) {
+            if (VcardGroup.profileCall.language(
+                  (_model.profileRes?.jsonBody ?? ''),
+                ) ==
+                'Arabic') {
+              setAppLanguage(context, 'ar');
+
+              setState(() {
+                FFAppState().selectLanguageIndex = 0;
+              });
+            } else {
+              if (VcardGroup.profileCall.language(
+                    (_model.profileRes?.jsonBody ?? ''),
+                  ) ==
+                  'VietNam') {
+                setAppLanguage(context, 'vi');
+
+                setState(() {
+                  FFAppState().selectLanguageIndex = 1;
+                });
+              } else {
+                if (VcardGroup.profileCall.language(
+                      (_model.profileRes?.jsonBody ?? ''),
+                    ) ==
+                    'English') {
+                  setAppLanguage(context, 'en');
+
+                  setState(() {
+                    FFAppState().selectLanguageIndex = 2;
+                  });
+                } else {
+                  if (VcardGroup.profileCall.language(
+                        (_model.profileRes?.jsonBody ?? ''),
+                      ) ==
+                      'French') {
+                    setAppLanguage(context, 'fr');
+
+                    setState(() {
+                      FFAppState().selectLanguageIndex = 3;
+                    });
+                  } else {
+                    if (VcardGroup.profileCall.language(
+                          (_model.profileRes?.jsonBody ?? ''),
+                        ) ==
+                        'German') {
+                      setAppLanguage(context, 'de');
+
+                      setState(() {
+                        FFAppState().selectLanguageIndex = 4;
+                      });
+                    } else {
+                      if (VcardGroup.profileCall.language(
+                            (_model.profileRes?.jsonBody ?? ''),
+                          ) ==
+                          'Portuguese') {
+                        setAppLanguage(context, 'pt');
+
+                        setState(() {
+                          FFAppState().selectLanguageIndex = 5;
+                        });
+                      } else {
+                        if (VcardGroup.profileCall.language(
+                              (_model.profileRes?.jsonBody ?? ''),
+                            ) ==
+                            'Russian') {
+                          setAppLanguage(context, 'ru');
+
+                          setState(() {
+                            FFAppState().selectLanguageIndex = 6;
+                          });
+                        } else {
+                          if (VcardGroup.profileCall.language(
+                                (_model.profileRes?.jsonBody ?? ''),
+                              ) ==
+                              'Spanish') {
+                            setAppLanguage(context, 'es');
+
+                            setState(() {
+                              FFAppState().selectLanguageIndex = 7;
+                            });
+                          } else {
+                            if (VcardGroup.profileCall.language(
+                                  (_model.profileRes?.jsonBody ?? ''),
+                                ) ==
+                                'Turkish') {
+                              setAppLanguage(context, 'tr');
+
+                              setState(() {
+                                FFAppState().selectLanguageIndex = 8;
+                              });
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          } else {
+            if (mounted) {
+              await actions.customSnackbar(
+                context,
+                FFLocalizations.of(context).getVariableText(
+                  viText: 'Lỗi hồ sơ.',
+                  enText: 'Profile Error.',
+                ),
+                FlutterFlowTheme.of(context).error,
+              );
+            }
+          }
+
+          if (mounted) {
+            GoRouter.of(context).prepareAuthEvent();
+          }
+
+          await authManager.signIn(
+            authenticationToken: FFAppState().authToken,
+          );
+          navigate = () => context.goNamedAuth('dashboard', context.mounted);
+        } else {
+          setState(() {
+            _model.emailController?.clear();
+          });
+          if (mounted) {
+            await actions.customSnackbar(
+              context,
+              getJsonField(
+                (_model.apiResult88p?.jsonBody ?? ''),
+                r'''$.message''',
+              ).toString(),
+              FlutterFlowTheme.of(context).error,
+            );
+          }
+        }
+      } else {
+        if (mounted) {
+          await actions.customSnackbar(
+            context,
+            getJsonField(
+              (_model.apiResult88p?.jsonBody ?? ''),
+              r'''$.message''',
+            ).toString(),
+            FlutterFlowTheme.of(context).error,
+          );
+        }
+      }
+    } else {
+      if (_model.emailController.text == '') {
+        await actions.customSnackbar(
+          context,
+          FFLocalizations.of(context).getVariableText(
+            viText: 'Vui lòng nhập email trước.',
+            enText: 'Enter Email First.',
+          ),
+          FlutterFlowTheme.of(context).error,
+        );
+      } else {
+        await actions.customSnackbar(
+          context,
+          FFLocalizations.of(context).getVariableText(
+            viText: 'Vui lòng nhập mật khẩu trước.',
+            enText: 'Enter Password First.',
+          ),
+          FlutterFlowTheme.of(context).error,
+        );
+      }
+    }
+
+    navigate();
+
+    setState(() {});
+  }
+
+  _onPressedLoginByPhoneNumber() {
+    context.pushNamed(
+      'phone_number',
+      extra: <String, dynamic>{
+        kTransitionInfoKey: const TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.fade,
+          duration: Duration(milliseconds: 300),
+        ),
+      },
+    );
+  }
+
+  _onPressedRegister() {
+    context.pushNamed(
+      'register_screen',
+      extra: <String, dynamic>{
+        kTransitionInfoKey: const TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.fade,
+          duration: Duration(milliseconds: 300),
+        ),
+      },
     );
   }
 }

@@ -8,7 +8,6 @@ export 'api_manager.dart' show ApiCallResponse;
 class VcardGroup {
   static String baseUrl = 'https://meu.ntiot.vn/api';
   static Map<String, String> headers = {};
-  static LoginCall loginCall = LoginCall();
   static NotificationCall notificationCall = NotificationCall();
   static LogoutCall logoutCall = LogoutCall();
   static SuperDashboardCall superDashboardCall = SuperDashboardCall();
@@ -27,9 +26,6 @@ class VcardGroup {
   static SingleVcardsCall singleVcardsCall = SingleVcardsCall();
   static SingleAdminVcardsCall singleAdminVcardsCall = SingleAdminVcardsCall();
   static DeleteVcardCall deleteVcardCall = DeleteVcardCall();
-  static RegisterCall registerCall = RegisterCall();
-  static PhoneNumberLoginCall phoneNumberLoginCall = PhoneNumberLoginCall();
-  static VerifiedOTPCall verifiedOTPCall = VerifiedOTPCall();
   static GroupCreateCall groupCreateCall = GroupCreateCall();
   static GroupsCall groupsCall = GroupsCall();
   static AdminGroupCall adminGroupCall = AdminGroupCall();
@@ -55,36 +51,7 @@ class VcardGroup {
   static VcardQrCodeCall vcardQrCodeCall = VcardQrCodeCall();
   static LanguageCall languageCall = LanguageCall();
   static DeleteGroupCall deleteGroupCall = DeleteGroupCall();
-  static ForgotPasswordCall forgotPasswordCall = ForgotPasswordCall();
-  static ResetPasswordCall resetPasswordCall = ResetPasswordCall();
   static AdminGroupCreateCall adminGroupCreateCall = AdminGroupCreateCall();
-}
-
-class LoginCall {
-  Future<ApiCallResponse> call({
-    String? email = '',
-    String? password = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "email": "$email",
-  "password": "$password"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Login',
-      apiUrl: '${VcardGroup.baseUrl}/login',
-      callType: ApiCallType.POST,
-      headers: {},
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
 }
 
 class LogoutCall {
@@ -887,72 +854,6 @@ class DeleteVcardCall {
       ));
 }
 
-class RegisterCall {
-  Future<ApiCallResponse> call({
-    String? firstName = '',
-    String? lastName = '',
-    String? email = '',
-    String? password = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "first_name": "$firstName",
-  "last_name": "$lastName",
-  "email": "$email",
-  "password": "$password"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Register',
-      apiUrl: '${VcardGroup.baseUrl}/register',
-      callType: ApiCallType.POST,
-      headers: {},
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  bool? success(dynamic response) => castToType<bool>(getJsonField(
-        response,
-        r'''$.success''',
-      ));
-}
-
-class PhoneNumberLoginCall {
-  Future<ApiCallResponse> call({
-    String? verificationPhone = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "verification_phone": "+84$verificationPhone"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Phone Number',
-      apiUrl: '${VcardGroup.baseUrl}/login-phone',
-      callType: ApiCallType.POST,
-      headers: {},
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  bool? success(dynamic response) => castToType<bool>(getJsonField(
-        response,
-        r'''$.success''',
-      ));
-}
-
 class NotificationCall {
   Future<ApiCallResponse> call(
       {String? authToken = '', int? userId, String? fcmToken = ''}) async {
@@ -979,38 +880,6 @@ class NotificationCall {
       alwaysAllowBody: false,
     );
   }
-}
-
-class VerifiedOTPCall {
-  Future<ApiCallResponse> call({
-    String? verificationPhone = '',
-    String? verificationCode = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "verification_phone": "+84$verificationPhone",
-  "verification_code": "$verificationCode"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Verify OTP',
-      apiUrl: '${VcardGroup.baseUrl}/verify-otp',
-      callType: ApiCallType.POST,
-      headers: {},
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  bool? success(dynamic response) => castToType<bool>(getJsonField(
-        response,
-        r'''$.success''',
-      ));
 }
 
 class GroupCreateCall {
@@ -1606,57 +1475,6 @@ class DeleteGroupCall {
         'Authorization': 'Bearer $authToken',
       },
       params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class ForgotPasswordCall {
-  Future<ApiCallResponse> call({
-    String? email = '',
-    String? urlDomain = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "email": "$email",
-  "url_domain": "$urlDomain"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Forgot Password',
-      apiUrl: '${VcardGroup.baseUrl}/forgot-password',
-      callType: ApiCallType.POST,
-      headers: {},
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class ResetPasswordCall {
-  Future<ApiCallResponse> call({
-    String? token = '',
-    String? email = '',
-    String? password = '',
-    String? confirmPassword = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Reset Password',
-      apiUrl:
-          '${VcardGroup.baseUrl}/password?token=$token&email=$email&password=$password&password_confirmation=$confirmPassword',
-      callType: ApiCallType.POST,
-      headers: {},
-      params: {},
-      bodyType: BodyType.NONE,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

@@ -1,17 +1,17 @@
 // Export pages
 export '/screens/appointment_screen/appointment_screen_widget.dart'
     show AppointmentScreenWidget;
-export '/screens/auth/forgot_password_screen/forgot_password_screen_widget.dart'
+export 'features/auth/forgot_password/presentation/forgot_password_screen_widget.dart'
     show ForgotPasswordScreenWidget;
-export '/screens/auth/login_screen/login_screen_widget.dart'
+export 'features/auth/login/presentation/login_screen_widget.dart'
     show LoginScreenWidget;
-export '/screens/auth/otp_screen/otp_screen_widget.dart'
+export 'features/auth/otp/presentation/otp_screen_widget.dart'
     show OtpScreenWidget;
-export '/screens/auth/phone_number_screen/phone_number_screen_widget.dart'
+export 'features/auth/phone_number/presentation/phone_number_screen_widget.dart'
     show PhoneNumberScreenWidget;
-export '/screens/auth/register_screen/register_screen_widget.dart'
+export 'features/auth/register/presentation/register_screen_widget.dart'
     show RegisterScreenWidget;
-export '/screens/auth/reset_password_screen/reset_password_screen_widget.dart'
+export 'features/auth/reset_password/presentation/reset_password_screen_widget.dart'
     show ResetPasswordScreenWidget;
 export '/screens/business_card_screen/business_card_screen_widget.dart'
     show BusinessCardScreenWidget;

@@ -1,4 +1,5 @@
-import '/backend/api_requests/api_calls.dart';
+import 'package:MeU/features/auth/reset_password/repository/reset_password_repository.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -282,57 +283,7 @@ class _ResetPasswordScreenWidgetState extends State<ResetPasswordScreenWidget> {
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 60.0, 0.0, 0.0),
                       child: FFButtonWidget(
-                        onPressed: () async {
-                          if (_model.passwordController.text ==
-                              _model.newPasswordController.text) {
-                            _model.apiResult8ok =
-                                await VcardGroup.resetPasswordCall.call(
-                              token: widget.token,
-                              email: widget.email,
-                              password: _model.passwordController.text,
-                              confirmPassword:
-                                  _model.newPasswordController.text,
-                            );
-                            if ((_model.apiResult8ok?.succeeded ?? true)) {
-                              await actions.customSnackbar(
-                                context,
-                                getJsonField(
-                                  (_model.apiResult8ok?.jsonBody ?? ''),
-                                  r'''$.message''',
-                                ).toString(),
-                                const Color(0xFF46A44D),
-                              );
-
-                              context.goNamed(
-                                'login_screen',
-                                extra: <String, dynamic>{
-                                  kTransitionInfoKey: const TransitionInfo(
-                                    hasTransition: true,
-                                    transitionType: PageTransitionType.fade,
-                                    duration: Duration(milliseconds: 300),
-                                  ),
-                                },
-                              );
-                            } else {
-                              await actions.customSnackbar(
-                                context,
-                                'Invalid or expired password reset token.',
-                                FlutterFlowTheme.of(context).error,
-                              );
-                            }
-                          } else {
-                            await actions.customSnackbar(
-                              context,
-                              FFLocalizations.of(context).getVariableText(
-                                viText: 'Vui lòng nhập mật khẩu đúng.',
-                                enText: 'Please Enter Valid Password.',
-                              ),
-                              FlutterFlowTheme.of(context).error,
-                            );
-                          }
-
-                          setState(() {});
-                        },
+                        onPressed: () => _onPressedSave(),
                         text: FFLocalizations.of(context).getText(
                           'oe5hp570' /* Save */,
                         ),
@@ -369,5 +320,60 @@ class _ResetPasswordScreenWidgetState extends State<ResetPasswordScreenWidget> {
         ),
       ),
     );
+  }
+
+  Future<void> _onPressedSave() async {
+    if (_model.passwordController.text == _model.newPasswordController.text) {
+      _model.apiResult8ok = await ResetPasswordRepository.reset(
+        token: widget.token,
+        email: widget.email,
+        password: _model.passwordController.text,
+        confirmPassword: _model.newPasswordController.text,
+      );
+      if ((_model.apiResult8ok?.succeeded ?? true)) {
+        if (mounted) {
+          await actions.customSnackbar(
+            context,
+            getJsonField(
+              (_model.apiResult8ok?.jsonBody ?? ''),
+              r'''$.message''',
+            ).toString(),
+            const Color(0xFF46A44D),
+          );
+        }
+
+        if (mounted) {
+          context.goNamed(
+            'login_screen',
+            extra: <String, dynamic>{
+              kTransitionInfoKey: const TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 300),
+              ),
+            },
+          );
+        }
+      } else {
+        if (mounted) {
+          await actions.customSnackbar(
+            context,
+            'Invalid or expired password reset token.',
+            FlutterFlowTheme.of(context).error,
+          );
+        }
+      }
+    } else {
+      await actions.customSnackbar(
+        context,
+        FFLocalizations.of(context).getVariableText(
+          viText: 'Vui lòng nhập mật khẩu đúng.',
+          enText: 'Please Enter Valid Password.',
+        ),
+        FlutterFlowTheme.of(context).error,
+      );
+    }
+
+    setState(() {});
   }
 }

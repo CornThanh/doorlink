@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:MeU/features/auth/phone_number/repository/phone_number_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '/backend/api_requests/api_calls.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -210,59 +210,7 @@ class _PhoneNumberScreenWidgetState extends State<PhoneNumberScreenWidget> {
                     padding: const EdgeInsetsDirectional.fromSTEB(
                         0.0, 80.0, 0.0, 0.0),
                     child: FFButtonWidget(
-                      onPressed: () async {
-                        if ((_model.phoneNumberController.text != '') &&
-                            await actions.vietnamPhoneValidation(
-                                _model.phoneNumberController.text)) {
-                          _model.phoneNumberRes =
-                              await VcardGroup.phoneNumberLoginCall.call(
-                            verificationPhone:
-                                _model.phoneNumberController.text,
-                          );
-
-                          if ((_model.phoneNumberRes?.succeeded ?? true)) {
-                            context.pushNamed(
-                              'otp',
-                              queryParameters: {
-                                'phoneNumber': serializeParam(
-                                  _model.phoneNumberController.text,
-                                  ParamType.String,
-                                ),
-                              }.withoutNulls,
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: const TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.fade,
-                                  duration: Duration(milliseconds: 400),
-                                ),
-                              },
-                            );
-                          } else {
-                            await actions.customSnackbar(
-                              context,
-                              valueOrDefault<String>(
-                                getJsonField(
-                                  (_model.phoneNumberRes?.jsonBody ?? ''),
-                                  r'''$.message''',
-                                )?.toString(),
-                                'Registration failed.',
-                              ),
-                              FlutterFlowTheme.of(context).error,
-                            );
-                          }
-                        } else {
-                          await actions.customSnackbar(
-                            context,
-                            FFLocalizations.of(context).getVariableText(
-                              viText: 'Vui lòng nhập đúng số điện thoại.',
-                              enText: 'Please enter correct phone number.',
-                            ),
-                            FlutterFlowTheme.of(context).error,
-                          );
-                        }
-
-                        setState(() {});
-                      },
+                      onPressed: () => _onPressedSend(),
                       text: FFLocalizations.of(context).getText(
                         'bj2tmfun' /* Send */,
                       ),
@@ -338,5 +286,61 @@ class _PhoneNumberScreenWidgetState extends State<PhoneNumberScreenWidget> {
         ),
       ),
     );
+  }
+
+  Future<void> _onPressedSend() async {
+    if ((_model.phoneNumberController.text != '') &&
+        await actions
+            .vietnamPhoneValidation(_model.phoneNumberController.text)) {
+      _model.phoneNumberRes = await PhoneNumberRepository.verify(
+        verificationPhone: _model.phoneNumberController.text,
+      );
+
+      if (mounted) {
+        if ((_model.phoneNumberRes?.succeeded ?? true)) {
+          context.pushNamed(
+            'otp',
+            queryParameters: {
+              'phoneNumber': serializeParam(
+                _model.phoneNumberController.text,
+                ParamType.String,
+              ),
+            }.withoutNulls,
+            extra: <String, dynamic>{
+              kTransitionInfoKey: const TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.fade,
+                duration: Duration(milliseconds: 400),
+              ),
+            },
+          );
+        } else {
+          await actions.customSnackbar(
+            context,
+            valueOrDefault<String>(
+              getJsonField(
+                (_model.phoneNumberRes?.jsonBody ?? ''),
+                r'''$.message''',
+              )?.toString(),
+              'Registration failed.',
+            ),
+            FlutterFlowTheme.of(context).error,
+          );
+        }
+      }
+    } else {
+      if (mounted) {
+        await actions.customSnackbar(
+          context,
+          FFLocalizations.of(context).getVariableText(
+            viText: 'Vui lòng nhập đúng số điện thoại.',
+            enText: 'Please enter correct phone number.',
+          ),
+          FlutterFlowTheme.of(context).error,
+        );
+      }
+    }
+
+    setState(() {});
   }
 }

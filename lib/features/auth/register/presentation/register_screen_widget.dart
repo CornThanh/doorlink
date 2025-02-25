@@ -1,4 +1,4 @@
-import '/backend/api_requests/api_calls.dart';
+import 'package:MeU/features/auth/register/repository/register_repository.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -478,161 +478,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 50.0, 0.0, 0.0),
                       child: FFButtonWidget(
-                        onPressed: () async {
-                          if ((_model.firstNameController.text != '') &&
-                              functions.textFieldValidator(
-                                  _model.firstNameController.text)) {
-                            if ((_model.lastNameController.text != '') &&
-                                functions.textFieldValidator(
-                                    _model.lastNameController.text)) {
-                              if ((_model.emailController.text != '') &&
-                                  functions.textFieldValidator(
-                                      _model.emailController.text)) {
-                                _model.emailRes = await actions.emailValidation(
-                                  _model.emailController.text,
-                                );
-                                if (_model.emailRes!) {
-                                  if ((_model.passwordController.text != '') &&
-                                      functions.textFieldValidator(
-                                          _model.passwordController.text)) {
-                                    if ((_model.confirmPasswordController
-                                                .text !=
-                                            '') &&
-                                        functions.textFieldValidator(_model
-                                            .confirmPasswordController.text)) {
-                                      if (_model.passwordController.text ==
-                                          _model
-                                              .confirmPasswordController.text) {
-                                        _model.registerRes =
-                                            await VcardGroup.registerCall.call(
-                                          firstName:
-                                              _model.firstNameController.text,
-                                          lastName:
-                                              _model.lastNameController.text,
-                                          email: _model.emailController.text,
-                                          password:
-                                              _model.passwordController.text,
-                                        );
-                                        if ((_model.registerRes?.succeeded ??
-                                            true)) {
-                                          context.pushNamed(
-                                            'login_screen',
-                                            extra: <String, dynamic>{
-                                              kTransitionInfoKey:
-                                                  const TransitionInfo(
-                                                hasTransition: true,
-                                                transitionType:
-                                                    PageTransitionType.fade,
-                                                duration:
-                                                    Duration(milliseconds: 400),
-                                              ),
-                                            },
-                                          );
-
-                                          await actions.customSnackbar(
-                                            context,
-                                            FFLocalizations.of(context)
-                                                .getVariableText(
-                                              viText: 'Đăng ký thành công.',
-                                              enText:
-                                                  'Registration successfully.',
-                                            ),
-                                            const Color(0xFF46A44D),
-                                          );
-                                        } else {
-                                          await actions.customSnackbar(
-                                            context,
-                                            valueOrDefault<String>(
-                                              getJsonField(
-                                                (_model.registerRes?.jsonBody ??
-                                                    ''),
-                                                r'''$.message''',
-                                              )?.toString(),
-                                              'Registration failed.',
-                                            ),
-                                            FlutterFlowTheme.of(context).error,
-                                          );
-                                        }
-                                      } else {
-                                        await actions.customSnackbar(
-                                          context,
-                                          FFLocalizations.of(context)
-                                              .getVariableText(
-                                            viText:
-                                                'Vui lòng nhập mật khẩu đúng.',
-                                            enText:
-                                                'Please Enter Valid Password.',
-                                          ),
-                                          FlutterFlowTheme.of(context).error,
-                                        );
-                                      }
-                                    } else {
-                                      await actions.customSnackbar(
-                                        context,
-                                        FFLocalizations.of(context)
-                                            .getVariableText(
-                                          viText:
-                                              'Vui lòng Nhập Xác nhận Mật khẩu.',
-                                          enText:
-                                              'Please Enter Confirm Password.',
-                                        ),
-                                        FlutterFlowTheme.of(context).error,
-                                      );
-                                    }
-                                  } else {
-                                    await actions.customSnackbar(
-                                      context,
-                                      FFLocalizations.of(context)
-                                          .getVariableText(
-                                        viText: 'Vui lòng Nhập Mật khẩu.',
-                                        enText: 'Please Enter Password.',
-                                      ),
-                                      FlutterFlowTheme.of(context).error,
-                                    );
-                                  }
-                                } else {
-                                  await actions.customSnackbar(
-                                    context,
-                                    FFLocalizations.of(context).getVariableText(
-                                      viText: 'Vui lòng nhập email chính xác',
-                                      enText: 'Please Enter Valid Email.',
-                                    ),
-                                    FlutterFlowTheme.of(context).error,
-                                  );
-                                }
-                              } else {
-                                await actions.customSnackbar(
-                                  context,
-                                  FFLocalizations.of(context).getVariableText(
-                                    viText: 'Vui lòng nhập email.',
-                                    enText: 'Please Enter Email.',
-                                  ),
-                                  FlutterFlowTheme.of(context).error,
-                                );
-                              }
-                            } else {
-                              await actions.customSnackbar(
-                                context,
-                                FFLocalizations.of(context).getVariableText(
-                                  viText: 'Vui lòng nhập họ.',
-                                  enText: 'Please Enter Last name.',
-                                ),
-                                FlutterFlowTheme.of(context).error,
-                              );
-                            }
-                          } else {
-                            await actions.customSnackbar(
-                              context,
-                              FFLocalizations.of(context).getVariableText(
-                                viText: 'Vui lòng nhập tên.',
-                                enText: 'Please Enter First name.',
-                              ),
-                              FlutterFlowTheme.of(context).error,
-                            );
-                          }
-
-                          setState(() {});
-                        },
+                        onPressed: () => _onPressedRegister(),
                         text: FFLocalizations.of(context).getText(
                           '1cnl5cer' /* Register */,
                         ),
@@ -684,18 +530,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 12.0, 0.0, 0.0),
                       child: FFButtonWidget(
-                        onPressed: () async {
-                          context.pushNamed(
-                            'login_screen',
-                            extra: <String, dynamic>{
-                              kTransitionInfoKey: const TransitionInfo(
-                                hasTransition: true,
-                                transitionType: PageTransitionType.fade,
-                                duration: Duration(milliseconds: 300),
-                              ),
-                            },
-                          );
-                        },
+                        onPressed: () => _onPressedLogin(),
                         text: FFLocalizations.of(context).getText(
                           'z8plp0bu' /* Login */,
                         ),
@@ -736,6 +571,162 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _onPressedRegister() async {
+    if ((_model.firstNameController.text != '') &&
+        functions.textFieldValidator(_model.firstNameController.text)) {
+      if ((_model.lastNameController.text != '') &&
+          functions.textFieldValidator(_model.lastNameController.text)) {
+        if ((_model.emailController.text != '') &&
+            functions.textFieldValidator(_model.emailController.text)) {
+          _model.emailRes = await actions.emailValidation(
+            _model.emailController.text,
+          );
+          if (_model.emailRes!) {
+            if ((_model.passwordController.text != '') &&
+                functions.textFieldValidator(_model.passwordController.text)) {
+              if ((_model.confirmPasswordController.text != '') &&
+                  functions.textFieldValidator(
+                      _model.confirmPasswordController.text)) {
+                if (_model.passwordController.text ==
+                    _model.confirmPasswordController.text) {
+                  _model.registerRes = await RegisterRepository.register(
+                    firstName: _model.firstNameController.text,
+                    lastName: _model.lastNameController.text,
+                    email: _model.emailController.text,
+                    password: _model.passwordController.text,
+                  );
+                  if ((_model.registerRes?.succeeded ?? true)) {
+                    if (mounted) {
+                      context.pushNamed(
+                        'login_screen',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: const TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 400),
+                          ),
+                        },
+                      );
+
+                      await actions.customSnackbar(
+                        context,
+                        FFLocalizations.of(context).getVariableText(
+                          viText: 'Đăng ký thành công.',
+                          enText: 'Registration successfully.',
+                        ),
+                        const Color(0xFF46A44D),
+                      );
+                    }
+                  } else {
+                    if (mounted) {
+                      await actions.customSnackbar(
+                        context,
+                        valueOrDefault<String>(
+                          getJsonField(
+                            (_model.registerRes?.jsonBody ?? ''),
+                            r'''$.message''',
+                          )?.toString(),
+                          'Registration failed.',
+                        ),
+                        FlutterFlowTheme.of(context).error,
+                      );
+                    }
+                  }
+                } else {
+                  if (mounted) {
+                    await actions.customSnackbar(
+                      context,
+                      FFLocalizations.of(context).getVariableText(
+                        viText: 'Vui lòng nhập mật khẩu đúng.',
+                        enText: 'Please Enter Valid Password.',
+                      ),
+                      FlutterFlowTheme.of(context).error,
+                    );
+                  }
+                }
+              } else {
+                if (mounted) {
+                  await actions.customSnackbar(
+                    context,
+                    FFLocalizations.of(context).getVariableText(
+                      viText: 'Vui lòng Nhập Xác nhận Mật khẩu.',
+                      enText: 'Please Enter Confirm Password.',
+                    ),
+                    FlutterFlowTheme.of(context).error,
+                  );
+                }
+              }
+            } else {
+              if (mounted) {
+                await actions.customSnackbar(
+                  context,
+                  FFLocalizations.of(context).getVariableText(
+                    viText: 'Vui lòng Nhập Mật khẩu.',
+                    enText: 'Please Enter Password.',
+                  ),
+                  FlutterFlowTheme.of(context).error,
+                );
+              }
+            }
+          } else {
+            if (mounted) {
+              await actions.customSnackbar(
+                context,
+                FFLocalizations.of(context).getVariableText(
+                  viText: 'Vui lòng nhập email chính xác',
+                  enText: 'Please Enter Valid Email.',
+                ),
+                FlutterFlowTheme.of(context).error,
+              );
+            }
+          }
+        } else {
+          await actions.customSnackbar(
+            context,
+            FFLocalizations.of(context).getVariableText(
+              viText: 'Vui lòng nhập email.',
+              enText: 'Please Enter Email.',
+            ),
+            FlutterFlowTheme.of(context).error,
+          );
+        }
+      } else {
+        await actions.customSnackbar(
+          context,
+          FFLocalizations.of(context).getVariableText(
+            viText: 'Vui lòng nhập họ.',
+            enText: 'Please Enter Last name.',
+          ),
+          FlutterFlowTheme.of(context).error,
+        );
+      }
+    } else {
+      await actions.customSnackbar(
+        context,
+        FFLocalizations.of(context).getVariableText(
+          viText: 'Vui lòng nhập tên.',
+          enText: 'Please Enter First name.',
+        ),
+        FlutterFlowTheme.of(context).error,
+      );
+    }
+
+    setState(() {});
+  }
+
+  _onPressedLogin() {
+    context.pushNamed(
+      'login_screen',
+      extra: <String, dynamic>{
+        kTransitionInfoKey: const TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.fade,
+          duration: Duration(milliseconds: 300),
+        ),
+      },
     );
   }
 }
