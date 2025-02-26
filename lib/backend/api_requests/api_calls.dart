@@ -10,7 +10,6 @@ class VcardGroup {
   static Map<String, String> headers = {};
   static NotificationCall notificationCall = NotificationCall();
   static LogoutCall logoutCall = LogoutCall();
-  static SuperDashboardCall superDashboardCall = SuperDashboardCall();
   static AdminVcardCall adminVcardCall = AdminVcardCall();
   static CreateAdminVcardCall createAdminVcardCall = CreateAdminVcardCall();
   static UpdateAdminVcardCall updateAddminVcardCall = UpdateAdminVcardCall();
@@ -33,16 +32,12 @@ class VcardGroup {
   static LanguageUpdateCall languageUpdateCall = LanguageUpdateCall();
   static BusinessCardCreateCall businessCardCreateCall =
       BusinessCardCreateCall();
-  static AdminDashboardCall adminDashboardCall = AdminDashboardCall();
   static BusinessCardCall businessCardCall = BusinessCardCall();
   static AdminBusinessCardCall adminBusinessCardCall = AdminBusinessCardCall();
   static FilterBusinessCardCall filterBusinessCardCall =
       FilterBusinessCardCall();
   static SettingUpdateCall settingUpdateCall = SettingUpdateCall();
   static AdminIncomeChartCall adminIncomeChartCall = AdminIncomeChartCall();
-  static SuperAdminIncomeChartCall superAdminIncomeChartCall =
-      SuperAdminIncomeChartCall();
-  static TodayAppointmentCall todayAppointmentCall = TodayAppointmentCall();
   static VcardAppointmentCall vcardAppointmentCall = VcardAppointmentCall();
   static VcardEnquiryCall vcardEnquiryCall = VcardEnquiryCall();
   static AppointmentCompletedCall appointmentCompletedCall =
@@ -73,29 +68,6 @@ class LogoutCall {
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class SuperDashboardCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Super Dashboard',
-      apiUrl: '${VcardGroup.baseUrl}/dashboard',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {
-        'auth_token': authToken,
-      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -1070,27 +1042,6 @@ class BusinessCardCreateCall {
   }
 }
 
-class AdminDashboardCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Admin Dashboard',
-      apiUrl: '${VcardGroup.baseUrl}/admin/dashboard',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
 class BusinessCardCall {
   Future<ApiCallResponse> call({
     String? authToken = '',
@@ -1245,48 +1196,6 @@ class AdminIncomeChartCall {
         r'''$.data.data''',
         true,
       ) as List?;
-}
-
-class SuperAdminIncomeChartCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Super Admin Income Chart ',
-      apiUrl: '${VcardGroup.baseUrl}/income-chart',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class TodayAppointmentCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Today Appointment',
-      apiUrl: '${VcardGroup.baseUrl}/admin/today-appointment',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
 }
 
 class VcardAppointmentCall {

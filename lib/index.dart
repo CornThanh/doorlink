@@ -17,7 +17,8 @@ export '/screens/business_card_screen/business_card_screen_widget.dart'
     show BusinessCardScreenWidget;
 export '/screens/change_password_screen/change_password_screen_widget.dart'
     show ChangePasswordScreenWidget;
-export '/screens/dashboard/dashboard_widget.dart' show DashboardWidget;
+export 'features/main/dashboard/presentation/dashboard_screen_widget.dart'
+    show DashboardScreenWidget;
 export '/screens/edit_profile_screen/edit_profile_screen_widget.dart'
     show EditProfileScreenWidget;
 export '/screens/enquiries_screen/enquiries_screen_widget.dart'

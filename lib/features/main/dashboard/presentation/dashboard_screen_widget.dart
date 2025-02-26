@@ -1,3 +1,4 @@
+import 'package:MeU/features/main/dashboard/repository/dashboard_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/backend/api_requests/api_calls.dart';
@@ -16,14 +17,14 @@ import 'package:provider/provider.dart';
 import 'dashboard_model.dart';
 export 'dashboard_model.dart';
 
-class DashboardWidget extends StatefulWidget {
-  const DashboardWidget({super.key});
+class DashboardScreenWidget extends StatefulWidget {
+  const DashboardScreenWidget({super.key});
 
   @override
-  State<DashboardWidget> createState() => _DashboardWidgetState();
+  State<DashboardScreenWidget> createState() => _DashboardScreenWidgetState();
 }
 
-class _DashboardWidgetState extends State<DashboardWidget> {
+class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
   late DashboardModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -63,22 +64,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color(0xFF1F69F6),
           child: const Icon(Icons.add, color: Colors.white, size: 28),
-          onPressed: () async {
-            if (FFAppState().selectedDrawerPage != 'VCards') {
-              context.goNamed(
-                'vcard_screen',
-                queryParameters: {'isCreate': 'true'},
-                extra: <String, dynamic>{
-                  kTransitionInfoKey: const TransitionInfo(
-                    hasTransition: true,
-                    transitionType: PageTransitionType.fade,
-                    duration: Duration(milliseconds: 300),
-                  ),
-                },
-              );
-            }
-            FFAppState().selectedDrawerPage = 'VCards';
-          },
+          onPressed: () => _onPressedFloatingButton(),
         ),
         appBar: AppBar(
           backgroundColor: const Color(0xff333333),
@@ -133,7 +119,7 @@ class _DashboardWidgetState extends State<DashboardWidget> {
                 padding:
                     const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                 child: FutureBuilder<ApiCallResponse>(
-                  future: VcardGroup.superDashboardCall.call(
+                  future: DashboardRepository.getSuperDashboard(
                     authToken: FFAppState().authToken,
                   ),
                   builder: (context, snapshot) {
@@ -909,7 +895,8 @@ Vcards */
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                             child: FutureBuilder<ApiCallResponse>(
-                              future: VcardGroup.superAdminIncomeChartCall.call(
+                              future:
+                                  DashboardRepository.getSuperAdminIncomeChart(
                                 authToken: FFAppState().authToken,
                               ),
                               builder: (context, snapshot) {
@@ -1028,7 +1015,7 @@ Vcards */
               );
             } else {
               return FutureBuilder<ApiCallResponse>(
-                future: VcardGroup.todayAppointmentCall.call(
+                future: DashboardRepository.getTodayAppointment(
                   authToken: FFAppState().authToken,
                 ),
                 builder: (context, snapshot) {
@@ -1049,7 +1036,7 @@ Vcards */
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           12.0, 0.0, 12.0, 0.0),
                       child: FutureBuilder<ApiCallResponse>(
-                        future: VcardGroup.adminDashboardCall.call(
+                        future: DashboardRepository.getAdminDashboard(
                           authToken: FFAppState().authToken,
                         ),
                         builder: (context, snapshot) {
@@ -1082,28 +1069,7 @@ Vcards */
                                       children: [
                                         Flexible(
                                           child: GestureDetector(
-                                            onTap: () {
-                                              if (FFAppState()
-                                                      .selectedDrawerPage !=
-                                                  'VCards') {
-                                                context.goNamed(
-                                                  'vcard_screen',
-                                                  extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
-                                                        const TransitionInfo(
-                                                      hasTransition: true,
-                                                      transitionType:
-                                                          PageTransitionType
-                                                              .fade,
-                                                      duration: Duration(
-                                                          milliseconds: 300),
-                                                    ),
-                                                  },
-                                                );
-                                              }
-                                              FFAppState().selectedDrawerPage =
-                                                  'VCards';
-                                            },
+                                            onTap: () => _onPressedVCards(),
                                             child: Padding(
                                               padding:
                                                   const EdgeInsetsDirectional
@@ -1302,28 +1268,7 @@ Vcards */
                                         ),
                                         Flexible(
                                           child: GestureDetector(
-                                            onTap: () {
-                                              if (FFAppState()
-                                                      .selectedDrawerPage !=
-                                                  'VCards') {
-                                                context.goNamed(
-                                                  'vcard_screen',
-                                                  extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
-                                                        const TransitionInfo(
-                                                      hasTransition: true,
-                                                      transitionType:
-                                                          PageTransitionType
-                                                              .fade,
-                                                      duration: Duration(
-                                                          milliseconds: 300),
-                                                    ),
-                                                  },
-                                                );
-                                              }
-                                              FFAppState().selectedDrawerPage =
-                                                  'VCards';
-                                            },
+                                            onTap: () => _onPressedVCards(),
                                             child: Padding(
                                               padding:
                                                   const EdgeInsetsDirectional
@@ -1532,30 +1477,7 @@ Vcards */
                                       children: [
                                         Flexible(
                                           child: GestureDetector(
-                                            onTap: () {
-                                              if (FFAppState()
-                                                      .selectedDrawerPage !=
-                                                  'Enquiries') {
-                                                context.goNamed(
-                                                  'enquiries_screen',
-                                                  extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
-                                                        const TransitionInfo(
-                                                      hasTransition: true,
-                                                      transitionType:
-                                                          PageTransitionType
-                                                              .fade,
-                                                      duration: Duration(
-                                                          milliseconds: 300),
-                                                    ),
-                                                  },
-                                                );
-                                              }
-                                              FFAppState().selectedDrawerPage =
-                                                  'Enquiries';
-                                              FFAppState().isVcardEnquiry =
-                                                  false;
-                                            },
+                                            onTap: () => _onPressedEnquiries(),
                                             child: Padding(
                                               padding:
                                                   const EdgeInsetsDirectional
@@ -1754,30 +1676,8 @@ Vcards */
                                         ),
                                         Flexible(
                                           child: GestureDetector(
-                                            onTap: () {
-                                              if (FFAppState()
-                                                      .selectedDrawerPage !=
-                                                  'Appointments') {
-                                                context.goNamed(
-                                                  'appointment_screen',
-                                                  extra: <String, dynamic>{
-                                                    kTransitionInfoKey:
-                                                        const TransitionInfo(
-                                                      hasTransition: true,
-                                                      transitionType:
-                                                          PageTransitionType
-                                                              .fade,
-                                                      duration: Duration(
-                                                          milliseconds: 300),
-                                                    ),
-                                                  },
-                                                );
-                                              }
-                                              FFAppState().selectedDrawerPage =
-                                                  'Appointments';
-                                              FFAppState().isVcardAppointment =
-                                                  false;
-                                            },
+                                            onTap: () =>
+                                                _onPressedAppointments(),
                                             child: Padding(
                                               padding:
                                                   const EdgeInsetsDirectional
@@ -2017,7 +1917,7 @@ Vcards */
                                   ),
                                   child: FutureBuilder<ApiCallResponse>(
                                     future:
-                                        VcardGroup.adminIncomeChartCall.call(
+                                        DashboardRepository.getAdminIncomeChart(
                                       authToken: FFAppState().authToken,
                                     ),
                                     builder: (context, snapshot) {
@@ -2045,15 +1945,12 @@ Vcards */
                                           child: custom_widgets.LineChartWidget(
                                             width: double.infinity,
                                             height: double.infinity,
-                                            weeklyLabels: VcardGroup
-                                                .adminIncomeChartCall
-                                                .weeklyLabel(
+                                            weeklyLabels:
+                                                DashboardRepository.weeklyLabel(
                                               containerAdminIncomeChartResponse
                                                   .jsonBody,
                                             )!,
-                                            chartData: VcardGroup
-                                                .adminIncomeChartCall
-                                                .data(
+                                            chartData: DashboardRepository.data(
                                               containerAdminIncomeChartResponse
                                                   .jsonBody,
                                             ),
@@ -2939,5 +2836,72 @@ Vcards */
         ),
       ),
     );
+  }
+
+  void _onPressedFloatingButton() {
+    if (FFAppState().selectedDrawerPage != 'VCards') {
+      context.goNamed(
+        'vcard_screen',
+        queryParameters: {'isCreate': 'true'},
+        extra: <String, dynamic>{
+          kTransitionInfoKey: const TransitionInfo(
+            hasTransition: true,
+            transitionType: PageTransitionType.fade,
+            duration: Duration(milliseconds: 300),
+          ),
+        },
+      );
+    }
+    FFAppState().selectedDrawerPage = 'VCards';
+  }
+
+  void _onPressedVCards() {
+    if (FFAppState().selectedDrawerPage != 'VCards') {
+      context.goNamed(
+        'vcard_screen',
+        extra: <String, dynamic>{
+          kTransitionInfoKey: const TransitionInfo(
+            hasTransition: true,
+            transitionType: PageTransitionType.fade,
+            duration: Duration(milliseconds: 300),
+          ),
+        },
+      );
+    }
+    FFAppState().selectedDrawerPage = 'VCards';
+  }
+
+  void _onPressedEnquiries() {
+    if (FFAppState().selectedDrawerPage != 'Enquiries') {
+      context.goNamed(
+        'enquiries_screen',
+        extra: <String, dynamic>{
+          kTransitionInfoKey: const TransitionInfo(
+            hasTransition: true,
+            transitionType: PageTransitionType.fade,
+            duration: Duration(milliseconds: 300),
+          ),
+        },
+      );
+    }
+    FFAppState().selectedDrawerPage = 'Enquiries';
+    FFAppState().isVcardEnquiry = false;
+  }
+
+  void _onPressedAppointments() {
+    if (FFAppState().selectedDrawerPage != 'Appointments') {
+      context.goNamed(
+        'appointment_screen',
+        extra: <String, dynamic>{
+          kTransitionInfoKey: const TransitionInfo(
+            hasTransition: true,
+            transitionType: PageTransitionType.fade,
+            duration: Duration(milliseconds: 300),
+          ),
+        },
+      );
+    }
+    FFAppState().selectedDrawerPage = 'Appointments';
+    FFAppState().isVcardAppointment = false;
   }
 }

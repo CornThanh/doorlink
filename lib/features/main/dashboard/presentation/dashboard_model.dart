@@ -1,10 +1,10 @@
 import '/component/drawer/drawer_widget.dart';
 import '/component/scan_component/scan_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dashboard_widget.dart' show DashboardWidget;
+import 'dashboard_screen_widget.dart' show DashboardScreenWidget;
 import 'package:flutter/material.dart';
 
-class DashboardModel extends FlutterFlowModel<DashboardWidget> {
+class DashboardModel extends FlutterFlowModel<DashboardScreenWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

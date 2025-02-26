@@ -72,14 +72,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? const DashboardWidget()
+          ? const DashboardScreenWidget()
           : const LoginScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? const DashboardWidget()
+              ? const DashboardScreenWidget()
               : const LoginScreenWidget(),
         ),
         FFRoute(
@@ -110,7 +110,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'dashboard',
           path: '/dashboard',
-          builder: (context, params) => const DashboardWidget(),
+          builder: (context, params) => const DashboardScreenWidget(),
         ),
         FFRoute(
           name: 'vcard_screen',
