@@ -29,7 +29,6 @@ class VcardGroup {
   static GroupsCall groupsCall = GroupsCall();
   static AdminGroupCall adminGroupCall = AdminGroupCall();
   static ChangePasswordCall changePasswordCall = ChangePasswordCall();
-  static LanguageUpdateCall languageUpdateCall = LanguageUpdateCall();
   static BusinessCardCreateCall businessCardCreateCall =
       BusinessCardCreateCall();
   static BusinessCardCall businessCardCall = BusinessCardCall();
@@ -958,39 +957,6 @@ class ChangePasswordCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Change Password',
       apiUrl: '${VcardGroup.baseUrl}/reset-password',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  bool? success(dynamic response) => castToType<bool>(getJsonField(
-        response,
-        r'''$.success''',
-      ));
-}
-
-class LanguageUpdateCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-    String? language = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "language": "$language"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Language Update',
-      apiUrl: '${VcardGroup.baseUrl}/language-update',
       callType: ApiCallType.POST,
       headers: {
         'Authorization': 'Bearer $authToken',

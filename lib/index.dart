@@ -23,7 +23,7 @@ export '/screens/edit_profile_screen/edit_profile_screen_widget.dart'
     show EditProfileScreenWidget;
 export '/screens/enquiries_screen/enquiries_screen_widget.dart'
     show EnquiriesScreenWidget;
-export '/screens/language_screen/language_screen_widget.dart'
+export 'features/main/language/presentation/language_screen_widget.dart'
     show LanguageScreenWidget;
 export 'features/main/setting/presentation/setting_screen_widget.dart'
     show SettingScreenWidget;
