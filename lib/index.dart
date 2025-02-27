@@ -25,6 +25,6 @@ export '/screens/enquiries_screen/enquiries_screen_widget.dart'
     show EnquiriesScreenWidget;
 export '/screens/language_screen/language_screen_widget.dart'
     show LanguageScreenWidget;
-export '/screens/setting_screen/setting_screen_widget.dart'
+export 'features/main/setting/presentation/setting_screen_widget.dart'
     show SettingScreenWidget;
 export '/screens/vcard_screen/vcard_screen_widget.dart' show VcardScreenWidget;

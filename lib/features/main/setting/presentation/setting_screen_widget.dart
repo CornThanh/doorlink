@@ -10,6 +10,11 @@ import 'package:provider/provider.dart';
 import 'setting_screen_model.dart';
 export 'setting_screen_model.dart';
 
+enum SettingScreenItems {
+  language,
+  changePassword,
+}
+
 class SettingScreenWidget extends StatefulWidget {
   const SettingScreenWidget({super.key});
 
@@ -203,27 +208,8 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                 focusColor: Colors.transparent,
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  context.pushNamed(
-                                    'edit_profile_screen',
-                                    queryParameters: {
-                                      'profileData': serializeParam(
-                                        getJsonField(
-                                          columnProfileResponse.jsonBody,
-                                          r'''$.data[0]''',
-                                        ),
-                                        ParamType.JSON,
-                                      ),
-                                    }.withoutNulls,
-                                    extra: <String, dynamic>{
-                                      kTransitionInfoKey: const TransitionInfo(
-                                        hasTransition: true,
-                                        transitionType: PageTransitionType.fade,
-                                        duration: Duration(milliseconds: 300),
-                                      ),
-                                    },
-                                  );
-                                },
+                                onTap: () => _onPressedEditProfile(
+                                    columnProfileResponse.jsonBody),
                                 child: Container(
                                   width:
                                       MediaQuery.sizeOf(context).width * 0.38,
@@ -275,119 +261,14 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                 ),
                               ),
                             ),
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () {
-                                context.pushNamed(
-                                  'language_screen',
-                                  queryParameters: {
-                                    'isChange': serializeParam(
-                                      true,
-                                      ParamType.bool,
-                                    ),
-                                  }.withoutNulls,
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: const TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType: PageTransitionType.fade,
-                                      duration: Duration(milliseconds: 300),
-                                    ),
-                                  },
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 30.0, 0.0, 8.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        'y9n16027' /* Language */,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Nunito Sans',
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey('Nunito Sans'),
-                                          ),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              10.0, 0.0, 0.0, 0.0),
-                                      child: Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 18.0,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Divider(
-                              thickness: 0.5,
-                              color: Colors.white.withOpacity(0.2),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 8.0, 0.0, 8.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  context.pushNamed(
-                                    'change_password_screen',
-                                    extra: <String, dynamic>{
-                                      kTransitionInfoKey: const TransitionInfo(
-                                        hasTransition: true,
-                                        transitionType: PageTransitionType.fade,
-                                        duration: Duration(milliseconds: 300),
-                                      ),
-                                    },
-                                  );
-                                },
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        'i7c0zshr' /* Change Password */,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Nunito Sans',
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold,
-                                            useGoogleFonts: GoogleFonts.asMap()
-                                                .containsKey('Nunito Sans'),
-                                          ),
-                                    ),
-                                    Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 20.0,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            const SizedBox(height: 16),
+                            ListView.separated(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemBuilder: _itemBuilder,
+                              separatorBuilder: _separatorBuilder,
+                              itemCount: SettingScreenItems.values.length,
+                            )
                           ],
                         );
                       },
@@ -418,6 +299,115 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _itemBuilder(BuildContext context, int index) {
+    String code = switch (SettingScreenItems.values[index]) {
+      SettingScreenItems.language => 'y9n16027' /* Language */,
+      SettingScreenItems.changePassword => 'i7c0zshr' /* Change Password */,
+    };
+
+    return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: () {
+        switch (SettingScreenItems.values[index]) {
+          case SettingScreenItems.language:
+            _onPressedLanguage();
+            break;
+
+          case SettingScreenItems.changePassword:
+            _onPressedChangePassword();
+            break;
+        }
+      },
+      child: Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              FFLocalizations.of(context).getText(code),
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Nunito Sans',
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                    useGoogleFonts:
+                        GoogleFonts.asMap().containsKey('Nunito Sans'),
+                  ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: FlutterFlowTheme.of(context).secondaryText,
+              size: 20,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _separatorBuilder(BuildContext context, int index) {
+    return Divider(
+      thickness: 0.5,
+      color: Colors.white.withOpacity(0.2),
+    );
+  }
+
+  void _onPressedLanguage() {
+    context.pushNamed(
+      'language_screen',
+      queryParameters: {
+        'isChange': serializeParam(
+          true,
+          ParamType.bool,
+        ),
+      }.withoutNulls,
+      extra: <String, dynamic>{
+        kTransitionInfoKey: const TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.fade,
+          duration: Duration(milliseconds: 300),
+        ),
+      },
+    );
+  }
+
+  _onPressedChangePassword() {
+    context.pushNamed(
+      'change_password_screen',
+      extra: <String, dynamic>{
+        kTransitionInfoKey: const TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.fade,
+          duration: Duration(milliseconds: 300),
+        ),
+      },
+    );
+  }
+
+  void _onPressedEditProfile(dynamic body) {
+    context.pushNamed(
+      'edit_profile_screen',
+      queryParameters: {
+        'profileData': serializeParam(
+          getJsonField(
+            body,
+            r'''$.data[0]''',
+          ),
+          ParamType.JSON,
+        ),
+      }.withoutNulls,
+      extra: <String, dynamic>{
+        kTransitionInfoKey: const TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.fade,
+          duration: Duration(milliseconds: 300),
+        ),
+      },
     );
   }
 }
