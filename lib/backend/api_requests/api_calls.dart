@@ -14,7 +14,6 @@ class VcardGroup {
   static CreateAdminVcardCall createAdminVcardCall = CreateAdminVcardCall();
   static UpdateAdminVcardCall updateAddminVcardCall = UpdateAdminVcardCall();
   static VcardsCall vcardsCall = VcardsCall();
-  static AppointmentCall appointmentCall = AppointmentCall();
   static SingleAppointmentCall singleAppointmentCall = SingleAppointmentCall();
   static SettingsCall settingsCall = SettingsCall();
   static DeleteAppointmentCall deleteAppointmentCall = DeleteAppointmentCall();
@@ -37,7 +36,6 @@ class VcardGroup {
       FilterBusinessCardCall();
   static SettingUpdateCall settingUpdateCall = SettingUpdateCall();
   static AdminIncomeChartCall adminIncomeChartCall = AdminIncomeChartCall();
-  static VcardAppointmentCall vcardAppointmentCall = VcardAppointmentCall();
   static VcardEnquiryCall vcardEnquiryCall = VcardEnquiryCall();
   static AppointmentCompletedCall appointmentCompletedCall =
       AppointmentCompletedCall();
@@ -285,35 +283,6 @@ class VcardsCall {
           .map((x) => castToType<int>(x))
           .withoutNulls
           .toList();
-}
-
-class AppointmentCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Appointment',
-      apiUrl: '${VcardGroup.baseUrl}/admin/appointment',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {
-        'auth_token': authToken,
-      },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
-        true,
-      ) as List?;
 }
 
 class SingleAppointmentCall {
@@ -1160,34 +1129,6 @@ class AdminIncomeChartCall {
   List? data(dynamic response) => getJsonField(
         response,
         r'''$.data.data''',
-        true,
-      ) as List?;
-}
-
-class VcardAppointmentCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-    int? id,
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Vcard Appointment',
-      apiUrl: '${VcardGroup.baseUrl}/admin/vcard-appointment/$id',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
         true,
       ) as List?;
 }

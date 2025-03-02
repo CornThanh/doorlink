@@ -1,5 +1,5 @@
 // Export pages
-export '/screens/appointment_screen/appointment_screen_widget.dart'
+export 'features/main/appointment/presentation/appointment_screen_widget.dart'
     show AppointmentScreenWidget;
 export 'features/auth/forgot_password/presentation/forgot_password_screen_widget.dart'
     show ForgotPasswordScreenWidget;
