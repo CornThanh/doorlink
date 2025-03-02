@@ -27,7 +27,6 @@ class VcardGroup {
   static GroupCreateCall groupCreateCall = GroupCreateCall();
   static GroupsCall groupsCall = GroupsCall();
   static AdminGroupCall adminGroupCall = AdminGroupCall();
-  static ChangePasswordCall changePasswordCall = ChangePasswordCall();
   static BusinessCardCreateCall businessCardCreateCall =
       BusinessCardCreateCall();
   static BusinessCardCall businessCardCall = BusinessCardCall();
@@ -906,45 +905,6 @@ class AdminGroupCall {
         r'''$.data''',
         true,
       ) as List?;
-}
-
-class ChangePasswordCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-    String? email = '',
-    String? oldPassword = '',
-    String? newPassword = '',
-    String? confirmPassword = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "email": "$email",
-  "old_password": "$oldPassword",
-  "password": "$newPassword",
-  "password_conformation": "$confirmPassword"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Change Password',
-      apiUrl: '${VcardGroup.baseUrl}/reset-password',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  bool? success(dynamic response) => castToType<bool>(getJsonField(
-        response,
-        r'''$.success''',
-      ));
 }
 
 class BusinessCardCreateCall {

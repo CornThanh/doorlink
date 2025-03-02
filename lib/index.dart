@@ -15,7 +15,7 @@ export 'features/auth/reset_password/presentation/reset_password_screen_widget.d
     show ResetPasswordScreenWidget;
 export '/screens/business_card_screen/business_card_screen_widget.dart'
     show BusinessCardScreenWidget;
-export '/screens/change_password_screen/change_password_screen_widget.dart'
+export 'features/main/change_password/presentation/change_password_screen_widget.dart'
     show ChangePasswordScreenWidget;
 export 'features/main/dashboard/presentation/dashboard_screen_widget.dart'
     show DashboardScreenWidget;

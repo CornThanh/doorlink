@@ -1,4 +1,5 @@
-import '/backend/api_requests/api_calls.dart';
+import 'dart:developer';
+import 'package:MeU/features/main/change_password/repository/change_password_repository.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -99,34 +100,9 @@ class _ChangePasswordScreenWidgetState
               Padding(
                 padding:
                     const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                child: RichText(
-                  textScaler: MediaQuery.of(context).textScaler,
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: FFLocalizations.of(context).getText(
-                          'xcayyr1i' /* Current Password: */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Nunito Sans',
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: GoogleFonts.asMap()
-                                  .containsKey('Nunito Sans'),
-                            ),
-                      ),
-                      TextSpan(
-                        text: FFLocalizations.of(context).getText(
-                          'gj7gq0fk' /*  * */,
-                        ),
-                        style: const TextStyle(
-                          color: Color(0xFFF35050),
-                          fontSize: 18.0,
-                        ),
-                      )
-                    ],
-                    style: FlutterFlowTheme.of(context).bodyMedium,
+                child: _buildRichText(
+                  FFLocalizations.of(context).getText(
+                    'xcayyr1i' /* Current Password: */,
                   ),
                 ),
               ),
@@ -196,34 +172,9 @@ class _ChangePasswordScreenWidgetState
               Padding(
                 padding:
                     const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
-                child: RichText(
-                  textScaler: MediaQuery.of(context).textScaler,
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: FFLocalizations.of(context).getText(
-                          '3h03ny4j' /* New Password: */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Nunito Sans',
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: GoogleFonts.asMap()
-                                  .containsKey('Nunito Sans'),
-                            ),
-                      ),
-                      TextSpan(
-                        text: FFLocalizations.of(context).getText(
-                          'u6iv42vg' /*  * */,
-                        ),
-                        style: const TextStyle(
-                          color: Color(0xFFF35050),
-                          fontSize: 18.0,
-                        ),
-                      )
-                    ],
-                    style: FlutterFlowTheme.of(context).bodyMedium,
+                child: _buildRichText(
+                  FFLocalizations.of(context).getText(
+                    '3h03ny4j' /* New Password: */,
                   ),
                 ),
               ),
@@ -293,34 +244,9 @@ class _ChangePasswordScreenWidgetState
               Padding(
                 padding:
                     const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
-                child: RichText(
-                  textScaler: MediaQuery.of(context).textScaler,
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: FFLocalizations.of(context).getText(
-                          '7aycies1' /* Confirm Password: */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Nunito Sans',
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: GoogleFonts.asMap()
-                                  .containsKey('Nunito Sans'),
-                            ),
-                      ),
-                      TextSpan(
-                        text: FFLocalizations.of(context).getText(
-                          'c6hsm8d0' /*  * */,
-                        ),
-                        style: const TextStyle(
-                          color: Color(0xFFF35050),
-                          fontSize: 18.0,
-                        ),
-                      )
-                    ],
-                    style: FlutterFlowTheme.of(context).bodyMedium,
+                child: _buildRichText(
+                  FFLocalizations.of(context).getText(
+                    '7aycies1' /* Confirm Password: */,
                   ),
                 ),
               ),
@@ -397,90 +323,7 @@ class _ChangePasswordScreenWidgetState
                   children: [
                     Expanded(
                       child: FFButtonWidget(
-                        onPressed: () async {
-                          if (_model.currentPasswordController.text != '') {
-                            if (_model.newPasswordController.text != '') {
-                              if (_model.confirmPasswordController.text != '') {
-                                if (_model.newPasswordController.text ==
-                                    _model.confirmPasswordController.text) {
-                                  _model.apiResult141 =
-                                      await VcardGroup.changePasswordCall.call(
-                                    authToken: FFAppState().authToken,
-                                    email: FFAppState().email,
-                                    oldPassword:
-                                        _model.currentPasswordController.text,
-                                    newPassword:
-                                        _model.newPasswordController.text,
-                                    confirmPassword:
-                                        _model.confirmPasswordController.text,
-                                  );
-                                  if ((_model.apiResult141?.succeeded ??
-                                      true)) {
-                                    context.safePop();
-                                    await actions.customSnackbar(
-                                      context,
-                                      FFLocalizations.of(context)
-                                          .getVariableText(
-                                        viText: 'Thay đổi mật khẩu thành công.',
-                                        enText:
-                                            'Password Changed Successfully.',
-                                      ),
-                                      const Color(0xFF46A44D),
-                                    );
-                                  } else {
-                                    await actions.customSnackbar(
-                                      context,
-                                      FFLocalizations.of(context)
-                                          .getVariableText(
-                                        viText: 'Thay đổi mật khẩu thất bại.',
-                                        enText: 'Password change failed.',
-                                      ),
-                                      FlutterFlowTheme.of(context).error,
-                                    );
-                                  }
-                                } else {
-                                  await actions.customSnackbar(
-                                    context,
-                                    FFLocalizations.of(context).getVariableText(
-                                      viText: 'Vui lòng nhập đúng mật khẩu.',
-                                      enText: 'Please enter correct password.',
-                                    ),
-                                    FlutterFlowTheme.of(context).error,
-                                  );
-                                }
-                              } else {
-                                await actions.customSnackbar(
-                                  context,
-                                  FFLocalizations.of(context).getVariableText(
-                                    viText: 'Vui lòng Nhập Xác nhận Mật khẩu.',
-                                    enText: 'Please Enter Confirm Password.',
-                                  ),
-                                  FlutterFlowTheme.of(context).error,
-                                );
-                              }
-                            } else {
-                              await actions.customSnackbar(
-                                context,
-                                FFLocalizations.of(context).getVariableText(
-                                  viText: 'Vui lòng nhập mật khẩu mới.',
-                                  enText: 'Please Enter New Password.',
-                                ),
-                                FlutterFlowTheme.of(context).error,
-                              );
-                            }
-                          } else {
-                            await actions.customSnackbar(
-                              context,
-                              FFLocalizations.of(context).getVariableText(
-                                viText: 'Please Enter Password.',
-                                enText: 'Please Enter Password.',
-                              ),
-                              FlutterFlowTheme.of(context).error,
-                            );
-                          }
-
-                          setState(() {});
-                        },
+                        onPressed: () => _onPressedSave(),
                         text: FFLocalizations.of(context).getText(
                           '9jxexqm3' /* Save */,
                         ),
@@ -552,5 +395,121 @@ class _ChangePasswordScreenWidgetState
         ),
       ),
     );
+  }
+
+  Widget _buildRichText(String text) {
+    return RichText(
+      textScaler: MediaQuery.of(context).textScaler,
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: text,
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: 'Nunito Sans',
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.bold,
+                  useGoogleFonts:
+                      GoogleFonts.asMap().containsKey('Nunito Sans'),
+                ),
+          ),
+          TextSpan(
+            text: FFLocalizations.of(context).getText(
+              'gj7gq0fk' /*  * */,
+            ),
+            style: const TextStyle(
+              color: Color(0xFFF35050),
+              fontSize: 18.0,
+            ),
+          )
+        ],
+        style: FlutterFlowTheme.of(context).bodyMedium,
+      ),
+    );
+  }
+
+  Future<void> _onPressedSave() async {
+    try {
+      if (_model.currentPasswordController.text != '') {
+        if (_model.newPasswordController.text != '') {
+          if (_model.confirmPasswordController.text != '') {
+            if (_model.newPasswordController.text ==
+                _model.confirmPasswordController.text) {
+              _model.apiResult141 =
+                  await ChangePasswordRepository.changePassword(
+                authToken: FFAppState().authToken,
+                email: FFAppState().email,
+                oldPassword: _model.currentPasswordController.text,
+                newPassword: _model.newPasswordController.text,
+                confirmPassword: _model.confirmPasswordController.text,
+              );
+
+              if ((_model.apiResult141?.succeeded ?? true) && mounted) {
+                context.safePop();
+                await actions.customSnackbar(
+                  context,
+                  FFLocalizations.of(context).getVariableText(
+                    viText: 'Thay đổi mật khẩu thành công.',
+                    enText: 'Password Changed Successfully.',
+                  ),
+                  const Color(0xFF46A44D),
+                );
+              } else {
+                if (mounted) {
+                  await actions.customSnackbar(
+                    context,
+                    FFLocalizations.of(context).getVariableText(
+                      viText: 'Thay đổi mật khẩu thất bại.',
+                      enText: 'Password change failed.',
+                    ),
+                    FlutterFlowTheme.of(context).error,
+                  );
+                }
+              }
+            } else {
+              await actions.customSnackbar(
+                context,
+                FFLocalizations.of(context).getVariableText(
+                  viText: 'Vui lòng nhập đúng mật khẩu.',
+                  enText: 'Please enter correct password.',
+                ),
+                FlutterFlowTheme.of(context).error,
+              );
+            }
+          } else {
+            await actions.customSnackbar(
+              context,
+              FFLocalizations.of(context).getVariableText(
+                viText: 'Vui lòng Nhập Xác nhận Mật khẩu.',
+                enText: 'Please Enter Confirm Password.',
+              ),
+              FlutterFlowTheme.of(context).error,
+            );
+          }
+        } else {
+          await actions.customSnackbar(
+            context,
+            FFLocalizations.of(context).getVariableText(
+              viText: 'Vui lòng nhập mật khẩu mới.',
+              enText: 'Please Enter New Password.',
+            ),
+            FlutterFlowTheme.of(context).error,
+          );
+        }
+      } else {
+        await actions.customSnackbar(
+          context,
+          FFLocalizations.of(context).getVariableText(
+            viText: 'Please Enter Password.',
+            enText: 'Please Enter Password.',
+          ),
+          FlutterFlowTheme.of(context).error,
+        );
+      }
+
+      setState(() {});
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }
