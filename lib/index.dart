@@ -19,7 +19,7 @@ export 'features/main/change_password/presentation/change_password_screen_widget
     show ChangePasswordScreenWidget;
 export 'features/main/dashboard/presentation/dashboard_screen_widget.dart'
     show DashboardScreenWidget;
-export '/screens/edit_profile_screen/edit_profile_screen_widget.dart'
+export 'features/main/edit_profile_screen/presentation/edit_profile_screen_widget.dart'
     show EditProfileScreenWidget;
 export '/screens/enquiries_screen/enquiries_screen_widget.dart'
     show EnquiriesScreenWidget;

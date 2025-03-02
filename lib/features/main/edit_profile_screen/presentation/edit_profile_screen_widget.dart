@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:MeU/features/main/edit_profile_screen/repository/edit_profile_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/backend/api_requests/api_calls.dart';
@@ -118,7 +121,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                         child: SizedBox(
                           width: 50.0,
                           height: 50.0,
-                          child: CupertinoActivityIndicator(color: Colors.white),
+                          child:
+                              CupertinoActivityIndicator(color: Colors.white),
                         ),
                       );
                     }
@@ -188,64 +192,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                               color: Colors.white,
                                               size: 20.0,
                                             ),
-                                            onPressed: () async {
-                                              final selectedMedia =
-                                                  await selectMediaWithSourceBottomSheet(
-                                                context: context,
-                                                allowPhoto: true,
-                                                textColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                pickerFontFamily: 'Nunito Sans',
-                                              );
-                                              if (selectedMedia != null &&
-                                                  selectedMedia.every((m) =>
-                                                      validateFileFormat(
-                                                          m.storagePath,
-                                                          context))) {
-                                                setState(() => _model
-                                                    .isDataUploading = true);
-                                                var selectedUploadedFiles =
-                                                    <FFUploadedFile>[];
-
-                                                try {
-                                                  selectedUploadedFiles =
-                                                      selectedMedia
-                                                          .map((m) =>
-                                                              FFUploadedFile(
-                                                                name: m
-                                                                    .storagePath
-                                                                    .split('/')
-                                                                    .last,
-                                                                bytes: m.bytes,
-                                                                height: m
-                                                                    .dimensions
-                                                                    ?.height,
-                                                                width: m
-                                                                    .dimensions
-                                                                    ?.width,
-                                                                blurHash:
-                                                                    m.blurHash,
-                                                              ))
-                                                          .toList();
-                                                } finally {
-                                                  _model.isDataUploading =
-                                                      false;
-                                                }
-                                                if (selectedUploadedFiles
-                                                        .length ==
-                                                    selectedMedia.length) {
-                                                  setState(() {
-                                                    _model.uploadedLocalFile =
-                                                        selectedUploadedFiles
-                                                            .first;
-                                                  });
-                                                } else {
-                                                  setState(() {});
-                                                  return;
-                                                }
-                                              }
-                                            },
+                                            onPressed: () => _onUploadedImage(),
                                           ),
                                         ),
                                       ),
@@ -624,163 +571,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                   children: [
                     Expanded(
                       child: FFButtonWidget(
-                        onPressed: () async {
-                          if ((_model.firstNameController.text != '') &&
-                              functions.textFieldValidator(
-                                  _model.firstNameController.text)) {
-                            if ((_model.lastNameController.text != '') &&
-                                functions.textFieldValidator(
-                                    _model.lastNameController.text)) {
-                              _model.emailRes = await actions.emailValidation(
-                                _model.emailController.text,
-                              );
-                              if (_model.emailRes == true) {
-                                if ((_model.emailController.text != '') &&
-                                    functions.textFieldValidator(
-                                        _model.emailController.text)) {
-                                  if ((_model.contactController.text != '') &&
-                                      functions.textFieldValidator(
-                                          _model.contactController.text)) {
-                                    _model.apiResultrga =
-                                        await VcardGroup.profileUpdateCall.call(
-                                      firstName:
-                                          _model.firstNameController.text,
-                                      contact: _model.contactController.text,
-                                      email: _model.emailController.text,
-                                      regionCode: FFAppState().prefixCode,
-                                      profile: _model.uploadedLocalFile,
-                                      authToken: FFAppState().authToken,
-                                      lastName: _model.lastNameController.text,
-                                    );
-                                    if ((_model.apiResultrga?.succeeded ??
-                                        true)) {
-                                      context.safePop();
-                                      await actions.customSnackbar(
-                                        context,
-                                        FFLocalizations.of(context)
-                                            .getVariableText(
-                                          viText:
-                                              'Profile Update Successfully.',
-                                          enText:
-                                              'Profile Update Successfully.',
-                                        ),
-                                        const Color(0xFF46A44D),
-                                      );
-                                    } else {
-                                      await actions.customSnackbar(
-                                        context,
-                                        FFLocalizations.of(context)
-                                            .getVariableText(
-                                          viText: 'Cập nhật hồ sơ thất bại.',
-                                          enText: 'Profile Update Failed.',
-                                        ),
-                                        FlutterFlowTheme.of(context).error,
-                                      );
-                                    }
-                                  } else {
-                                    if (_model.contactController.text == '') {
-                                      await actions.customSnackbar(
-                                        context,
-                                        FFLocalizations.of(context)
-                                            .getVariableText(
-                                          viText:
-                                              'Vui lòng nhập thông tin liên hệ.',
-                                          enText: 'Please Enter Contact no.',
-                                        ),
-                                        FlutterFlowTheme.of(context).error,
-                                      );
-                                    } else {
-                                      await actions.customSnackbar(
-                                        context,
-                                        FFLocalizations.of(context)
-                                            .getVariableText(
-                                          viText:
-                                              'Vui lòng nhập thông tin liên hệ đúng.',
-                                          enText:
-                                              'Please Enter Valid Contact no.',
-                                        ),
-                                        FlutterFlowTheme.of(context).error,
-                                      );
-                                    }
-                                  }
-                                } else {
-                                  if (_model.emailController.text == '') {
-                                    await actions.customSnackbar(
-                                      context,
-                                      FFLocalizations.of(context)
-                                          .getVariableText(
-                                        viText: 'Vui lòng nhập email.',
-                                        enText: 'Please Enter Email.',
-                                      ),
-                                      FlutterFlowTheme.of(context).error,
-                                    );
-                                  } else {
-                                    await actions.customSnackbar(
-                                      context,
-                                      FFLocalizations.of(context)
-                                          .getVariableText(
-                                        viText: 'Vui lòng nhập email chính xác',
-                                        enText: 'Please Enter Valid Email.',
-                                      ),
-                                      FlutterFlowTheme.of(context).error,
-                                    );
-                                  }
-                                }
-                              } else {
-                                await actions.customSnackbar(
-                                  context,
-                                  FFLocalizations.of(context).getVariableText(
-                                    viText: 'Vui lòng nhập email chính xác',
-                                    enText: 'Please Enter Valid Email.',
-                                  ),
-                                  FlutterFlowTheme.of(context).error,
-                                );
-                              }
-                            } else {
-                              if (_model.lastNameController.text == '') {
-                                await actions.customSnackbar(
-                                  context,
-                                  FFLocalizations.of(context).getVariableText(
-                                    viText: 'Vui lòng nhập họ.',
-                                    enText: 'Please Enter Last name.',
-                                  ),
-                                  FlutterFlowTheme.of(context).error,
-                                );
-                              } else {
-                                await actions.customSnackbar(
-                                  context,
-                                  FFLocalizations.of(context).getVariableText(
-                                    viText: 'Vui lòng nhập họ đúng.',
-                                    enText: 'Please Enter Valid Last name.',
-                                  ),
-                                  FlutterFlowTheme.of(context).error,
-                                );
-                              }
-                            }
-                          } else {
-                            if (_model.firstNameController.text == '') {
-                              await actions.customSnackbar(
-                                context,
-                                FFLocalizations.of(context).getVariableText(
-                                  viText: 'Vui lòng nhập tên',
-                                  enText: 'Please Enter First name.',
-                                ),
-                                FlutterFlowTheme.of(context).error,
-                              );
-                            } else {
-                              await actions.customSnackbar(
-                                context,
-                                FFLocalizations.of(context).getVariableText(
-                                  viText: 'Vui lòng nhập tên đúng.',
-                                  enText: 'Please Enter Valid First name.',
-                                ),
-                                FlutterFlowTheme.of(context).error,
-                              );
-                            }
-                          }
-
-                          setState(() {});
-                        },
+                        onPressed: () => _onPressedSave(),
                         text: FFLocalizations.of(context).getText(
                           'gef46sip' /* Save */,
                         ),
@@ -852,5 +643,198 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
         ),
       ),
     );
+  }
+
+  Future<void> _onUploadedImage() async {
+    try {
+      final selectedMedia = await selectMediaWithSourceBottomSheet(
+        context: context,
+        allowPhoto: true,
+        textColor: FlutterFlowTheme.of(context).primaryText,
+        pickerFontFamily: 'Nunito Sans',
+      );
+      if (selectedMedia != null &&
+          selectedMedia
+              .every((m) => validateFileFormat(m.storagePath, context))) {
+        setState(() => _model.isDataUploading = true);
+        var selectedUploadedFiles = <FFUploadedFile>[];
+
+        try {
+          selectedUploadedFiles = selectedMedia
+              .map((m) => FFUploadedFile(
+                    name: m.storagePath.split('/').last,
+                    bytes: m.bytes,
+                    height: m.dimensions?.height,
+                    width: m.dimensions?.width,
+                    blurHash: m.blurHash,
+                  ))
+              .toList();
+        } finally {
+          _model.isDataUploading = false;
+        }
+        if (selectedUploadedFiles.length == selectedMedia.length) {
+          setState(() {
+            _model.uploadedLocalFile = selectedUploadedFiles.first;
+          });
+        } else {
+          setState(() {});
+          return;
+        }
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  Future<void> _onPressedSave() async {
+    try {
+      if ((_model.firstNameController.text != '') &&
+          functions.textFieldValidator(_model.firstNameController.text)) {
+        if ((_model.lastNameController.text != '') &&
+            functions.textFieldValidator(_model.lastNameController.text)) {
+          _model.emailRes = await actions.emailValidation(
+            _model.emailController.text,
+          );
+          if (_model.emailRes == true) {
+            if ((_model.emailController.text != '') &&
+                functions.textFieldValidator(_model.emailController.text)) {
+              if ((_model.contactController.text != '') &&
+                  functions.textFieldValidator(_model.contactController.text)) {
+                _model.apiResultrga = await EditProfileRepository.update(
+                  firstName: _model.firstNameController.text,
+                  contact: _model.contactController.text,
+                  email: _model.emailController.text,
+                  regionCode: FFAppState().prefixCode,
+                  profile: _model.uploadedLocalFile,
+                  authToken: FFAppState().authToken,
+                  lastName: _model.lastNameController.text,
+                );
+                if (mounted) {
+                  if ((_model.apiResultrga?.succeeded ?? true)) {
+                    context.safePop();
+                    await actions.customSnackbar(
+                      context,
+                      FFLocalizations.of(context).getVariableText(
+                        viText: 'Profile Update Successfully.',
+                        enText: 'Profile Update Successfully.',
+                      ),
+                      const Color(0xFF46A44D),
+                    );
+                  } else {
+                    await actions.customSnackbar(
+                      context,
+                      FFLocalizations.of(context).getVariableText(
+                        viText: 'Cập nhật hồ sơ thất bại.',
+                        enText: 'Profile Update Failed.',
+                      ),
+                      FlutterFlowTheme.of(context).error,
+                    );
+                  }
+                }
+              } else {
+                if (mounted) {
+                  if (_model.contactController.text == '') {
+                    await actions.customSnackbar(
+                      context,
+                      FFLocalizations.of(context).getVariableText(
+                        viText: 'Vui lòng nhập thông tin liên hệ.',
+                        enText: 'Please Enter Contact no.',
+                      ),
+                      FlutterFlowTheme.of(context).error,
+                    );
+                  } else {
+                    await actions.customSnackbar(
+                      context,
+                      FFLocalizations.of(context).getVariableText(
+                        viText: 'Vui lòng nhập thông tin liên hệ đúng.',
+                        enText: 'Please Enter Valid Contact no.',
+                      ),
+                      FlutterFlowTheme.of(context).error,
+                    );
+                  }
+                }
+              }
+            } else {
+              if (mounted) {
+                if (_model.emailController.text == '') {
+                  await actions.customSnackbar(
+                    context,
+                    FFLocalizations.of(context).getVariableText(
+                      viText: 'Vui lòng nhập email.',
+                      enText: 'Please Enter Email.',
+                    ),
+                    FlutterFlowTheme.of(context).error,
+                  );
+                } else {
+                  await actions.customSnackbar(
+                    context,
+                    FFLocalizations.of(context).getVariableText(
+                      viText: 'Vui lòng nhập email chính xác',
+                      enText: 'Please Enter Valid Email.',
+                    ),
+                    FlutterFlowTheme.of(context).error,
+                  );
+                }
+              }
+            }
+          } else {
+            if (mounted) {
+              await actions.customSnackbar(
+                context,
+                FFLocalizations.of(context).getVariableText(
+                  viText: 'Vui lòng nhập email chính xác',
+                  enText: 'Please Enter Valid Email.',
+                ),
+                FlutterFlowTheme.of(context).error,
+              );
+            }
+          }
+        } else {
+          if (_model.lastNameController.text == '') {
+            await actions.customSnackbar(
+              context,
+              FFLocalizations.of(context).getVariableText(
+                viText: 'Vui lòng nhập họ.',
+                enText: 'Please Enter Last name.',
+              ),
+              FlutterFlowTheme.of(context).error,
+            );
+          } else {
+            await actions.customSnackbar(
+              context,
+              FFLocalizations.of(context).getVariableText(
+                viText: 'Vui lòng nhập họ đúng.',
+                enText: 'Please Enter Valid Last name.',
+              ),
+              FlutterFlowTheme.of(context).error,
+            );
+          }
+        }
+      } else {
+        if (_model.firstNameController.text == '') {
+          await actions.customSnackbar(
+            context,
+            FFLocalizations.of(context).getVariableText(
+              viText: 'Vui lòng nhập tên',
+              enText: 'Please Enter First name.',
+            ),
+            FlutterFlowTheme.of(context).error,
+          );
+        } else {
+          await actions.customSnackbar(
+            context,
+            FFLocalizations.of(context).getVariableText(
+              viText: 'Vui lòng nhập tên đúng.',
+              enText: 'Please Enter Valid First name.',
+            ),
+            FlutterFlowTheme.of(context).error,
+          );
+        }
+      }
+
+      setState(() {});
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

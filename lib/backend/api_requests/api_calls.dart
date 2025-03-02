@@ -38,7 +38,6 @@ class VcardGroup {
   static VcardEnquiryCall vcardEnquiryCall = VcardEnquiryCall();
   static AppointmentCompletedCall appointmentCompletedCall =
       AppointmentCompletedCall();
-  static ProfileUpdateCall profileUpdateCall = ProfileUpdateCall();
   static VcardQrCodeCall vcardQrCodeCall = VcardQrCodeCall();
   static LanguageCall languageCall = LanguageCall();
   static DeleteGroupCall deleteGroupCall = DeleteGroupCall();
@@ -1141,40 +1140,6 @@ class AppointmentCompletedCall {
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class ProfileUpdateCall {
-  Future<ApiCallResponse> call({
-    String? firstName = '',
-    String? contact = '',
-    String? regionCode = '',
-    String? email = '',
-    FFUploadedFile? profile,
-    String? authToken = '',
-    String? lastName = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Profile Update',
-      apiUrl: '${VcardGroup.baseUrl}/profile-update',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {
-        'first_name': firstName,
-        'contact': contact,
-        'region_code': regionCode,
-        'email': email,
-        'profile': profile,
-      },
-      bodyType: BodyType.MULTIPART,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
