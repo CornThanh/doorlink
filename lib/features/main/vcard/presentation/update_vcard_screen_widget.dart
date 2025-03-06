@@ -1,18 +1,19 @@
 import 'dart:async';
-import 'package:MeU/backend/api_requests/api_calls.dart';
-import 'package:MeU/screens/vcard_screen/social_network_widget.dart';
-import 'package:MeU/screens/vcard_screen/update_vcard_screen_model.dart';
-import 'package:MeU/screens/vcard_screen/vcard_template_widget.dart';
+
+import 'package:MeU/features/main/vcard/presentation/social_network_widget.dart';
+import 'package:MeU/features/main/vcard/presentation/update_vcard_screen_model.dart';
+import 'package:MeU/features/main/vcard/presentation/vcard_template_widget.dart';
+import 'package:MeU/features/main/vcard/repository/vcard_repository.dart';
 import 'package:flutter/cupertino.dart';
-import '../../custom_code/actions/custom_snackbar.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '../../../../custom_code/actions/custom_snackbar.dart';
 import 'basic_infomation_widget.dart';
 
 class UpdateVcardScreenWidget extends StatefulWidget {
@@ -87,123 +88,56 @@ class _UpdateVcardScreenWidgetState extends State<UpdateVcardScreenWidget> {
   }
 
   Future<void> init() async {
-    final response = await VcardGroup.singleAdminVcardsCall.call(
+    final response = await VcardRepository.getAdminVcardDetails(
       authToken: FFAppState().authToken,
       id: widget.vcardID,
     );
 
-    _model.columnSingleVcardsResponse = response;
+    _model.aliasController.text = response.data?.alias ?? '';
 
-    _model.aliasController.text = VcardGroup.singleAdminVcardsCall.alias(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
+    _model.nameController.text = response.data?.name ?? '';
 
-    _model.nameController.text = VcardGroup.singleAdminVcardsCall.name(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
+    _model.occupationController.text = response.data?.occupation ?? '';
 
-    _model.occupationController.text =
-        VcardGroup.singleAdminVcardsCall.occupation(
-              _model.columnSingleVcardsResponse.jsonBody,
-            ) ??
-            '';
+    _model.descriptionController.text = response.data?.description ?? '';
 
-    _model.descriptionController.text =
-        VcardGroup.singleAdminVcardsCall.description(
-              _model.columnSingleVcardsResponse.jsonBody,
-            ) ??
-            '';
+    _model.firstNameController.text = response.data?.firstName ?? '';
 
-    _model.firstNameController.text =
-        VcardGroup.singleAdminVcardsCall.firstName(
-              _model.columnSingleVcardsResponse.jsonBody,
-            ) ??
-            '';
+    _model.lastNameController.text = response.data?.lastName ?? '';
 
-    _model.lastNameController.text = VcardGroup.singleAdminVcardsCall.lastName(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
+    _model.emailController.text = response.data?.email ?? '';
 
-    _model.emailController.text = VcardGroup.singleAdminVcardsCall.email(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
+    _model.phoneController.text = response.data?.phone ?? '';
 
-    _model.phoneController.text = VcardGroup.singleAdminVcardsCall.phone(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
+    _model.addressController.text = response.data?.location ?? '';
 
-    _model.addressController.text = VcardGroup.singleAdminVcardsCall.location(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
+    _model.dateOfBirthController.text = response.data?.dob ?? '';
 
-    _model.dateOfBirthController.text = VcardGroup.singleAdminVcardsCall.dob(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
+    _model.companyController.text = response.data?.company ?? '';
 
-    _model.companyController.text = VcardGroup.singleAdminVcardsCall.company(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
+    _model.positionController.text = response.data?.position ?? '';
 
-    _model.positionController.text = VcardGroup.singleAdminVcardsCall.position(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
-    _model.avatarImage = VcardGroup.singleAdminVcardsCall.avatar(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
+    _model.avatarImage = response.data?.avatar ?? '';
 
-    _model.backgroundImage = VcardGroup.singleAdminVcardsCall.background(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
+    _model.backgroundImage = response.data?.background ?? '';
 
-    _model.selectedTemplateID = VcardGroup.singleAdminVcardsCall.templateID(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        1;
+    _model.selectedTemplateID = response.data?.templateID ?? 1;
 
-    _model.websiteController.text = VcardGroup.singleAdminVcardsCall.website(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
-    _model.facebookController.text = VcardGroup.singleAdminVcardsCall.facebook(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
-    _model.zaloController.text = VcardGroup.singleAdminVcardsCall.zalo(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
-    _model.tiktokController.text = VcardGroup.singleAdminVcardsCall.tiktok(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
-    _model.instagramController.text =
-        VcardGroup.singleAdminVcardsCall.instagram(
-              _model.columnSingleVcardsResponse.jsonBody,
-            ) ??
-            '';
-    _model.youtubeController.text = VcardGroup.singleAdminVcardsCall.youtube(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
-    _model.linkedinController.text = VcardGroup.singleAdminVcardsCall.linkedin(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
-    _model.whatsappController.text = VcardGroup.singleAdminVcardsCall.whatsapp(
-          _model.columnSingleVcardsResponse.jsonBody,
-        ) ??
-        '';
+    _model.websiteController.text = response.data?.website ?? '';
+
+    _model.facebookController.text = response.data?.facebook ?? '';
+
+    _model.zaloController.text = response.data?.zalo ?? '';
+
+    _model.tiktokController.text = response.data?.tiktok ?? '';
+
+    _model.instagramController.text = response.data?.instagram ?? '';
+
+    _model.youtubeController.text = response.data?.youtube ?? '';
+
+    _model.linkedinController.text = response.data?.linkedin ?? '';
+
+    _model.whatsappController.text = response.data?.whatsapp ?? '';
 
     setState(() {});
   }

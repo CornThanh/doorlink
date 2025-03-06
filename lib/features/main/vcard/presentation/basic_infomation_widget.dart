@@ -3,8 +3,8 @@ import 'package:MeU/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../flutter_flow/flutter_flow_icon_button.dart';
-import '../../flutter_flow/flutter_flow_theme.dart';
+import '../../../../flutter_flow/flutter_flow_icon_button.dart';
+import '../../../../flutter_flow/flutter_flow_theme.dart';
 import 'update_vcard_screen_model.dart';
 
 class BasicInformationWidget extends StatefulWidget {
@@ -74,45 +74,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                           color: Colors.white,
                           size: 20.0,
                         ),
-                        onPressed: () async {
-                          final selectedMedia =
-                              await selectMediaWithSourceBottomSheet(
-                            context: context,
-                            allowPhoto: true,
-                            textColor: FlutterFlowTheme.of(context).primaryText,
-                            pickerFontFamily: 'Nunito Sans',
-                          );
-                          if (selectedMedia != null &&
-                              selectedMedia.every((m) =>
-                                  validateFileFormat(m.storagePath, context))) {
-                            setState(() => widget.model.isDataUploading = true);
-                            var selectedUploadedFiles = <FFUploadedFile>[];
-
-                            try {
-                              selectedUploadedFiles = selectedMedia
-                                  .map((m) => FFUploadedFile(
-                                        name: m.storagePath.split('/').last,
-                                        bytes: m.bytes,
-                                        height: m.dimensions?.height,
-                                        width: m.dimensions?.width,
-                                        blurHash: m.blurHash,
-                                      ))
-                                  .toList();
-                            } finally {
-                              widget.model.isDataUploading = false;
-                            }
-                            if (selectedUploadedFiles.length ==
-                                selectedMedia.length) {
-                              setState(() {
-                                widget.model.backgroundUploadedLocalFile =
-                                    selectedUploadedFiles.first;
-                              });
-                            } else {
-                              setState(() {});
-                              return;
-                            }
-                          }
-                        },
+                        onPressed: _handleMediaSelection,
                       ),
                     ),
                   ),
@@ -174,51 +136,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                                   color: Colors.white,
                                   size: 20.0,
                                 ),
-                                onPressed: () async {
-                                  final selectedMedia =
-                                      await selectMediaWithSourceBottomSheet(
-                                    context: context,
-                                    allowPhoto: true,
-                                    textColor: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    pickerFontFamily: 'Nunito Sans',
-                                  );
-                                  if (selectedMedia != null &&
-                                      selectedMedia.every((m) =>
-                                          validateFileFormat(
-                                              m.storagePath, context))) {
-                                    setState(() =>
-                                        widget.model.isDataUploading = true);
-                                    var selectedUploadedFiles =
-                                        <FFUploadedFile>[];
-
-                                    try {
-                                      selectedUploadedFiles = selectedMedia
-                                          .map((m) => FFUploadedFile(
-                                                name: m.storagePath
-                                                    .split('/')
-                                                    .last,
-                                                bytes: m.bytes,
-                                                height: m.dimensions?.height,
-                                                width: m.dimensions?.width,
-                                                blurHash: m.blurHash,
-                                              ))
-                                          .toList();
-                                    } finally {
-                                      widget.model.isDataUploading = false;
-                                    }
-                                    if (selectedUploadedFiles.length ==
-                                        selectedMedia.length) {
-                                      setState(() {
-                                        widget.model.avatarUploadedLocalFile =
-                                            selectedUploadedFiles.first;
-                                      });
-                                    } else {
-                                      setState(() {});
-                                      return;
-                                    }
-                                  }
-                                },
+                                onPressed: _handleMediaSelection,
                               ),
                             ),
                           ),
@@ -975,6 +893,44 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
         widget.model.dateOfBirthController?.text =
             DateFormat('dd-MM-yyyy').format(pickedDate);
       });
+    }
+  }
+
+  Future<void> _handleMediaSelection() async {
+    final selectedMedia = await selectMediaWithSourceBottomSheet(
+      context: context,
+      allowPhoto: true,
+      textColor: FlutterFlowTheme.of(context).primaryText,
+      pickerFontFamily: 'Nunito Sans',
+    );
+    if (selectedMedia != null &&
+        selectedMedia
+            .every((m) => validateFileFormat(m.storagePath, context))) {
+      setState(() => widget.model.isDataUploading = true);
+      var selectedUploadedFiles = <FFUploadedFile>[];
+
+      try {
+        selectedUploadedFiles = selectedMedia
+            .map((m) => FFUploadedFile(
+                  name: m.storagePath.split('/').last,
+                  bytes: m.bytes,
+                  height: m.dimensions?.height,
+                  width: m.dimensions?.width,
+                  blurHash: m.blurHash,
+                ))
+            .toList();
+      } finally {
+        widget.model.isDataUploading = false;
+      }
+      if (selectedUploadedFiles.length == selectedMedia.length) {
+        setState(() {
+          widget.model.backgroundUploadedLocalFile =
+              selectedUploadedFiles.first;
+        });
+      } else {
+        setState(() {});
+        return;
+      }
     }
   }
 }

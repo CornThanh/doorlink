@@ -31,6 +31,7 @@ enum BodyType {
 class ApiCallRecord extends Equatable {
   const ApiCallRecord(this.callName, this.apiUrl, this.headers, this.params,
       this.body, this.bodyType);
+
   final String callName;
   final String apiUrl;
   final Map<String, dynamic> headers;
@@ -43,52 +44,77 @@ class ApiCallRecord extends Equatable {
       [callName, apiUrl, headers, params, body, bodyType];
 }
 
-class ApiCallResponse {
-  const ApiCallResponse(
-    this.jsonBody,
-    this.headers,
-    this.statusCode, {
-    this.response,
-  });
+class ApiCallResponse<T> {
+  const ApiCallResponse(this.jsonBody, this.data, this.headers, this.statusCode,
+      this.message,
+      {this.response});
+
   final dynamic jsonBody;
+  final T? data;
   final Map<String, String> headers;
   final int statusCode;
   final http.Response? response;
+  final String? message;
+
   // Whether we received a 2xx status (which generally marks success).
   bool get succeeded => statusCode >= 200 && statusCode < 300;
+
   String getHeader(String headerName) => headers[headerName] ?? '';
+
   // Return the raw body from the response, or if this came from a cloud call
   // and the body is not a string, then the json encoded body.
   String get bodyText =>
-      response?.body ??
-      (jsonBody is String ? jsonBody as String : jsonEncode(jsonBody));
+      response?.body ?? (data is String ? data as String : jsonEncode(data));
 
-  static ApiCallResponse fromHttpResponse(
+  static ApiCallResponse<T> fromHttpResponse<T>(
     http.Response response,
     bool returnBody,
     bool decodeUtf8,
+    T Function(dynamic json)? fromJson,
   ) {
     var jsonBody;
+    String? message;
     try {
       final responseBody = decodeUtf8 && returnBody
           ? const Utf8Decoder().convert(response.bodyBytes)
           : response.body;
-      jsonBody = returnBody ? json.decode(responseBody) : null;
+      if (responseBody.isNotEmpty) {
+        jsonBody = returnBody ? json.decode(responseBody) : null;
+        if (jsonBody is Map && jsonBody.containsKey('message')) {
+          message = jsonBody['message'];
+        }
+      }
     } catch (_) {}
-    return ApiCallResponse(
-      jsonBody,
-      response.headers,
-      response.statusCode,
-      response: response,
-    );
+
+    T? data;
+    if (jsonBody != null && fromJson != null) {
+      try {
+        data = jsonBody['data'] != null ? fromJson(jsonBody['data']) : null;
+      } catch (_) {}
+    }
+
+    return ApiCallResponse<T>(
+        jsonBody, data, response.headers, response.statusCode, message,
+        response: response);
   }
 
-  static ApiCallResponse fromCloudCallResponse(Map<String, dynamic> response) =>
-      ApiCallResponse(
+  static ApiCallResponse<T> fromCloudCallResponse<T>(
+      Map<String, dynamic> response, T Function(dynamic json)? fromJson) {
+    var jsonBody = response['body'];
+    T? data;
+    String? message = response['message'];
+    if (jsonBody != null && fromJson != null) {
+      try {
+        data = jsonBody['data'] != null ? fromJson(jsonBody['data']) : null;
+      } catch (_) {}
+    }
+    return ApiCallResponse<T>(
         response['body'],
+        data,
         ApiManager.toStringMap(response['headers'] ?? {}),
         response['statusCode'] ?? 400,
-      );
+        message);
+  }
 }
 
 class ApiManager {
@@ -98,6 +124,7 @@ class ApiManager {
   static final Map<ApiCallRecord, ApiCallResponse> _apiCache = {};
 
   static ApiManager? _instance;
+
   static ApiManager get instance => _instance ??= ApiManager._();
 
   // If your API calls need authentication, populate this field once
@@ -119,13 +146,15 @@ class ApiManager {
           "${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value.toString())}")
       .join('&');
 
-  static Future<ApiCallResponse> urlRequest(
-      ApiCallType callType,
-      String apiUrl,
-      Map<String, dynamic> headers,
-      Map<String, dynamic> params,
-      bool returnBody,
-      bool decodeUtf8) async {
+  static Future<ApiCallResponse<T>> urlRequest<T>(
+    ApiCallType callType,
+    String apiUrl,
+    Map<String, dynamic> headers,
+    Map<String, dynamic> params,
+    bool returnBody,
+    bool decodeUtf8,
+    T Function(dynamic json)? fromJson,
+  ) async {
     if (params.isNotEmpty) {
       final specifier =
           Uri.parse(apiUrl).queryParameters.isNotEmpty ? '&' : '?';
@@ -140,20 +169,23 @@ class ApiManager {
         : httpWithMiddleware.delete;
     final response =
         await makeRequest(Uri.parse(apiUrl), headers: toStringMap(headers));
-    return ApiCallResponse.fromHttpResponse(response, returnBody, decodeUtf8);
+    return ApiCallResponse.fromHttpResponse(
+        response, returnBody, decodeUtf8, fromJson);
   }
 
-  static Future<ApiCallResponse> requestWithBody(
-      ApiCallType type,
-      String apiUrl,
-      Map<String, dynamic> headers,
-      Map<String, dynamic> params,
-      String? body,
-      BodyType? bodyType,
-      bool returnBody,
-      bool encodeBodyUtf8,
-      bool decodeUtf8,
-      bool alwaysAllowBody) async {
+  static Future<ApiCallResponse<T>> requestWithBody<T>(
+    ApiCallType type,
+    String apiUrl,
+    Map<String, dynamic> headers,
+    Map<String, dynamic> params,
+    String? body,
+    BodyType? bodyType,
+    bool returnBody,
+    bool encodeBodyUtf8,
+    bool decodeUtf8,
+    bool alwaysAllowBody,
+    T Function(dynamic json)? fromJson,
+  ) async {
     assert(
       {ApiCallType.POST, ApiCallType.PUT, ApiCallType.PATCH}.contains(type) ||
           (alwaysAllowBody && type == ApiCallType.DELETE),
@@ -167,8 +199,8 @@ class ApiManager {
         createBody(headers, params, body, bodyType, encodeBodyUtf8);
 
     if (bodyType == BodyType.MULTIPART) {
-      return multipartRequest(type, apiUrl, headers, params, returnBody,
-          decodeUtf8, alwaysAllowBody);
+      return multipartRequest<T>(type, apiUrl, headers, params, returnBody,
+          decodeUtf8, alwaysAllowBody, fromJson);
     }
 
     final requestFn = {
@@ -181,10 +213,11 @@ class ApiManager {
     headers.addEntries(planets.entries);
     final response = await requestFn(Uri.parse(apiUrl),
         headers: toStringMap(headers), body: postBody);
-    return ApiCallResponse.fromHttpResponse(response, returnBody, decodeUtf8);
+    return ApiCallResponse.fromHttpResponse(
+        response, returnBody, decodeUtf8, fromJson);
   }
 
-  static Future<ApiCallResponse> multipartRequest(
+  static Future<ApiCallResponse<T>> multipartRequest<T>(
     ApiCallType? type,
     String apiUrl,
     Map<String, dynamic> headers,
@@ -192,6 +225,7 @@ class ApiManager {
     bool returnBody,
     bool decodeUtf8,
     bool alwaysAllowBody,
+    T Function(dynamic json)? fromJson,
   ) async {
     assert(
       {ApiCallType.POST, ApiCallType.PUT, ApiCallType.PATCH}.contains(type) ||
@@ -240,7 +274,8 @@ class ApiManager {
 
     final response =
         await http.Response.fromStream(await httpClient.send(request));
-    return ApiCallResponse.fromHttpResponse(response, returnBody, decodeUtf8);
+    return ApiCallResponse.fromHttpResponse<T>(
+        response, returnBody, decodeUtf8, fromJson);
   }
 
   static MediaType? _getMediaType(String? filename) {
@@ -295,19 +330,21 @@ class ApiManager {
         : postBody;
   }
 
-  Future<ApiCallResponse> makeApiCall(
-      {required String callName,
-      required String apiUrl,
-      required ApiCallType callType,
-      Map<String, dynamic> headers = const {},
-      Map<String, dynamic> params = const {},
-      String? body,
-      BodyType? bodyType,
-      bool returnBody = true,
-      bool encodeBodyUtf8 = false,
-      bool decodeUtf8 = false,
-      bool cache = false,
-      bool alwaysAllowBody = false}) async {
+  Future<ApiCallResponse<T>> makeApiCall<T>({
+    required String callName,
+    required String apiUrl,
+    required ApiCallType callType,
+    Map<String, dynamic> headers = const {},
+    Map<String, dynamic> params = const {},
+    String? body,
+    BodyType? bodyType,
+    bool returnBody = true,
+    bool encodeBodyUtf8 = false,
+    bool decodeUtf8 = false,
+    bool cache = false,
+    bool alwaysAllowBody = false,
+    T Function(dynamic json)? fromJson,
+  }) async {
     final callRecord =
         ApiCallRecord(callName, apiUrl, headers, params, body, bodyType);
     // Modify for your specific needs if this differs from your API.
@@ -321,21 +358,23 @@ class ApiManager {
     // If we've already made this exact call before and caching is on,
     // return the cached result.
     if (cache && _apiCache.containsKey(callRecord)) {
-      return _apiCache[callRecord]!;
+      final cachedResponse = _apiCache[callRecord]!;
+      return ApiCallResponse<T>(
+        cachedResponse.jsonBody,
+        cachedResponse.data,
+        cachedResponse.headers,
+        cachedResponse.statusCode,
+        cachedResponse.message,
+        response: cachedResponse.response,
+      );
     }
 
-    ApiCallResponse result;
+    ApiCallResponse<T> result;
     try {
       switch (callType) {
         case ApiCallType.GET:
-          result = await urlRequest(
-            callType,
-            apiUrl,
-            headers,
-            params,
-            returnBody,
-            decodeUtf8,
-          );
+          result = await urlRequest(callType, apiUrl, headers, params,
+              returnBody, decodeUtf8, fromJson);
           break;
         case ApiCallType.DELETE:
           result = alwaysAllowBody
@@ -350,31 +389,25 @@ class ApiManager {
                   encodeBodyUtf8,
                   decodeUtf8,
                   alwaysAllowBody,
-                )
-              : await urlRequest(
-                  callType,
-                  apiUrl,
-                  headers,
-                  params,
-                  returnBody,
-                  decodeUtf8,
-                );
+                  fromJson)
+              : await urlRequest(callType, apiUrl, headers, params, returnBody,
+                  decodeUtf8, fromJson);
           break;
         case ApiCallType.POST:
         case ApiCallType.PUT:
         case ApiCallType.PATCH:
           result = await requestWithBody(
-            callType,
-            apiUrl,
-            headers,
-            params,
-            body,
-            bodyType,
-            returnBody,
-            encodeBodyUtf8,
-            decodeUtf8,
-            alwaysAllowBody,
-          );
+              callType,
+              apiUrl,
+              headers,
+              params,
+              body,
+              bodyType,
+              returnBody,
+              encodeBodyUtf8,
+              decodeUtf8,
+              alwaysAllowBody,
+              fromJson);
           break;
       }
 
@@ -384,10 +417,8 @@ class ApiManager {
       }
     } catch (e) {
       result = const ApiCallResponse(
-        null,
-        {},
-        -1,
-      );
+        null, null, {},
+        -1, null);
     }
 
     return result;

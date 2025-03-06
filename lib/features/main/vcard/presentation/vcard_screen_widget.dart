@@ -1,22 +1,24 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:MeU/component/vcard_sheet/create_vcard_sheet_widget.dart';
+import 'package:MeU/features/main/vcard/repository/vcard_repository.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '/backend/api_requests/api_calls.dart';
 import '/component/drawer/drawer_widget.dart';
 import '/component/empty_data_component/empty_data_component_widget.dart';
 import '/component/scan_component/scan_component_widget.dart';
 import '/component/vcard_sheet/vcard_sheet_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'vcard_screen_model.dart';
+
 export 'vcard_screen_model.dart';
 
 class VcardScreenWidget extends StatefulWidget {
@@ -187,7 +189,7 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                       child: FutureBuilder<ApiCallResponse>(
                         future: (_model.apiRequestCompleter1 ??=
                                 Completer<ApiCallResponse>()
-                                  ..complete(VcardGroup.vcardsCall.call(
+                                  ..complete(VcardRepository.getVcard(
                                     authToken: FFAppState().authToken,
                                   )))
                             .future,
@@ -207,8 +209,7 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                           return Builder(
                             builder: (context) {
                               final data = functions
-                                  .sortListData(VcardGroup.vcardsCall
-                                      .data(
+                                  .sortListData(VcardRepository.data(
                                         listViewVcardsResponse.jsonBody,
                                       )!
                                       .toList())
@@ -527,7 +528,7 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                       child: FutureBuilder<ApiCallResponse>(
                         future: (_model.apiRequestCompleter2 ??=
                                 Completer<ApiCallResponse>()
-                                  ..complete(VcardGroup.adminVcardCall.call(
+                                  ..complete(VcardRepository.getAdminVcardList(
                                     authToken: FFAppState().authToken,
                                   )))
                             .future,
@@ -547,8 +548,7 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                           return Builder(
                             builder: (context) {
                               final data = functions
-                                  .sortListData(VcardGroup.adminVcardCall
-                                      .data(
+                                  .sortListData(VcardRepository.data(
                                         listViewAdminVcardResponse.jsonBody,
                                       )!
                                       .toList())

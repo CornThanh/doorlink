@@ -10,10 +10,7 @@ class VcardGroup {
   static Map<String, String> headers = {};
   static NotificationCall notificationCall = NotificationCall();
   static LogoutCall logoutCall = LogoutCall();
-  static AdminVcardCall adminVcardCall = AdminVcardCall();
   static CreateAdminVcardCall createAdminVcardCall = CreateAdminVcardCall();
-  static UpdateAdminVcardCall updateAddminVcardCall = UpdateAdminVcardCall();
-  static VcardsCall vcardsCall = VcardsCall();
   static SingleAppointmentCall singleAppointmentCall = SingleAppointmentCall();
   static SettingsCall settingsCall = SettingsCall();
   static DeleteAppointmentCall deleteAppointmentCall = DeleteAppointmentCall();
@@ -72,134 +69,6 @@ class LogoutCall {
   }
 }
 
-class AdminVcardCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Admin Vcard',
-      apiUrl: '${VcardGroup.baseUrl}/admin/vcard',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {
-        'auth_token': authToken,
-      },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
-        true,
-      ) as List?;
-  List<int>? id(dynamic response) => (getJsonField(
-        response,
-        r'''$.data[:].id''',
-        true,
-      ) as List?)
-          ?.withoutNulls
-          .map((x) => castToType<int>(x))
-          .withoutNulls
-          .toList();
-}
-
-class UpdateAdminVcardCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-    required int id,
-    required String urlAlias,
-    required String name,
-    required String firstName,
-    required String lastName,
-    required int templateID,
-    String? occupation,
-    String? description,
-    FFUploadedFile? avatar,
-    FFUploadedFile? background,
-    String? email,
-    String? phone,
-    String? location,
-    String? company,
-    String? position,
-    String? dob,
-    String? website,
-    String? zalo,
-    String? facebook,
-    String? tiktok,
-    String? instagram,
-    String? youtube,
-    String? linkedin,
-    String? whatsapp,
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Admin Vcard Update',
-      apiUrl: '${VcardGroup.baseUrl}/admin/vcard-update',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {
-        'id': id,
-        'url_alias': urlAlias,
-        'name': name,
-        'occupation': occupation,
-        'description': description,
-        'profile_img': avatar,
-        'cover_img': background,
-        'first_name': firstName,
-        'last_name': lastName,
-        'email': email,
-        'phone': phone,
-        'location': location,
-        'dob': dob,
-        'company': company,
-        'job_title': position,
-        'template_id': templateID,
-        'website': website,
-        'zalo': zalo,
-        'facebook': facebook,
-        'tiktok': tiktok,
-        'instagram': instagram,
-        'youtube': youtube,
-        'linkedin': linkedin,
-        'whatsapp': whatsapp,
-        'enable_affiliation': 0,
-        'enable_contact': 0,
-        'hide_stickybar': 1,
-        'whatsapp_share': 0,
-      },
-      bodyType: BodyType.MULTIPART,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
-        true,
-      ) as List?;
-  List<int>? id(dynamic response) => (getJsonField(
-        response,
-        r'''$.data[:].id''',
-        true,
-      ) as List?)
-          ?.withoutNulls
-          .map((x) => castToType<int>(x))
-          .withoutNulls
-          .toList();
-}
-
 class CreateAdminVcardCall {
   Future<ApiCallResponse> call({
     String? authToken = '',
@@ -223,7 +92,9 @@ class CreateAdminVcardCall {
         'first_name': firstName,
         'last_name': lastName,
         'profile_img': avatar,
-        'cover_img': background
+        'cover_img': background,
+        'hide_stickybar': "1",
+        'enable_contact': "1",
       },
       bodyType: BodyType.MULTIPART,
       returnBody: true,
@@ -243,44 +114,6 @@ class CreateAdminVcardCall {
         response,
         r'''$.data[:].message''',
       ));
-}
-
-class VcardsCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Vcards',
-      apiUrl: '${VcardGroup.baseUrl}/vcard',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {
-        'auth_token': authToken,
-      },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
-        true,
-      ) as List?;
-  List<int>? id(dynamic response) => (getJsonField(
-        response,
-        r'''$.data[:].id''',
-        true,
-      ) as List?)
-          ?.withoutNulls
-          .map((x) => castToType<int>(x))
-          .withoutNulls
-          .toList();
 }
 
 class SingleAppointmentCall {
@@ -639,27 +472,6 @@ class SingleVcardsCall {
 }
 
 class SingleAdminVcardsCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-    int? id,
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Single Vcards',
-      apiUrl: '${VcardGroup.baseUrl}/admin/vcard/$id',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {
-        'auth_token': authToken,
-      },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
 
   int? id(dynamic response) => castToType<int>(getJsonField(
         response,

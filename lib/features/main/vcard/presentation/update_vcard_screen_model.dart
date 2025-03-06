@@ -1,9 +1,11 @@
-import 'package:http/http.dart' as http;
-import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
-import 'vcard_screen_widget.dart' show VcardScreenWidget;
+
+import 'package:MeU/features/main/vcard/repository/vcard_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+import '/flutter_flow/flutter_flow_util.dart';
+import 'vcard_screen_widget.dart' show VcardScreenWidget;
 
 class UpdateVcardScreenModel extends FlutterFlowModel<VcardScreenWidget> {
   ///  State fields for stateful widgets in this page.
@@ -11,8 +13,6 @@ class UpdateVcardScreenModel extends FlutterFlowModel<VcardScreenWidget> {
   final formKey = GlobalKey<FormState>();
 
   final unfocusNode = FocusNode();
-  Completer<ApiCallResponse>? apiRequestCompleter1;
-  Completer<ApiCallResponse>? apiRequestCompleter2;
 
   /// Initialization and disposal methods.
   ///
@@ -96,8 +96,6 @@ class UpdateVcardScreenModel extends FlutterFlowModel<VcardScreenWidget> {
   bool isDataUploading = false;
 
   int selectedTemplateID = 1;
-
-  dynamic columnSingleVcardsResponse;
 
   String avatarImage = '';
   String backgroundImage = '';
@@ -214,7 +212,7 @@ class UpdateVcardScreenModel extends FlutterFlowModel<VcardScreenWidget> {
     }
 
     if (formKey.currentState?.validate() == true) {
-      final result = await VcardGroup.updateAddminVcardCall.call(
+      final result = await VcardRepository.updateAdminVcard(
         id: id,
         authToken: FFAppState().authToken,
         urlAlias: urlAlias,
@@ -244,36 +242,6 @@ class UpdateVcardScreenModel extends FlutterFlowModel<VcardScreenWidget> {
 
       context.pop();
       context.pop(result.succeeded);
-    }
-  }
-
-  Future waitForApiRequestCompleted1({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(const Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleter1?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
-  }
-
-  Future waitForApiRequestCompleted2({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(const Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleter2?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
     }
   }
 }

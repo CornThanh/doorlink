@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:MeU/screens/vcard_screen/update_vcard_screen_widget.dart';
+import 'package:MeU/features/main/vcard/presentation/update_vcard_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
