@@ -1,14 +1,16 @@
-import '/backend/api_requests/api_calls.dart';
-import '/component/select_group_dialog_box/select_group_dialog_box_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
+import '/backend/api_requests/api_calls.dart';
+import '/component/select_group_dialog_box/select_group_dialog_box_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'add_group_component_model.dart';
+
 export 'add_group_component_model.dart';
 
 class AddGroupComponentWidget extends StatefulWidget {
@@ -185,42 +187,6 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                                     widget.data!.toList(),
                                     _model.textController.text) ==
                                 true) {
-                              if (FFAppState().role == 'Super Admin') {
-                                _model.apiResult16n =
-                                    await VcardGroup.groupCreateCall.call(
-                                  authToken: FFAppState().authToken,
-                                  name: _model.textController.text,
-                                );
-                                if ((_model.apiResult16n?.succeeded ?? true)) {
-                                  Navigator.pop(context);
-                                  await showDialog(
-                                    context: context,
-                                    builder: (dialogContext) {
-                                      return Dialog(
-                                        elevation: 1,
-                                        insetPadding: EdgeInsets.zero,
-                                        backgroundColor: Colors.transparent,
-                                        alignment:
-                                            const AlignmentDirectional(0.0, 0.0)
-                                                .resolve(
-                                                    Directionality.of(context)),
-                                        child:
-                                            const SelectGroupDialogBoxWidget(),
-                                      );
-                                    },
-                                  ).then((value) => setState(() {}));
-                                } else {
-                                  context.safePop();
-                                  await actions.customSnackbar(
-                                    context,
-                                    FFLocalizations.of(context).getVariableText(
-                                      viText: 'Vui lòng nhập đúng tên nhóm',
-                                      enText: 'Please enter valid Group name.',
-                                    ),
-                                    FlutterFlowTheme.of(context).error,
-                                  );
-                                }
-                              } else {
                                 _model.adminGroupRes =
                                     await VcardGroup.adminGroupCreateCall.call(
                                   authToken: FFAppState().authToken,
@@ -255,7 +221,6 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                                     FlutterFlowTheme.of(context).error,
                                   );
                                 }
-                              }
                             } else {
                               context.safePop();
                               await actions.customSnackbar(

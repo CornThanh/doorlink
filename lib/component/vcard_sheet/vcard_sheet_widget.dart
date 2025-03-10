@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:provider/provider.dart';
 
 import '/backend/api_requests/api_calls.dart';
 import '/component/delete_dialog_box/delete_dialog_box_widget.dart';
 import '/component/nfc_write_sheet/nfc_write_sheet_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'vcard_sheet_model.dart';
+
 export 'vcard_sheet_model.dart';
 
 class VcardSheetWidget extends StatefulWidget {
@@ -57,7 +58,7 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
 
     return Container(
       width: double.infinity,
-      height: FFAppState().role == 'Super Admin' ? 250.0 : 305.0,
+      height: 305.0,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(

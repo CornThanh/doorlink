@@ -12,31 +12,21 @@ class VcardGroup {
   static LogoutCall logoutCall = LogoutCall();
   static CreateAdminVcardCall createAdminVcardCall = CreateAdminVcardCall();
   static SingleAppointmentCall singleAppointmentCall = SingleAppointmentCall();
-  static SettingsCall settingsCall = SettingsCall();
   static DeleteAppointmentCall deleteAppointmentCall = DeleteAppointmentCall();
   static EnquiryCall enquiryCall = EnquiryCall();
   static SingleEnquiryCall singleEnquiryCall = SingleEnquiryCall();
   static DeleteEnquiryCall deleteEnquiryCall = DeleteEnquiryCall();
   static ProfileCall profileCall = ProfileCall();
   static SingleVcardsCall singleVcardsCall = SingleVcardsCall();
-  static SingleAdminVcardsCall singleAdminVcardsCall = SingleAdminVcardsCall();
   static DeleteVcardCall deleteVcardCall = DeleteVcardCall();
-  static GroupCreateCall groupCreateCall = GroupCreateCall();
-  static GroupsCall groupsCall = GroupsCall();
   static AdminGroupCall adminGroupCall = AdminGroupCall();
   static BusinessCardCreateCall businessCardCreateCall =
       BusinessCardCreateCall();
-  static BusinessCardCall businessCardCall = BusinessCardCall();
   static AdminBusinessCardCall adminBusinessCardCall = AdminBusinessCardCall();
-  static FilterBusinessCardCall filterBusinessCardCall =
-      FilterBusinessCardCall();
-  static SettingUpdateCall settingUpdateCall = SettingUpdateCall();
-  static AdminIncomeChartCall adminIncomeChartCall = AdminIncomeChartCall();
   static VcardEnquiryCall vcardEnquiryCall = VcardEnquiryCall();
   static AppointmentCompletedCall appointmentCompletedCall =
       AppointmentCompletedCall();
   static VcardQrCodeCall vcardQrCodeCall = VcardQrCodeCall();
-  static LanguageCall languageCall = LanguageCall();
   static DeleteGroupCall deleteGroupCall = DeleteGroupCall();
   static AdminGroupCreateCall adminGroupCreateCall = AdminGroupCreateCall();
 }
@@ -174,55 +164,6 @@ class SingleAppointmentCall {
   String? vcardName(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.data[:].vcard_name''',
-      ));
-}
-
-class SettingsCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Settings',
-      apiUrl: '${VcardGroup.baseUrl}/admin/settings-edit',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {
-        'auth_token': authToken,
-      },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  String? language(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data[:].language''',
-      ));
-  String? time(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data[:].time_format''',
-      ));
-  String? enableAffiliation(dynamic response) =>
-      castToType<String>(getJsonField(
-        response,
-        r'''$.data[:].enable_affiliation''',
-      ));
-  String? enableContact(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data[:].enable_contact''',
-      ));
-  String? hideStickybar(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data[:].hide_stickybar''',
-      ));
-  String? whatsappShare(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data[:].whatsapp_share''',
       ));
 }
 
@@ -471,110 +412,6 @@ class SingleVcardsCall {
       ));
 }
 
-class SingleAdminVcardsCall {
-
-  int? id(dynamic response) => castToType<int>(getJsonField(
-        response,
-        r'''$.data.id''',
-      ));
-  String? alias(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.url_alias''',
-      ));
-  String? name(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.name''',
-      ));
-  String? occupation(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.occupation''',
-      ));
-  String? description(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.description''',
-      ));
-
-  String? avatar(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.profile_url''',
-      ));
-  String? background(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.cover_url''',
-      ));
-
-  String? firstName(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.first_name''',
-      ));
-  String? lastName(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.last_name''',
-      ));
-  String? email(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.email''',
-      ));
-  String? phone(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.phone''',
-      ));
-  String? location(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.location''',
-      ));
-  String? dob(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.dob''',
-      ));
-  String? company(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.company''',
-      ));
-
-  String? position(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.job_title''',
-      ));
-
-  int? templateID(dynamic response) => castToType<int>(getJsonField(
-        response,
-        r'''$.data.template_id''',
-      ));
-  String? website(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.website''',
-      ));
-  String? facebook(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.facebook''',
-      ));
-  String? zalo(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.zalo''',
-      ));
-  String? tiktok(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.tiktok''',
-      ));
-  String? instagram(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.instagram''',
-      ));
-  String? youtube(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.youtube''',
-      ));
-  String? linkedin(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.linkedin''',
-      ));
-  String? whatsapp(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.data.whatsapp''',
-      ));
-}
-
 class DeleteVcardCall {
   Future<ApiCallResponse> call({
     String? authToken = '',
@@ -630,63 +467,6 @@ class NotificationCall {
       alwaysAllowBody: false,
     );
   }
-}
-
-class GroupCreateCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-    String? name = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "name": "$name"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Group Create',
-      apiUrl: '${VcardGroup.baseUrl}/groups-create',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class GroupsCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Groups',
-      apiUrl: '${VcardGroup.baseUrl}/groups',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {
-        'auth_token': authToken,
-      },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
-        true,
-      ) as List?;
 }
 
 class AdminGroupCall {
@@ -748,33 +528,6 @@ class BusinessCardCreateCall {
   }
 }
 
-class BusinessCardCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Business Card',
-      apiUrl: '${VcardGroup.baseUrl}/business-cards',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
-        true,
-      ) as List?;
-}
-
 class AdminBusinessCardCall {
   Future<ApiCallResponse> call({
     String? authToken = '',
@@ -798,108 +551,6 @@ class AdminBusinessCardCall {
   List? data(dynamic response) => getJsonField(
         response,
         r'''$.data''',
-        true,
-      ) as List?;
-}
-
-class FilterBusinessCardCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-    int? filter,
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Filter Business Card',
-      apiUrl: '${VcardGroup.baseUrl}/business-cards',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {
-        'filter[]': filter,
-      },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
-        true,
-      ) as List?;
-}
-
-class SettingUpdateCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-    String? enableAffiliation = '',
-    String? enableContact = '',
-    String? hideStickybar = '',
-    String? whatsappShare = '',
-    String? timeFormat = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "time_format": "$timeFormat",
-  "enable_affiliation": "$enableAffiliation",
-  "enable_contact": "$enableContact",
-  "hide_stickybar": "$hideStickybar",
-  "whatsapp_share": "$whatsappShare"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Setting Update',
-      apiUrl: '${VcardGroup.baseUrl}/admin/settings-update',
-      callType: ApiCallType.POST,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class AdminIncomeChartCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Admin Income Chart',
-      apiUrl: '${VcardGroup.baseUrl}/admin/income-chart',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List<String>? weeklyLabel(dynamic response) => (getJsonField(
-        response,
-        r'''$.data.weeklyLabels''',
-        true,
-      ) as List?)
-          ?.withoutNulls
-          .map((x) => castToType<String>(x))
-          .withoutNulls
-          .toList();
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data.data''',
         true,
       ) as List?;
 }
@@ -986,33 +637,6 @@ class VcardQrCodeCall {
         response,
         r'''$.data[:].url''',
       ));
-}
-
-class LanguageCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Language',
-      apiUrl: '${VcardGroup.baseUrl}/language-edit',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
-        true,
-      ) as List?;
 }
 
 class DeleteGroupCall {

@@ -62,25 +62,6 @@ class DashboardRepository {
     );
   }
 
-  static Future<ApiCallResponse> getSuperAdminIncomeChart({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Super Admin Income Chart ',
-      apiUrl: '${VcardGroup.baseUrl}/income-chart',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
   static Future<ApiCallResponse> getAdminIncomeChart({
     String? authToken = '',
   }) async {

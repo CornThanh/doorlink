@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '/backend/api_requests/api_calls.dart';
 import '/component/empty_data_component/empty_data_component_widget.dart';
 import '/component/select_group_dialog_box/select_group_dialog_box_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/actions/index.dart' as actions;
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'delete_group_dialog_box_model.dart';
+
 export 'delete_group_dialog_box_model.dart';
 
 class DeleteGroupDialogBoxWidget extends StatefulWidget {
@@ -83,166 +84,6 @@ class _DeleteGroupDialogBoxWidgetState
                     children: [
                       Builder(
                         builder: (context) {
-                          if (FFAppState().role == 'Super Admin') {
-                            return FutureBuilder<ApiCallResponse>(
-                              future: VcardGroup.groupsCall.call(
-                                authToken: FFAppState().authToken,
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return const Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CupertinoActivityIndicator(color: Colors.white),
-                                    ),
-                                  );
-                                }
-                                final listViewGroupsResponse = snapshot.data!;
-                                return Builder(
-                                  builder: (context) {
-                                    final data = VcardGroup.groupsCall
-                                            .data(
-                                              listViewGroupsResponse.jsonBody,
-                                            )
-                                            ?.toList() ??
-                                        [];
-                                    if (data.isEmpty) {
-                                      return const SizedBox(
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        child: EmptyDataComponentWidget(),
-                                      );
-                                    }
-                                    return ListView.builder(
-                                      padding: const EdgeInsets.fromLTRB(
-                                        0,
-                                        15.0,
-                                        0,
-                                        0,
-                                      ),
-                                      primary: false,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: data.length,
-                                      itemBuilder: (context, dataIndex) {
-                                        final dataItem = data[dataIndex];
-                                        return InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            setState(() {
-                                              FFAppState().selectedGroupIndex =
-                                                  dataIndex;
-                                              FFAppState().selectedGroupId =
-                                                  getJsonField(
-                                                dataItem,
-                                                r'''$.id''',
-                                              );
-                                            });
-                                          },
-                                          child: Container(
-                                            decoration: const BoxDecoration(),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          0.0, 0.0, 5.0, 0.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        getJsonField(
-                                                          dataItem,
-                                                          r'''$.name''',
-                                                        ).toString(),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Nunito Sans',
-                                                              fontSize: 16.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              useGoogleFonts: GoogleFonts
-                                                                      .asMap()
-                                                                  .containsKey(
-                                                                      'Nunito Sans'),
-                                                            ),
-                                                      ),
-                                                      Container(
-                                                        width: 18.0,
-                                                        height: 18.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: dataIndex ==
-                                                                  FFAppState()
-                                                                      .selectedGroupIndex
-                                                              ? const Color(
-                                                                  0xFF1F69F6)
-                                                              : const Color(
-                                                                  0xFFAAB0B8),
-                                                          shape:
-                                                              BoxShape.circle,
-                                                        ),
-                                                        alignment:
-                                                            const AlignmentDirectional(
-                                                                0.0, 0.0),
-                                                        child: Container(
-                                                          width: 14.0,
-                                                          height: 14.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: dataIndex ==
-                                                                    FFAppState()
-                                                                        .selectedGroupIndex
-                                                                ? const Color(
-                                                                    0xFF1F69F6)
-                                                                : FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            border: Border.all(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryBackground,
-                                                              width: 2.5,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                const Divider(
-                                                  height: 25.0,
-                                                  thickness: 0.5,
-                                                  color: Color(0xFFAAB0B8),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                );
-                              },
-                            );
-                          } else {
                             return FutureBuilder<ApiCallResponse>(
                               future: VcardGroup.adminGroupCall.call(
                                 authToken: FFAppState().authToken,
@@ -399,7 +240,6 @@ class _DeleteGroupDialogBoxWidgetState
                                 );
                               },
                             );
-                          }
                         },
                       ),
                     ],
@@ -422,39 +262,6 @@ class _DeleteGroupDialogBoxWidgetState
                           FFAppState().selectedBusinessGroupIndex = 0;
                         });
                         if (FFAppState().isBusinessScreenSelected) {
-                          if (FFAppState().role == 'Super Admin') {
-                            _model.updatePage(() {
-                              FFAppState().isAPILoading = true;
-                            });
-                            _model.groupRes1 = await VcardGroup.groupsCall.call(
-                              authToken: FFAppState().authToken,
-                            );
-                            _model.businesscardRes1 =
-                                await VcardGroup.businessCardCall.call(
-                              authToken: FFAppState().authToken,
-                            );
-                            FFAppState().update(() {
-                              FFAppState().businessGroupList =
-                                  VcardGroup.groupsCall
-                                      .data(
-                                        (_model.groupRes1?.jsonBody ?? ''),
-                                      )!
-                                      .toList()
-                                      .cast<dynamic>();
-                              FFAppState().businessCardList = VcardGroup
-                                  .businessCardCall
-                                  .data(
-                                    (_model.businesscardRes1?.jsonBody ?? ''),
-                                  )!
-                                  .toList()
-                                  .cast<dynamic>();
-                            });
-                            _model.updatePage(() {
-                              FFAppState().isAPILoading = false;
-                              FFAppState().isBusinessScreenSelected = false;
-                              FFAppState().selectedGroupIndex = 1000;
-                            });
-                          } else {
                             _model.updatePage(() {
                               FFAppState().isAPILoading = true;
                             });
@@ -488,7 +295,6 @@ class _DeleteGroupDialogBoxWidgetState
                               FFAppState().isBusinessScreenSelected = false;
                               FFAppState().selectedGroupIndex = 1000;
                             });
-                          }
                         }
                         context.safePop();
                         FFAppState().update(() {
