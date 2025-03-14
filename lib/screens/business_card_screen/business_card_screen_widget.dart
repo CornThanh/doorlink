@@ -1,18 +1,20 @@
-import '/backend/api_requests/api_calls.dart';
-import '/component/drawer/drawer_widget.dart';
-import '/component/empty_data_component/empty_data_component_widget.dart';
-import '/component/scan_component/scan_component_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
-import '/custom_code/actions/index.dart' as actions;
-import '/custom_code/widgets/index.dart' as custom_widgets;
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+
+import '/backend/api_requests/api_calls.dart';
+import '/component/drawer/drawer_widget.dart';
+import '/component/empty_data_component/empty_data_component_widget.dart';
+import '/component/scan_component/scan_component_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'business_card_screen_model.dart';
+
 export 'business_card_screen_model.dart';
 
 class BusinessCardScreenWidget extends StatefulWidget {
@@ -38,30 +40,9 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
       setState(() {
         FFAppState().isAPILoading = true;
       });
-      if (FFAppState().role == 'Super Admin') {
-        _model.groupRes = await VcardGroup.groupsCall.call(
-          authToken: FFAppState().authToken,
-        );
-        _model.businesscardRes = await VcardGroup.businessCardCall.call(
-          authToken: FFAppState().authToken,
-        );
-        setState(() {
-          FFAppState().businessGroupList = VcardGroup.groupsCall
-              .data(
-                (_model.groupRes?.jsonBody ?? ''),
-              )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().businessCardList = VcardGroup.businessCardCall
-              .data(
-                (_model.businesscardRes?.jsonBody ?? ''),
-              )!
-              .toList()
-              .cast<dynamic>();
-        });
-      } else {
-        _model.adminGroupRes = await VcardGroup.adminGroupCall.call(
-          authToken: FFAppState().authToken,
+
+      _model.adminGroupRes = await VcardGroup.adminGroupCall.call(
+        authToken: FFAppState().authToken,
         );
         _model.adminBusinesscardRes =
             await VcardGroup.adminBusinessCardCall.call(
@@ -81,7 +62,6 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
               .toList()
               .cast<dynamic>();
         });
-      }
 
       setState(() {
         FFAppState().isAPILoading = false;

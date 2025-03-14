@@ -1,12 +1,13 @@
-import '/component/logout_dialog_box/logout_dialog_box_widget.dart';
-import '/component/select_group_dialog_box/select_group_dialog_box_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
+import '/component/logout_dialog_box/logout_dialog_box_widget.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'drawer_model.dart';
+
 export 'drawer_model.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -210,8 +211,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               ),
             ),
           ),
-          if (FFAppState().role != 'Super Admin')
-            Padding(
+
+          Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
@@ -259,8 +260,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
               ),
             ),
-          if (FFAppState().role != 'Super Admin')
-            Padding(
+
+          Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
