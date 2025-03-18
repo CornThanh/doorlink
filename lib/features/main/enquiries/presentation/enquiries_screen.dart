@@ -1,3 +1,4 @@
+import 'package:MeU/features/main/enquiries/repository/enquiries_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/backend/api_requests/api_calls.dart';
@@ -16,8 +17,8 @@ import 'package:provider/provider.dart';
 import 'enquiries_screen_model.dart';
 export 'enquiries_screen_model.dart';
 
-class EnquiriesScreenWidget extends StatefulWidget {
-  const EnquiriesScreenWidget({
+class EnquiriesScreen extends StatefulWidget {
+  const EnquiriesScreen({
     super.key,
     this.vcardID,
   });
@@ -25,10 +26,10 @@ class EnquiriesScreenWidget extends StatefulWidget {
   final int? vcardID;
 
   @override
-  State<EnquiriesScreenWidget> createState() => _EnquiriesScreenWidgetState();
+  State<EnquiriesScreen> createState() => _EnquiriesScreenState();
 }
 
-class _EnquiriesScreenWidgetState extends State<EnquiriesScreenWidget> {
+class _EnquiriesScreenState extends State<EnquiriesScreen> {
   late EnquiriesScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -173,7 +174,7 @@ class _EnquiriesScreenWidgetState extends State<EnquiriesScreenWidget> {
                       child: FutureBuilder<ApiCallResponse>(
                         future: (_model.apiRequestCompleter1 ??=
                                 Completer<ApiCallResponse>()
-                                  ..complete(VcardGroup.enquiryCall.call(
+                                  ..complete(EnquiriesRepository.call(
                                     authToken: FFAppState().authToken,
                                   )))
                             .future,
@@ -193,10 +194,9 @@ class _EnquiriesScreenWidgetState extends State<EnquiriesScreenWidget> {
                           return Builder(
                             builder: (context) {
                               final data = functions
-                                  .enquiryListSort(VcardGroup.enquiryCall
-                                      .data(
-                                        listViewEnquiryResponse.jsonBody,
-                                      )!
+                                  .enquiryListSort(EnquiriesRepository.data(
+                                    listViewEnquiryResponse.jsonBody,
+                                  )!
                                       .toList())
                                   .toList();
                               if (data.isEmpty) {
