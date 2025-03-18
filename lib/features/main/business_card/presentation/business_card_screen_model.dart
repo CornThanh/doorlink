@@ -2,11 +2,10 @@ import '/backend/api_requests/api_calls.dart';
 import '/component/drawer/drawer_widget.dart';
 import '/component/scan_component/scan_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'business_card_screen_widget.dart' show BusinessCardScreenWidget;
+import 'business_card_screen.dart' show BusinessCardScreen;
 import 'package:flutter/material.dart';
 
-class BusinessCardScreenModel
-    extends FlutterFlowModel<BusinessCardScreenWidget> {
+class BusinessCardScreenModel extends FlutterFlowModel<BusinessCardScreen> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

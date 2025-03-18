@@ -3,10 +3,10 @@ import '/component/drawer/drawer_widget.dart';
 import '/component/scan_component/scan_component_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
-import 'enquiries_screen_widget.dart' show EnquiriesScreenWidget;
+import 'enquiries_screen.dart' show EnquiriesScreen;
 import 'package:flutter/material.dart';
 
-class EnquiriesScreenModel extends FlutterFlowModel<EnquiriesScreenWidget> {
+class EnquiriesScreenModel extends FlutterFlowModel<EnquiriesScreen> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

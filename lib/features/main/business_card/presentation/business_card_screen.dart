@@ -1,3 +1,4 @@
+import 'package:MeU/features/main/business_card/repository/business_card_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,15 +18,14 @@ import 'business_card_screen_model.dart';
 
 export 'business_card_screen_model.dart';
 
-class BusinessCardScreenWidget extends StatefulWidget {
-  const BusinessCardScreenWidget({super.key});
+class BusinessCardScreen extends StatefulWidget {
+  const BusinessCardScreen({super.key});
 
   @override
-  State<BusinessCardScreenWidget> createState() =>
-      _BusinessCardScreenWidgetState();
+  State<BusinessCardScreen> createState() => _BusinessCardScreenState();
 }
 
-class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
+class _BusinessCardScreenState extends State<BusinessCardScreen> {
   late BusinessCardScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -43,25 +43,24 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
 
       _model.adminGroupRes = await VcardGroup.adminGroupCall.call(
         authToken: FFAppState().authToken,
-        );
-        _model.adminBusinesscardRes =
-            await VcardGroup.adminBusinessCardCall.call(
-          authToken: FFAppState().authToken,
-        );
-        setState(() {
-          FFAppState().businessGroupList = VcardGroup.adminGroupCall
-              .data(
-                (_model.adminGroupRes?.jsonBody ?? ''),
-              )!
-              .toList()
-              .cast<dynamic>();
-          FFAppState().businessCardList = VcardGroup.adminBusinessCardCall
-              .data(
-                (_model.adminBusinesscardRes?.jsonBody ?? ''),
-              )!
-              .toList()
-              .cast<dynamic>();
-        });
+      );
+      _model.adminBusinesscardRes =
+          await BusinessCardRepository.getBusinessCard(
+        authToken: FFAppState().authToken,
+      );
+      setState(() {
+        FFAppState().businessGroupList = VcardGroup.adminGroupCall
+            .data(
+              (_model.adminGroupRes?.jsonBody ?? ''),
+            )!
+            .toList()
+            .cast<dynamic>();
+        FFAppState().businessCardList = BusinessCardRepository.data(
+          (_model.adminBusinesscardRes?.jsonBody ?? ''),
+        )!
+            .toList()
+            .cast<dynamic>();
+      });
 
       setState(() {
         FFAppState().isAPILoading = false;

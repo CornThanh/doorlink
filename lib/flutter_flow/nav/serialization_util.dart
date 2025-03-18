@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
@@ -74,7 +75,7 @@ String? serializeParam(
         return null;
     }
   } catch (e) {
-    print('Error serializing parameter: $e');
+    log('Error serializing parameter: $e');
     return null;
   }
 }
@@ -210,7 +211,7 @@ dynamic deserializeParam<T>(
         return null;
     }
   } catch (e) {
-    print('Error deserializing parameter: $e');
+    log('Error deserializing parameter: $e');
     return null;
   }
 }

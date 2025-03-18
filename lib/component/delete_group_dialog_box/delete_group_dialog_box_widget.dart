@@ -1,3 +1,4 @@
+import 'package:MeU/features/main/business_card/repository/business_card_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -84,105 +85,120 @@ class _DeleteGroupDialogBoxWidgetState
                     children: [
                       Builder(
                         builder: (context) {
-                            return FutureBuilder<ApiCallResponse>(
-                              future: VcardGroup.adminGroupCall.call(
-                                authToken: FFAppState().authToken,
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return const Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CupertinoActivityIndicator(color: Colors.white),
+                          return FutureBuilder<ApiCallResponse>(
+                            future: VcardGroup.adminGroupCall.call(
+                              authToken: FFAppState().authToken,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return const Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CupertinoActivityIndicator(
+                                        color: Colors.white),
+                                  ),
+                                );
+                              }
+                              final listViewAdminGroupResponse = snapshot.data!;
+                              return Builder(
+                                builder: (context) {
+                                  final data = VcardGroup.adminGroupCall
+                                          .data(
+                                            listViewAdminGroupResponse.jsonBody,
+                                          )
+                                          ?.toList() ??
+                                      [];
+                                  if (data.isEmpty) {
+                                    return const EmptyDataComponentWidget();
+                                  }
+                                  return ListView.builder(
+                                    padding: const EdgeInsets.fromLTRB(
+                                      0,
+                                      15.0,
+                                      0,
+                                      0,
                                     ),
-                                  );
-                                }
-                                final listViewAdminGroupResponse =
-                                    snapshot.data!;
-                                return Builder(
-                                  builder: (context) {
-                                    final data = VcardGroup.adminGroupCall
-                                            .data(
-                                              listViewAdminGroupResponse
-                                                  .jsonBody,
-                                            )
-                                            ?.toList() ??
-                                        [];
-                                    if (data.isEmpty) {
-                                      return const EmptyDataComponentWidget();
-                                    }
-                                    return ListView.builder(
-                                      padding: const EdgeInsets.fromLTRB(
-                                        0,
-                                        15.0,
-                                        0,
-                                        0,
-                                      ),
-                                      primary: false,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: data.length,
-                                      itemBuilder: (context, dataIndex) {
-                                        final dataItem = data[dataIndex];
-                                        return InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            setState(() {
-                                              FFAppState().selectedGroupIndex =
-                                                  dataIndex;
-                                              FFAppState().selectedGroupId =
-                                                  getJsonField(
-                                                dataItem,
-                                                r'''$.id''',
-                                              );
-                                            });
-                                          },
-                                          child: Container(
-                                            decoration: const BoxDecoration(),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          0.0, 0.0, 5.0, 0.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        getJsonField(
-                                                          dataItem,
-                                                          r'''$.name''',
-                                                        ).toString(),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Nunito Sans',
-                                                              fontSize: 16.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              useGoogleFonts: GoogleFonts
-                                                                      .asMap()
-                                                                  .containsKey(
-                                                                      'Nunito Sans'),
-                                                            ),
+                                    primary: false,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: data.length,
+                                    itemBuilder: (context, dataIndex) {
+                                      final dataItem = data[dataIndex];
+                                      return InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          setState(() {
+                                            FFAppState().selectedGroupIndex =
+                                                dataIndex;
+                                            FFAppState().selectedGroupId =
+                                                getJsonField(
+                                              dataItem,
+                                              r'''$.id''',
+                                            );
+                                          });
+                                        },
+                                        child: Container(
+                                          decoration: const BoxDecoration(),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                        0.0, 0.0, 5.0, 0.0),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      getJsonField(
+                                                        dataItem,
+                                                        r'''$.name''',
+                                                      ).toString(),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Nunito Sans',
+                                                            fontSize: 16.0,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            useGoogleFonts:
+                                                                GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        'Nunito Sans'),
+                                                          ),
+                                                    ),
+                                                    Container(
+                                                      width: 18.0,
+                                                      height: 18.0,
+                                                      decoration: BoxDecoration(
+                                                        color: dataIndex ==
+                                                                FFAppState()
+                                                                    .selectedGroupIndex
+                                                            ? const Color(
+                                                                0xFF1F69F6)
+                                                            : const Color(
+                                                                0xFFAAB0B8),
+                                                        shape: BoxShape.circle,
                                                       ),
-                                                      Container(
-                                                        width: 18.0,
-                                                        height: 18.0,
+                                                      alignment:
+                                                          const AlignmentDirectional(
+                                                              0.0, 0.0),
+                                                      child: Container(
+                                                        width: 14.0,
+                                                        height: 14.0,
                                                         decoration:
                                                             BoxDecoration(
                                                           color: dataIndex ==
@@ -190,56 +206,38 @@ class _DeleteGroupDialogBoxWidgetState
                                                                       .selectedGroupIndex
                                                               ? const Color(
                                                                   0xFF1F69F6)
-                                                              : const Color(
-                                                                  0xFFAAB0B8),
+                                                              : FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
                                                           shape:
                                                               BoxShape.circle,
-                                                        ),
-                                                        alignment:
-                                                            const AlignmentDirectional(
-                                                                0.0, 0.0),
-                                                        child: Container(
-                                                          width: 14.0,
-                                                          height: 14.0,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: dataIndex ==
-                                                                    FFAppState()
-                                                                        .selectedGroupIndex
-                                                                ? const Color(
-                                                                    0xFF1F69F6)
-                                                                : FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                            shape:
-                                                                BoxShape.circle,
-                                                            border: Border.all(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryBackground,
-                                                              width: 2.5,
-                                                            ),
+                                                          border: Border.all(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
+                                                            width: 2.5,
                                                           ),
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                const Divider(
-                                                  height: 25.0,
-                                                  thickness: 0.5,
-                                                  color: Color(0xFFAAB0B8),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                              const Divider(
+                                                height: 25.0,
+                                                thickness: 0.5,
+                                                color: Color(0xFFAAB0B8),
+                                              ),
+                                            ],
                                           ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                );
-                              },
-                            );
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          );
                         },
                       ),
                     ],
@@ -262,39 +260,37 @@ class _DeleteGroupDialogBoxWidgetState
                           FFAppState().selectedBusinessGroupIndex = 0;
                         });
                         if (FFAppState().isBusinessScreenSelected) {
-                            _model.updatePage(() {
-                              FFAppState().isAPILoading = true;
-                            });
-                            _model.admingroupRes1 =
-                                await VcardGroup.adminGroupCall.call(
-                              authToken: FFAppState().authToken,
-                            );
-                            _model.adminbusinesscardRes1 =
-                                await VcardGroup.adminBusinessCardCall.call(
-                              authToken: FFAppState().authToken,
-                            );
-                            FFAppState().update(() {
-                              FFAppState().businessGroupList =
-                                  VcardGroup.adminGroupCall
-                                      .data(
-                                        (_model.admingroupRes1?.jsonBody ?? ''),
-                                      )!
-                                      .toList()
-                                      .cast<dynamic>();
-                              FFAppState().businessCardList = VcardGroup
-                                  .adminBusinessCardCall
-                                  .data(
-                                    (_model.adminbusinesscardRes1?.jsonBody ??
-                                        ''),
-                                  )!
-                                  .toList()
-                                  .cast<dynamic>();
-                            });
-                            _model.updatePage(() {
-                              FFAppState().isAPILoading = false;
-                              FFAppState().isBusinessScreenSelected = false;
-                              FFAppState().selectedGroupIndex = 1000;
-                            });
+                          _model.updatePage(() {
+                            FFAppState().isAPILoading = true;
+                          });
+                          _model.admingroupRes1 =
+                              await VcardGroup.adminGroupCall.call(
+                            authToken: FFAppState().authToken,
+                          );
+                          _model.adminbusinesscardRes1 =
+                              await BusinessCardRepository.getBusinessCard(
+                            authToken: FFAppState().authToken,
+                          );
+                          FFAppState().update(() {
+                            FFAppState().businessGroupList =
+                                VcardGroup.adminGroupCall
+                                    .data(
+                                      (_model.admingroupRes1?.jsonBody ?? ''),
+                                    )!
+                                    .toList()
+                                    .cast<dynamic>();
+                            FFAppState().businessCardList =
+                                BusinessCardRepository.data(
+                              (_model.adminbusinesscardRes1?.jsonBody ?? ''),
+                            )!
+                                    .toList()
+                                    .cast<dynamic>();
+                          });
+                          _model.updatePage(() {
+                            FFAppState().isAPILoading = false;
+                            FFAppState().isBusinessScreenSelected = false;
+                            FFAppState().selectedGroupIndex = 1000;
+                          });
                         }
                         context.safePop();
                         FFAppState().update(() {

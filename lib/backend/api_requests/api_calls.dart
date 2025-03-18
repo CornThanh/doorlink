@@ -13,7 +13,6 @@ class VcardGroup {
   static CreateAdminVcardCall createAdminVcardCall = CreateAdminVcardCall();
   static SingleAppointmentCall singleAppointmentCall = SingleAppointmentCall();
   static DeleteAppointmentCall deleteAppointmentCall = DeleteAppointmentCall();
-  static EnquiryCall enquiryCall = EnquiryCall();
   static SingleEnquiryCall singleEnquiryCall = SingleEnquiryCall();
   static DeleteEnquiryCall deleteEnquiryCall = DeleteEnquiryCall();
   static ProfileCall profileCall = ProfileCall();
@@ -22,7 +21,6 @@ class VcardGroup {
   static AdminGroupCall adminGroupCall = AdminGroupCall();
   static BusinessCardCreateCall businessCardCreateCall =
       BusinessCardCreateCall();
-  static AdminBusinessCardCall adminBusinessCardCall = AdminBusinessCardCall();
   static VcardEnquiryCall vcardEnquiryCall = VcardEnquiryCall();
   static AppointmentCompletedCall appointmentCompletedCall =
       AppointmentCompletedCall();
@@ -194,35 +192,6 @@ class DeleteAppointmentCall {
         response,
         r'''$.success''',
       ));
-}
-
-class EnquiryCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Enquiry',
-      apiUrl: '${VcardGroup.baseUrl}/admin/enquiries',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {
-        'auth_token': authToken,
-      },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
-        true,
-      ) as List?;
 }
 
 class SingleEnquiryCall {
@@ -526,33 +495,6 @@ class BusinessCardCreateCall {
       alwaysAllowBody: false,
     );
   }
-}
-
-class AdminBusinessCardCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Admin Business Card',
-      apiUrl: '${VcardGroup.baseUrl}/admin/business-cards',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
-        true,
-      ) as List?;
 }
 
 class VcardEnquiryCall {

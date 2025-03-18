@@ -129,7 +129,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'enquiries_screen',
           path: '/enquiriesScreen',
-          builder: (context, params) => EnquiriesScreenWidget(
+          builder: (context, params) => EnquiriesScreen(
             vcardID: params.getParam('vcardID', ParamType.int),
           ),
         ),
@@ -153,7 +153,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'business_card_screen',
           path: '/businessCardScreen',
-          builder: (context, params) => const BusinessCardScreenWidget(),
+          builder: (context, params) => const BusinessCardScreen(),
         ),
         FFRoute(
           name: 'phone_number',
