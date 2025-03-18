@@ -22,7 +22,6 @@ class VcardGroup {
   static AdminGroupCall adminGroupCall = AdminGroupCall();
   static BusinessCardCreateCall businessCardCreateCall =
       BusinessCardCreateCall();
-  static AdminBusinessCardCall adminBusinessCardCall = AdminBusinessCardCall();
   static VcardEnquiryCall vcardEnquiryCall = VcardEnquiryCall();
   static AppointmentCompletedCall appointmentCompletedCall =
       AppointmentCompletedCall();
@@ -526,33 +525,6 @@ class BusinessCardCreateCall {
       alwaysAllowBody: false,
     );
   }
-}
-
-class AdminBusinessCardCall {
-  Future<ApiCallResponse> call({
-    String? authToken = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Admin Business Card',
-      apiUrl: '${VcardGroup.baseUrl}/admin/business-cards',
-      callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authToken',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  List? data(dynamic response) => getJsonField(
-        response,
-        r'''$.data''',
-        true,
-      ) as List?;
 }
 
 class VcardEnquiryCall {

@@ -153,7 +153,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'business_card_screen',
           path: '/businessCardScreen',
-          builder: (context, params) => const BusinessCardScreenWidget(),
+          builder: (context, params) => const BusinessCardScreen(),
         ),
         FFRoute(
           name: 'phone_number',
