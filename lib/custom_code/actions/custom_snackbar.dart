@@ -21,7 +21,7 @@ Future customSnackbar(
         ],
       ),
       margin: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height - 200,
+          bottom: MediaQuery.of(context).size.height - 150,
           left: 10,
           right: 10),
       behavior: SnackBarBehavior.floating,

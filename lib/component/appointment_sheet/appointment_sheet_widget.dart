@@ -149,7 +149,7 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                                           .jsonBody,
                                     ) ==
                                     ''
-                                ? const Color(0xFF1F69F6)
+                                ? const Color(0xFF1A4572)
                                 : const Color(0xFFFF9900),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
@@ -311,7 +311,7 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                           boxShadow: const [
                             BoxShadow(
                               blurRadius: 0.0,
-                              color: Color(0xFF1F69F6),
+                              color: Color(0xFF1A4572),
                               offset: Offset(-5.0, 0.0),
                             )
                           ],
@@ -351,7 +351,7 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                                 children: [
                                   const Icon(
                                     Icons.mail_rounded,
-                                    color: Color(0xFF1F69F6),
+                                    color: Color(0xFF1A4572),
                                     size: 20.0,
                                   ),
                                   Padding(
@@ -385,7 +385,7 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                                 children: [
                                   const Icon(
                                     Icons.call,
-                                    color: Color(0xFF1F69F6),
+                                    color: Color(0xFF1A4572),
                                     size: 20.0,
                                   ),
                                   Padding(
@@ -460,7 +460,7 @@ class _AppointmentSheetWidgetState extends State<AppointmentSheetWidget> {
                               24.0, 0.0, 24.0, 0.0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: const Color(0xFF1F69F6),
+                          color: const Color(0xFF1A4572),
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Nunito Sans',

@@ -29,3 +29,4 @@ export 'features/main/setting/presentation/setting_screen_widget.dart'
     show SettingScreenWidget;
 export 'features/main/vcard/presentation/vcard_screen_widget.dart'
     show VcardScreenWidget;
+export 'features/main/tabbar/presentation/tabbar_screen_widget.dart';

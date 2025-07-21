@@ -919,7 +919,7 @@ class _VcardSheetWidgetState extends State<VcardSheetWidget> {
                             width: double.infinity,
                             height: 45.0,
                             decoration: BoxDecoration(
-                              color: const Color(0xFF1F69F6),
+                              color: const Color(0xFF1A4572),
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Align(

@@ -90,99 +90,100 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primary,
-        drawer: Drawer(
-          elevation: 16.0,
-          child: wrapWithModel(
-            model: _model.drawerModel,
-            updateCallback: () => setState(() {}),
-            child: const DrawerWidget(),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color(0xFF1F69F6),
-          child: const Icon(Icons.add, color: Colors.white, size: 28),
-          onPressed: () async {
-            final shouldReload = await showModalBottomSheet(
-              isScrollControlled: true,
-              backgroundColor: Colors.transparent,
-              context: context,
-              builder: (context) {
-                return Padding(
-                  padding: MediaQuery.viewInsetsOf(context),
-                  child: const CreateVcardSheetWidget(),
-                );
-              },
-            );
+        // drawer: Drawer(
+        //   elevation: 16.0,
+        //   child: wrapWithModel(
+        //     model: _model.drawerModel,
+        //     updateCallback: () => setState(() {}),
+        //     child: const DrawerWidget(),
+        //   ),
+        // ),
+        // floatingActionButton: FloatingActionButton(
+        //   backgroundColor: const Color(0xFF1A4572),
+        //   child: const Icon(Icons.add, color: Colors.white, size: 28),
+        //   onPressed: () async {
+        //     final shouldReload = await showModalBottomSheet(
+        //       isScrollControlled: true,
+        //       backgroundColor: Colors.transparent,
+        //       context: context,
+        //       builder: (context) {
+        //         return Padding(
+        //           padding: MediaQuery.viewInsetsOf(context),
+        //           child: const CreateVcardSheetWidget(),
+        //         );
+        //       },
+        //     );
 
-            if (shouldReload == true) {
-              setState(() => _model.apiRequestCompleter2 = null);
-              await _model.waitForApiRequestCompleted2();
-            }
-          },
-        ),
-        appBar: AppBar(
-          backgroundColor: const Color(0xff333333),
-          automaticallyImplyLeading: false,
-          leading: InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
-              scaffoldKey.currentState!.openDrawer();
-            },
-            child: Container(
-              decoration: const BoxDecoration(),
-              child: const Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
-                child: SizedBox(
-                  width: 100.0,
-                  height: 100.0,
-                  child: Icon(Icons.menu),
-                ),
-              ),
-            ),
-          ),
-          title: Text(
-            FFLocalizations.of(context).getText(
-              'xv0dqfc8' /* VCards */,
-            ),
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Nunito Sans',
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
-                  useGoogleFonts:
-                      GoogleFonts.asMap().containsKey('Nunito Sans'),
-                ),
-          ),
-          actions: [
-            wrapWithModel(
-              model: _model.scanComponentModel,
-              updateCallback: () => setState(() {}),
-              child: const ScanComponentWidget(),
-            ),
-          ],
-          centerTitle: true,
-          elevation: 1.0,
-        ),
-        body: Builder(
-          builder: (context) {
-            if (FFAppState().isLoading) {
-              return const Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
-                child: SizedBox(
-                  width: 100.0,
-                  height: 100.0,
-                  child: custom_widgets.CustomLoader(
+        //     if (shouldReload == true) {
+        //       setState(() => _model.apiRequestCompleter2 = null);
+        //       await _model.waitForApiRequestCompleted2();
+        //     }
+        //   },
+        // ),
+        // appBar: AppBar(
+        //   backgroundColor: const Color(0xff333333),
+        //   automaticallyImplyLeading: false,
+        //   leading: InkWell(
+        //     splashColor: Colors.transparent,
+        //     focusColor: Colors.transparent,
+        //     hoverColor: Colors.transparent,
+        //     highlightColor: Colors.transparent,
+        //     onTap: () async {
+        //       scaffoldKey.currentState!.openDrawer();
+        //     },
+        //     child: Container(
+        //       decoration: const BoxDecoration(),
+        //       child: const Padding(
+        //         padding: EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
+        //         child: SizedBox(
+        //           width: 100.0,
+        //           height: 100.0,
+        //           child: Icon(Icons.menu),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        //   title: Text(
+        //     FFLocalizations.of(context).getText(
+        //       'xv0dqfc8' /* VCards */,
+        //     ),
+        //     style: FlutterFlowTheme.of(context).headlineMedium.override(
+        //           fontFamily: 'Nunito Sans',
+        //           color: Colors.white,
+        //           fontSize: 22.0,
+        //           fontWeight: FontWeight.bold,
+        //           useGoogleFonts:
+        //               GoogleFonts.asMap().containsKey('Nunito Sans'),
+        //         ),
+        //   ),
+        //   actions: [
+        //     wrapWithModel(
+        //       model: _model.scanComponentModel,
+        //       updateCallback: () => setState(() {}),
+        //       child: const ScanComponentWidget(),
+        //     ),
+        //   ],
+        //   centerTitle: true,
+        //   elevation: 1.0,
+        // ),
+        body: SafeArea(
+          child: Builder(
+            builder: (context) {
+              if (FFAppState().isLoading) {
+                return const Align(
+                  alignment: AlignmentDirectional(0.0, 0.0),
+                  child: SizedBox(
                     width: 100.0,
                     height: 100.0,
+                    child: custom_widgets.CustomLoader(
+                      width: 100.0,
+                      height: 100.0,
+                    ),
                   ),
-                ),
-              );
-            } else {
-              return Builder(
-                builder: (context) {
+                );
+              } else {
+                return Builder(
+                  builder: (context) {
                     return Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: FutureBuilder<ApiCallResponse>(
@@ -209,8 +210,8 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                             builder: (context) {
                               final data = functions
                                   .sortListData(VcardRepository.data(
-                                        listViewAdminVcardResponse.jsonBody,
-                                      )!
+                                    listViewAdminVcardResponse.jsonBody,
+                                  )!
                                       .toList())
                                   .toList();
                               if (data.isEmpty) {
@@ -303,7 +304,7 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                                               boxShadow: const [
                                                 BoxShadow(
                                                   blurRadius: 0.0,
-                                                  color: Color(0xFF1F69F6),
+                                                  color: Color(0xFF1A4572),
                                                   offset: Offset(-5.0, 0.0),
                                                 )
                                               ],
@@ -391,14 +392,17 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                                                         ),
                                                         Text(
                                                           getJsonField(
-                                                            dataItem,
-                                                            r'''$.occupation''',
-                                                          )?.toString()
-                                                              .maybeHandleOverflow(
-                                                                maxChars: 20,
-                                                                replacement:
-                                                                    '…',
-                                                              ) ?? "",
+                                                                dataItem,
+                                                                r'''$.occupation''',
+                                                              )
+                                                                  ?.toString()
+                                                                  .maybeHandleOverflow(
+                                                                    maxChars:
+                                                                        20,
+                                                                    replacement:
+                                                                        '…',
+                                                                  ) ??
+                                                              "",
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
@@ -578,10 +582,11 @@ class _VcardScreenWidgetState extends State<VcardScreenWidget> {
                         },
                       ),
                     );
-                },
-              );
-            }
-          },
+                  },
+                );
+              }
+            },
+          ),
         ),
       ),
     );

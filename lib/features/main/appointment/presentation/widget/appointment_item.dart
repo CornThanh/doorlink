@@ -56,7 +56,7 @@ class AppointmentItem extends StatelessWidget {
                     boxShadow: const [
                       BoxShadow(
                         blurRadius: 0.0,
-                        color: Color(0xFF1F69F6),
+                        color: Color(0xFF1A4572),
                         offset: Offset(-5.0, 0.0),
                       )
                     ],
@@ -95,7 +95,7 @@ class AppointmentItem extends StatelessWidget {
                                 height: 35.0,
                                 decoration: BoxDecoration(
                                   color: isFree
-                                      ? const Color(0xFF1F69F6)
+                                      ? const Color(0xFF1A4572)
                                       : const Color(0xFFFF9900),
                                   borderRadius: const BorderRadius.only(
                                     bottomLeft: Radius.circular(15.0),
@@ -183,7 +183,7 @@ class AppointmentItem extends StatelessWidget {
                                 children: [
                                   const Icon(
                                     Icons.watch_later_outlined,
-                                    color: Color(0xFF1F69F6),
+                                    color: Color(0xFF1A4572),
                                     size: 24.0,
                                   ),
                                   Padding(

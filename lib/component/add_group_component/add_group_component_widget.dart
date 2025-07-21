@@ -187,40 +187,38 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                                     widget.data!.toList(),
                                     _model.textController.text) ==
                                 true) {
-                                _model.adminGroupRes =
-                                    await VcardGroup.adminGroupCreateCall.call(
-                                  authToken: FFAppState().authToken,
-                                  name: _model.textController.text,
+                              _model.adminGroupRes =
+                                  await VcardGroup.adminGroupCreateCall.call(
+                                authToken: FFAppState().authToken,
+                                name: _model.textController.text,
+                              );
+                              if ((_model.adminGroupRes?.succeeded ?? true)) {
+                                Navigator.pop(context);
+                                await showDialog(
+                                  context: context,
+                                  builder: (dialogContext) {
+                                    return Dialog(
+                                      elevation: 1,
+                                      insetPadding: EdgeInsets.zero,
+                                      backgroundColor: Colors.transparent,
+                                      alignment: const AlignmentDirectional(
+                                              0.0, 0.0)
+                                          .resolve(Directionality.of(context)),
+                                      child: const SelectGroupDialogBoxWidget(),
+                                    );
+                                  },
+                                ).then((value) => setState(() {}));
+                              } else {
+                                context.safePop();
+                                await actions.customSnackbar(
+                                  context,
+                                  FFLocalizations.of(context).getVariableText(
+                                    viText: 'Vui lòng nhập đúng tên nhóm',
+                                    enText: 'Please enter valid Group name.',
+                                  ),
+                                  FlutterFlowTheme.of(context).error,
                                 );
-                                if ((_model.adminGroupRes?.succeeded ?? true)) {
-                                  Navigator.pop(context);
-                                  await showDialog(
-                                    context: context,
-                                    builder: (dialogContext) {
-                                      return Dialog(
-                                        elevation: 1,
-                                        insetPadding: EdgeInsets.zero,
-                                        backgroundColor: Colors.transparent,
-                                        alignment:
-                                            const AlignmentDirectional(0.0, 0.0)
-                                                .resolve(
-                                                    Directionality.of(context)),
-                                        child:
-                                            const SelectGroupDialogBoxWidget(),
-                                      );
-                                    },
-                                  ).then((value) => setState(() {}));
-                                } else {
-                                  context.safePop();
-                                  await actions.customSnackbar(
-                                    context,
-                                    FFLocalizations.of(context).getVariableText(
-                                      viText: 'Vui lòng nhập đúng tên nhóm',
-                                      enText: 'Please enter valid Group name.',
-                                    ),
-                                    FlutterFlowTheme.of(context).error,
-                                  );
-                                }
+                              }
                             } else {
                               context.safePop();
                               await actions.customSnackbar(
@@ -245,7 +243,7 @@ class _AddGroupComponentWidgetState extends State<AddGroupComponentWidget> {
                                 24.0, 0.0, 24.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: const Color(0xFF1F69F6),
+                            color: const Color(0xFF1A4572),
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(

@@ -14,7 +14,7 @@ abstract class FlutterFlowTheme {
 
   static FlutterFlowTheme of(BuildContext context) {
     deviceSize = getDeviceSize(context);
-    return DarkModeTheme();
+    return LightModeTheme();
   }
 
   @Deprecated('Use primary instead')
@@ -144,7 +144,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color warning = const Color(0xFFF9CF58);
   late Color error = const Color(0xFFFF5963);
   late Color info = const Color(0xFFFFFFFF);
-  late Color button = const Color(0xFF1F69F6);
+  late Color button = const Color(0xFF1A4572);
 }
 
 class DarkModeTheme extends FlutterFlowTheme {
@@ -171,7 +171,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color warning = const Color(0xFFF9CF58);
   late Color error = const Color(0xFFFF5963);
   late Color info = const Color(0xFFFFFFFF);
-  late Color button = const Color(0xFF1F69F6);
+  late Color button = const Color(0xFF1A4572);
 }
 
 abstract class Typography {

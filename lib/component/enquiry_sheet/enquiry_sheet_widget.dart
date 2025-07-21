@@ -169,7 +169,7 @@ class _EnquirySheetWidgetState extends State<EnquirySheetWidget> {
                           boxShadow: const [
                             BoxShadow(
                               blurRadius: 0.0,
-                              color: Color(0xFF1F69F6),
+                              color: Color(0xFF1A4572),
                               offset: Offset(-5.0, 0.0),
                             )
                           ],
@@ -206,7 +206,7 @@ class _EnquirySheetWidgetState extends State<EnquirySheetWidget> {
                                 children: [
                                   const Icon(
                                     Icons.mail_rounded,
-                                    color: Color(0xFF1F69F6),
+                                    color: Color(0xFF1A4572),
                                     size: 20.0,
                                   ),
                                   Padding(
@@ -239,7 +239,7 @@ class _EnquirySheetWidgetState extends State<EnquirySheetWidget> {
                                 children: [
                                   const Icon(
                                     Icons.call,
-                                    color: Color(0xFF1F69F6),
+                                    color: Color(0xFF1A4572),
                                     size: 20.0,
                                   ),
                                   Padding(

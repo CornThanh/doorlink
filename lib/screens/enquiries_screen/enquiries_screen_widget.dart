@@ -279,7 +279,7 @@ class _EnquiriesScreenWidgetState extends State<EnquiriesScreenWidget> {
                                                   boxShadow: const [
                                                     BoxShadow(
                                                       blurRadius: 0.0,
-                                                      color: Color(0xFF1F69F6),
+                                                      color: Color(0xFF1A4572),
                                                       offset: Offset(-5.0, 0.0),
                                                     )
                                                   ],
@@ -545,7 +545,7 @@ class _EnquiriesScreenWidgetState extends State<EnquiriesScreenWidget> {
                                               boxShadow: const [
                                                 BoxShadow(
                                                   blurRadius: 0.0,
-                                                  color: Color(0xFF1F69F6),
+                                                  color: Color(0xFF1A4572),
                                                   offset: Offset(-5.0, 0.0),
                                                 )
                                               ],

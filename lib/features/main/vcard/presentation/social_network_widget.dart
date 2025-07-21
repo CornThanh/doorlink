@@ -88,7 +88,7 @@ class _SocialNetworkWidgetState extends State<SocialNetworkWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       filled: true,
-                      fillColor: Colors.white.withOpacity(0.1),
+                      fillColor: Colors.white.withValues(alpha: 0.1),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium,
                     validator: widget.model.websiteControllerValidator
@@ -164,7 +164,7 @@ class _SocialNetworkWidgetState extends State<SocialNetworkWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       filled: true,
-                      fillColor: Colors.white.withOpacity(0.1),
+                      fillColor: Colors.white.withValues(alpha: 0.1),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium,
                     validator: widget.model.facebookControllerValidator
@@ -240,7 +240,7 @@ class _SocialNetworkWidgetState extends State<SocialNetworkWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       filled: true,
-                      fillColor: Colors.white.withOpacity(0.1),
+                      fillColor: Colors.white.withValues(alpha: 0.1),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium,
                     validator: widget.model.zaloControllerValidator
@@ -316,7 +316,7 @@ class _SocialNetworkWidgetState extends State<SocialNetworkWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       filled: true,
-                      fillColor: Colors.white.withOpacity(0.1),
+                      fillColor: Colors.white.withValues(alpha: 0.1),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium,
                     validator: widget.model.tiktokControllerValidator
@@ -392,7 +392,7 @@ class _SocialNetworkWidgetState extends State<SocialNetworkWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       filled: true,
-                      fillColor: Colors.white.withOpacity(0.1),
+                      fillColor: Colors.white.withValues(alpha: 0.1),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium,
                     validator: widget.model.instagramControllerValidator
@@ -468,7 +468,7 @@ class _SocialNetworkWidgetState extends State<SocialNetworkWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       filled: true,
-                      fillColor: Colors.white.withOpacity(0.1),
+                      fillColor: Colors.white.withValues(alpha: 0.1),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium,
                     validator: widget.model.youtubeControllerValidator
@@ -544,7 +544,7 @@ class _SocialNetworkWidgetState extends State<SocialNetworkWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       filled: true,
-                      fillColor: Colors.white.withOpacity(0.1),
+                      fillColor: Colors.white.withValues(alpha: 0.1),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium,
                     validator: widget.model.linkedinControllerValidator
@@ -620,7 +620,7 @@ class _SocialNetworkWidgetState extends State<SocialNetworkWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       filled: true,
-                      fillColor: Colors.white.withOpacity(0.1),
+                      fillColor: Colors.white.withValues(alpha: 0.1),
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium,
                     validator: widget.model.whatsappControllerValidator

@@ -186,7 +186,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                             borderRadius: 20.0,
                                             borderWidth: 1.0,
                                             buttonSize: 40.0,
-                                            fillColor: const Color(0xFF1F69F6),
+                                            fillColor: const Color(0xFF1A4572),
                                             icon: const Icon(
                                               Icons.camera_alt,
                                               color: Colors.white,
@@ -274,7 +274,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 filled: true,
-                                fillColor: Colors.white.withOpacity(0.1),
+                                fillColor: Colors.white.withValues(alpha: 0.1),
                               ),
                               style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.firstNameControllerValidator
@@ -331,7 +331,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 filled: true,
-                                fillColor: Colors.white.withOpacity(0.1),
+                                fillColor: Colors.white.withValues(alpha: 0.1),
                               ),
                               style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.lastNameControllerValidator
@@ -425,7 +425,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 filled: true,
-                                fillColor: Colors.white.withOpacity(0.1),
+                                fillColor: Colors.white.withValues(alpha: 0.1),
                               ),
                               style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.emailControllerValidator
@@ -582,7 +582,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                               24.0, 0.0, 24.0, 0.0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: const Color(0xFF1F69F6),
+                          color: const Color(0xFF1A4572),
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Nunito Sans',

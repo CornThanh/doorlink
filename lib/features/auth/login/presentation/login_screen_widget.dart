@@ -174,7 +174,21 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
-                            color: Color(0x0079818A),
+                            color: Color(0xFFF6F8F9),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFFF6F8F9),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFFF6F8F9),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
@@ -201,7 +215,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
-                        fillColor: Colors.white.withOpacity(0.1),
+                        fillColor: Colors.white,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       keyboardType: TextInputType.emailAddress,
@@ -231,22 +245,29 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
-                            color: Color(0x0079818A),
+                            color: Color(0xFFF6F8F9),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFFF6F8F9),
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFFF6F8F9),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
-                            color: Colors.white,
+                            color: Color(0xFFF6F8F9),
                             width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 0.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
@@ -258,7 +279,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
-                        fillColor: Colors.white.withOpacity(0.1),
+                        fillColor: Colors.white.withValues(alpha: 0.1),
                         suffixIcon: InkWell(
                           onTap: () => setState(
                             () => _model.passwordVisibility =
@@ -308,7 +329,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Nunito Sans',
-                                    color: const Color(0xFF1F69F6),
+                                    color: const Color(0xFF1A4572),
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Nunito Sans'),
@@ -332,7 +353,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 0.0, 0.0, 0.0),
-                        color: const Color(0xFF1F69F6),
+                        color: const Color(0xFF1A4572),
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Nunito Sans',
@@ -350,57 +371,57 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 12.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () => _onPressedLoginByPhoneNumber(),
-                      text: FFLocalizations.of(context).getText(
-                        'nnbxrxo7' /* Login with phone number */,
-                      ),
-                      options: FFButtonOptions(
-                        width: double.infinity,
-                        height: 50.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 0.0, 0.0, 0.0),
-                        color: const Color(0xFFE9F0FF),
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Nunito Sans',
-                                  color: const Color(0xFF1F69F6),
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Nunito Sans'),
-                                ),
-                        elevation: 1.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          0.0, 45.0, 0.0, 0.0),
-                      child: Text(
-                        FFLocalizations.of(context).getText(
-                          'anao6v0h' /* Don't have an Account? */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Nunito Sans',
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: GoogleFonts.asMap()
-                                  .containsKey('Nunito Sans'),
-                            ),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsetsDirectional.fromSTEB(
+                  //       0.0, 12.0, 0.0, 0.0),
+                  //   child: FFButtonWidget(
+                  //     onPressed: () => _onPressedLoginByPhoneNumber(),
+                  //     text: FFLocalizations.of(context).getText(
+                  //       'nnbxrxo7' /* Login with phone number */,
+                  //     ),
+                  //     options: FFButtonOptions(
+                  //       width: double.infinity,
+                  //       height: 50.0,
+                  //       padding: const EdgeInsetsDirectional.fromSTEB(
+                  //           24.0, 0.0, 24.0, 0.0),
+                  //       iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                  //           0.0, 0.0, 0.0, 0.0),
+                  //       color: const Color(0xFFE9F0FF),
+                  //       textStyle:
+                  //           FlutterFlowTheme.of(context).titleSmall.override(
+                  //                 fontFamily: 'Nunito Sans',
+                  //                 color: const Color(0xFF1A4572),
+                  //                 fontWeight: FontWeight.bold,
+                  //                 useGoogleFonts: GoogleFonts.asMap()
+                  //                     .containsKey('Nunito Sans'),
+                  //               ),
+                  //       elevation: 1.0,
+                  //       borderSide: const BorderSide(
+                  //         color: Colors.transparent,
+                  //         width: 1.0,
+                  //       ),
+                  //       borderRadius: BorderRadius.circular(8.0),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Align(
+                  //   alignment: const AlignmentDirectional(0.0, 0.0),
+                  //   child: Padding(
+                  //     padding: const EdgeInsetsDirectional.fromSTEB(
+                  //         0.0, 45.0, 0.0, 0.0),
+                  //     child: Text(
+                  //       FFLocalizations.of(context).getText(
+                  //         'anao6v0h' /* Don't have an Account? */,
+                  //       ),
+                  //       style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  //             fontFamily: 'Nunito Sans',
+                  //             fontWeight: FontWeight.bold,
+                  //             useGoogleFonts: GoogleFonts.asMap()
+                  //                 .containsKey('Nunito Sans'),
+                  //           ),
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(
                         0.0, 12.0, 0.0, 0.0),
@@ -420,7 +441,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Nunito Sans',
-                                  color: const Color(0xFF1F69F6),
+                                  color: const Color(0xFF1A4572),
                                   fontWeight: FontWeight.bold,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey('Nunito Sans'),
@@ -471,16 +492,20 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
             FFAppState().selectedDrawerPage = 'Dashboard';
           });
 
-          await VcardGroup.notificationCall.call(
-              authToken: getJsonField(
-                (_model.apiResult88p?.jsonBody ?? ''),
-                r'''$.data.token''',
-              ).toString(),
-              userId: getJsonField(
-                (_model.apiResult88p?.jsonBody ?? ''),
-                r'''$.data.user_id''',
-              ),
-              fcmToken: (await FirebaseMessaging.instance.getToken()));
+          final simulator = await isSimulator();
+          if (!simulator) {
+            await VcardGroup.notificationCall.call(
+                authToken: getJsonField(
+                  (_model.apiResult88p?.jsonBody ?? ''),
+                  r'''$.data.token''',
+                ).toString(),
+                userId: getJsonField(
+                  (_model.apiResult88p?.jsonBody ?? ''),
+                  r'''$.data.user_id''',
+                ),
+                fcmToken: (await FirebaseMessaging.instance.getToken()));
+          }
+
           _model.profileRes = await VcardGroup.profileCall.call(
             authToken: getJsonField(
               (_model.apiResult88p?.jsonBody ?? ''),
@@ -662,18 +687,18 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
     setState(() {});
   }
 
-  _onPressedLoginByPhoneNumber() {
-    context.pushNamed(
-      'phone_number',
-      extra: <String, dynamic>{
-        kTransitionInfoKey: const TransitionInfo(
-          hasTransition: true,
-          transitionType: PageTransitionType.fade,
-          duration: Duration(milliseconds: 300),
-        ),
-      },
-    );
-  }
+  // _onPressedLoginByPhoneNumber() {
+  //   context.pushNamed(
+  //     'phone_number',
+  //     extra: <String, dynamic>{
+  //       kTransitionInfoKey: const TransitionInfo(
+  //         hasTransition: true,
+  //         transitionType: PageTransitionType.fade,
+  //         duration: Duration(milliseconds: 300),
+  //       ),
+  //     },
+  //   );
+  // }
 
   _onPressedRegister() {
     context.pushNamed(

@@ -53,67 +53,68 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primary,
-        drawer: Drawer(
-          elevation: 16.0,
-          child: wrapWithModel(
-            model: _model.drawerModel,
-            updateCallback: () => setState(() {}),
-            child: const DrawerWidget(),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color(0xFF1F69F6),
-          child: const Icon(Icons.add, color: Colors.white, size: 28),
-          onPressed: () => _onPressedFloatingButton(),
-        ),
-        appBar: AppBar(
-          backgroundColor: const Color(0xff333333),
-          automaticallyImplyLeading: false,
-          leading: InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
-              scaffoldKey.currentState!.openDrawer();
-            },
-            child: Container(
-              decoration: const BoxDecoration(),
-              child: const Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
-                child: SizedBox(
-                  width: 100.0,
-                  height: 100.0,
-                  child: Icon(Icons.menu),
-                ),
-              ),
-            ),
-          ),
-          title: Text(
-            FFLocalizations.of(context).getText(
-              'nr07wewc' /* Dashboard */,
-            ),
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Nunito Sans',
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
-                  useGoogleFonts:
-                      GoogleFonts.asMap().containsKey('Nunito Sans'),
-                ),
-          ),
-          actions: [
-            wrapWithModel(
-              model: _model.scanComponentModel,
-              updateCallback: () => setState(() {}),
-              child: const ScanComponentWidget(),
-            ),
-          ],
-          centerTitle: true,
-          elevation: 1.0,
-        ),
-        body: Builder(
-          builder: (context) {
+        // drawer: Drawer(
+        //   elevation: 16.0,
+        //   child: wrapWithModel(
+        //     model: _model.drawerModel,
+        //     updateCallback: () => setState(() {}),
+        //     child: const DrawerWidget(),
+        //   ),
+        // ),
+        // floatingActionButton: FloatingActionButton(
+        //   backgroundColor: const Color(0xFF1A4572),
+        //   child: const Icon(Icons.add, color: Colors.white, size: 28),
+        //   onPressed: () => _onPressedFloatingButton(),
+        // ),
+        // appBar: AppBar(
+        //   backgroundColor: const Color(0xff333333),
+        //   automaticallyImplyLeading: false,
+        //   leading: InkWell(
+        //     splashColor: Colors.transparent,
+        //     focusColor: Colors.transparent,
+        //     hoverColor: Colors.transparent,
+        //     highlightColor: Colors.transparent,
+        //     onTap: () async {
+        //       scaffoldKey.currentState!.openDrawer();
+        //     },
+        //     child: Container(
+        //       decoration: const BoxDecoration(),
+        //       child: const Padding(
+        //         padding: EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
+        //         child: SizedBox(
+        //           width: 100.0,
+        //           height: 100.0,
+        //           child: Icon(Icons.menu),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        //   title: Text(
+        //     FFLocalizations.of(context).getText(
+        //       'nr07wewc' /* Dashboard */,
+        //     ),
+        //     style: FlutterFlowTheme.of(context).headlineMedium.override(
+        //           fontFamily: 'Nunito Sans',
+        //           color: Colors.white,
+        //           fontSize: 22.0,
+        //           fontWeight: FontWeight.bold,
+        //           useGoogleFonts:
+        //               GoogleFonts.asMap().containsKey('Nunito Sans'),
+        //         ),
+        //   ),
+        //   actions: [
+        //     wrapWithModel(
+        //       model: _model.scanComponentModel,
+        //       updateCallback: () => setState(() {}),
+        //       child: const ScanComponentWidget(),
+        //     ),
+        //   ],
+        //   centerTitle: true,
+        //   elevation: 1.0,
+        // ),
+        body: SafeArea(
+          child: Builder(
+            builder: (context) {
               return FutureBuilder<ApiCallResponse>(
                 future: DashboardRepository.getTodayAppointment(
                   authToken: FFAppState().authToken,
@@ -228,7 +229,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                     fontFamily:
                                                                         'Nunito Sans',
                                                                     color: const Color(
-                                                                        0xFF1F69F6),
+                                                                        0xFF1A4572),
                                                                     fontSize:
                                                                         26.0,
                                                                     fontWeight:
@@ -336,7 +337,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                     context)
                                                                 .getText(
                                                               'w4yi1rza' /* Total Active
-                                            Vcards */
+                                              Vcards */
                                                               ,
                                                             ),
                                                             maxLines: 2,
@@ -535,7 +536,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                     context)
                                                                 .getText(
                                                               'dx7jboeu' /* Total Deactivated
-                                            Vcards */
+                                              Vcards */
                                                               ,
                                                             ),
                                                             maxLines: 2,
@@ -744,7 +745,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                     context)
                                                                 .getText(
                                                               '76c7kx4k' /* Today 
-                                            Enquiries */
+                                              Enquiries */
                                                               ,
                                                             ),
                                                             maxLines: 2,
@@ -944,7 +945,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                     context)
                                                                 .getText(
                                                               'zvfj14as' /* Today 
-                                            Appointments */
+                                              Appointments */
                                                               ,
                                                             ),
                                                             maxLines: 2,
@@ -1106,7 +1107,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Nunito Sans',
-                                              color: const Color(0xFF1F69F6),
+                                              color: const Color(0xFF1A4572),
                                               fontWeight: FontWeight.bold,
                                               useGoogleFonts:
                                                   GoogleFonts.asMap()
@@ -1234,7 +1235,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                               BoxShadow(
                                                                 blurRadius: 0.0,
                                                                 color: Color(
-                                                                    0xFF1F69F6),
+                                                                    0xFF1A4572),
                                                                 offset: Offset(
                                                                     -5.0, 0.0),
                                                               )
@@ -1290,7 +1291,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                             dataItem,
                                                                             r'''$.paid_amount''',
                                                                           ))
-                                                                              ? const Color(0xFF1F69F6)
+                                                                              ? const Color(0xFF1A4572)
                                                                               : const Color(0xFFFF9900),
                                                                           borderRadius:
                                                                               const BorderRadius.only(
@@ -1513,7 +1514,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                             child:
                                                                                 Icon(
                                                                               Icons.watch_later_outlined,
-                                                                              color: Color(0xFF1F69F6),
+                                                                              color: Color(0xFF1A4572),
                                                                               size: 24.0,
                                                                             ),
                                                                           ),
@@ -1616,7 +1617,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                               BoxShadow(
                                                                 blurRadius: 0.0,
                                                                 color: Color(
-                                                                    0xFF1F69F6),
+                                                                    0xFF1A4572),
                                                                 offset: Offset(
                                                                     -5.0, 0.0),
                                                               )
@@ -1691,7 +1692,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                             dataItem,
                                                                             r'''$.paid_amount''',
                                                                           ))
-                                                                              ? const Color(0xFF1F69F6)
+                                                                              ? const Color(0xFF1A4572)
                                                                               : const Color(0xFFFF9900),
                                                                           borderRadius:
                                                                               const BorderRadius.only(
@@ -1841,7 +1842,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                           const Icon(
                                                                             Icons.watch_later_outlined,
                                                                             color:
-                                                                                Color(0xFF1F69F6),
+                                                                                Color(0xFF1A4572),
                                                                             size:
                                                                                 24.0,
                                                                           ),
@@ -1931,28 +1932,29 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                   );
                 },
               );
-          },
+            },
+          ),
         ),
       ),
     );
   }
 
-  void _onPressedFloatingButton() {
-    if (FFAppState().selectedDrawerPage != 'VCards') {
-      context.goNamed(
-        'vcard_screen',
-        queryParameters: {'isCreate': 'true'},
-        extra: <String, dynamic>{
-          kTransitionInfoKey: const TransitionInfo(
-            hasTransition: true,
-            transitionType: PageTransitionType.fade,
-            duration: Duration(milliseconds: 300),
-          ),
-        },
-      );
-    }
-    FFAppState().selectedDrawerPage = 'VCards';
-  }
+  // void _onPressedFloatingButton() {
+  //   if (FFAppState().selectedDrawerPage != 'VCards') {
+  //     context.goNamed(
+  //       'vcard_screen',
+  //       queryParameters: {'isCreate': 'true'},
+  //       extra: <String, dynamic>{
+  //         kTransitionInfoKey: const TransitionInfo(
+  //           hasTransition: true,
+  //           transitionType: PageTransitionType.fade,
+  //           duration: Duration(milliseconds: 300),
+  //         ),
+  //       },
+  //     );
+  //   }
+  //   FFAppState().selectedDrawerPage = 'VCards';
+  // }
 
   void _onPressedVCards() {
     if (FFAppState().selectedDrawerPage != 'VCards') {

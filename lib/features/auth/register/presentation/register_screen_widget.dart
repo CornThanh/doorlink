@@ -1,4 +1,5 @@
 import 'package:MeU/features/auth/register/repository/register_repository.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -25,6 +26,11 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   late StreamSubscription<bool> _keyboardVisibilitySubscription;
   bool _isKeyboardVisible = false;
+  final List<String> items = [
+    'Solicitor',
+    'Homeowner',
+  ];
+  String? selectedValue;
 
   @override
   void initState() {
@@ -107,7 +113,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: MediaQuery.sizeOf(context).height * 0.15,
+                      height: MediaQuery.sizeOf(context).height * 0.10,
                       decoration: const BoxDecoration(
                         color: Color(0x00FFFFFF),
                       ),
@@ -164,7 +170,21 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                   ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Color(0x0079818A),
+                              color: Color(0xFFF6F8F9),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF6F8F9),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF6F8F9),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
@@ -191,75 +211,89 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withOpacity(0.1),
+                          fillColor: Colors.white.withValues(alpha: 0.1),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
                         validator: _model.firstNameControllerValidator
                             .asValidator(context),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          0.0, 15.0, 0.0, 0.0),
-                      child: TextFormField(
-                        controller: _model.lastNameController,
-                        focusNode: _model.lastNameFocusNode,
-                        textInputAction: TextInputAction.next,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          labelStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Nunito Sans',
-                                    color: Colors.black,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey('Nunito Sans'),
-                                  ),
-                          hintText: FFLocalizations.of(context).getText(
-                            'qf8w78qo' /* Enter Your Last Name */,
-                          ),
-                          hintStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Nunito Sans',
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey('Nunito Sans'),
-                                  ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Color(0x0079818A),
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
-                              color: Color(0xFFF6F8F9),
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: FlutterFlowTheme.of(context).error,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          filled: true,
-                          fillColor: Colors.white.withOpacity(0.1),
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
-                        validator: _model.lastNameControllerValidator
-                            .asValidator(context),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsetsDirectional.fromSTEB(
+                    //       0.0, 15.0, 0.0, 0.0),
+                    //   child: TextFormField(
+                    //     controller: _model.lastNameController,
+                    //     focusNode: _model.lastNameFocusNode,
+                    //     textInputAction: TextInputAction.next,
+                    //     obscureText: false,
+                    //     decoration: InputDecoration(
+                    //       labelStyle:
+                    //           FlutterFlowTheme.of(context).labelMedium.override(
+                    //                 fontFamily: 'Nunito Sans',
+                    //                 color: Colors.black,
+                    //                 useGoogleFonts: GoogleFonts.asMap()
+                    //                     .containsKey('Nunito Sans'),
+                    //               ),
+                    //       hintText: FFLocalizations.of(context).getText(
+                    //         'qf8w78qo' /* Enter Your Last Name */,
+                    //       ),
+                    //       hintStyle:
+                    //           FlutterFlowTheme.of(context).labelMedium.override(
+                    //                 fontFamily: 'Nunito Sans',
+                    //                 fontWeight: FontWeight.bold,
+                    //                 useGoogleFonts: GoogleFonts.asMap()
+                    //                     .containsKey('Nunito Sans'),
+                    //               ),
+                    //       enabledBorder: OutlineInputBorder(
+                    //         borderSide: const BorderSide(
+                    //           color: Color(0xFFF6F8F9),
+                    //           width: 1.0,
+                    //         ),
+                    //         borderRadius: BorderRadius.circular(8.0),
+                    //       ),
+                    //       border: OutlineInputBorder(
+                    //         borderSide: const BorderSide(
+                    //           color: Color(0xFFF6F8F9),
+                    //           width: 1.0,
+                    //         ),
+                    //         borderRadius: BorderRadius.circular(8.0),
+                    //       ),
+                    //       disabledBorder: OutlineInputBorder(
+                    //         borderSide: const BorderSide(
+                    //           color: Color(0xFFF6F8F9),
+                    //           width: 1.0,
+                    //         ),
+                    //         borderRadius: BorderRadius.circular(8.0),
+                    //       ),
+                    //       focusedBorder: OutlineInputBorder(
+                    //         borderSide: const BorderSide(
+                    //           color: Color(0xFFF6F8F9),
+                    //           width: 1.0,
+                    //         ),
+                    //         borderRadius: BorderRadius.circular(8.0),
+                    //       ),
+                    //       errorBorder: OutlineInputBorder(
+                    //         borderSide: BorderSide(
+                    //           color: FlutterFlowTheme.of(context).error,
+                    //           width: 1.0,
+                    //         ),
+                    //         borderRadius: BorderRadius.circular(8.0),
+                    //       ),
+                    //       focusedErrorBorder: OutlineInputBorder(
+                    //         borderSide: BorderSide(
+                    //           color: FlutterFlowTheme.of(context).error,
+                    //           width: 1.0,
+                    //         ),
+                    //         borderRadius: BorderRadius.circular(8.0),
+                    //       ),
+                    //       filled: true,
+                    //       fillColor: Colors.white.withValues(alpha: 0.1),
+                    //     ),
+                    //     style: FlutterFlowTheme.of(context).bodyMedium,
+                    //     validator: _model.lastNameControllerValidator
+                    //         .asValidator(context),
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 15.0, 0.0, 0.0),
@@ -288,7 +322,21 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                   ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Color(0x0079818A),
+                              color: Color(0xFFF6F8F9),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF6F8F9),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF6F8F9),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
@@ -315,7 +363,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withOpacity(0.1),
+                          fillColor: Colors.white.withValues(alpha: 0.1),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
                         validator: _model.emailControllerValidator
@@ -350,7 +398,21 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                   ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Color(0x0079818A),
+                              color: Color(0xFFF6F8F9),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF6F8F9),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF6F8F9),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
@@ -377,7 +439,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withOpacity(0.1),
+                          fillColor: Colors.white.withValues(alpha: 0.1),
                           suffixIcon: InkWell(
                             onTap: () => setState(
                               () => _model.passwordVisibility =
@@ -426,7 +488,21 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                                   ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              color: Color(0x0079818A),
+                              color: Color(0xFFF6F8F9),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF6F8F9),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          disabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFFF6F8F9),
                               width: 1.0,
                             ),
                             borderRadius: BorderRadius.circular(8.0),
@@ -453,7 +529,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withOpacity(0.1),
+                          fillColor: Colors.white.withValues(alpha: 0.1),
                           suffixIcon: InkWell(
                             onTap: () => setState(
                               () => _model.confirmPasswordVisibility =
@@ -476,6 +552,91 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                     ),
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 20.0, 0.0, 0.0),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton2<String>(
+                          isExpanded: true,
+                          hint: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  'Choose type',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Nunito Sans',
+                                        fontWeight: FontWeight.bold,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey('Nunito Sans'),
+                                      ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ],
+                          ),
+                          items: items
+                              .map((String item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Nunito Sans',
+                                            color: Colors.black,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey('Nunito Sans'),
+                                          ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ))
+                              .toList(),
+                          value: selectedValue,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedValue = value;
+                            });
+                          },
+                          buttonStyleData: ButtonStyleData(
+                            height: 50,
+                            width: double.infinity,
+                            padding: const EdgeInsets.only(left: 14, right: 14),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14),
+                              border: Border.all(color: Color(0xFFF6F8F9)),
+                              color: Colors.white,
+                            ),
+                            elevation: 0,
+                          ),
+                          iconStyleData: const IconStyleData(
+                            icon: Icon(
+                              Icons.arrow_forward_ios_outlined,
+                            ),
+                            iconSize: 14,
+                            iconEnabledColor: Color(0xFF79818A),
+                            iconDisabledColor: Colors.grey,
+                          ),
+                          dropdownStyleData: DropdownStyleData(
+                            maxHeight: 200,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14),
+                              color: Colors.white,
+                            ),
+                            scrollbarTheme: ScrollbarThemeData(
+                              radius: const Radius.circular(40),
+                              thickness: WidgetStateProperty.all(6),
+                              thumbVisibility: WidgetStateProperty.all(true),
+                            ),
+                          ),
+                          menuItemStyleData: const MenuItemStyleData(
+                            height: 40,
+                            padding: EdgeInsets.only(left: 14, right: 14),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 50.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () => _onPressedRegister(),
@@ -489,7 +650,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                               24.0, 0.0, 24.0, 0.0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: const Color(0xFF1F69F6),
+                          color: const Color(0xFF1A4572),
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Nunito Sans',
@@ -511,7 +672,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                       alignment: const AlignmentDirectional(0.0, 0.0),
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 45.0, 0.0, 0.0),
+                            0.0, 24.0, 0.0, 0.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             '0duuerwu' /* Already have an Account? */,
@@ -545,7 +706,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Nunito Sans',
-                                    color: const Color(0xFF1F69F6),
+                                    color: const Color(0xFF1A4572),
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Nunito Sans'),

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -62,6 +63,19 @@ Future launchURL(String url) async {
   } catch (e) {
     throw 'Could not launch $uri: $e';
   }
+}
+
+Future<bool> isSimulator() async {
+  final deviceInfo = DeviceInfoPlugin();
+
+  if (Platform.isIOS) {
+    final iosInfo = await deviceInfo.iosInfo;
+    return !iosInfo.isPhysicalDevice;
+  } else if (Platform.isAndroid) {
+    final androidInfo = await deviceInfo.androidInfo;
+    return !androidInfo.isPhysicalDevice;
+  }
+  return false;
 }
 
 Color colorFromCssString(String color, {Color? defaultColor}) {

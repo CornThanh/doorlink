@@ -9,7 +9,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 
 export 'package:go_router/go_router.dart';
-
 export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
@@ -79,108 +78,109 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? const DashboardScreenWidget()
+              ? const TabBarScreenWidget()
               : const LoginScreenWidget(),
         ),
-        FFRoute(
-          name: 'language_screen',
-          path: '/languageScreen',
-          builder: (context, params) => LanguageScreenWidget(
-            isChange: params.getParam('isChange', ParamType.bool),
-          ),
-        ),
-        FFRoute(
-          name: 'login_screen',
-          path: '/loginScreen',
-          builder: (context, params) => const LoginScreenWidget(),
-        ),
-        FFRoute(
-          name: 'forgot_password_screen',
-          path: '/forgotPasswordScreen',
-          builder: (context, params) => const ForgotPasswordScreenWidget(),
-        ),
-        FFRoute(
-          name: 'reset_password_screen',
-          path: '/resetPasswordScreen',
-          builder: (context, params) => ResetPasswordScreenWidget(
-            token: params.getParam('token', ParamType.String),
-            email: params.getParam('email', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'dashboard',
-          path: '/dashboard',
-          builder: (context, params) => const DashboardScreenWidget(),
-        ),
-        FFRoute(
-          name: 'vcard_screen',
-          path: '/vcardScreen',
-          builder: (context, params) => VcardScreenWidget(
-            isCreate: params.getParam('isCreate', ParamType.bool) ?? false,
-          ),
-        ),
-        FFRoute(
-          name: 'appointment_screen',
-          path: '/appointmentScreen',
-          builder: (context, params) => AppointmentScreenWidget(
-            vcardID: params.getParam('vcardID', ParamType.int),
-          ),
-        ),
-        FFRoute(
-          name: 'enquiries_screen',
-          path: '/enquiriesScreen',
-          builder: (context, params) => EnquiriesScreenWidget(
-            vcardID: params.getParam('vcardID', ParamType.int),
-          ),
-        ),
-        FFRoute(
-          name: 'setting_screen',
-          path: '/settingScreen',
-          builder: (context, params) => const SettingScreenWidget(),
-        ),
-        FFRoute(
-          name: 'change_password_screen',
-          path: '/changePasswordScreen',
-          builder: (context, params) => const ChangePasswordScreenWidget(),
-        ),
-        FFRoute(
-          name: 'edit_profile_screen',
-          path: '/editProfileScreen',
-          builder: (context, params) => EditProfileScreenWidget(
-            profileData: params.getParam('profileData', ParamType.JSON),
-          ),
-        ),
-        FFRoute(
-          name: 'business_card_screen',
-          path: '/businessCardScreen',
-          builder: (context, params) => const BusinessCardScreenWidget(),
-        ),
-        FFRoute(
-          name: 'phone_number',
-          path: '/phoneNumber',
-          builder: (context, params) => const PhoneNumberScreenWidget(),
-        ),
-        FFRoute(
-          name: 'otp',
-          path: '/otp',
-          builder: (context, params) => OtpScreenWidget(
-            phoneNumber: params.getParam('phoneNumber', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'register_screen',
-          path: '/registerScreen',
-          builder: (context, params) => const RegisterScreenWidget(),
-        ),
-        FFRoute(
-          name: 'update_vcard_screen',
-          path: '/updateVcardScreen',
-          builder: (context, params) {
-            return UpdateVcardScreenWidget(
-              vcardID: params.getParam('vcardID', ParamType.int),
-            );
-          },
-        ),
+
+        // FFRoute(
+        //   name: 'language_screen',
+        //   path: '/languageScreen',
+        //   builder: (context, params) => LanguageScreenWidget(
+        //     isChange: params.getParam('isChange', ParamType.bool),
+        //   ),
+        // ),
+        // FFRoute(
+        //   name: 'login_screen',
+        //   path: '/loginScreen',
+        //   builder: (context, params) => const LoginScreenWidget(),
+        // ),
+        // FFRoute(
+        //   name: 'forgot_password_screen',
+        //   path: '/forgotPasswordScreen',
+        //   builder: (context, params) => const ForgotPasswordScreenWidget(),
+        // ),
+        // FFRoute(
+        //   name: 'reset_password_screen',
+        //   path: '/resetPasswordScreen',
+        //   builder: (context, params) => ResetPasswordScreenWidget(
+        //     token: params.getParam('token', ParamType.String),
+        //     email: params.getParam('email', ParamType.String),
+        //   ),
+        // ),
+        // FFRoute(
+        //   name: 'dashboard',
+        //   path: '/dashboard',
+        //   builder: (context, params) => const DashboardScreenWidget(),
+        // ),
+        // FFRoute(
+        //   name: 'vcard_screen',
+        //   path: '/vcardScreen',
+        //   builder: (context, params) => VcardScreenWidget(
+        //     isCreate: params.getParam('isCreate', ParamType.bool) ?? false,
+        //   ),
+        // ),
+        // FFRoute(
+        //   name: 'appointment_screen',
+        //   path: '/appointmentScreen',
+        //   builder: (context, params) => AppointmentScreenWidget(
+        //     vcardID: params.getParam('vcardID', ParamType.int),
+        //   ),
+        // ),
+        // FFRoute(
+        //   name: 'enquiries_screen',
+        //   path: '/enquiriesScreen',
+        //   builder: (context, params) => EnquiriesScreenWidget(
+        //     vcardID: params.getParam('vcardID', ParamType.int),
+        //   ),
+        // ),
+        // FFRoute(
+        //   name: 'setting_screen',
+        //   path: '/settingScreen',
+        //   builder: (context, params) => const SettingScreenWidget(),
+        // ),
+        // FFRoute(
+        //   name: 'change_password_screen',
+        //   path: '/changePasswordScreen',
+        //   builder: (context, params) => const ChangePasswordScreenWidget(),
+        // ),
+        // FFRoute(
+        //   name: 'edit_profile_screen',
+        //   path: '/editProfileScreen',
+        //   builder: (context, params) => EditProfileScreenWidget(
+        //     profileData: params.getParam('profileData', ParamType.JSON),
+        //   ),
+        // ),
+        // FFRoute(
+        //   name: 'business_card_screen',
+        //   path: '/businessCardScreen',
+        //   builder: (context, params) => const BusinessCardScreenWidget(),
+        // ),
+        // FFRoute(
+        //   name: 'phone_number',
+        //   path: '/phoneNumber',
+        //   builder: (context, params) => const PhoneNumberScreenWidget(),
+        // ),
+        // FFRoute(
+        //   name: 'otp',
+        //   path: '/otp',
+        //   builder: (context, params) => OtpScreenWidget(
+        //     phoneNumber: params.getParam('phoneNumber', ParamType.String),
+        //   ),
+        // ),
+        // FFRoute(
+        //   name: 'register_screen',
+        //   path: '/registerScreen',
+        //   builder: (context, params) => const RegisterScreenWidget(),
+        // ),
+        // FFRoute(
+        //   name: 'update_vcard_screen',
+        //   path: '/updateVcardScreen',
+        //   builder: (context, params) {
+        //     return UpdateVcardScreenWidget(
+        //       vcardID: params.getParam('vcardID', ParamType.int),
+        //     );
+        //   },
+        // ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
@@ -363,13 +363,13 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: const Color(0xff1A1A1A),
+                  color: const Color(0xffffffff),
                   child: Center(
                     child: Image.asset(
-                      'assets/images/app_launcher_icon.png',
-                      width: MediaQuery.sizeOf(context).width * 0.65,
-                      height: MediaQuery.sizeOf(context).height * 0.3,
-                      fit: BoxFit.fitHeight,
+                      'assets/images/splash_image.png',
+                      width: MediaQuery.sizeOf(context).width * 0.7,
+                      height: MediaQuery.sizeOf(context).height * 0.2,
+                      fit: BoxFit.fitWidth,
                     ),
                   ),
                 )

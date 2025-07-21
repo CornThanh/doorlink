@@ -143,244 +143,240 @@ class _SelectGroupDialogBoxWidgetState
                     children: [
                       Builder(
                         builder: (context) {
-                            return FutureBuilder<ApiCallResponse>(
-                              future: VcardGroup.adminGroupCall.call(
-                                authToken: FFAppState().authToken,
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return const Center(
-                                    child: SizedBox(
-                                      width: 50.0,
-                                      height: 50.0,
-                                      child: CupertinoActivityIndicator(color: Colors.white),
-                                    ),
-                                  );
-                                }
-                                final columnAdminGroupResponse = snapshot.data!;
-                                return Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Builder(
-                                      builder: (context) {
-                                        final data = VcardGroup.adminGroupCall
-                                                .data(
-                                                  columnAdminGroupResponse
-                                                      .jsonBody,
-                                                )
-                                                ?.toList() ??
-                                            [];
-                                        if (data.isEmpty) {
-                                          return const EmptyDataComponentWidget();
-                                        }
-                                        return ListView.builder(
-                                          padding: const EdgeInsets.fromLTRB(
-                                            0,
-                                            15.0,
-                                            0,
-                                            0,
-                                          ),
-                                          primary: false,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          itemCount: data.length,
-                                          itemBuilder: (context, dataIndex) {
-                                            final dataItem = data[dataIndex];
-                                            return InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                setState(() {
-                                                  FFAppState()
-                                                          .selectedGroupIndex =
-                                                      dataIndex;
-                                                  FFAppState().selectedGroupId =
-                                                      getJsonField(
-                                                    dataItem,
-                                                    r'''$.id''',
-                                                  );
-                                                });
-                                              },
-                                              child: Container(
-                                                decoration:
-                                                    const BoxDecoration(),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(0.0,
-                                                              0.0, 5.0, 0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Text(
-                                                            getJsonField(
-                                                              dataItem,
-                                                              r'''$.name''',
-                                                            ).toString(),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Nunito Sans',
-                                                                  fontSize:
-                                                                      16.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          'Nunito Sans'),
-                                                                ),
+                          return FutureBuilder<ApiCallResponse>(
+                            future: VcardGroup.adminGroupCall.call(
+                              authToken: FFAppState().authToken,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return const Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CupertinoActivityIndicator(
+                                        color: Colors.white),
+                                  ),
+                                );
+                              }
+                              final columnAdminGroupResponse = snapshot.data!;
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Builder(
+                                    builder: (context) {
+                                      final data = VcardGroup.adminGroupCall
+                                              .data(
+                                                columnAdminGroupResponse
+                                                    .jsonBody,
+                                              )
+                                              ?.toList() ??
+                                          [];
+                                      if (data.isEmpty) {
+                                        return const EmptyDataComponentWidget();
+                                      }
+                                      return ListView.builder(
+                                        padding: const EdgeInsets.fromLTRB(
+                                          0,
+                                          15.0,
+                                          0,
+                                          0,
+                                        ),
+                                        primary: false,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: data.length,
+                                        itemBuilder: (context, dataIndex) {
+                                          final dataItem = data[dataIndex];
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              setState(() {
+                                                FFAppState()
+                                                        .selectedGroupIndex =
+                                                    dataIndex;
+                                                FFAppState().selectedGroupId =
+                                                    getJsonField(
+                                                  dataItem,
+                                                  r'''$.id''',
+                                                );
+                                              });
+                                            },
+                                            child: Container(
+                                              decoration: const BoxDecoration(),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                            0.0, 0.0, 5.0, 0.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          getJsonField(
+                                                            dataItem,
+                                                            r'''$.name''',
+                                                          ).toString(),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Nunito Sans',
+                                                                fontSize: 16.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        'Nunito Sans'),
+                                                              ),
+                                                        ),
+                                                        Container(
+                                                          width: 18.0,
+                                                          height: 18.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: dataIndex ==
+                                                                    FFAppState()
+                                                                        .selectedGroupIndex
+                                                                ? const Color(
+                                                                    0xFF1A4572)
+                                                                : const Color(
+                                                                    0xFFAAB0B8),
+                                                            shape:
+                                                                BoxShape.circle,
                                                           ),
-                                                          Container(
-                                                            width: 18.0,
-                                                            height: 18.0,
+                                                          alignment:
+                                                              const AlignmentDirectional(
+                                                                  0.0, 0.0),
+                                                          child: Container(
+                                                            width: 14.0,
+                                                            height: 14.0,
                                                             decoration:
                                                                 BoxDecoration(
                                                               color: dataIndex ==
                                                                       FFAppState()
                                                                           .selectedGroupIndex
                                                                   ? const Color(
-                                                                      0xFF1F69F6)
-                                                                  : const Color(
-                                                                      0xFFAAB0B8),
+                                                                      0xFF1A4572)
+                                                                  : FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
                                                               shape: BoxShape
                                                                   .circle,
-                                                            ),
-                                                            alignment:
-                                                                const AlignmentDirectional(
-                                                                    0.0, 0.0),
-                                                            child: Container(
-                                                              width: 14.0,
-                                                              height: 14.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: dataIndex ==
-                                                                        FFAppState()
-                                                                            .selectedGroupIndex
-                                                                    ? const Color(
-                                                                        0xFF1F69F6)
-                                                                    : FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                                border:
-                                                                    Border.all(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
-                                                                  width: 2.5,
-                                                                ),
+                                                              border:
+                                                                  Border.all(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryBackground,
+                                                                width: 2.5,
                                                               ),
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    const Divider(
-                                                      height: 25.0,
-                                                      thickness: 0.5,
-                                                      color: Color(0xFFAAB0B8),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ),
-                                    Builder(
-                                      builder: (context) => Padding(
-                                        padding: const EdgeInsetsDirectional
-                                            .fromSTEB(0.0, 2.0, 2.5, 0.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.safePop();
-                                            await showDialog(
-                                              context: context,
-                                              builder: (dialogContext) {
-                                                return Dialog(
-                                                  elevation: 1,
-                                                  insetPadding: EdgeInsets.zero,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  alignment:
-                                                      const AlignmentDirectional(
-                                                              0.0, 0.0)
-                                                          .resolve(
-                                                              Directionality.of(
-                                                                  context)),
-                                                  child:
-                                                      AddGroupComponentWidget(
-                                                    data: VcardGroup
-                                                        .adminGroupCall
-                                                        .data(
-                                                      columnAdminGroupResponse
-                                                          .jsonBody,
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                );
-                                              },
-                                            ).then((value) => setState(() {}));
-                                          },
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  '519lfi78' /* Add Group */,
+                                                  const Divider(
+                                                    height: 25.0,
+                                                    thickness: 0.5,
+                                                    color: Color(0xFFAAB0B8),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                  Builder(
+                                    builder: (context) => Padding(
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 2.0, 2.5, 0.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.safePop();
+                                          await showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return Dialog(
+                                                elevation: 1,
+                                                insetPadding: EdgeInsets.zero,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                alignment:
+                                                    const AlignmentDirectional(
+                                                            0.0, 0.0)
+                                                        .resolve(
+                                                            Directionality.of(
+                                                                context)),
+                                                child: AddGroupComponentWidget(
+                                                  data: VcardGroup
+                                                      .adminGroupCall
+                                                      .data(
+                                                    columnAdminGroupResponse
+                                                        .jsonBody,
+                                                  ),
                                                 ),
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Nunito Sans',
-                                                      fontSize: 16.0,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      useGoogleFonts:
-                                                          GoogleFonts.asMap()
-                                                              .containsKey(
-                                                                  'Nunito Sans'),
-                                                    ),
+                                              );
+                                            },
+                                          ).then((value) => setState(() {}));
+                                        },
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '519lfi78' /* Add Group */,
                                               ),
-                                              const Icon(
-                                                Icons.add,
-                                                color: Colors.black,
-                                                size: 24.0,
-                                              ),
-                                            ],
-                                          ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Nunito Sans',
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.w600,
+                                                    useGoogleFonts:
+                                                        GoogleFonts.asMap()
+                                                            .containsKey(
+                                                                'Nunito Sans'),
+                                                  ),
+                                            ),
+                                            const Icon(
+                                              Icons.add,
+                                              color: Colors.black,
+                                              size: 24.0,
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                  ],
-                                );
-                              },
-                            );
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
                       ),
                     ],
@@ -393,14 +389,13 @@ class _SelectGroupDialogBoxWidgetState
                 child: FFButtonWidget(
                   onPressed: () async {
                     if (FFAppState().selectedGroupId != 0) {
-                        _model.adminBusinessRes =
-                            await VcardGroup.adminBusinessCardCall.call(
-                          authToken: FFAppState().authToken,
-                        );
-                        _model.adminGroup =
-                            await VcardGroup.adminGroupCall.call(
-                          authToken: FFAppState().authToken,
-                        );
+                      _model.adminBusinessRes =
+                          await VcardGroup.adminBusinessCardCall.call(
+                        authToken: FFAppState().authToken,
+                      );
+                      _model.adminGroup = await VcardGroup.adminGroupCall.call(
+                        authToken: FFAppState().authToken,
+                      );
 
                       if (functions.businessCardValidator(
                               VcardGroup.adminBusinessCardCall
@@ -423,38 +418,38 @@ class _SelectGroupDialogBoxWidgetState
                         );
                         if ((_model.apiResultzh2?.succeeded ?? true)) {
                           if (FFAppState().isBusinessScreenSelected) {
-                              _model.updatePage(() {
-                                FFAppState().isAPILoading = true;
-                              });
-                              _model.admingroupRes1 =
-                                  await VcardGroup.adminGroupCall.call(
-                                authToken: FFAppState().authToken,
-                              );
-                              _model.adminbusinesscardRes1 =
-                                  await VcardGroup.adminBusinessCardCall.call(
-                                authToken: FFAppState().authToken,
-                              );
-                              FFAppState().update(() {
-                                FFAppState().businessGroupList = VcardGroup
-                                    .adminGroupCall
-                                    .data(
-                                      (_model.admingroupRes1?.jsonBody ?? ''),
-                                    )!
-                                    .toList()
-                                    .cast<dynamic>();
-                                FFAppState().businessCardList = VcardGroup
-                                    .adminBusinessCardCall
-                                    .data(
-                                      (_model.adminbusinesscardRes1?.jsonBody ??
-                                          ''),
-                                    )!
-                                    .toList()
-                                    .cast<dynamic>();
-                              });
-                              _model.updatePage(() {
-                                FFAppState().isAPILoading = false;
-                                FFAppState().isBusinessScreenSelected = false;
-                              });
+                            _model.updatePage(() {
+                              FFAppState().isAPILoading = true;
+                            });
+                            _model.admingroupRes1 =
+                                await VcardGroup.adminGroupCall.call(
+                              authToken: FFAppState().authToken,
+                            );
+                            _model.adminbusinesscardRes1 =
+                                await VcardGroup.adminBusinessCardCall.call(
+                              authToken: FFAppState().authToken,
+                            );
+                            FFAppState().update(() {
+                              FFAppState().businessGroupList =
+                                  VcardGroup.adminGroupCall
+                                      .data(
+                                        (_model.admingroupRes1?.jsonBody ?? ''),
+                                      )!
+                                      .toList()
+                                      .cast<dynamic>();
+                              FFAppState().businessCardList = VcardGroup
+                                  .adminBusinessCardCall
+                                  .data(
+                                    (_model.adminbusinesscardRes1?.jsonBody ??
+                                        ''),
+                                  )!
+                                  .toList()
+                                  .cast<dynamic>();
+                            });
+                            _model.updatePage(() {
+                              FFAppState().isAPILoading = false;
+                              FFAppState().isBusinessScreenSelected = false;
+                            });
                           }
                           context.safePop();
                           await actions.customSnackbar(
@@ -516,7 +511,7 @@ class _SelectGroupDialogBoxWidgetState
                         24.0, 0.0, 24.0, 0.0),
                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
                         0.0, 0.0, 0.0, 0.0),
-                    color: const Color(0xFF1F69F6),
+                    color: const Color(0xFF1A4572),
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Nunito Sans',
                           color: Colors.white,

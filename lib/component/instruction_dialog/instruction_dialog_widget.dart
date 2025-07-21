@@ -66,7 +66,8 @@ class _InstructionDialogWidgetState extends State<InstructionDialogWidget> {
                     ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
                     '4pub3o54' /* Go to settings and follow belo... */,
@@ -81,7 +82,8 @@ class _InstructionDialogWidgetState extends State<InstructionDialogWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
                     'srbg7bto' /* 1. Open app setting. */,
@@ -96,7 +98,8 @@ class _InstructionDialogWidgetState extends State<InstructionDialogWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
                     'mnx423h5' /* 2. Tap into “Open by default”. */,
@@ -111,7 +114,8 @@ class _InstructionDialogWidgetState extends State<InstructionDialogWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
                     'kbp5yjef' /* 3. Add link, and select availa... */,
@@ -126,7 +130,8 @@ class _InstructionDialogWidgetState extends State<InstructionDialogWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
                     'ppow7hza' /* 4. Now, open your reset passwo... */,
@@ -141,7 +146,8 @@ class _InstructionDialogWidgetState extends State<InstructionDialogWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(25.0, 25.0, 25.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(25.0, 25.0, 25.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     await actions.openSettings(
@@ -154,11 +160,11 @@ class _InstructionDialogWidgetState extends State<InstructionDialogWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 40.0,
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: const Color(0xFF1F69F6),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        24.0, 0.0, 24.0, 0.0),
+                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 0.0),
+                    color: const Color(0xFF1A4572),
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Nunito Sans',
                           color: Colors.white,

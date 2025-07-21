@@ -129,7 +129,7 @@ class _VcardSheetWidgetState extends State<CreateVcardSheetWidget> {
                                 borderRadius: 20.0,
                                 borderWidth: 1.0,
                                 buttonSize: 40.0,
-                                fillColor: const Color(0xFF1F69F6),
+                                fillColor: const Color(0xFF1A4572),
                                 icon: const Icon(
                                   Icons.edit,
                                   color: Colors.white,
@@ -194,7 +194,7 @@ class _VcardSheetWidgetState extends State<CreateVcardSheetWidget> {
                               width: 40.0,
                               height: 40.0,
                               decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.3),
+                                color: Colors.black.withValues(alpha: .3),
                                 image: _model.avatarUploadedLocalFile.bytes
                                             ?.isNotEmpty ==
                                         true
@@ -228,7 +228,7 @@ class _VcardSheetWidgetState extends State<CreateVcardSheetWidget> {
                                       borderRadius: 20.0,
                                       borderWidth: 1.0,
                                       buttonSize: 40.0,
-                                      fillColor: const Color(0xFF1F69F6),
+                                      fillColor: const Color(0xFF1A4572),
                                       icon: const Icon(
                                         Icons.camera_alt,
                                         color: Colors.white,
@@ -348,7 +348,7 @@ class _VcardSheetWidgetState extends State<CreateVcardSheetWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
-                        fillColor: Colors.white.withOpacity(0.1),
+                        fillColor: Colors.white.withValues(alpha: .1),
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       validator:
@@ -410,7 +410,7 @@ class _VcardSheetWidgetState extends State<CreateVcardSheetWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
-                        fillColor: Colors.white.withOpacity(0.1),
+                        fillColor: Colors.white.withValues(alpha: .1),
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       validator:
@@ -472,7 +472,7 @@ class _VcardSheetWidgetState extends State<CreateVcardSheetWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
-                        fillColor: Colors.white.withOpacity(0.1),
+                        fillColor: Colors.white.withValues(alpha: .1),
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       validator: _model.firstNameControllerValidator
@@ -534,7 +534,7 @@ class _VcardSheetWidgetState extends State<CreateVcardSheetWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
-                        fillColor: Colors.white.withOpacity(0.1),
+                        fillColor: Colors.white.withValues(alpha: .1),
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium,
                       validator: _model.lastNameControllerValidator
@@ -559,7 +559,7 @@ class _VcardSheetWidgetState extends State<CreateVcardSheetWidget> {
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 0.0, 0.0, 0.0),
-                        color: const Color(0xFF1F69F6),
+                        color: const Color(0xFF1A4572),
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Nunito Sans',

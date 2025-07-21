@@ -45,8 +45,8 @@ class ApiCallRecord extends Equatable {
 }
 
 class ApiCallResponse<T> {
-  const ApiCallResponse(this.jsonBody, this.data, this.headers, this.statusCode,
-      this.message,
+  const ApiCallResponse(
+      this.jsonBody, this.data, this.headers, this.statusCode, this.message,
       {this.response});
 
   final dynamic jsonBody;
@@ -416,9 +416,7 @@ class ApiManager {
         _apiCache[callRecord] = result;
       }
     } catch (e) {
-      result = const ApiCallResponse(
-        null, null, {},
-        -1, null);
+      result = const ApiCallResponse(null, null, {}, -1, null);
     }
 
     return result;

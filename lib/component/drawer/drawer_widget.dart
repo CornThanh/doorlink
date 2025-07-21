@@ -98,7 +98,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   leading: Icon(
                     Icons.pie_chart_sharp,
                     color: FFAppState().selectedDrawerPage == 'Dashboard'
-                        ? const Color(0xFF1F69F6)
+                        ? const Color(0xFF1A4572)
                         : const Color(0xFFAAB0B8),
                   ),
                   title: Text(
@@ -143,7 +143,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   leading: Icon(
                     Icons.qr_code_scanner_sharp,
                     color: FFAppState().selectedDrawerPage == 'ScanBusinessCard'
-                        ? const Color(0xFF1F69F6)
+                        ? const Color(0xFF1A4572)
                         : const Color(0xFFAAB0B8),
                   ),
                   title: Text(
@@ -191,7 +191,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 leading: Icon(
                   Icons.business_center,
                   color: FFAppState().selectedDrawerPage == 'VCards'
-                      ? const Color(0xFF1F69F6)
+                      ? const Color(0xFF1A4572)
                       : const Color(0xFFAAB0B8),
                 ),
                 title: Text(
@@ -213,102 +213,102 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           ),
 
           Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.safePop();
-                  if (FFAppState().selectedDrawerPage != 'Enquiries') {
-                    context.goNamed(
-                      'enquiries_screen',
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.fade,
-                          duration: Duration(milliseconds: 300),
-                        ),
-                      },
-                    );
-                  }
-                  FFAppState().selectedDrawerPage = 'Enquiries';
-                  FFAppState().isVcardEnquiry = false;
-                },
-                child: ListTile(
-                  leading: Icon(
-                    Icons.info,
-                    color: FFAppState().selectedDrawerPage == 'Enquiries'
-                        ? const Color(0xFF1F69F6)
-                        : const Color(0xFFAAB0B8),
-                  ),
-                  title: Text(
-                    FFLocalizations.of(context).getText(
-                      'uvnyicos' /* Enquiries */,
-                    ),
-                    style: FlutterFlowTheme.of(context).titleLarge.override(
-                          fontFamily: 'Nunito Sans',
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts:
-                              GoogleFonts.asMap().containsKey('Nunito Sans'),
-                        ),
-                  ),
-                  tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  dense: false,
+            padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+            child: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.safePop();
+                if (FFAppState().selectedDrawerPage != 'Enquiries') {
+                  context.goNamed(
+                    'enquiries_screen',
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: const TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 300),
+                      ),
+                    },
+                  );
+                }
+                FFAppState().selectedDrawerPage = 'Enquiries';
+                FFAppState().isVcardEnquiry = false;
+              },
+              child: ListTile(
+                leading: Icon(
+                  Icons.info,
+                  color: FFAppState().selectedDrawerPage == 'Enquiries'
+                      ? const Color(0xFF1A4572)
+                      : const Color(0xFFAAB0B8),
                 ),
+                title: Text(
+                  FFLocalizations.of(context).getText(
+                    'uvnyicos' /* Enquiries */,
+                  ),
+                  style: FlutterFlowTheme.of(context).titleLarge.override(
+                        fontFamily: 'Nunito Sans',
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        useGoogleFonts:
+                            GoogleFonts.asMap().containsKey('Nunito Sans'),
+                      ),
+                ),
+                tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                dense: false,
               ),
             ),
+          ),
 
           Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  context.safePop();
-                  if (FFAppState().selectedDrawerPage != 'Appointments') {
-                    context.goNamed(
-                      'appointment_screen',
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.fade,
-                          duration: Duration(milliseconds: 300),
-                        ),
-                      },
-                    );
-                  }
-                  FFAppState().selectedDrawerPage = 'Appointments';
-                  FFAppState().isVcardAppointment = false;
-                },
-                child: ListTile(
-                  leading: Icon(
-                    Icons.calendar_month,
-                    color: FFAppState().selectedDrawerPage == 'Appointments'
-                        ? const Color(0xFF1F69F6)
-                        : const Color(0xFFAAB0B8),
-                  ),
-                  title: Text(
-                    FFLocalizations.of(context).getText(
-                      'ujuhl9mw' /* Appointments */,
-                    ),
-                    style: FlutterFlowTheme.of(context).titleLarge.override(
-                          fontFamily: 'Nunito Sans',
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          useGoogleFonts:
-                              GoogleFonts.asMap().containsKey('Nunito Sans'),
-                        ),
-                  ),
-                  tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  dense: false,
+            padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+            child: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                context.safePop();
+                if (FFAppState().selectedDrawerPage != 'Appointments') {
+                  context.goNamed(
+                    'appointment_screen',
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: const TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 300),
+                      ),
+                    },
+                  );
+                }
+                FFAppState().selectedDrawerPage = 'Appointments';
+                FFAppState().isVcardAppointment = false;
+              },
+              child: ListTile(
+                leading: Icon(
+                  Icons.calendar_month,
+                  color: FFAppState().selectedDrawerPage == 'Appointments'
+                      ? const Color(0xFF1A4572)
+                      : const Color(0xFFAAB0B8),
                 ),
+                title: Text(
+                  FFLocalizations.of(context).getText(
+                    'ujuhl9mw' /* Appointments */,
+                  ),
+                  style: FlutterFlowTheme.of(context).titleLarge.override(
+                        fontFamily: 'Nunito Sans',
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        useGoogleFonts:
+                            GoogleFonts.asMap().containsKey('Nunito Sans'),
+                      ),
+                ),
+                tileColor: FlutterFlowTheme.of(context).secondaryBackground,
+                dense: false,
               ),
             ),
+          ),
           // Padding(
           //   padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
           //   child: InkWell(
@@ -337,7 +337,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           //       leading: Icon(
           //         Icons.perm_contact_cal_rounded,
           //         color: FFAppState().selectedDrawerPage == 'BusinessCards'
-          //             ? const Color(0xFF1F69F6)
+          //             ? const Color(0xFF1A4572)
           //             : const Color(0xFFAAB0B8),
           //       ),
           //       title: Text(
@@ -384,7 +384,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 leading: Icon(
                   Icons.settings_rounded,
                   color: FFAppState().selectedDrawerPage == 'Settings'
-                      ? const Color(0xFF1F69F6)
+                      ? const Color(0xFF1A4572)
                       : const Color(0xFFAAB0B8),
                 ),
                 title: Text(

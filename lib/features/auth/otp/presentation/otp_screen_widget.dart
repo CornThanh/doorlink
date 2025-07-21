@@ -205,7 +205,7 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 0.0, 0.0, 0.0),
-                        color: const Color(0xFF1F69F6),
+                        color: const Color(0xFF1A4572),
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Nunito Sans',
@@ -244,7 +244,7 @@ class _OtpScreenWidgetState extends State<OtpScreenWidget> {
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Nunito Sans',
-                                  color: const Color(0xFF1F69F6),
+                                  color: const Color(0xFF1A4572),
                                   fontWeight: FontWeight.bold,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey('Nunito Sans'),

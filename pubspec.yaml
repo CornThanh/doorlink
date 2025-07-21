@@ -25,9 +25,9 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  app_settings: ^5.1.1
+  app_settings: 4.1.1
   auto_size_text: 3.0.0
-  collection: 1.18.0
+  collection: ^1.19.1
   country_code_picker: ^3.0.0
   equatable: ^2.0.7
   file_picker: ^8.0.0+1
@@ -61,6 +61,7 @@ dependencies:
   video_player: ^2.9.2
   flutter_cache_manager: ^3.4.1
   pin_code_fields: ^8.0.1
+  device_info_plus: ^9.1.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -72,6 +73,8 @@ dependencies:
   firebase_messaging: ^14.7.19
   pretty_http_logger: any
   flutter_local_notifications: ^18.0.1
+  dropdown_button2: ^2.3.9
+  persistent_bottom_nav_bar: ^6.2.1
 
 dependency_overrides:
   http: 1.2.0

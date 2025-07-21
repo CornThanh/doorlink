@@ -155,7 +155,7 @@ class _ChangePasswordScreenWidgetState
                       ),
                     ),
                     filled: true,
-                    fillColor: Colors.white.withOpacity(0.1),
+                    fillColor: Colors.white.withValues(alpha: 0.1),
                     enabledBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
                         color: Color(0x0079818A),
@@ -234,7 +234,7 @@ class _ChangePasswordScreenWidgetState
                       ),
                     ),
                     filled: true,
-                    fillColor: Colors.white.withOpacity(0.1),
+                    fillColor: Colors.white.withValues(alpha: 0.1),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium,
                   validator: _model.newPasswordControllerValidator
@@ -306,7 +306,7 @@ class _ChangePasswordScreenWidgetState
                       ),
                     ),
                     filled: true,
-                    fillColor: Colors.white.withOpacity(0.1),
+                    fillColor: Colors.white.withValues(alpha: 0.1),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium,
                   validator: _model.confirmPasswordControllerValidator
@@ -334,7 +334,7 @@ class _ChangePasswordScreenWidgetState
                               24.0, 0.0, 24.0, 0.0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: const Color(0xFF1F69F6),
+                          color: const Color(0xFF1A4572),
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Nunito Sans',

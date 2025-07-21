@@ -237,7 +237,7 @@ class _UpdateVcardScreenWidgetState extends State<UpdateVcardScreenWidget> {
                     ),
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
                           fontFamily: 'Nunito Sans',
-                          color: const Color(0xFF1F69F6),
+                          color: const Color(0xFF1A4572),
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
                           useGoogleFonts:
@@ -293,12 +293,12 @@ class _UpdateVcardScreenWidgetState extends State<UpdateVcardScreenWidget> {
                                   color: dataIndex ==
                                           FFAppState().selectedVcardGroupIndex
                                       ? const Color(0x1A1F69F6)
-                                      : Colors.white.withOpacity(0.1),
+                                      : Colors.white.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(20.0),
                                   border: Border.all(
                                     color: dataIndex ==
                                             FFAppState().selectedVcardGroupIndex
-                                        ? const Color(0xFF1F69F6)
+                                        ? const Color(0xFF1A4572)
                                         : const Color(0x00FFFFFF),
                                   ),
                                 ),
@@ -318,7 +318,7 @@ class _UpdateVcardScreenWidgetState extends State<UpdateVcardScreenWidget> {
                                           color: dataIndex ==
                                                   FFAppState()
                                                       .selectedVcardGroupIndex
-                                              ? const Color(0xFF1F69F6)
+                                              ? const Color(0xFF1A4572)
                                               : Colors.white,
                                           fontSize: 15.0,
                                           fontWeight: FontWeight.bold,

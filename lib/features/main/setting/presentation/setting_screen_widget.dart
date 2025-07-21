@@ -70,233 +70,235 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
             child: const DrawerWidget(),
           ),
         ),
-        appBar: AppBar(
-          backgroundColor: const Color(0xff333333),
-          automaticallyImplyLeading: false,
-          leading: InkWell(
-            splashColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () async {
-              scaffoldKey.currentState!.openDrawer();
-            },
-            child: Container(
-              decoration: const BoxDecoration(),
-              child: const Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
-                child: SizedBox(
-                  width: 100.0,
-                  height: 100.0,
-                  child: Icon(Icons.menu),
-                ),
-              ),
-            ),
-          ),
-          title: Text(
-            FFLocalizations.of(context).getText(
-              '2vqrk4yt' /* Settings */,
-            ),
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Nunito Sans',
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
-                  useGoogleFonts:
-                      GoogleFonts.asMap().containsKey('Nunito Sans'),
-                ),
-          ),
-          centerTitle: true,
-          elevation: 1.0,
-        ),
-        body: Stack(
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsetsDirectional.fromSTEB(15.0, 20.0, 15.0, 20.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    FutureBuilder<ApiCallResponse>(
-                      future: VcardGroup.profileCall.call(
-                        authToken: FFAppState().authToken,
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 40.0,
-                              height: 40.0,
-                              child: CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  FlutterFlowTheme.of(context).primary,
+        // appBar: AppBar(
+        //   backgroundColor: const Color(0xff333333),
+        //   automaticallyImplyLeading: false,
+        //   leading: InkWell(
+        //     splashColor: Colors.transparent,
+        //     focusColor: Colors.transparent,
+        //     hoverColor: Colors.transparent,
+        //     highlightColor: Colors.transparent,
+        //     onTap: () async {
+        //       scaffoldKey.currentState!.openDrawer();
+        //     },
+        //     child: Container(
+        //       decoration: const BoxDecoration(),
+        //       child: const Padding(
+        //         padding: EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
+        //         child: SizedBox(
+        //           width: 100.0,
+        //           height: 100.0,
+        //           child: Icon(Icons.menu),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        //   title: Text(
+        //     FFLocalizations.of(context).getText(
+        //       '2vqrk4yt' /* Settings */,
+        //     ),
+        //     style: FlutterFlowTheme.of(context).headlineMedium.override(
+        //           fontFamily: 'Nunito Sans',
+        //           color: Colors.white,
+        //           fontSize: 22.0,
+        //           fontWeight: FontWeight.bold,
+        //           useGoogleFonts:
+        //               GoogleFonts.asMap().containsKey('Nunito Sans'),
+        //         ),
+        //   ),
+        //   centerTitle: true,
+        //   elevation: 1.0,
+        // ),
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(
+                    15.0, 20.0, 15.0, 20.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      FutureBuilder<ApiCallResponse>(
+                        future: VcardGroup.profileCall.call(
+                          authToken: FFAppState().authToken,
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 40.0,
+                                height: 40.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        }
-                        final columnProfileResponse = snapshot.data!;
-                        return Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(50.0),
-                                  bottomRight: Radius.circular(50.0),
-                                  topLeft: Radius.circular(50.0),
-                                  topRight: Radius.circular(50.0),
-                                ),
-                                child: Image.network(
-                                  VcardGroup.profileCall.image(
-                                    columnProfileResponse.jsonBody,
-                                  )!,
-                                  width: 90.0,
-                                  height: 90.0,
-                                  fit: BoxFit.cover,
+                            );
+                          }
+                          final columnProfileResponse = snapshot.data!;
+                          return Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: ClipRRect(
+                                  borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(50.0),
+                                    bottomRight: Radius.circular(50.0),
+                                    topLeft: Radius.circular(50.0),
+                                    topRight: Radius.circular(50.0),
+                                  ),
+                                  child: Image.network(
+                                    VcardGroup.profileCall.image(
+                                      columnProfileResponse.jsonBody,
+                                    )!,
+                                    width: 90.0,
+                                    height: 90.0,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 10.0, 0.0, 0.0),
-                              child: Text(
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 10.0, 0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    VcardGroup.profileCall.firstName(
+                                      columnProfileResponse.jsonBody,
+                                    ),
+                                    'firstName',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Nunito Sans',
+                                        color: Colors.white,
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.bold,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey('Nunito Sans'),
+                                      ),
+                                ),
+                              ),
+                              Text(
                                 valueOrDefault<String>(
-                                  VcardGroup.profileCall.firstName(
+                                  VcardGroup.profileCall.email(
                                     columnProfileResponse.jsonBody,
                                   ),
-                                  'firstName',
+                                  'email',
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Nunito Sans',
-                                      color: Colors.white,
-                                      fontSize: 18.0,
+                                      color: const Color(0xFF79818A),
+                                      fontSize: 14.0,
                                       fontWeight: FontWeight.bold,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey('Nunito Sans'),
                                     ),
                               ),
-                            ),
-                            Text(
-                              valueOrDefault<String>(
-                                VcardGroup.profileCall.email(
-                                  columnProfileResponse.jsonBody,
-                                ),
-                                'email',
-                              ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Nunito Sans',
-                                    color: const Color(0xFF79818A),
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey('Nunito Sans'),
-                                  ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 20.0, 0.0, 0.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () => _onPressedEditProfile(
-                                    columnProfileResponse.jsonBody),
-                                child: Container(
-                                  width:
-                                      MediaQuery.sizeOf(context).width * 0.38,
-                                  height: 35.0,
-                                  decoration: BoxDecoration(
-                                    color: const Color(0xFF1F69F6),
-                                    borderRadius: BorderRadius.circular(30.0),
-                                  ),
-                                  alignment:
-                                      const AlignmentDirectional(0.0, 0.0),
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 0.0, 10.0, 0.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'mg8rhguv' /* Edit Profile */,
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 20.0, 0.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () => _onPressedEditProfile(
+                                      columnProfileResponse.jsonBody),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.38,
+                                    height: 35.0,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF1A4572),
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                    alignment:
+                                        const AlignmentDirectional(0.0, 0.0),
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              10.0, 0.0, 10.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            FFLocalizations.of(context).getText(
+                                              'mg8rhguv' /* Edit Profile */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Nunito Sans',
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600,
+                                                  useGoogleFonts:
+                                                      GoogleFonts.asMap()
+                                                          .containsKey(
+                                                              'Nunito Sans'),
+                                                ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Nunito Sans',
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600,
-                                                useGoogleFonts:
-                                                    GoogleFonts.asMap()
-                                                        .containsKey(
-                                                            'Nunito Sans'),
-                                              ),
-                                        ),
-                                        const Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 0.0, 0.0),
-                                          child: Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            color: Colors.white,
-                                            size: 15.0,
+                                          const Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    15.0, 0.0, 0.0, 0.0),
+                                            child: Icon(
+                                              Icons.arrow_forward_ios_rounded,
+                                              color: Colors.white,
+                                              size: 15.0,
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 16),
-                            ListView.separated(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemBuilder: _itemBuilder,
-                              separatorBuilder: _separatorBuilder,
-                              itemCount: SettingScreenItems.values.length,
-                            )
-                          ],
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            if (FFAppState().isLoading)
-              Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                ),
-                child: const Align(
-                  alignment: AlignmentDirectional(0.0, 0.0),
-                  child: SizedBox(
-                    width: 100.0,
-                    height: 100.0,
-                    child: custom_widgets.CustomLoader(
-                      width: 100.0,
-                      height: 100.0,
-                    ),
+                              const SizedBox(height: 16),
+                              ListView.separated(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: _itemBuilder,
+                                separatorBuilder: _separatorBuilder,
+                                itemCount: SettingScreenItems.values.length,
+                              )
+                            ],
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
               ),
-          ],
+              if (FFAppState().isLoading)
+                Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child: const Align(
+                    alignment: AlignmentDirectional(0.0, 0.0),
+                    child: SizedBox(
+                      width: 100.0,
+                      height: 100.0,
+                      child: custom_widgets.CustomLoader(
+                        width: 100.0,
+                        height: 100.0,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
@@ -353,7 +355,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
   Widget _separatorBuilder(BuildContext context, int index) {
     return Divider(
       thickness: 0.5,
-      color: Colors.white.withOpacity(0.2),
+      color: Colors.white.withValues(alpha: .2),
     );
   }
 

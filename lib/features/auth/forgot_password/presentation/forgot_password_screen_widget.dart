@@ -219,7 +219,7 @@ class _ForgotPasswordScreenWidgetState
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               filled: true,
-                              fillColor: Colors.white.withOpacity(0.1),
+                              fillColor: Colors.white.withValues(alpha: .1),
                             ),
                             style: FlutterFlowTheme.of(context).bodyMedium,
                             validator: _model.emailControllerValidator
@@ -243,7 +243,7 @@ class _ForgotPasswordScreenWidgetState
                                 iconPadding:
                                     const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                color: const Color(0xFF1F69F6),
+                                color: const Color(0xFF1A4572),
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(

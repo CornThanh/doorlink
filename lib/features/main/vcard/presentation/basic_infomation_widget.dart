@@ -68,7 +68,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                         borderRadius: 20.0,
                         borderWidth: 1.0,
                         buttonSize: 40.0,
-                        fillColor: const Color(0xFF1F69F6),
+                        fillColor: const Color(0xFF1A4572),
                         icon: const Icon(
                           Icons.edit,
                           color: Colors.white,
@@ -130,7 +130,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                                 borderRadius: 20.0,
                                 borderWidth: 1.0,
                                 buttonSize: 40.0,
-                                fillColor: const Color(0xFF1F69F6),
+                                fillColor: const Color(0xFF1A4572),
                                 icon: const Icon(
                                   Icons.camera_alt,
                                   color: Colors.white,
@@ -214,7 +214,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator:
@@ -272,7 +272,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator:
@@ -331,7 +331,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator: widget.model.occupationControllerValidator
@@ -389,7 +389,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator: widget.model.descriptionControllerValidator
@@ -462,7 +462,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator: widget.model.firstNameControllerValidator
@@ -520,7 +520,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator:
@@ -578,7 +578,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator:
@@ -636,7 +636,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator:
@@ -694,7 +694,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator:
@@ -753,7 +753,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator: widget.model.dateOfBirthControllerValidator
@@ -811,7 +811,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator:
@@ -869,7 +869,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
               ),
               style: FlutterFlowTheme.of(context).bodyMedium,
               validator:

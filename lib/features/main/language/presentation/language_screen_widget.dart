@@ -118,7 +118,7 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Nunito Sans',
-                            color: const Color(0xFF1F69F6),
+                            color: const Color(0xFF1A4572),
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
                             useGoogleFonts:
@@ -186,7 +186,7 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
             borderRadius: BorderRadius.circular(10.0),
             border: Border.all(
               color: dataItem.id == FFAppState().selectLanguageIndex
-                  ? const Color(0xFF1F69F6)
+                  ? const Color(0xFF1A4572)
                   : FlutterFlowTheme.of(context).primary,
               width: 1.5,
             ),

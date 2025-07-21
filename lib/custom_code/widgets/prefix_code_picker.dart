@@ -22,7 +22,6 @@ class _PrefixCodePickerState extends State<PrefixCodePicker> {
   String code = '';
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     String prefix = widget.code.substring(0, 1);
 
