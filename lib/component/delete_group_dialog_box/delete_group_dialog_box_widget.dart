@@ -1,3 +1,4 @@
+import 'package:MeU/features/main/business_card/repository/business_card_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -187,7 +188,7 @@ class _DeleteGroupDialogBoxWidgetState
                                                                 FFAppState()
                                                                     .selectedGroupIndex
                                                             ? const Color(
-                                                                0xFF1A4572)
+                                                                0xFF1F69F6)
                                                             : const Color(
                                                                 0xFFAAB0B8),
                                                         shape: BoxShape.circle,
@@ -204,7 +205,7 @@ class _DeleteGroupDialogBoxWidgetState
                                                                   FFAppState()
                                                                       .selectedGroupIndex
                                                               ? const Color(
-                                                                  0xFF1A4572)
+                                                                  0xFF1F69F6)
                                                               : FlutterFlowTheme
                                                                       .of(context)
                                                                   .primary,
@@ -267,7 +268,7 @@ class _DeleteGroupDialogBoxWidgetState
                             authToken: FFAppState().authToken,
                           );
                           _model.adminbusinesscardRes1 =
-                              await VcardGroup.adminBusinessCardCall.call(
+                              await BusinessCardRepository.getBusinessCard(
                             authToken: FFAppState().authToken,
                           );
                           FFAppState().update(() {
@@ -279,11 +280,9 @@ class _DeleteGroupDialogBoxWidgetState
                                     .toList()
                                     .cast<dynamic>();
                             FFAppState().businessCardList =
-                                VcardGroup.adminBusinessCardCall
-                                    .data(
-                                      (_model.adminbusinesscardRes1?.jsonBody ??
-                                          ''),
-                                    )!
+                                BusinessCardRepository.data(
+                              (_model.adminbusinesscardRes1?.jsonBody ?? ''),
+                            )!
                                     .toList()
                                     .cast<dynamic>();
                           });
@@ -336,7 +335,7 @@ class _DeleteGroupDialogBoxWidgetState
                           24.0, 0.0, 24.0, 0.0),
                       iconPadding: const EdgeInsetsDirectional.fromSTEB(
                           0.0, 0.0, 0.0, 0.0),
-                      color: const Color(0xFF1A4572),
+                      color: const Color(0xFF1F69F6),
                       textStyle: FlutterFlowTheme.of(context)
                           .titleSmall
                           .override(

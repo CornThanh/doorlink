@@ -1,3 +1,4 @@
+import 'package:MeU/features/main/business_card/repository/business_card_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,15 +18,14 @@ import 'business_card_screen_model.dart';
 
 export 'business_card_screen_model.dart';
 
-class BusinessCardScreenWidget extends StatefulWidget {
-  const BusinessCardScreenWidget({super.key});
+class BusinessCardScreen extends StatefulWidget {
+  const BusinessCardScreen({super.key});
 
   @override
-  State<BusinessCardScreenWidget> createState() =>
-      _BusinessCardScreenWidgetState();
+  State<BusinessCardScreen> createState() => _BusinessCardScreenState();
 }
 
-class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
+class _BusinessCardScreenState extends State<BusinessCardScreen> {
   late BusinessCardScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -44,7 +44,8 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
       _model.adminGroupRes = await VcardGroup.adminGroupCall.call(
         authToken: FFAppState().authToken,
       );
-      _model.adminBusinesscardRes = await VcardGroup.adminBusinessCardCall.call(
+      _model.adminBusinesscardRes =
+          await BusinessCardRepository.getBusinessCard(
         authToken: FFAppState().authToken,
       );
       setState(() {
@@ -54,10 +55,9 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
             )!
             .toList()
             .cast<dynamic>();
-        FFAppState().businessCardList = VcardGroup.adminBusinessCardCall
-            .data(
-              (_model.adminBusinesscardRes?.jsonBody ?? ''),
-            )!
+        FFAppState().businessCardList = BusinessCardRepository.data(
+          (_model.adminBusinesscardRes?.jsonBody ?? ''),
+        )!
             .toList()
             .cast<dynamic>();
       });
@@ -206,7 +206,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                               color: dataIndex ==
                                                       FFAppState()
                                                           .selectedBusinessGroupIndex
-                                                  ? const Color(0xFF1A4572)
+                                                  ? const Color(0xFF1F69F6)
                                                   : const Color(0x00FFFFFF),
                                             ),
                                           ),
@@ -229,7 +229,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                             FFAppState()
                                                                 .selectedBusinessGroupIndex
                                                         ? const Color(
-                                                            0xFF1A4572)
+                                                            0xFF1F69F6)
                                                         : const Color(
                                                             0xFF79818A),
                                                     fontSize: 15.0,
@@ -384,7 +384,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                                   boxShadow: const [
                                                                                     BoxShadow(
                                                                                       blurRadius: 0.0,
-                                                                                      color: Color(0xFF1A4572),
+                                                                                      color: Color(0xFF1F69F6),
                                                                                       offset: Offset(-5.0, 0.0),
                                                                                     )
                                                                                   ],
@@ -688,7 +688,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                                   boxShadow: const [
                                                                                     BoxShadow(
                                                                                       blurRadius: 0.0,
-                                                                                      color: Color(0xFF1A4572),
+                                                                                      color: Color(0xFF1F69F6),
                                                                                       offset: Offset(-5.0, 0.0),
                                                                                     )
                                                                                   ],
@@ -999,7 +999,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                                   boxShadow: const [
                                                                                     BoxShadow(
                                                                                       blurRadius: 0.0,
-                                                                                      color: Color(0xFF1A4572),
+                                                                                      color: Color(0xFF1F69F6),
                                                                                       offset: Offset(-5.0, 0.0),
                                                                                     )
                                                                                   ],
@@ -1153,7 +1153,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                                   boxShadow: const [
                                                                                     BoxShadow(
                                                                                       blurRadius: 0.0,
-                                                                                      color: Color(0xFF1A4572),
+                                                                                      color: Color(0xFF1F69F6),
                                                                                       offset: Offset(-5.0, 0.0),
                                                                                     )
                                                                                   ],
@@ -1425,7 +1425,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                             blurRadius:
                                                                                 0.0,
                                                                             color:
-                                                                                Color(0xFF1A4572),
+                                                                                Color(0xFF1F69F6),
                                                                             offset:
                                                                                 Offset(-5.0, 0.0),
                                                                           )
@@ -1751,7 +1751,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                             blurRadius:
                                                                                 0.0,
                                                                             color:
-                                                                                Color(0xFF1A4572),
+                                                                                Color(0xFF1F69F6),
                                                                             offset:
                                                                                 Offset(-5.0, 0.0),
                                                                           )
@@ -2085,7 +2085,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                             blurRadius:
                                                                                 0.0,
                                                                             color:
-                                                                                Color(0xFF1A4572),
+                                                                                Color(0xFF1F69F6),
                                                                             offset:
                                                                                 Offset(-5.0, 0.0),
                                                                           )
@@ -2262,7 +2262,7 @@ class _BusinessCardScreenWidgetState extends State<BusinessCardScreenWidget> {
                                                                             blurRadius:
                                                                                 0.0,
                                                                             color:
-                                                                                Color(0xFF1A4572),
+                                                                                Color(0xFF1F69F6),
                                                                             offset:
                                                                                 Offset(-5.0, 0.0),
                                                                           )

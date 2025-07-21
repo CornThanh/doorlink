@@ -1,8 +1,8 @@
 // Export pages
-export '/screens/business_card_screen/business_card_screen_widget.dart'
-    show BusinessCardScreenWidget;
-export '/screens/enquiries_screen/enquiries_screen_widget.dart'
-    show EnquiriesScreenWidget;
+export 'features/main/business_card/presentation/business_card_screen.dart'
+    show BusinessCardScreen;
+export 'features/main/enquiries/presentation/enquiries_screen.dart'
+    show EnquiriesScreen;
 export 'features/auth/forgot_password/presentation/forgot_password_screen_widget.dart'
     show ForgotPasswordScreenWidget;
 export 'features/auth/login/presentation/login_screen_widget.dart'

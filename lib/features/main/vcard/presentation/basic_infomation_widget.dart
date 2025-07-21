@@ -74,7 +74,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                           color: Colors.white,
                           size: 20.0,
                         ),
-                        onPressed: _handleMediaSelection,
+                        onPressed: () => _handleMediaSelection(true),
                       ),
                     ),
                   ),
@@ -136,7 +136,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
                                   color: Colors.white,
                                   size: 20.0,
                                 ),
-                                onPressed: _handleMediaSelection,
+                                onPressed: () => _handleMediaSelection(false),
                               ),
                             ),
                           ),
@@ -896,7 +896,7 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
     }
   }
 
-  Future<void> _handleMediaSelection() async {
+  Future<void> _handleMediaSelection(bool isBackground) async {
     final selectedMedia = await selectMediaWithSourceBottomSheet(
       context: context,
       allowPhoto: true,
@@ -924,8 +924,13 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
       }
       if (selectedUploadedFiles.length == selectedMedia.length) {
         setState(() {
-          widget.model.backgroundUploadedLocalFile =
+          if(isBackground) {
+            widget.model.backgroundUploadedLocalFile =
               selectedUploadedFiles.first;
+          } else {
+            widget.model.avatarUploadedLocalFile =
+                selectedUploadedFiles.first;
+          }
         });
       } else {
         setState(() {});

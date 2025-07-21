@@ -1,3 +1,4 @@
+import 'package:MeU/features/main/business_card/repository/business_card_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -252,7 +253,7 @@ class _SelectGroupDialogBoxWidgetState
                                                                     FFAppState()
                                                                         .selectedGroupIndex
                                                                 ? const Color(
-                                                                    0xFF1A4572)
+                                                                    0xFF1F69F6)
                                                                 : const Color(
                                                                     0xFFAAB0B8),
                                                             shape:
@@ -270,7 +271,7 @@ class _SelectGroupDialogBoxWidgetState
                                                                       FFAppState()
                                                                           .selectedGroupIndex
                                                                   ? const Color(
-                                                                      0xFF1A4572)
+                                                                      0xFF1F69F6)
                                                                   : FlutterFlowTheme.of(
                                                                           context)
                                                                       .primary,
@@ -390,7 +391,7 @@ class _SelectGroupDialogBoxWidgetState
                   onPressed: () async {
                     if (FFAppState().selectedGroupId != 0) {
                       _model.adminBusinessRes =
-                          await VcardGroup.adminBusinessCardCall.call(
+                          await BusinessCardRepository.getBusinessCard(
                         authToken: FFAppState().authToken,
                       );
                       _model.adminGroup = await VcardGroup.adminGroupCall.call(
@@ -398,10 +399,9 @@ class _SelectGroupDialogBoxWidgetState
                       );
 
                       if (functions.businessCardValidator(
-                              VcardGroup.adminBusinessCardCall
-                                  .data(
-                                    (_model.adminBusinessRes?.jsonBody ?? ''),
-                                  )!
+                              BusinessCardRepository.data(
+                                (_model.adminBusinessRes?.jsonBody ?? ''),
+                              )!
                                   .toList(),
                               FFAppState().scannedURL,
                               VcardGroup.adminGroupCall
@@ -426,7 +426,7 @@ class _SelectGroupDialogBoxWidgetState
                               authToken: FFAppState().authToken,
                             );
                             _model.adminbusinesscardRes1 =
-                                await VcardGroup.adminBusinessCardCall.call(
+                                await BusinessCardRepository.getBusinessCard(
                               authToken: FFAppState().authToken,
                             );
                             FFAppState().update(() {
@@ -437,14 +437,12 @@ class _SelectGroupDialogBoxWidgetState
                                       )!
                                       .toList()
                                       .cast<dynamic>();
-                              FFAppState().businessCardList = VcardGroup
-                                  .adminBusinessCardCall
-                                  .data(
-                                    (_model.adminbusinesscardRes1?.jsonBody ??
-                                        ''),
-                                  )!
-                                  .toList()
-                                  .cast<dynamic>();
+                              FFAppState().businessCardList =
+                                  BusinessCardRepository.data(
+                                (_model.adminbusinesscardRes1?.jsonBody ?? ''),
+                              )!
+                                      .toList()
+                                      .cast<dynamic>();
                             });
                             _model.updatePage(() {
                               FFAppState().isAPILoading = false;
@@ -511,7 +509,7 @@ class _SelectGroupDialogBoxWidgetState
                         24.0, 0.0, 24.0, 0.0),
                     iconPadding: const EdgeInsetsDirectional.fromSTEB(
                         0.0, 0.0, 0.0, 0.0),
-                    color: const Color(0xFF1A4572),
+                    color: const Color(0xFF1F69F6),
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Nunito Sans',
                           color: Colors.white,
