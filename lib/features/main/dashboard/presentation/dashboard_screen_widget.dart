@@ -6,9 +6,7 @@ import 'package:provider/provider.dart';
 
 import '/backend/api_requests/api_calls.dart';
 import '/component/appointment_sheet/appointment_sheet_widget.dart';
-import '/component/drawer/drawer_widget.dart';
 import '/component/empty_data_component/empty_data_component_widget.dart';
-import '/component/scan_component/scan_component_widget.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -52,7 +50,35 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primary,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Analytics',
+            style: FlutterFlowTheme.of(context).titleLarge.override(
+                  fontFamily: 'Nunito Sans',
+                  color: Colors.black,
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                  useGoogleFonts:
+                      GoogleFonts.asMap().containsKey('Nunito Sans'),
+                ),
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(
+                CupertinoIcons.bell,
+                color: FlutterFlowTheme.of(context).primaryText,
+              ),
+              onPressed: () {
+                context.pushNamed('notification_screen');
+              },
+            )
+          ],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
         // drawer: Drawer(
         //   elevation: 16.0,
         //   child: wrapWithModel(
@@ -1048,9 +1074,10 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                             height: double.infinity,
                                             weeklyLabels:
                                                 DashboardRepository.weeklyLabel(
-                                              containerAdminIncomeChartResponse
-                                                  .jsonBody,
-                                            )!,
+                                                      containerAdminIncomeChartResponse
+                                                          .jsonBody,
+                                                    ) ??
+                                                    [],
                                             chartData: DashboardRepository.data(
                                               containerAdminIncomeChartResponse
                                                   .jsonBody,

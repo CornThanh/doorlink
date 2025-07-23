@@ -69,7 +69,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: const Color(0xff333333),
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
@@ -78,8 +78,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
             buttonSize: 60.0,
             icon: const Icon(
               Icons.arrow_back_ios_rounded,
-              color: Colors.white,
-              size: 24.0,
+              color: Colors.black,
+              size: 22.0,
             ),
             onPressed: () async {
               context.pop();
@@ -91,7 +91,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Nunito Sans',
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts:
@@ -99,7 +99,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                 ),
           ),
           centerTitle: true,
-          elevation: 1.0,
+          elevation: 0.0,
         ),
         body: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -147,8 +147,9 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                     fit: BoxFit.cover,
                                     image: Image.network(
                                       VcardGroup.profileCall.image(
-                                        columnProfileResponse.jsonBody,
-                                      )!,
+                                            columnProfileResponse.jsonBody,
+                                          ) ??
+                                          '',
                                     ).image,
                                   ),
                                   shape: BoxShape.circle,
@@ -202,13 +203,13 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                               ),
                             ),
                           ),
-                          const Divider(
-                            thickness: 0.5,
-                            color: Color(0xFFAAB0B8),
-                          ),
+                          // const Divider(
+                          //   thickness: 0.5,
+                          //   color: Color(0xFFAAB0B8),
+                          // ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 15.0, 0.0, 0.0),
+                                0.0, 0.0, 0.0, 0.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
                                 'xzao1gj9' /* Full Name: */,
@@ -246,32 +247,45 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                     FlutterFlowTheme.of(context).labelMedium,
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
-                                    color: Color(0x0079818A),
+                                    color: Colors.white,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.white,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Colors.white,
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
+                                  borderSide: const BorderSide(
+                                    color: Colors.white,
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 filled: true,
                                 fillColor: Colors.white.withValues(alpha: 0.1),
@@ -281,63 +295,63 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                   .asValidator(context),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 8.0, 0.0, 0.0),
-                            child: TextFormField(
-                              controller: _model.lastNameController ??=
-                                  TextEditingController(
-                                text: VcardGroup.profileCall.lastName(
-                                  columnProfileResponse.jsonBody,
-                                ),
-                              ),
-                              focusNode: _model.lastNameFocusNode,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
-                                hintText: FFLocalizations.of(context).getText(
-                                  'clqyndho' /* Enter Last Name */,
-                                ),
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color(0x0079818A),
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                filled: true,
-                                fillColor: Colors.white.withValues(alpha: 0.1),
-                              ),
-                              style: FlutterFlowTheme.of(context).bodyMedium,
-                              validator: _model.lastNameControllerValidator
-                                  .asValidator(context),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsetsDirectional.fromSTEB(
+                          //       0.0, 8.0, 0.0, 0.0),
+                          //   child: TextFormField(
+                          //     controller: _model.lastNameController ??=
+                          //         TextEditingController(
+                          //       text: VcardGroup.profileCall.lastName(
+                          //         columnProfileResponse.jsonBody,
+                          //       ),
+                          //     ),
+                          //     focusNode: _model.lastNameFocusNode,
+                          //     obscureText: false,
+                          //     decoration: InputDecoration(
+                          //       labelStyle:
+                          //           FlutterFlowTheme.of(context).labelMedium,
+                          //       hintText: FFLocalizations.of(context).getText(
+                          //         'clqyndho' /* Enter Last Name */,
+                          //       ),
+                          //       hintStyle:
+                          //           FlutterFlowTheme.of(context).labelMedium,
+                          //       enabledBorder: OutlineInputBorder(
+                          //         borderSide: const BorderSide(
+                          //           color: Color(0x0079818A),
+                          //           width: 1.0,
+                          //         ),
+                          //         borderRadius: BorderRadius.circular(8.0),
+                          //       ),
+                          //       focusedBorder: OutlineInputBorder(
+                          //         borderSide: BorderSide(
+                          //           color:
+                          //               FlutterFlowTheme.of(context).alternate,
+                          //           width: 1.0,
+                          //         ),
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //       ),
+                          //       errorBorder: OutlineInputBorder(
+                          //         borderSide: BorderSide(
+                          //           color: FlutterFlowTheme.of(context).error,
+                          //           width: 1.0,
+                          //         ),
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //       ),
+                          //       focusedErrorBorder: OutlineInputBorder(
+                          //         borderSide: BorderSide(
+                          //           color: FlutterFlowTheme.of(context).error,
+                          //           width: 1.0,
+                          //         ),
+                          //         borderRadius: BorderRadius.circular(10.0),
+                          //       ),
+                          //       filled: true,
+                          //       fillColor: Colors.white.withValues(alpha: 0.1),
+                          //     ),
+                          //     style: FlutterFlowTheme.of(context).bodyMedium,
+                          //     validator: _model.lastNameControllerValidator
+                          //         .asValidator(context),
+                          //   ),
+                          // ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 15.0, 0.0, 0.0),
@@ -397,25 +411,38 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                     FlutterFlowTheme.of(context).labelMedium,
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
-                                    color: Color(0x0079818A),
+                                    color: Color(0xFFF6F8F9),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFF6F8F9),
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                disabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFF6F8F9),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
+                                  borderSide: const BorderSide(
+                                    color: Color(0xFFF6F8F9),
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: FlutterFlowTheme.of(context).error,
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -432,130 +459,130 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                   .asValidator(context),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 15.0, 0.0, 0.0),
-                            child: RichText(
-                              textScaler: MediaQuery.of(context).textScaler,
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: FFLocalizations.of(context).getText(
-                                      '1za1kahu' /* Contact Number: */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Nunito Sans',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.bold,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey('Nunito Sans'),
-                                        ),
-                                  ),
-                                  TextSpan(
-                                    text: FFLocalizations.of(context).getText(
-                                      '8eu3zng3' /*  * */,
-                                    ),
-                                    style: const TextStyle(
-                                      color: Color(0xFFF35050),
-                                      fontSize: 18.0,
-                                    ),
-                                  )
-                                ],
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 8.0, 0.0, 0.0),
-                            child: Container(
-                              width: double.infinity,
-                              height: 55.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                border: Border.all(
-                                  color: const Color(0xFFDFE5E8),
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Container(
-                                    width: 115.0,
-                                    height: 100.0,
-                                    decoration: const BoxDecoration(
-                                      color: Color(0xFFF6F8F9),
-                                      borderRadius: BorderRadius.only(
-                                        bottomLeft: Radius.circular(10.0),
-                                        bottomRight: Radius.circular(0.0),
-                                        topLeft: Radius.circular(10.0),
-                                        topRight: Radius.circular(0.0),
-                                      ),
-                                    ),
-                                    alignment:
-                                        const AlignmentDirectional(0.0, 0.0),
-                                    child: SizedBox(
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      child: custom_widgets.PrefixCodePicker(
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        code: valueOrDefault<String>(
-                                          VcardGroup.profileCall.regionCode(
-                                            columnProfileResponse.jsonBody,
-                                          ),
-                                          '+91',
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              10.0, 0.0, 0.0, 0.0),
-                                      child: TextFormField(
-                                        controller: _model.contactController ??=
-                                            TextEditingController(
-                                          text: VcardGroup.profileCall.contact(
-                                            columnProfileResponse.jsonBody,
-                                          ),
-                                        ),
-                                        focusNode: _model.contactFocusNode,
-                                        obscureText: false,
-                                        decoration: InputDecoration(
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
-                                          hintText: FFLocalizations.of(context)
-                                              .getText(
-                                            'bi0q9hyu' /* Enter Contact number */,
-                                          ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
-                                          enabledBorder: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                          errorBorder: InputBorder.none,
-                                          focusedErrorBorder: InputBorder.none,
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                        keyboardType: TextInputType.number,
-                                        validator: _model
-                                            .contactControllerValidator
-                                            .asValidator(context),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          // Padding(
+                          //   padding: const EdgeInsetsDirectional.fromSTEB(
+                          //       0.0, 15.0, 0.0, 0.0),
+                          //   child: RichText(
+                          //     textScaler: MediaQuery.of(context).textScaler,
+                          //     text: TextSpan(
+                          //       children: [
+                          //         TextSpan(
+                          //           text: FFLocalizations.of(context).getText(
+                          //             '1za1kahu' /* Contact Number: */,
+                          //           ),
+                          //           style: FlutterFlowTheme.of(context)
+                          //               .bodyMedium
+                          //               .override(
+                          //                 fontFamily: 'Nunito Sans',
+                          //                 color: FlutterFlowTheme.of(context)
+                          //                     .primaryText,
+                          //                 fontSize: 15.0,
+                          //                 fontWeight: FontWeight.bold,
+                          //                 useGoogleFonts: GoogleFonts.asMap()
+                          //                     .containsKey('Nunito Sans'),
+                          //               ),
+                          //         ),
+                          //         TextSpan(
+                          //           text: FFLocalizations.of(context).getText(
+                          //             '8eu3zng3' /*  * */,
+                          //           ),
+                          //           style: const TextStyle(
+                          //             color: Color(0xFFF35050),
+                          //             fontSize: 18.0,
+                          //           ),
+                          //         )
+                          //       ],
+                          //       style: FlutterFlowTheme.of(context).bodyMedium,
+                          //     ),
+                          //   ),
+                          // ),
+                          // Padding(
+                          //   padding: const EdgeInsetsDirectional.fromSTEB(
+                          //       0.0, 8.0, 0.0, 0.0),
+                          //   child: Container(
+                          //     width: double.infinity,
+                          //     height: 55.0,
+                          //     decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(10.0),
+                          //       border: Border.all(
+                          //         color: const Color(0xFFDFE5E8),
+                          //       ),
+                          //     ),
+                          //     child: Row(
+                          //       mainAxisSize: MainAxisSize.max,
+                          //       children: [
+                          //         Container(
+                          //           width: 115.0,
+                          //           height: 100.0,
+                          //           decoration: const BoxDecoration(
+                          //             color: Color(0xFFF6F8F9),
+                          //             borderRadius: BorderRadius.only(
+                          //               bottomLeft: Radius.circular(10.0),
+                          //               bottomRight: Radius.circular(0.0),
+                          //               topLeft: Radius.circular(10.0),
+                          //               topRight: Radius.circular(0.0),
+                          //             ),
+                          //           ),
+                          //           alignment:
+                          //               const AlignmentDirectional(0.0, 0.0),
+                          //           child: SizedBox(
+                          //             width: double.infinity,
+                          //             height: double.infinity,
+                          //             child: custom_widgets.PrefixCodePicker(
+                          //               width: double.infinity,
+                          //               height: double.infinity,
+                          //               code: valueOrDefault<String>(
+                          //                 VcardGroup.profileCall.regionCode(
+                          //                   columnProfileResponse.jsonBody,
+                          //                 ),
+                          //                 '+91',
+                          //               ),
+                          //             ),
+                          //           ),
+                          //         ),
+                          //         Expanded(
+                          //           child: Padding(
+                          //             padding:
+                          //                 const EdgeInsetsDirectional.fromSTEB(
+                          //                     10.0, 0.0, 0.0, 0.0),
+                          //             child: TextFormField(
+                          //               controller: _model.contactController ??=
+                          //                   TextEditingController(
+                          //                 text: VcardGroup.profileCall.contact(
+                          //                   columnProfileResponse.jsonBody,
+                          //                 ),
+                          //               ),
+                          //               focusNode: _model.contactFocusNode,
+                          //               obscureText: false,
+                          //               decoration: InputDecoration(
+                          //                 labelStyle:
+                          //                     FlutterFlowTheme.of(context)
+                          //                         .labelMedium,
+                          //                 hintText: FFLocalizations.of(context)
+                          //                     .getText(
+                          //                   'bi0q9hyu' /* Enter Contact number */,
+                          //                 ),
+                          //                 hintStyle:
+                          //                     FlutterFlowTheme.of(context)
+                          //                         .labelMedium,
+                          //                 enabledBorder: InputBorder.none,
+                          //                 focusedBorder: InputBorder.none,
+                          //                 errorBorder: InputBorder.none,
+                          //                 focusedErrorBorder: InputBorder.none,
+                          //               ),
+                          //               style: FlutterFlowTheme.of(context)
+                          //                   .bodyMedium,
+                          //               keyboardType: TextInputType.number,
+                          //               validator: _model
+                          //                   .contactControllerValidator
+                          //                   .asValidator(context),
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     );

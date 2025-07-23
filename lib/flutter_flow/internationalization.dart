@@ -380,6 +380,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Language',
       'vi': 'Ngôn ngữ',
     },
+    'y9n16127': {
+      'en': 'Edit Profile',
+      'vi': 'Sửa thông tin',
+    },
     'i7c0zshr': {
       'en': 'Change Password',
       'vi': 'Thay đổi mật khẩu',
@@ -896,6 +900,30 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Go to Setting',
       'vi': 'Vào cài đặt',
     },
+  },
+
+  /// Tabbar
+  {
+    '1p20tie1': {
+      'en': 'Scan QR Code',
+      'vi': 'Quét mã QR',
+    },
+    '0qadhchn': {
+      'en': 'Scan NFC',
+      'vi': 'Quét NFC',
+    },
+    'du28g3hn': {
+      'en': 'Enter DoorLink Code',
+      'vi': 'Nhập mã DoorLink',
+    },
+    'f0k3xdae': {
+      'en': 'DoorLink Code',
+      'vi': 'Mã DoorLink',
+    },
+    '0t2bd74t': {
+      'en': 'Confirm',
+      'vi': 'Xác nhận',
+    }
   },
   // Miscellaneous
   {

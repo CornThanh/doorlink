@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/component/drawer/drawer_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -11,6 +13,7 @@ import 'setting_screen_model.dart';
 export 'setting_screen_model.dart';
 
 enum SettingScreenItems {
+  editProfile,
   language,
   changePassword,
 }
@@ -26,6 +29,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
   late SettingScreenModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  dynamic columnProfileResponse = {};
 
   @override
   void initState() {
@@ -62,53 +66,34 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        drawer: Drawer(
-          elevation: 16.0,
-          child: wrapWithModel(
-            model: _model.drawerModel,
-            updateCallback: () => setState(() {}),
-            child: const DrawerWidget(),
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Profile',
+            style: FlutterFlowTheme.of(context).titleLarge.override(
+                  fontFamily: 'Nunito Sans',
+                  color: Colors.black,
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                  useGoogleFonts:
+                      GoogleFonts.asMap().containsKey('Nunito Sans'),
+                ),
           ),
+          actions: [
+            IconButton(
+              icon: Icon(
+                CupertinoIcons.bell,
+                color: FlutterFlowTheme.of(context).primaryText,
+              ),
+              onPressed: () {
+                context.pushNamed('notification_screen');
+              },
+            )
+          ],
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        // appBar: AppBar(
-        //   backgroundColor: const Color(0xff333333),
-        //   automaticallyImplyLeading: false,
-        //   leading: InkWell(
-        //     splashColor: Colors.transparent,
-        //     focusColor: Colors.transparent,
-        //     hoverColor: Colors.transparent,
-        //     highlightColor: Colors.transparent,
-        //     onTap: () async {
-        //       scaffoldKey.currentState!.openDrawer();
-        //     },
-        //     child: Container(
-        //       decoration: const BoxDecoration(),
-        //       child: const Padding(
-        //         padding: EdgeInsetsDirectional.fromSTEB(12.0, 17.0, 25.0, 17.0),
-        //         child: SizedBox(
-        //           width: 100.0,
-        //           height: 100.0,
-        //           child: Icon(Icons.menu),
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        //   title: Text(
-        //     FFLocalizations.of(context).getText(
-        //       '2vqrk4yt' /* Settings */,
-        //     ),
-        //     style: FlutterFlowTheme.of(context).headlineMedium.override(
-        //           fontFamily: 'Nunito Sans',
-        //           color: Colors.white,
-        //           fontSize: 22.0,
-        //           fontWeight: FontWeight.bold,
-        //           useGoogleFonts:
-        //               GoogleFonts.asMap().containsKey('Nunito Sans'),
-        //         ),
-        //   ),
-        //   centerTitle: true,
-        //   elevation: 1.0,
-        // ),
         body: SafeArea(
           child: Stack(
             children: [
@@ -132,13 +117,14 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                 height: 40.0,
                                 child: CircularProgressIndicator(
                                   valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
+                                    FlutterFlowTheme.of(context)
+                                        .primaryBackground,
                                   ),
                                 ),
                               ),
                             );
                           }
-                          final columnProfileResponse = snapshot.data!;
+                          columnProfileResponse = snapshot.data!;
                           return Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -153,8 +139,9 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                   ),
                                   child: Image.network(
                                     VcardGroup.profileCall.image(
-                                      columnProfileResponse.jsonBody,
-                                    )!,
+                                          columnProfileResponse.jsonBody,
+                                        ) ??
+                                        '',
                                     width: 90.0,
                                     height: 90.0,
                                     fit: BoxFit.cover,
@@ -175,7 +162,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Nunito Sans',
-                                        color: Colors.white,
+                                        color: Colors.black,
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.bold,
                                         useGoogleFonts: GoogleFonts.asMap()
@@ -262,14 +249,14 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 16),
-                              ListView.separated(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemBuilder: _itemBuilder,
-                                separatorBuilder: _separatorBuilder,
-                                itemCount: SettingScreenItems.values.length,
-                              )
+                              const SizedBox(height: 32),
+                              // ListView.separated(
+                              //   physics: const NeverScrollableScrollPhysics(),
+                              //   shrinkWrap: true,
+                              //   itemBuilder: _itemBuilder,
+                              //   separatorBuilder: _separatorBuilder,
+                              //   itemCount: SettingScreenItems.values.length,
+                              // )
                             ],
                           );
                         },
@@ -283,7 +270,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                   width: double.infinity,
                   height: double.infinity,
                   decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
                   ),
                   child: const Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
@@ -306,7 +293,8 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
 
   Widget _itemBuilder(BuildContext context, int index) {
     String code = switch (SettingScreenItems.values[index]) {
-      SettingScreenItems.language => 'y9n16027' /* Language */,
+      SettingScreenItems.editProfile => 'y9n16127' /* Edit profile */,
+      SettingScreenItems.language => 'y9n16027' /* MyQR */,
       SettingScreenItems.changePassword => 'i7c0zshr' /* Change Password */,
     };
 
@@ -323,6 +311,9 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
 
           case SettingScreenItems.changePassword:
             _onPressedChangePassword();
+            break;
+          case SettingScreenItems.editProfile:
+            _onPressedEditProfile(columnProfileResponse.jsonBody);
             break;
         }
       },
@@ -344,7 +335,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
             Icon(
               Icons.arrow_forward_ios_rounded,
               color: FlutterFlowTheme.of(context).secondaryText,
-              size: 20,
+              size: 16,
             ),
           ],
         ),
@@ -380,7 +371,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
 
   _onPressedChangePassword() {
     context.pushNamed(
-      'change_password_screen',
+      'notification_screen',
       extra: <String, dynamic>{
         kTransitionInfoKey: const TransitionInfo(
           hasTransition: true,
