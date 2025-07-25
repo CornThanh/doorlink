@@ -209,20 +209,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // dashboard
   {
     '6hsy28xo': {
-      'en': 'Total Active \nUsers',
-      'vi': 'Tổng người dùng hoạt động',
+      'en': 'ENGAGED',
+      'vi': 'ĐÃ TƯƠNG TÁC',
     },
     'eck7f7xr': {
-      'en': 'Total Deactivated\nUsers',
-      'vi': 'Tổng người dùng đã hủy kích hoạt',
+      'en': 'OPENED',
+      'vi': 'ĐÃ MỞ',
     },
     'rxccenn6': {
-      'en': 'Total Active\nVcards',
-      'vi': 'Danh thiếp hoạt động',
+      'en': 'RE-ENGAGED',
+      'vi': 'TƯƠNG TÁC LẠI',
     },
     'u6g2qwc5': {
-      'en': 'Total Deactivated\nVcards',
-      'vi': 'Danh thiếp hủy kích hoạt',
+      'en': 'TOTAL',
+      'vi': 'TỔNG CỘNG',
     },
     'ufd1g8fs': {
       'en': 'VCard Analytics',
@@ -253,8 +253,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'vi': 'Cuộc hẹn\nhôm nay',
     },
     'xdgkk7kf': {
-      'en': 'VCard Analytics',
-      'vi': 'Phân tích danh thiếp',
+      'en': 'Engagement',
+      'vi': 'Tương tác',
     },
     '721dm1ol': {
       'en': 'Today’s Appointments',
@@ -603,7 +603,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'vi': 'Vui lòng nhập thông tin chi tiết của bạn',
     },
     '9ni1jqov': {
-      'en': 'Enter Your First Name',
+      'en': 'Enter Your Full Name',
       'vi': 'Nhập Tên của bạn',
     },
     'qf8w78qo': {

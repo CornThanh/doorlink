@@ -135,21 +135,17 @@ class _TabBarScreenWidgetState extends State<TabBarScreenWidget> {
                               child: FFButtonWidget(
                                 showLoadingIndicator: false,
                                 onPressed: () async {
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    builder: (context) {
-                                      return Padding(
-                                        padding:
-                                            MediaQuery.viewInsetsOf(context),
-                                        child: NfcWriteSheetWidget(
-                                          url: 'widget.url!',
-                                          name: 'NFC Write',
-                                        ),
-                                      );
-                                    },
+                                  context.pop();
+                                  final url =
+                                      await FlutterBarcodeScanner.scanBarcode(
+                                    '#C62828', // scanning line color
+                                    FFLocalizations.of(context).getText(
+                                      'g6ibpxlk' /* Cancel */,
+                                    ), // cancel button text
+                                    false, // whether to show the flash icon
+                                    ScanMode.QR,
                                   );
+                                  await launchURL(url);
                                 },
                                 text: FFLocalizations.of(context).getText(
                                   '1p20tie1' /* Register */,
@@ -186,16 +182,22 @@ class _TabBarScreenWidgetState extends State<TabBarScreenWidget> {
                               child: FFButtonWidget(
                                 showLoadingIndicator: false,
                                 onPressed: () async {
-                                  final url =
-                                      await FlutterBarcodeScanner.scanBarcode(
-                                    '#C62828', // scanning line color
-                                    FFLocalizations.of(context).getText(
-                                      'g6ibpxlk' /* Cancel */,
-                                    ), // cancel button text
-                                    false, // whether to show the flash icon
-                                    ScanMode.QR,
+                                  context.pop();
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            MediaQuery.viewInsetsOf(context),
+                                        child: NfcWriteSheetWidget(
+                                          url: 'widget.url!',
+                                          name: 'NFC Write',
+                                        ),
+                                      );
+                                    },
                                   );
-                                  await launchURL(url);
                                 },
                                 text: FFLocalizations.of(context).getText(
                                   '0qadhchn' /* Register */,

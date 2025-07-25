@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -138,11 +139,7 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
                 ? SizedBox(
                     width: iconSize,
                     height: iconSize,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        iconColor ?? Colors.white,
-                      ),
-                    ),
+                    child: CupertinoActivityIndicator(),
                   )
                 : effectiveIcon,
             onPressed: widget.onPressed == null

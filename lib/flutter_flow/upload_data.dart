@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -362,12 +363,7 @@ void showUploadMessage(
             if (showLoading)
               Padding(
                 padding: const EdgeInsetsDirectional.only(end: 10.0),
-                child: CircularProgressIndicator(
-                  valueColor: Theme.of(context).brightness == Brightness.dark
-                      ? AlwaysStoppedAnimation<Color>(
-                          FlutterFlowTheme.of(context).accent4)
-                      : null,
-                ),
+                child: CupertinoActivityIndicator(),
               ),
             Text(message),
           ],

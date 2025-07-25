@@ -496,7 +496,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
               (_model.apiResult88p?.jsonBody ?? ''),
               r'''$.data.role''',
             ).toString();
-            FFAppState().selectedDrawerPage = 'Dashboard';
+            FFAppState().selectedDrawerPage = 'tabbar_screen';
           });
 
           final simulator = await isSimulator();
@@ -535,7 +535,7 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                     (_model.profileRes?.jsonBody ?? ''),
                   ) ==
                   'VietNam') {
-                setAppLanguage(context, 'vi');
+                setAppLanguage(context, 'en');
 
                 setState(() {
                   FFAppState().selectLanguageIndex = 1;
@@ -639,7 +639,8 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
           await authManager.signIn(
             authenticationToken: FFAppState().authToken,
           );
-          navigate = () => context.goNamedAuth('dashboard', context.mounted);
+          navigate =
+              () => context.goNamedAuth('tabbar_screen', context.mounted);
         } else {
           setState(() {
             _model.emailController?.clear();

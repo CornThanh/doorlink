@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -84,11 +85,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
               child: SizedBox(
                 width: 23,
                 height: 23,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    widget.options.textStyle!.color ?? Colors.white,
-                  ),
-                ),
+                child: CupertinoActivityIndicator(),
               ),
             ),
           )

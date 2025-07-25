@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:doorlink_mobile/features/main/message/presentation/chat_screen_widget.dart';
 import 'package:doorlink_mobile/features/main/notification/presentation/notification_screen_widget.dart';
 import 'package:doorlink_mobile/features/main/vcard/presentation/update_vcard_screen_widget.dart';
+import 'package:doorlink_mobile/webview/presentation/webview_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -82,6 +83,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, _) => appStateNotifier.loggedIn
               ? const TabBarScreenWidget()
               : const LoginScreenWidget(),
+        ),
+        FFRoute(
+          name: 'tabbar_screen',
+          path: '/tabbarScreen',
+          builder: (context, params) => const TabBarScreenWidget(),
         ),
         FFRoute(
           name: 'language_screen',
@@ -191,6 +197,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'chat_screen',
           path: '/chatScreen',
           builder: (context, params) => ChatScreenWidget(),
+        ),
+        FFRoute(
+          name: 'webview_screen',
+          path: '/webviewScreen',
+          builder: (context, params) => WebviewScreenWidget(
+            title: params.getParam('title', ParamType.String),
+          ),
         ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
