@@ -1,7 +1,8 @@
+import 'package:doorlink_mobile/component/delete_dialog_box/delete_dialog_box_widget.dart';
+import 'package:doorlink_mobile/component/logout_dialog_box/logout_dialog_box_widget.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/backend/api_requests/api_calls.dart';
-import '/component/drawer/drawer_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
@@ -13,9 +14,11 @@ import 'setting_screen_model.dart';
 export 'setting_screen_model.dart';
 
 enum SettingScreenItems {
-  editProfile,
-  language,
-  changePassword,
+  logout,
+  deleteAccount,
+  // editProfile,
+  // language,
+  // changePassword,
 }
 
 class SettingScreenWidget extends StatefulWidget {
@@ -26,7 +29,7 @@ class SettingScreenWidget extends StatefulWidget {
 }
 
 class _SettingScreenWidgetState extends State<SettingScreenWidget> {
-  late SettingScreenModel _model;
+  late SettingScreenViewModel _viewModel;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   dynamic columnProfileResponse = {};
@@ -34,7 +37,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SettingScreenModel());
+    _viewModel = createModel(context, () => SettingScreenViewModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -50,7 +53,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _viewModel.dispose();
 
     super.dispose();
   }
@@ -60,8 +63,8 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+      onTap: () => _viewModel.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_viewModel.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
@@ -250,13 +253,13 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                                 ),
                               ),
                               const SizedBox(height: 32),
-                              // ListView.separated(
-                              //   physics: const NeverScrollableScrollPhysics(),
-                              //   shrinkWrap: true,
-                              //   itemBuilder: _itemBuilder,
-                              //   separatorBuilder: _separatorBuilder,
-                              //   itemCount: SettingScreenItems.values.length,
-                              // )
+                              ListView.separated(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: _itemBuilder,
+                                separatorBuilder: _separatorBuilder,
+                                itemCount: SettingScreenItems.values.length,
+                              )
                             ],
                           );
                         },
@@ -293,9 +296,13 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
 
   Widget _itemBuilder(BuildContext context, int index) {
     String code = switch (SettingScreenItems.values[index]) {
-      SettingScreenItems.editProfile => 'y9n16127' /* Edit profile */,
-      SettingScreenItems.language => 'y9n16027' /* MyQR */,
-      SettingScreenItems.changePassword => 'i7c0zshr' /* Change Password */,
+      // SettingScreenItems.editProfile => 'y9n16127' /* Edit profile */,
+      // SettingScreenItems.language => 'y9n16027' /* MyQR */,
+      // SettingScreenItems.changePassword => 'i7c0zshr' /* Change Password */,
+      // TODO: Handle this case.
+      SettingScreenItems.logout => 'Logout' /* Logout */,
+      // TODO: Handle this case.
+      SettingScreenItems.deleteAccount => 'Delete Account' /* Delete Account */,
     };
 
     return InkWell(
@@ -303,17 +310,53 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
       focusColor: Colors.transparent,
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onTap: () {
+      onTap: () async {
         switch (SettingScreenItems.values[index]) {
-          case SettingScreenItems.language:
-            _onPressedLanguage();
-            break;
+          // case SettingScreenItems.language:
+          //   _onPressedLanguage();
+          //   break;
 
-          case SettingScreenItems.changePassword:
-            _onPressedChangePassword();
+          // case SettingScreenItems.changePassword:
+          //   _onPressedChangePassword();
+          //   break;
+          // case SettingScreenItems.editProfile:
+          //   _onPressedEditProfile(columnProfileResponse.jsonBody);
+          //   break;
+          case SettingScreenItems.logout:
+            // TODO: Handle this case.
+            await showDialog(
+              context: context,
+              builder: (dialogContext) {
+                return Dialog(
+                  elevation: 1,
+                  insetPadding: EdgeInsets.zero,
+                  backgroundColor: Colors.transparent,
+                  alignment: const AlignmentDirectional(0.0, 0.0)
+                      .resolve(Directionality.of(context)),
+                  child: const LogoutDialogBoxWidget(),
+                );
+              },
+            );
             break;
-          case SettingScreenItems.editProfile:
-            _onPressedEditProfile(columnProfileResponse.jsonBody);
+          case SettingScreenItems.deleteAccount:
+            await showDialog(
+              context: context,
+              builder: (dialogContext) {
+                return Dialog(
+                  elevation: 1,
+                  insetPadding: EdgeInsets.zero,
+                  backgroundColor: Colors.transparent,
+                  alignment: const AlignmentDirectional(0.0, 0.0)
+                      .resolve(Directionality.of(context)),
+                  child: DeleteDialogBoxWidget(
+                    titile: 'Delete Account',
+                    subtitle: 'Do you want to delete your account?',
+                    deleteId: null,
+                    deleteType: '',
+                  ),
+                );
+              },
+            );
             break;
         }
       },
@@ -323,7 +366,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              FFLocalizations.of(context).getText(code),
+              code,
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Nunito Sans',
                     fontSize: 16.0,
@@ -350,37 +393,37 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
     );
   }
 
-  void _onPressedLanguage() {
-    context.pushNamed(
-      'language_screen',
-      queryParameters: {
-        'isChange': serializeParam(
-          true,
-          ParamType.bool,
-        ),
-      }.withoutNulls,
-      extra: <String, dynamic>{
-        kTransitionInfoKey: const TransitionInfo(
-          hasTransition: true,
-          transitionType: PageTransitionType.fade,
-          duration: Duration(milliseconds: 300),
-        ),
-      },
-    );
-  }
+  // void _onPressedLanguage() {
+  //   context.pushNamed(
+  //     'language_screen',
+  //     queryParameters: {
+  //       'isChange': serializeParam(
+  //         true,
+  //         ParamType.bool,
+  //       ),
+  //     }.withoutNulls,
+  //     extra: <String, dynamic>{
+  //       kTransitionInfoKey: const TransitionInfo(
+  //         hasTransition: true,
+  //         transitionType: PageTransitionType.fade,
+  //         duration: Duration(milliseconds: 300),
+  //       ),
+  //     },
+  //   );
+  // }
 
-  _onPressedChangePassword() {
-    context.pushNamed(
-      'notification_screen',
-      extra: <String, dynamic>{
-        kTransitionInfoKey: const TransitionInfo(
-          hasTransition: true,
-          transitionType: PageTransitionType.fade,
-          duration: Duration(milliseconds: 300),
-        ),
-      },
-    );
-  }
+  // _onPressedChangePassword() {
+  //   context.pushNamed(
+  //     'notification_screen',
+  //     extra: <String, dynamic>{
+  //       kTransitionInfoKey: const TransitionInfo(
+  //         hasTransition: true,
+  //         transitionType: PageTransitionType.fade,
+  //         duration: Duration(milliseconds: 300),
+  //       ),
+  //     },
+  //   );
+  // }
 
   void _onPressedEditProfile(dynamic body) {
     context.pushNamed(

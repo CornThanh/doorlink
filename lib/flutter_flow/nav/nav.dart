@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:MeU/features/main/notification/presentation/notification_screen_widget.dart';
-import 'package:MeU/features/main/vcard/presentation/update_vcard_screen_widget.dart';
+import 'package:doorlink_mobile/features/main/message/presentation/chat_screen_widget.dart';
+import 'package:doorlink_mobile/features/main/notification/presentation/notification_screen_widget.dart';
+import 'package:doorlink_mobile/features/main/vcard/presentation/update_vcard_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -72,7 +73,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? const DashboardScreenWidget()
+          ? const TabBarScreenWidget()
           : const LoginScreenWidget(),
       routes: [
         FFRoute(
@@ -185,6 +186,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'notification_screen',
           path: '/notificationScreen',
           builder: (context, params) => const NotificationScreenWidget(),
+        ),
+        FFRoute(
+          name: 'chat_screen',
+          path: '/chatScreen',
+          builder: (context, params) => ChatScreenWidget(),
         ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

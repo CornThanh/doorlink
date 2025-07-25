@@ -1,4 +1,4 @@
-import 'package:MeU/features/main/business_card/repository/business_card_repository.dart';
+import 'package:doorlink_mobile/features/main/business_card/repository/business_card_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';

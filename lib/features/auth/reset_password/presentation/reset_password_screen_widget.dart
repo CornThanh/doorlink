@@ -1,4 +1,4 @@
-import 'package:MeU/features/auth/reset_password/repository/reset_password_repository.dart';
+import 'package:doorlink_mobile/features/auth/reset_password/repository/reset_password_repository.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

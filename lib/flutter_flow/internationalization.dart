@@ -23,7 +23,7 @@ class FFLocalizations {
     final locale = _prefs.getString(_kLocaleStorageKey);
     return locale != null && locale.isNotEmpty
         ? createLocale(locale)
-        : const Locale('vi');
+        : const Locale('en');
   }
 
   String get languageCode => locale.toString();
@@ -558,8 +558,9 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'fgce4hqx': {
       'en':
-          'Enter your phone number, MeU will send a confirmation code to your phone',
-      'vi': 'Nhập số điện thoại, MeU sẽ gửi mã xác nhận đến điện thoại của bạn',
+          'Enter your phone number, doorlink_mobile will send a confirmation code to your phone',
+      'vi':
+          'Nhập số điện thoại, doorlink_mobile sẽ gửi mã xác nhận đến điện thoại của bạn',
     },
     'jznj5x2j': {
       'en': 'Phone number',
@@ -943,8 +944,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'vi': 'Cho phép quyền NFC để đọc và ghi thẻ NFC.',
     },
     'kcglmo2n': {
-      'en': "username (https://meu.ntiot.vn/username)",
-      'vi': "Tên người dùng (meu.ntiot.vn/tennguoidung)",
+      'en': "username (https://doorlink_mobile.ntiot.vn/username)",
+      'vi': "Tên người dùng (doorlink_mobile.ntiot.vn/tennguoidung)",
     },
     'zd8zu4bj': {
       'en': 'Your Vcard Name',

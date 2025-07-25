@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:MeU/features/main/vcard/repository/vcard_repository.dart';
+import 'package:doorlink_mobile/features/main/vcard/repository/vcard_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

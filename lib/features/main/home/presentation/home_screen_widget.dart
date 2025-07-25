@@ -1,4 +1,4 @@
-import 'package:MeU/features/main/home/presentation/home_view_model.dart';
+import 'package:doorlink_mobile/features/main/home/presentation/home_view_model.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -163,10 +163,26 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       ],
                     ),
                     // Calendar icon
-                    Icon(
-                      Icons.calendar_today_rounded,
-                      color: Colors.white,
-                      size: 40,
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Icon(
+                          Icons.calendar_today,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Text(
+                            "32",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

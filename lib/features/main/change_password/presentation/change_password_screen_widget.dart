@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:MeU/features/main/change_password/repository/change_password_repository.dart';
+import 'package:doorlink_mobile/features/main/change_password/repository/change_password_repository.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

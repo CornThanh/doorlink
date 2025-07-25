@@ -1,7 +1,7 @@
-import 'package:MeU/backend/api_requests/api_calls.dart';
-import 'package:MeU/backend/api_requests/api_manager.dart';
-import 'package:MeU/features/main/vcard/model/vcard_model.dart';
-import 'package:MeU/flutter_flow/flutter_flow_util.dart';
+import 'package:doorlink_mobile/backend/api_requests/api_calls.dart';
+import 'package:doorlink_mobile/backend/api_requests/api_manager.dart';
+import 'package:doorlink_mobile/features/main/vcard/model/vcard_model.dart';
+import 'package:doorlink_mobile/flutter_flow/flutter_flow_util.dart';
 
 class VcardRepository {
   static Future<ApiCallResponse> getVcard({

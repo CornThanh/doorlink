@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:MeU/backend/schema/structs/index.dart';
-import 'package:MeU/features/main/language/repository/language_repository.dart';
+import 'package:doorlink_mobile/backend/schema/structs/index.dart';
+import 'package:doorlink_mobile/features/main/language/repository/language_repository.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

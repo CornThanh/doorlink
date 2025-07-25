@@ -1,4 +1,4 @@
-import 'package:MeU/service/notification_service.dart';
+import 'package:doorlink_mobile/service/notification_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'MeU',
+      title: 'Doorlink',
       localizationsDelegates: const [
         FFLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -85,8 +85,8 @@ class _MyAppState extends State<MyApp> {
       ],
       locale: _locale,
       supportedLocales: const [
-        Locale('vi'),
         Locale('en'),
+        Locale('vi'),
       ],
       theme: ThemeData(
         brightness: Brightness.light,

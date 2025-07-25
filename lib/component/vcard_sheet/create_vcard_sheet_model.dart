@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:MeU/backend/api_requests/api_calls.dart';
-import 'package:MeU/component/vcard_sheet/create_vcard_sheet_widget.dart';
+import 'package:doorlink_mobile/backend/api_requests/api_calls.dart';
+import 'package:doorlink_mobile/component/vcard_sheet/create_vcard_sheet_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;

@@ -1,14 +1,10 @@
-import 'dart:developer';
-
-import 'package:MeU/component/nfc_write_sheet/nfc_write_sheet_widget.dart';
-import 'package:MeU/component/scan_component/scan_component_widget.dart';
-import 'package:MeU/features/main/home/presentation/home_screen_widget.dart';
-import 'package:MeU/features/main/message/presentation/message_screen_widget.dart';
-import 'package:MeU/flutter_flow/flutter_flow_theme.dart';
-import 'package:MeU/flutter_flow/flutter_flow_util.dart';
-import 'package:MeU/flutter_flow/flutter_flow_widgets.dart';
-import 'package:MeU/flutter_flow/internationalization.dart';
-import 'package:MeU/index.dart';
+import 'package:doorlink_mobile/component/nfc_write_sheet/nfc_write_sheet_widget.dart';
+import 'package:doorlink_mobile/features/main/home/presentation/home_screen_widget.dart';
+import 'package:doorlink_mobile/features/main/message/presentation/message_screen_widget.dart';
+import 'package:doorlink_mobile/flutter_flow/flutter_flow_theme.dart';
+import 'package:doorlink_mobile/flutter_flow/flutter_flow_util.dart';
+import 'package:doorlink_mobile/flutter_flow/flutter_flow_widgets.dart';
+import 'package:doorlink_mobile/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';

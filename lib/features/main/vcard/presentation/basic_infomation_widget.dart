@@ -1,5 +1,5 @@
-import 'package:MeU/flutter_flow/flutter_flow_util.dart';
-import 'package:MeU/flutter_flow/upload_data.dart';
+import 'package:doorlink_mobile/flutter_flow/flutter_flow_util.dart';
+import 'package:doorlink_mobile/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -924,12 +924,11 @@ class _BasicInformationWidgetState extends State<BasicInformationWidget> {
       }
       if (selectedUploadedFiles.length == selectedMedia.length) {
         setState(() {
-          if(isBackground) {
+          if (isBackground) {
             widget.model.backgroundUploadedLocalFile =
-              selectedUploadedFiles.first;
-          } else {
-            widget.model.avatarUploadedLocalFile =
                 selectedUploadedFiles.first;
+          } else {
+            widget.model.avatarUploadedLocalFile = selectedUploadedFiles.first;
           }
         });
       } else {

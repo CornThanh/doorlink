@@ -70,9 +70,9 @@ class FFAppState extends ChangeNotifier {
 
   List<LanguageDataStruct> languages = [
     LanguageDataStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"0\",\"name\":\"VietNam\",\"iso_code\":\"vi\",\"image\":\"https://meu.ntiot.vn/assets/img/LanguageImage/vietnam.jpg\"}')),
+        '{\"id\":\"0\",\"name\":\"VietNam\",\"iso_code\":\"vi\",\"image\":\"https://doorlink_mobile.ntiot.vn/assets/img/LanguageImage/vietnam.jpg\"}')),
     LanguageDataStruct.fromSerializableMap(jsonDecode(
-        '{\"id\":\"1\",\"name\":\"English\",\"iso_code\":\"en\",\"image\":\"https://meu.ntiot.vn/assets/img/LanguageImage/english.png\"}')),
+        '{\"id\":\"1\",\"name\":\"English\",\"iso_code\":\"en\",\"image\":\"https://doorlink_mobile.ntiot.vn/assets/img/LanguageImage/english.png\"}')),
   ];
 
   void addToLanguages(LanguageDataStruct value) {

@@ -1,6 +1,6 @@
-import 'package:MeU/backend/api_requests/api_calls.dart';
-import 'package:MeU/backend/api_requests/api_manager.dart';
-import 'package:MeU/flutter_flow/uploaded_file.dart';
+import 'package:doorlink_mobile/backend/api_requests/api_calls.dart';
+import 'package:doorlink_mobile/backend/api_requests/api_manager.dart';
+import 'package:doorlink_mobile/flutter_flow/uploaded_file.dart';
 
 class EditProfileRepository {
   static Future<ApiCallResponse> update({

@@ -1,4 +1,4 @@
-import 'package:MeU/backend/schema/util/schema_util.dart';
+import 'package:doorlink_mobile/backend/schema/util/schema_util.dart';
 import 'package:flutter/cupertino.dart';
 
 class DownloadLoader extends StatefulWidget {

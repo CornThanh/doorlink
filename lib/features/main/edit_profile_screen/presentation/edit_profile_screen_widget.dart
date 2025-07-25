@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:MeU/features/main/edit_profile_screen/repository/edit_profile_repository.dart';
+import 'package:doorlink_mobile/features/main/edit_profile_screen/repository/edit_profile_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/backend/api_requests/api_calls.dart';
@@ -10,7 +10,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/actions/index.dart' as actions;
-import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -181,20 +180,16 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                               .secondary,
                                           shape: BoxShape.circle,
                                         ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: FlutterFlowIconButton(
-                                            borderRadius: 20.0,
-                                            borderWidth: 1.0,
-                                            buttonSize: 40.0,
-                                            fillColor: const Color(0xFF1A4572),
-                                            icon: const Icon(
-                                              Icons.camera_alt,
-                                              color: Colors.white,
-                                              size: 20.0,
-                                            ),
-                                            onPressed: () => _onUploadedImage(),
+                                        child: FlutterFlowIconButton(
+                                          borderRadius: 22.0,
+                                          buttonSize: 40.0,
+                                          fillColor: const Color(0xFF1A4572),
+                                          icon: const Icon(
+                                            Icons.camera_alt,
+                                            color: Colors.white,
+                                            size: 20.0,
                                           ),
+                                          onPressed: () => _onUploadedImage(),
                                         ),
                                       ),
                                     ),
@@ -247,28 +242,28 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                     FlutterFlowTheme.of(context).labelMedium,
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
-                                    color: Colors.white,
+                                    color: Color(0xFFF6F8F9),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 border: OutlineInputBorder(
                                   borderSide: const BorderSide(
-                                    color: Colors.white,
+                                    color: Color(0xFFF6F8F9),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 disabledBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
-                                    color: Colors.white,
+                                    color: Color(0xFFF6F8F9),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: const BorderSide(
-                                    color: Colors.white,
+                                    color: Color(0xFFF6F8F9),
                                     width: 1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
@@ -288,7 +283,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 filled: true,
-                                fillColor: Colors.white.withValues(alpha: 0.1),
+                                fillColor: Colors.white,
                               ),
                               style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.firstNameControllerValidator
@@ -449,10 +444,10 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                                     color: FlutterFlowTheme.of(context).error,
                                     width: 1.0,
                                   ),
-                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 filled: true,
-                                fillColor: Colors.white.withValues(alpha: 0.1),
+                                fillColor: Colors.white,
                               ),
                               style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.emailControllerValidator

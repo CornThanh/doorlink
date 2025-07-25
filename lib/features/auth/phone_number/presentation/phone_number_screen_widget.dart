@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:MeU/features/auth/phone_number/repository/phone_number_repository.dart';
+import 'package:doorlink_mobile/features/auth/phone_number/repository/phone_number_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';

@@ -123,6 +123,7 @@ class FlutterFlowDynamicModels<T extends FlutterFlowModel> {
     return model != null ? getValue(model) : null;
   }
 
+  // ignore: avoid_function_literals_in_foreach_calls
   void dispose() => _childrenModels.values.forEach((model) => model.dispose());
 
   void _updateActiveKeys(String uniqueKey) {

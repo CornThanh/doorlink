@@ -1,4 +1,4 @@
-import 'package:MeU/backend/schema/util/schema_util.dart';
+import 'package:doorlink_mobile/backend/schema/util/schema_util.dart';
 import 'package:flutter/cupertino.dart';
 
 class CustomLoader extends StatefulWidget {
@@ -18,6 +18,6 @@ class CustomLoader extends StatefulWidget {
 class _CustomLoaderState extends State<CustomLoader> {
   @override
   Widget build(BuildContext context) {
-    return  const CupertinoActivityIndicator(color: Colors.white);
+    return const CupertinoActivityIndicator(color: Colors.white);
   }
 }

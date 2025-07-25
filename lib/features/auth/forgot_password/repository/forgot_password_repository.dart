@@ -1,5 +1,5 @@
-import 'package:MeU/backend/api_requests/api_calls.dart';
-import 'package:MeU/backend/api_requests/api_manager.dart';
+import 'package:doorlink_mobile/backend/api_requests/api_calls.dart';
+import 'package:doorlink_mobile/backend/api_requests/api_manager.dart';
 
 class ForgotPasswordRepository {
   static Future<ApiCallResponse> forgot({

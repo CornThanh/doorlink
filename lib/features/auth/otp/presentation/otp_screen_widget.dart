@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:MeU/features/auth/otp/repository/otp_repository.dart';
+import 'package:doorlink_mobile/features/auth/otp/repository/otp_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';

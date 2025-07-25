@@ -1,4 +1,5 @@
-import 'package:MeU/features/main/notification/presentation/notification_view_model.dart';
+import 'package:doorlink_mobile/features/main/notification/presentation/notification_view_model.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -79,9 +80,13 @@ class _NotificationScreenWidgetState extends State<NotificationScreenWidget> {
           titleSpacing: 0,
           title: Text(
             'Notifications',
-            style: FlutterFlowTheme.of(context).title2.override(
-                  fontFamily: 'Poppins',
-                  color: FlutterFlowTheme.of(context).primaryText,
+            style: FlutterFlowTheme.of(context).titleLarge.override(
+                  fontFamily: 'Nunito Sans',
+                  color: Colors.black,
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                  useGoogleFonts:
+                      GoogleFonts.asMap().containsKey('Nunito Sans'),
                 ),
           ),
           centerTitle: true,

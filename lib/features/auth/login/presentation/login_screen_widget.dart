@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:MeU/features/auth/login/repository/login_repository.dart';
+import 'package:doorlink_mobile/features/auth/login/repository/login_repository.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -271,15 +271,22 @@ class _LoginScreenWidgetState extends State<LoginScreenWidget> {
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: FlutterFlowTheme.of(context).error,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                         focusedErrorBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).error,
-                            width: 0.0,
+                            width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
-                        fillColor: Colors.white.withValues(alpha: 0.1),
+                        fillColor: Colors.white,
                         suffixIcon: InkWell(
                           onTap: () => setState(
                             () => _model.passwordVisibility =

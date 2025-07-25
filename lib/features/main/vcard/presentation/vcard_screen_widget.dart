@@ -1,17 +1,15 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:MeU/component/vcard_sheet/create_vcard_sheet_widget.dart';
-import 'package:MeU/features/main/vcard/repository/vcard_repository.dart';
+import 'package:doorlink_mobile/component/vcard_sheet/create_vcard_sheet_widget.dart';
+import 'package:doorlink_mobile/features/main/vcard/repository/vcard_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '/backend/api_requests/api_calls.dart';
-import '/component/drawer/drawer_widget.dart';
 import '/component/empty_data_component/empty_data_component_widget.dart';
-import '/component/scan_component/scan_component_widget.dart';
 import '/component/vcard_sheet/vcard_sheet_widget.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;

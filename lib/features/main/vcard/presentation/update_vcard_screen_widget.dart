@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:MeU/features/main/vcard/presentation/social_network_widget.dart';
-import 'package:MeU/features/main/vcard/presentation/update_vcard_screen_model.dart';
-import 'package:MeU/features/main/vcard/presentation/vcard_template_widget.dart';
-import 'package:MeU/features/main/vcard/repository/vcard_repository.dart';
+import 'package:doorlink_mobile/features/main/vcard/presentation/social_network_widget.dart';
+import 'package:doorlink_mobile/features/main/vcard/presentation/update_vcard_screen_model.dart';
+import 'package:doorlink_mobile/features/main/vcard/presentation/vcard_template_widget.dart';
+import 'package:doorlink_mobile/features/main/vcard/repository/vcard_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

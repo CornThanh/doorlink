@@ -157,7 +157,7 @@ class _LogoutDialogBoxWidgetState extends State<LogoutDialogBoxWidget> {
                               email: FFAppState().email,
                             );
                             if ((_model.apiResult2xw?.succeeded ?? true)) {
-                              setAppLanguage(context, 'vi');
+                              setAppLanguage(context, 'en');
                               FFAppState().authToken = '';
                               FFAppState().email = '';
                               FFAppState().role = '';

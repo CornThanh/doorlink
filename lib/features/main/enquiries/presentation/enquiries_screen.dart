@@ -1,4 +1,4 @@
-import 'package:MeU/features/main/enquiries/repository/enquiries_repository.dart';
+import 'package:doorlink_mobile/features/main/enquiries/repository/enquiries_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/backend/api_requests/api_calls.dart';

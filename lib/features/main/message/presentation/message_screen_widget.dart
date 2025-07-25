@@ -1,4 +1,4 @@
-import 'package:MeU/features/main/message/presentation/message_view_model.dart';
+import 'package:doorlink_mobile/features/main/message/presentation/message_view_model.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -101,54 +101,57 @@ class _MessageScreenWidgetState extends State<MessageScreenWidget> {
             separatorBuilder: (_, __) => SizedBox(height: 12),
             itemBuilder: (context, index) {
               final offer = offers[index];
-              return Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: Row(
-                  children: [
-                    // Icon
-                    CircleAvatar(
-                      radius: 24,
-                      backgroundColor: Colors.pink.shade100,
-                      backgroundImage: NetworkImage(offer.iconUrl),
-                    ),
-                    SizedBox(width: 12),
-                    // Title + Subtitle
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            offer.title,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF1E144F),
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            offer.description,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF7B7B8B),
-                            ),
-                          ),
-                        ],
+              return GestureDetector(
+                onTap: () => context.pushNamed('chat_screen'),
+                child: Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  child: Row(
+                    children: [
+                      // Icon
+                      CircleAvatar(
+                        radius: 24,
+                        backgroundColor: Colors.pink.shade100,
+                        backgroundImage: NetworkImage(offer.iconUrl),
                       ),
-                    ),
-                    // Time ago
-                    Text(
-                      offer.timeAgo,
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: Color(0xFFCCCCCC),
+                      SizedBox(width: 12),
+                      // Title + Subtitle
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              offer.title,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF1E144F),
+                              ),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              offer.description,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xFF7B7B8B),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      // Time ago
+                      Text(
+                        offer.timeAgo,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Color(0xFFCCCCCC),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

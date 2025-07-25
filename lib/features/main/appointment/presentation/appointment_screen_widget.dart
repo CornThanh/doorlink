@@ -1,6 +1,6 @@
-import 'package:MeU/features/main/appointment/presentation/widget/appointment_item.dart';
-import 'package:MeU/features/main/appointment/presentation/widget/appointment_vcard_item.dart';
-import 'package:MeU/features/main/appointment/repository/appointment_repository.dart';
+import 'package:doorlink_mobile/features/main/appointment/presentation/widget/appointment_item.dart';
+import 'package:doorlink_mobile/features/main/appointment/presentation/widget/appointment_vcard_item.dart';
+import 'package:doorlink_mobile/features/main/appointment/repository/appointment_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/backend/api_requests/api_calls.dart';
