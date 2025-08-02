@@ -102,7 +102,7 @@ class _NotificationScreenWidgetState extends State<NotificationScreenWidget> {
             style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: 'Nunito Sans',
                   color: Colors.black,
-                  fontSize: 22.0,
+                  fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   useGoogleFonts:
                       GoogleFonts.asMap().containsKey('Nunito Sans'),
@@ -116,7 +116,7 @@ class _NotificationScreenWidgetState extends State<NotificationScreenWidget> {
           child: ListView.separated(
             padding: EdgeInsets.symmetric(horizontal: 16),
             itemCount: offers.length,
-            separatorBuilder: (_, __) => SizedBox(height: 12),
+            separatorBuilder: (_, __) => SizedBox(height: 6),
             itemBuilder: (context, index) {
               final offer = offers[index];
               return GestureDetector(
@@ -151,7 +151,7 @@ class _NotificationScreenWidgetState extends State<NotificationScreenWidget> {
                             Text(
                               offer.title,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF1E144F),
                               ),

@@ -58,7 +58,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: Image.asset(
-                'assets/images/app_launcher_icon.png',
+                'assets/images/app_icon.png',
                 width: 180.0,
                 height: 120.0,
                 fit: BoxFit.contain,

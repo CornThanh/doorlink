@@ -85,7 +85,7 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
               child: SizedBox(
                 width: 23,
                 height: 23,
-                child: CupertinoActivityIndicator(),
+                child: CupertinoActivityIndicator(color: Colors.white),
               ),
             ),
           )

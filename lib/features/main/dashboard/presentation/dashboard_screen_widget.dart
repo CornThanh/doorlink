@@ -51,17 +51,13 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          title: Text(
-            'Analytics',
-            style: FlutterFlowTheme.of(context).titleLarge.override(
-                  fontFamily: 'Nunito Sans',
-                  color: Colors.black,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
-                  useGoogleFonts:
-                      GoogleFonts.asMap().containsKey('Nunito Sans'),
-                ),
+          title: Image.asset(
+            'assets/images/app_icon_no_bg.png',
+            width: 64.0,
+            height: 64.0,
+            fit: BoxFit.cover,
           ),
+          
           actions: [
             IconButton(
               icon: Icon(
@@ -94,7 +90,7 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                       ),
                     );
                   }
-                  final containerTodayAppointmentResponse = snapshot.data!;
+                  // final containerTodayAppointmentResponse = snapshot.data!;
                   return Container(
                     decoration: const BoxDecoration(),
                     child: Padding(

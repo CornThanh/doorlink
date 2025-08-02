@@ -139,7 +139,7 @@ class _FlutterFlowIconButtonState extends State<FlutterFlowIconButton> {
                 ? SizedBox(
                     width: iconSize,
                     height: iconSize,
-                    child: CupertinoActivityIndicator(),
+                    child: CupertinoActivityIndicator(color: Colors.white),
                   )
                 : effectiveIcon,
             onPressed: widget.onPressed == null

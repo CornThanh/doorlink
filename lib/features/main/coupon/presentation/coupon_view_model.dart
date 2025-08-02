@@ -1,10 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
 import '/component/drawer/drawer_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'message_screen_widget.dart' show MessageScreenWidget;
+import 'coupon_screen_widget.dart' show CouponScreenWidget;
 import 'package:flutter/material.dart';
 
-class MessageViewModel extends FlutterFlowModel<MessageScreenWidget> {
+class CouponViewModel extends FlutterFlowModel<CouponScreenWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

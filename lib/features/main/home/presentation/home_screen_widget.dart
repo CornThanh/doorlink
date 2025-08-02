@@ -1,7 +1,10 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:doorlink_mobile/features/main/coupon/model/coupon.dart';
 import 'package:doorlink_mobile/features/main/home/presentation/home_view_model.dart';
-import 'package:doorlink_mobile/webview/presentation/webview_screen_widget.dart';
+import 'package:doorlink_mobile/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../deal/model/deal.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -32,40 +35,99 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     super.dispose();
   }
 
-  final List<OfferItem> offers = [
-    OfferItem(
-      title: "Domino's",
-      description: "Get 20% off your next online order!",
-      timeAgo: "2d ago",
-      iconUrl:
-          'https://cdn-icons-png.flaticon.com/512/733/733544.png', // pink Dribbble icon
+  final List<Deal> dealList = [
+    Deal(
+      title: 'Buy 1 Get 1 Free',
+      description: 'Valid for all coffee drinks until Aug 10.',
+      imageUrl: 'https://picsum.photos/id/1016/800/400',
+      createdDate: DateTime(2025, 7, 30),
+      expireDate: DateTime(2025, 8, 10),
     ),
-    OfferItem(
-      title: "Retail Chains with Loyalty",
-      description: "See the latest city newsletter",
-      timeAgo: "2d ago",
-      iconUrl: 'https://cdn-icons-png.flaticon.com/512/733/733544.png',
+    Deal(
+      title: 'Summer Sale 30% Off',
+      description: 'Enjoy a discount on selected items.',
+      imageUrl: 'https://picsum.photos/id/1016/800/400',
+      createdDate: DateTime(2025, 7, 28),
+      expireDate: DateTime(2025, 8, 5),
     ),
-    OfferItem(
-      title: "Retail Chains with Loyalty",
-      description: "See the latest city newsletter",
-      timeAgo: "2d ago",
-      iconUrl: 'https://cdn-icons-png.flaticon.com/512/733/733544.png',
+    Deal(
+      title: 'Free Shipping Weekend',
+      description: 'Applies to orders over 500K.',
+      imageUrl: 'https://picsum.photos/id/1016/800/400',
+      createdDate: DateTime(2025, 7, 26),
+      expireDate: DateTime(2025, 8, 2),
     ),
-    OfferItem(
-      title: "Retail Chains with Loyalty",
-      description: "See the latest city newsletter",
-      timeAgo: "2d ago",
-      iconUrl: 'https://cdn-icons-png.flaticon.com/512/733/733544.png',
+    Deal(
+      title: 'Back to School Promo',
+      description: 'Get up to 40% off on school supplies.',
+      imageUrl: 'https://picsum.photos/id/1016/800/400',
+      createdDate: DateTime(2025, 7, 25),
+      expireDate: DateTime(2025, 8, 15),
     ),
   ];
 
-  void _onOfferTap(OfferItem offer) {
+  final List<Map<String, String>> couponList = [
+    {
+      'title': '10% Off All Orders',
+      'subtitle': 'Valid for orders above \$20',
+      'image': 'https://picsum.photos/id/1016/800/400',
+      'createdDate': '2025-08-01',
+    },
+    {
+      'title': 'Free Shipping Coupon',
+      'subtitle': 'No minimum spend required',
+      'image': 'https://picsum.photos/id/1016/800/400',
+      'createdDate': '2025-07-28',
+    },
+    {
+      'title': '\$5 OFF on Your Next Purchase',
+      'subtitle': 'For orders over \$50',
+      'image': 'https://picsum.photos/id/1016/800/400',
+      'createdDate': '2025-07-25',
+    },
+    {
+      'title': 'Summer Flash Deal',
+      'subtitle': 'Flat 15% off for 24 hours only!',
+      'image': 'https://picsum.photos/id/1016/800/400',
+      'createdDate': '2025-07-29',
+    },
+  ];
+
+  int _current = 0;
+  final List<String> imgList = [
+    'https://picsum.photos/id/1011/800/400',
+    'https://picsum.photos/id/1015/800/400',
+    'https://picsum.photos/id/1016/800/400',
+    'https://picsum.photos/id/1020/800/400',
+  ];
+
+  final CarouselSliderController _controller = CarouselSliderController();
+
+  void _onDealTap(Deal deal) {
     context.pushNamed(
       'webview_screen',
       queryParameters: {
         'title': serializeParam(
-          offer.title,
+          deal.title,
+          ParamType.String,
+        ),
+      }.withoutNulls,
+      extra: <String, dynamic>{
+        kTransitionInfoKey: const TransitionInfo(
+          hasTransition: true,
+          transitionType: PageTransitionType.fade,
+          duration: Duration(milliseconds: 400),
+        ),
+      },
+    );
+  }
+
+  void _onCouponTab(Coupon coupon) {
+    context.pushNamed(
+      'webview_screen',
+      queryParameters: {
+        'title': serializeParam(
+          coupon.title,
           ParamType.String,
         ),
       }.withoutNulls,
@@ -89,16 +151,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          title: Text(
-            'Home',
-            style: FlutterFlowTheme.of(context).titleLarge.override(
-                  fontFamily: 'Nunito Sans',
-                  color: Colors.black,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
-                  useGoogleFonts:
-                      GoogleFonts.asMap().containsKey('Nunito Sans'),
-                ),
+          title: Image.asset(
+            'assets/images/app_icon_no_bg.png',
+            width: 64.0,
+            height: 64.0,
+            fit: BoxFit.cover,
           ),
           actions: [
             IconButton(
@@ -115,201 +172,330 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                child: Text(
-                  'Welcome, John Doe',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Nunito Sans',
-                        color: Colors.black,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        useGoogleFonts:
-                            GoogleFonts.asMap().containsKey('Nunito Sans'),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CarouselSlider(
+                  items: imgList.map((url) {
+                    return ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.network(
+                        url,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
                       ),
+                    );
+                  }).toList(),
+                  carouselController: _controller,
+                  options: CarouselOptions(
+                    height: 180,
+                    autoPlay: true,
+                    enlargeCenterPage: true,
+                    viewportFraction: 0.9,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _current = index;
+                      });
+                    },
+                  ),
                 ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
-                child: Text(
-                  '1234 Elm St. • Apt 3A',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Nunito Sans',
-                        color: Colors.blueGrey,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.normal,
-                        useGoogleFonts:
-                            GoogleFonts.asMap().containsKey('Nunito Sans'),
-                      ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(16.0),
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  color: Color(0xFF3379CE), // Google blue
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Text content
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Special 50th',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          'Anniversary Event',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                    // Calendar icon
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Icon(
-                          Icons.calendar_today,
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Text(
-                            "32",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 0.0, 0.0),
-                child: Text(
-                  'Offers & Updates',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Nunito Sans',
-                        color: Colors.black,
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        useGoogleFonts:
-                            GoogleFonts.asMap().containsKey('Nunito Sans'),
-                      ),
-                ),
-              ),
-              Expanded(
-                child: ListView.separated(
-                  padding: EdgeInsets.all(16),
-                  itemCount: offers.length,
-                  separatorBuilder: (_, __) => SizedBox(height: 12),
-                  itemBuilder: (context, index) {
-                    final offer = offers[index];
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: imgList.asMap().entries.map((entry) {
                     return GestureDetector(
-                      onTap: () => _onOfferTap(offer),
+                      onTap: () => _controller.animateToPage(entry.key),
                       child: Container(
-                        padding: EdgeInsets.all(12),
+                        width: 6.0,
+                        height: 6.0,
+                        margin: const EdgeInsets.symmetric(horizontal: 4.0),
                         decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withValues(alpha: .1),
-                              blurRadius: 1,
-                              offset: const Offset(0, 1),
-                            ),
-                          ],
-                        ),
-                        child: Row(
-                          children: [
-                            // Icon
-                            CircleAvatar(
-                              radius: 24,
-                              backgroundColor: Colors.pink.shade100,
-                              backgroundImage: NetworkImage(offer.iconUrl),
-                            ),
-                            SizedBox(width: 12),
-                            // Title + Subtitle
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    offer.title,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFF1E144F),
-                                    ),
-                                  ),
-                                  SizedBox(height: 4),
-                                  Text(
-                                    offer.description,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: Color(0xFF7B7B8B),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            // Time ago
-                            Text(
-                              offer.timeAgo,
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Color(0xFFCCCCCC),
-                              ),
-                            ),
-                          ],
+                          shape: BoxShape.circle,
+                          color: _current == entry.key
+                              ? Color(0xFF1A4572)
+                              : Colors.grey[300],
                         ),
                       ),
                     );
-                  },
+                  }).toList(),
                 ),
-              )
-            ],
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Hot Coupons',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Nunito Sans',
+                              color: Colors.black,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              useGoogleFonts: GoogleFonts.asMap()
+                                  .containsKey('Nunito Sans'),
+                            ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          context.pushNamed('coupon_screen');
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Color(0xFF1A4572),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Text(
+                              'See more',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            SizedBox(width: 4),
+                            Icon(Icons.arrow_forward, size: 18),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 250, // enough to fit image + texts
+                  child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: couponList.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 12),
+                    itemBuilder: (context, index) {
+                      final coupon = couponList[index];
+                      return GestureDetector(
+                        onTap: () => _onCouponTab(Coupon(
+                          title: coupon['title']!,
+                          description: coupon['subtitle']!,
+                          iconUrl: coupon['image']!,
+                          code: 'COUPON${index + 1}',
+                          discountAmount: 200,
+                          discountPercent: 10,
+                          minimumOrderValue: 2,
+                          expiryDate: DateTime.now(),
+                          isActive: true,
+                        )),
+                        child: Container(
+                          width: 256,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 4,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(12)),
+                                child: Image.network(
+                                  coupon['image']!,
+                                  height: 120,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  coupon['title']!,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(
+                                  coupon['subtitle']!,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 2),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
+                                child: Text(
+                                  '${coupon['createdDate']!} - ${coupon['createdDate']!}',
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                child: FFButtonWidget(
+                                  onPressed: () => {},
+                                  text: 'Apply Now',
+                                  options: FFButtonOptions(
+                                    width: double.infinity,
+                                    color: const Color(0xFF1A4572),
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Nunito Sans',
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey('Nunito Sans'),
+                                        ),
+                                    elevation: 1.0,
+                                    borderSide: const BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'News & Deals',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Nunito Sans',
+                              color: Colors.black,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              useGoogleFonts: GoogleFonts.asMap()
+                                  .containsKey('Nunito Sans'),
+                            ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          context.pushNamed('offer_screen');
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: Color(0xFF1A4572),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Text(
+                              'See more',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                            SizedBox(width: 4),
+                            Icon(Icons.arrow_forward, size: 18),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 200, // enough to fit image + texts
+                  child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: dealList.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 12),
+                    itemBuilder: (context, index) {
+                      final deal = dealList[index];
+                      return GestureDetector(
+                        onTap: () => _onDealTap(deal),
+                        child: Container(
+                          width: 256,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 4,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(12)),
+                                child: Image.network(
+                                  deal.imageUrl,
+                                  height: 120,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  deal.title,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(
+                                  deal.description,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 2),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
+                                child: Text(
+                                  '${deal.createdDate.year}',
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-}
-
-class OfferItem {
-  final String title;
-  final String description;
-  final String timeAgo;
-  final String iconUrl;
-
-  OfferItem({
-    required this.title,
-    required this.description,
-    required this.timeAgo,
-    required this.iconUrl,
-  });
 }

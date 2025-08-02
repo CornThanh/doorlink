@@ -71,16 +71,11 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          title: Text(
-            'Profile',
-            style: FlutterFlowTheme.of(context).titleLarge.override(
-                  fontFamily: 'Nunito Sans',
-                  color: Colors.black,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
-                  useGoogleFonts:
-                      GoogleFonts.asMap().containsKey('Nunito Sans'),
-                ),
+          title: Image.asset(
+            'assets/images/app_icon_no_bg.png',
+            width: 64.0,
+            height: 64.0,
+            fit: BoxFit.cover,
           ),
           actions: [
             IconButton(
@@ -255,9 +250,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
       // SettingScreenItems.editProfile => 'y9n16127' /* Edit profile */,
       // SettingScreenItems.language => 'y9n16027' /* MyQR */,
       // SettingScreenItems.changePassword => 'i7c0zshr' /* Change Password */,
-      // TODO: Handle this case.
       SettingScreenItems.logout => 'Logout' /* Logout */,
-      // TODO: Handle this case.
       SettingScreenItems.deleteAccount => 'Delete Account' /* Delete Account */,
     };
 
@@ -279,7 +272,6 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
           //   _onPressedEditProfile(columnProfileResponse.jsonBody);
           //   break;
           case SettingScreenItems.logout:
-            // TODO: Handle this case.
             await showDialog(
               context: context,
               builder: (dialogContext) {

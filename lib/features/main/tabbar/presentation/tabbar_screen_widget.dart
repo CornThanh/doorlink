@@ -1,6 +1,6 @@
 import 'package:doorlink_mobile/component/nfc_write_sheet/nfc_write_sheet_widget.dart';
 import 'package:doorlink_mobile/features/main/home/presentation/home_screen_widget.dart';
-import 'package:doorlink_mobile/features/main/message/presentation/message_screen_widget.dart';
+import 'package:doorlink_mobile/features/main/mail/presentation/mail_screen_widget.dart';
 import 'package:doorlink_mobile/flutter_flow/flutter_flow_theme.dart';
 import 'package:doorlink_mobile/flutter_flow/flutter_flow_util.dart';
 import 'package:doorlink_mobile/flutter_flow/flutter_flow_widgets.dart';
@@ -57,7 +57,7 @@ class _TabBarScreenWidgetState extends State<TabBarScreenWidget> {
       HomeScreenWidget(),
       SettingScreenWidget(),
       Container(),
-      MessageScreenWidget(),
+      MailScreenWidget(),
       DashboardScreenWidget()
     ];
   }
@@ -360,8 +360,8 @@ class _TabBarScreenWidgetState extends State<TabBarScreenWidget> {
         },
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.chat_bubble),
-        title: ("Settings"),
+        icon: Icon(CupertinoIcons.mail),
+        title: ("Email"),
         activeColorPrimary: Color(0xFF1A4572),
         inactiveColorPrimary: CupertinoColors.systemGrey,
         routeAndNavigatorSettings: RouteAndNavigatorSettings(

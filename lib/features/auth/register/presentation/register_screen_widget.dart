@@ -211,7 +211,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withValues(alpha: 0.1),
+                          fillColor: Colors.white,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
                         validator: _model.firstNameControllerValidator
@@ -363,7 +363,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withValues(alpha: 0.1),
+                          fillColor: Colors.white,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
                         validator: _model.emailControllerValidator
@@ -439,7 +439,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withValues(alpha: 0.1),
+                          fillColor: Colors.white,
                           suffixIcon: InkWell(
                             onTap: () => setState(
                               () => _model.passwordVisibility =
@@ -529,7 +529,7 @@ class _RegisterScreenWidgetState extends State<RegisterScreenWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withValues(alpha: 0.1),
+                          fillColor: Colors.white,
                           suffixIcon: InkWell(
                             onTap: () => setState(
                               () => _model.confirmPasswordVisibility =

@@ -1,7 +1,10 @@
 import 'dart:async';
 
-import 'package:doorlink_mobile/features/main/message/presentation/chat_screen_widget.dart';
+import 'package:doorlink_mobile/features/main/coupon/presentation/coupon_screen_widget.dart';
+import 'package:doorlink_mobile/features/main/mail/presentation/chat_screen_widget.dart';
 import 'package:doorlink_mobile/features/main/notification/presentation/notification_screen_widget.dart';
+import 'package:doorlink_mobile/features/main/deal/presentation/deal_screen_widget.dart';
+import 'package:doorlink_mobile/features/main/onboarding/presentation/onboarding_screen_widget.dart';
 import 'package:doorlink_mobile/features/main/vcard/presentation/update_vcard_screen_widget.dart';
 import 'package:doorlink_mobile/webview/presentation/webview_screen_widget.dart';
 import 'package:flutter/material.dart';
@@ -75,14 +78,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
           ? const TabBarScreenWidget()
-          : const LoginScreenWidget(),
+          : const OnboardingScreenWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
               ? const TabBarScreenWidget()
-              : const LoginScreenWidget(),
+              : const OnboardingScreenWidget(),
         ),
         FFRoute(
           name: 'tabbar_screen',
@@ -197,6 +200,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'chat_screen',
           path: '/chatScreen',
           builder: (context, params) => ChatScreenWidget(),
+        ),
+        FFRoute(
+          name: 'offer_screen',
+          path: '/offerScreen',
+          builder: (context, params) => DealScreenWidget(),
+        ),
+        FFRoute(
+          name: 'coupon_screen',
+          path: '/couponScreen',
+          builder: (context, params) => CouponScreenWidget(),
         ),
         FFRoute(
           name: 'webview_screen',

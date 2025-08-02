@@ -1,28 +1,27 @@
-import 'package:doorlink_mobile/features/main/message/presentation/message_view_model.dart';
+import 'package:doorlink_mobile/features/main/mail/presentation/mail_view_model.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class MessageScreenWidget extends StatefulWidget {
-  const MessageScreenWidget({super.key});
+class MailScreenWidget extends StatefulWidget {
+  const MailScreenWidget({super.key});
 
   @override
-  State<MessageScreenWidget> createState() => _MessageScreenWidgetState();
+  State<MailScreenWidget> createState() => _MailScreenWidgetState();
 }
 
-class _MessageScreenWidgetState extends State<MessageScreenWidget> {
-  late MessageViewModel _viewModel;
+class _MailScreenWidgetState extends State<MailScreenWidget> {
+  late MailViewModel _viewModel;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _viewModel = createModel(context, () => MessageViewModel());
+    _viewModel = createModel(context, () => MailViewModel());
   }
 
   @override
@@ -69,16 +68,11 @@ class _MessageScreenWidgetState extends State<MessageScreenWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
-          title: Text(
-            'Messages',
-            style: FlutterFlowTheme.of(context).titleLarge.override(
-                  fontFamily: 'Nunito Sans',
-                  color: Colors.black,
-                  fontSize: 22.0,
-                  fontWeight: FontWeight.bold,
-                  useGoogleFonts:
-                      GoogleFonts.asMap().containsKey('Nunito Sans'),
-                ),
+          title: Image.asset(
+            'assets/images/app_icon_no_bg.png',
+            width: 64.0,
+            height: 64.0,
+            fit: BoxFit.cover,
           ),
           actions: [
             IconButton(
@@ -98,7 +92,7 @@ class _MessageScreenWidgetState extends State<MessageScreenWidget> {
           child: ListView.separated(
             padding: EdgeInsets.symmetric(horizontal: 16),
             itemCount: offers.length,
-            separatorBuilder: (_, __) => SizedBox(height: 12),
+            separatorBuilder: (_, __) => SizedBox(height: 6),
             itemBuilder: (context, index) {
               final offer = offers[index];
               return GestureDetector(
@@ -133,7 +127,7 @@ class _MessageScreenWidgetState extends State<MessageScreenWidget> {
                             Text(
                               offer.title,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF1E144F),
                               ),

@@ -192,7 +192,21 @@ class _ForgotPasswordScreenWidgetState
                                   FlutterFlowTheme.of(context).labelMedium,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
-                                  color: Color(0x0079818A),
+                                  color: Color(0xFFF6F8F9),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              border: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFF6F8F9),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              disabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Color(0xFFF6F8F9),
                                   width: 1.0,
                                 ),
                                 borderRadius: BorderRadius.circular(8.0),
@@ -219,7 +233,7 @@ class _ForgotPasswordScreenWidgetState
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
                               filled: true,
-                              fillColor: Colors.white.withValues(alpha: .1),
+                              fillColor: Colors.white,
                             ),
                             style: FlutterFlowTheme.of(context).bodyMedium,
                             validator: _model.emailControllerValidator

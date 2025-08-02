@@ -76,6 +76,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   persistent_bottom_nav_bar: ^6.2.1
   webview_flutter: ^4.13.0
+  carousel_slider: ^5.1.1
 
 dependency_overrides:
   http: 1.2.0
@@ -95,7 +96,7 @@ flutter_launcher_icons:
   remove_alpha_ios: true
   web:
     generate: true
-  image_path: "assets/images/app_launcher_icon.png"
+  image_path: "assets/images/app_icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

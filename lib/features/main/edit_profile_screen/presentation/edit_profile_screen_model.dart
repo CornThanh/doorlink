@@ -16,9 +16,9 @@ class EditProfileScreenModel extends FlutterFlowModel<EditProfileScreenWidget> {
   TextEditingController? firstNameController;
   String? Function(BuildContext, String?)? firstNameControllerValidator;
   // State field(s) for last_name widget.
-  FocusNode? lastNameFocusNode;
-  TextEditingController? lastNameController;
-  String? Function(BuildContext, String?)? lastNameControllerValidator;
+  // FocusNode? lastNameFocusNode;
+  // TextEditingController? lastNameController;
+  // String? Function(BuildContext, String?)? lastNameControllerValidator;
   // State field(s) for email widget.
   FocusNode? emailFocusNode;
   TextEditingController? emailController;
@@ -43,8 +43,8 @@ class EditProfileScreenModel extends FlutterFlowModel<EditProfileScreenWidget> {
     firstNameFocusNode?.dispose();
     firstNameController?.dispose();
 
-    lastNameFocusNode?.dispose();
-    lastNameController?.dispose();
+    // lastNameFocusNode?.dispose();
+    // lastNameController?.dispose();
 
     emailFocusNode?.dispose();
     emailController?.dispose();

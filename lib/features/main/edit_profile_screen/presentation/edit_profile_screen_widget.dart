@@ -42,7 +42,7 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
 
     _model.firstNameFocusNode ??= FocusNode();
 
-    _model.lastNameFocusNode ??= FocusNode();
+    // _model.lastNameFocusNode ??= FocusNode();
 
     _model.emailFocusNode ??= FocusNode();
 
@@ -712,78 +712,53 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
     try {
       if ((_model.firstNameController.text != '') &&
           functions.textFieldValidator(_model.firstNameController.text)) {
-        if ((_model.lastNameController.text != '') &&
-            functions.textFieldValidator(_model.lastNameController.text)) {
-          _model.emailRes = await actions.emailValidation(
-            _model.emailController.text,
-          );
-          if (_model.emailRes == true) {
-            if ((_model.emailController.text != '') &&
-                functions.textFieldValidator(_model.emailController.text)) {
-              if ((_model.contactController.text != '') &&
-                  functions.textFieldValidator(_model.contactController.text)) {
-                _model.apiResultrga = await EditProfileRepository.update(
-                  firstName: _model.firstNameController.text,
-                  contact: _model.contactController.text,
-                  email: _model.emailController.text,
-                  regionCode: FFAppState().prefixCode,
-                  profile: _model.uploadedLocalFile,
-                  authToken: FFAppState().authToken,
-                  lastName: _model.lastNameController.text,
-                );
-                if (mounted) {
-                  if ((_model.apiResultrga?.succeeded ?? true)) {
-                    context.safePop();
-                    await actions.customSnackbar(
-                      context,
-                      FFLocalizations.of(context).getVariableText(
-                        viText: 'Profile Update Successfully.',
-                        enText: 'Profile Update Successfully.',
-                      ),
-                      const Color(0xFF46A44D),
-                    );
-                  } else {
-                    await actions.customSnackbar(
-                      context,
-                      FFLocalizations.of(context).getVariableText(
-                        viText: 'Cập nhật hồ sơ thất bại.',
-                        enText: 'Profile Update Failed.',
-                      ),
-                      FlutterFlowTheme.of(context).error,
-                    );
-                  }
-                }
-              } else {
-                if (mounted) {
-                  if (_model.contactController.text == '') {
-                    await actions.customSnackbar(
-                      context,
-                      FFLocalizations.of(context).getVariableText(
-                        viText: 'Vui lòng nhập thông tin liên hệ.',
-                        enText: 'Please Enter Contact no.',
-                      ),
-                      FlutterFlowTheme.of(context).error,
-                    );
-                  } else {
-                    await actions.customSnackbar(
-                      context,
-                      FFLocalizations.of(context).getVariableText(
-                        viText: 'Vui lòng nhập thông tin liên hệ đúng.',
-                        enText: 'Please Enter Valid Contact no.',
-                      ),
-                      FlutterFlowTheme.of(context).error,
-                    );
-                  }
+        _model.emailRes = await actions.emailValidation(
+          _model.emailController.text,
+        );
+        if (_model.emailRes == true) {
+          if ((_model.emailController.text != '') &&
+              functions.textFieldValidator(_model.emailController.text)) {
+            if ((_model.contactController.text != '') &&
+                functions.textFieldValidator(_model.contactController.text)) {
+              _model.apiResultrga = await EditProfileRepository.update(
+                firstName: _model.firstNameController.text,
+                contact: _model.contactController.text,
+                email: _model.emailController.text,
+                regionCode: FFAppState().prefixCode,
+                profile: _model.uploadedLocalFile,
+                authToken: FFAppState().authToken,
+                lastName: '',
+              );
+              if (mounted) {
+                if ((_model.apiResultrga?.succeeded ?? true)) {
+                  context.safePop();
+                  await actions.customSnackbar(
+                    context,
+                    FFLocalizations.of(context).getVariableText(
+                      viText: 'Profile Update Successfully.',
+                      enText: 'Profile Update Successfully.',
+                    ),
+                    const Color(0xFF46A44D),
+                  );
+                } else {
+                  await actions.customSnackbar(
+                    context,
+                    FFLocalizations.of(context).getVariableText(
+                      viText: 'Cập nhật hồ sơ thất bại.',
+                      enText: 'Profile Update Failed.',
+                    ),
+                    FlutterFlowTheme.of(context).error,
+                  );
                 }
               }
             } else {
               if (mounted) {
-                if (_model.emailController.text == '') {
+                if (_model.contactController.text == '') {
                   await actions.customSnackbar(
                     context,
                     FFLocalizations.of(context).getVariableText(
-                      viText: 'Vui lòng nhập email.',
-                      enText: 'Please Enter Email.',
+                      viText: 'Vui lòng nhập thông tin liên hệ.',
+                      enText: 'Please Enter Contact no.',
                     ),
                     FlutterFlowTheme.of(context).error,
                   );
@@ -791,8 +766,8 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
                   await actions.customSnackbar(
                     context,
                     FFLocalizations.of(context).getVariableText(
-                      viText: 'Vui lòng nhập email chính xác',
-                      enText: 'Please Enter Valid Email.',
+                      viText: 'Vui lòng nhập thông tin liên hệ đúng.',
+                      enText: 'Please Enter Valid Contact no.',
                     ),
                     FlutterFlowTheme.of(context).error,
                   );
@@ -801,32 +776,34 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
             }
           } else {
             if (mounted) {
-              await actions.customSnackbar(
-                context,
-                FFLocalizations.of(context).getVariableText(
-                  viText: 'Vui lòng nhập email chính xác',
-                  enText: 'Please Enter Valid Email.',
-                ),
-                FlutterFlowTheme.of(context).error,
-              );
+              if (_model.emailController.text == '') {
+                await actions.customSnackbar(
+                  context,
+                  FFLocalizations.of(context).getVariableText(
+                    viText: 'Vui lòng nhập email.',
+                    enText: 'Please Enter Email.',
+                  ),
+                  FlutterFlowTheme.of(context).error,
+                );
+              } else {
+                await actions.customSnackbar(
+                  context,
+                  FFLocalizations.of(context).getVariableText(
+                    viText: 'Vui lòng nhập email chính xác',
+                    enText: 'Please Enter Valid Email.',
+                  ),
+                  FlutterFlowTheme.of(context).error,
+                );
+              }
             }
           }
         } else {
-          if (_model.lastNameController.text == '') {
+          if (mounted) {
             await actions.customSnackbar(
               context,
               FFLocalizations.of(context).getVariableText(
-                viText: 'Vui lòng nhập họ.',
-                enText: 'Please Enter Last name.',
-              ),
-              FlutterFlowTheme.of(context).error,
-            );
-          } else {
-            await actions.customSnackbar(
-              context,
-              FFLocalizations.of(context).getVariableText(
-                viText: 'Vui lòng nhập họ đúng.',
-                enText: 'Please Enter Valid Last name.',
+                viText: 'Vui lòng nhập email chính xác',
+                enText: 'Please Enter Valid Email.',
               ),
               FlutterFlowTheme.of(context).error,
             );

@@ -21,6 +21,7 @@ class _WebviewScreenWidgetState extends State<WebviewScreenWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final controller = WebViewController()
     ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..setBackgroundColor(Colors.white)
     ..setNavigationDelegate(
       NavigationDelegate(
         onProgress: (int progress) {
