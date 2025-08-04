@@ -57,13 +57,9 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
             height: 64.0,
             fit: BoxFit.cover,
           ),
-          
           actions: [
             IconButton(
-              icon: Icon(
-                CupertinoIcons.bell,
-                color: FlutterFlowTheme.of(context).primaryText,
-              ),
+              icon: Icon(CupertinoIcons.bell, color: const Color(0xFF1A4572)),
               onPressed: () {
                 context.pushNamed('notification_screen');
               },

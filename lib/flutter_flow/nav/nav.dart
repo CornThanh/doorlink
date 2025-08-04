@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:doorlink_mobile/features/main/coupon/presentation/coupon_screen_widget.dart';
-import 'package:doorlink_mobile/features/main/mail/presentation/chat_screen_widget.dart';
+import 'package:doorlink_mobile/features/main/mail/presentation/mail_detail_screen_widget.dart';
 import 'package:doorlink_mobile/features/main/notification/presentation/notification_screen_widget.dart';
 import 'package:doorlink_mobile/features/main/deal/presentation/deal_screen_widget.dart';
 import 'package:doorlink_mobile/features/main/onboarding/presentation/onboarding_screen_widget.dart';
@@ -146,7 +146,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'setting_screen',
           path: '/settingScreen',
-          builder: (context, params) => const SettingScreenWidget(),
+          builder: (context, params) => const ProfileScreenWidget(),
         ),
         FFRoute(
           name: 'change_password_screen',
@@ -197,9 +197,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const NotificationScreenWidget(),
         ),
         FFRoute(
-          name: 'chat_screen',
-          path: '/chatScreen',
-          builder: (context, params) => ChatScreenWidget(),
+          name: 'mail_detail_screen',
+          path: '/mailDetailScreen',
+          builder: (context, params) => MailDetailScreenWidget(),
         ),
         FFRoute(
           name: 'offer_screen',

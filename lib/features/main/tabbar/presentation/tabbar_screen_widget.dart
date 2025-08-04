@@ -55,7 +55,7 @@ class _TabBarScreenWidgetState extends State<TabBarScreenWidget> {
   List<Widget> _buildScreens() {
     return [
       HomeScreenWidget(),
-      SettingScreenWidget(),
+      ProfileScreenWidget(),
       Container(),
       MailScreenWidget(),
       DashboardScreenWidget()
@@ -361,7 +361,7 @@ class _TabBarScreenWidgetState extends State<TabBarScreenWidget> {
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.mail),
-        title: ("Email"),
+        title: ("MailBox"),
         activeColorPrimary: Color(0xFF1A4572),
         inactiveColorPrimary: CupertinoColors.systemGrey,
         routeAndNavigatorSettings: RouteAndNavigatorSettings(

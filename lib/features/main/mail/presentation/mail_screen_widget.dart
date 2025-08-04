@@ -1,3 +1,4 @@
+import 'package:doorlink_mobile/features/main/mail/model/mail.dart';
 import 'package:doorlink_mobile/features/main/mail/presentation/mail_view_model.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -17,6 +18,14 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
   late MailViewModel _viewModel;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final List<String> types = [
+    'All',
+    'Offers & Promotions',
+    'Government & City Updates',
+    'Archived / Deleted'
+  ];
+
+  int selectedIndex = 0;
 
   @override
   void initState() {
@@ -30,33 +39,50 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
     super.dispose();
   }
 
-  final List<OfferItem> offers = [
-    OfferItem(
-      title: "Domino's",
-      description: "Get 20% off your next online order!",
-      timeAgo: "2d ago",
-      iconUrl:
-          'https://cdn-icons-png.flaticon.com/512/733/733544.png', // pink Dribbble icon
+  final List<Mail> mails = [
+    Mail(
+      sender: 'Google',
+      senderEmail: 'no-reply@google.com',
+      subject: 'Your security alert',
+      snippet: 'We detected a new login to your account...',
+      time: '8:15 AM',
+      isRead: false,
     ),
-    OfferItem(
-      title: "Retail Chains with Loyalty",
-      description: "See the latest city newsletter",
-      timeAgo: "2d ago",
-      iconUrl: 'https://cdn-icons-png.flaticon.com/512/733/733544.png',
+    Mail(
+      sender: 'LinkedIn',
+      senderEmail: 'jobs@linkedin.com',
+      subject: 'New job matches for you',
+      snippet: 'Senior Flutter Developer roles in Ho Chi Minh City...',
+      time: 'Yesterday',
+      isRead: true,
     ),
-    OfferItem(
-      title: "Retail Chains with Loyalty",
-      description: "See the latest city newsletter",
-      timeAgo: "2d ago",
-      iconUrl: 'https://cdn-icons-png.flaticon.com/512/733/733544.png',
-    ),
-    OfferItem(
-      title: "Retail Chains with Loyalty",
-      description: "See the latest city newsletter",
-      timeAgo: "2d ago",
-      iconUrl: 'https://cdn-icons-png.flaticon.com/512/733/733544.png',
+    Mail(
+      sender: 'GitHub',
+      senderEmail: 'noreply@github.com',
+      subject: 'Pull Request: Update readme.md',
+      snippet: 'A new PR was submitted to your repo...',
+      time: 'Aug 3',
+      isRead: false,
     ),
   ];
+
+  Widget slideLeftBackground() {
+    return Container(
+      color: Colors.red,
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.only(left: 20),
+      child: Icon(Icons.delete, color: Colors.white),
+    );
+  }
+
+  Widget slideRightBackground() {
+    return Container(
+      color: Color(0xFF1A4572),
+      alignment: Alignment.centerRight,
+      padding: EdgeInsets.only(right: 20),
+      child: Icon(Icons.archive, color: Colors.white),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +102,7 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
           ),
           actions: [
             IconButton(
-              icon: Icon(
-                CupertinoIcons.bell,
-                color: FlutterFlowTheme.of(context).primaryText,
-              ),
+              icon: Icon(CupertinoIcons.bell, color: const Color(0xFF1A4572)),
               onPressed: () {
                 context.pushNamed('notification_screen');
               },
@@ -89,90 +112,122 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
-          child: ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            itemCount: offers.length,
-            separatorBuilder: (_, __) => SizedBox(height: 6),
-            itemBuilder: (context, index) {
-              final offer = offers[index];
-              return GestureDetector(
-                onTap: () => context.pushNamed('chat_screen'),
-                child: Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: .1),
-                        blurRadius: 1,
-                        offset: const Offset(0, 1),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 50,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: types.length,
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  itemBuilder: (context, index) {
+                    final isSelected = selectedIndex == index;
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: ChoiceChip(
+                        elevation: 0,
+                        pressElevation: 0,
+                        label: Text(
+                          types[index],
+                          style: TextStyle(
+                            color: isSelected ? Colors.white : Colors.black,
+                          ),
+                        ),
+                        selected: isSelected,
+                        selectedColor: Color(0xFF1A4572),
+                        onSelected: (_) {
+                          setState(() {
+                            selectedIndex = index;
+                          });
+                        },
                       ),
-                    ],
-                  ),
-                  child: Row(
-                    children: [
-                      // Icon
-                      CircleAvatar(
-                        radius: 24,
-                        backgroundColor: Colors.pink.shade100,
-                        backgroundImage: NetworkImage(offer.iconUrl),
-                      ),
-                      SizedBox(width: 12),
-                      // Title + Subtitle
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 8),
+              Divider(height: 1),
+              Expanded(
+                child: ListView.separated(
+                  itemCount: mails.length,
+                  separatorBuilder: (_, __) => Divider(height: 1),
+                  itemBuilder: (context, index) {
+                    final mail = mails[index];
+                    return Dismissible(
+                      key: ValueKey(mail.subject + mail.time),
+                      background: slideLeftBackground(),
+                      secondaryBackground: slideRightBackground(),
+                      onDismissed: (direction) {
+                        // Bạn có thể xử lý xóa, lưu trữ, v.v tại đây
+                      },
+                      child: ListTile(
+                        onTap: () {
+                          // Điều hướng đến trang chi tiết
+                          context.pushNamed('mail_detail_screen');
+                        },
+                        leading: CircleAvatar(
+                          backgroundColor: Color(0xFF1A4572),
+                          child: Text(mail.sender[0]),
+                        ),
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              offer.title,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF1E144F),
+                            Expanded(
+                              child: Text(
+                                mail.sender,
+                                style: TextStyle(
+                                  fontWeight: mail.isRead
+                                      ? FontWeight.normal
+                                      : FontWeight.bold,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            SizedBox(height: 4),
                             Text(
-                              offer.description,
+                              mail.time,
                               style: TextStyle(
-                                fontSize: 14,
-                                color: Color(0xFF7B7B8B),
+                                fontSize: 12,
+                                color: Colors.grey,
+                                fontWeight: mail.isRead
+                                    ? FontWeight.normal
+                                    : FontWeight.bold,
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      // Time ago
-                      Text(
-                        offer.timeAgo,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Color(0xFFCCCCCC),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              mail.subject,
+                              style: TextStyle(
+                                fontWeight: mail.isRead
+                                    ? FontWeight.normal
+                                    : FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              mail.snippet,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: Colors.grey[700],
+                              ),
+                            ),
+                          ],
                         ),
+                        isThreeLine: true,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                       ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
-              );
-            },
+              )
+            ],
           ),
         ),
       ),
     );
   }
-}
-
-class OfferItem {
-  final String title;
-  final String description;
-  final String timeAgo;
-  final String iconUrl;
-
-  OfferItem({
-    required this.title,
-    required this.description,
-    required this.timeAgo,
-    required this.iconUrl,
-  });
 }

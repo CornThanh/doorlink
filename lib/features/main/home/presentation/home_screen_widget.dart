@@ -161,7 +161,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             IconButton(
               icon: Icon(
                 CupertinoIcons.bell,
-                color: FlutterFlowTheme.of(context).primaryText,
+                color: const Color(0xFF1A4572)
               ),
               onPressed: () {
                 context.pushNamed('notification_screen');

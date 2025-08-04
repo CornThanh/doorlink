@@ -25,8 +25,8 @@ export 'features/main/edit_profile_screen/presentation/edit_profile_screen_widge
     show EditProfileScreenWidget;
 export 'features/main/language/presentation/language_screen_widget.dart'
     show LanguageScreenWidget;
-export 'features/main/setting/presentation/setting_screen_widget.dart'
-    show SettingScreenWidget;
+export 'features/main/setting/presentation/profile_screen_widget.dart'
+    show ProfileScreenWidget;
 export 'features/main/vcard/presentation/vcard_screen_widget.dart'
     show VcardScreenWidget;
 export 'features/main/tabbar/presentation/tabbar_screen_widget.dart';

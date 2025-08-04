@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'setting_screen_model.dart';
-export 'setting_screen_model.dart';
+import 'profile_screen_model.dart';
+export 'profile_screen_model.dart';
 
 enum SettingScreenItems {
   logout,
@@ -20,15 +20,15 @@ enum SettingScreenItems {
   // changePassword,
 }
 
-class SettingScreenWidget extends StatefulWidget {
-  const SettingScreenWidget({super.key});
+class ProfileScreenWidget extends StatefulWidget {
+  const ProfileScreenWidget({super.key});
 
   @override
-  State<SettingScreenWidget> createState() => _SettingScreenWidgetState();
+  State<ProfileScreenWidget> createState() => _ProfileScreenWidgetState();
 }
 
-class _SettingScreenWidgetState extends State<SettingScreenWidget> {
-  late SettingScreenViewModel _viewModel;
+class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
+  late ProfileScreenViewModel _viewModel;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   dynamic columnProfileResponse = {};
@@ -36,7 +36,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
   @override
   void initState() {
     super.initState();
-    _viewModel = createModel(context, () => SettingScreenViewModel());
+    _viewModel = createModel(context, () => ProfileScreenViewModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -79,10 +79,14 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
           ),
           actions: [
             IconButton(
-              icon: Icon(
-                CupertinoIcons.bell,
-                color: FlutterFlowTheme.of(context).primaryText,
-              ),
+              icon:
+                  Icon(CupertinoIcons.settings, color: const Color(0xFF1A4572)),
+              onPressed: () {
+                context.pushNamed('notification_screen');
+              },
+            ),
+            IconButton(
+              icon: Icon(CupertinoIcons.bell, color: const Color(0xFF1A4572)),
               onPressed: () {
                 context.pushNamed('notification_screen');
               },
@@ -227,10 +231,72 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
                         ),
                       ),
                       const SizedBox(height: 32),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Text(
+                            'My Account',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Nunito Sans',
+                                  fontSize: 16.0,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey('Nunito Sans'),
+                                ),
+                          ),
+                        ),
+                      ),
                       ListView.separated(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemBuilder: _itemBuilder,
+                        itemBuilder: (context, index) {
+                          String code =
+                              switch (SettingScreenItems.values[index]) {
+                            SettingScreenItems.logout => 'Logout',
+                            SettingScreenItems.deleteAccount =>
+                              'Delete Account',
+                          };
+                          return _itemBuilder(context, index, code);
+                        },
+                        separatorBuilder: _separatorBuilder,
+                        itemCount: SettingScreenItems.values.length,
+                      ),
+                      SizedBox(height: 16),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Text(
+                            'Help & Support',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Nunito Sans',
+                                  fontSize: 16.0,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey('Nunito Sans'),
+                                ),
+                          ),
+                        ),
+                      ),
+                      ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          String code =
+                              switch (SettingScreenItems.values[index]) {
+                            SettingScreenItems.logout => 'How DoorLink Works',
+                            SettingScreenItems.deleteAccount =>
+                              'Report an Issue',
+                          };
+                          return _itemBuilder(context, index, code);
+                        },
                         separatorBuilder: _separatorBuilder,
                         itemCount: SettingScreenItems.values.length,
                       )
@@ -245,15 +311,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
     );
   }
 
-  Widget _itemBuilder(BuildContext context, int index) {
-    String code = switch (SettingScreenItems.values[index]) {
-      // SettingScreenItems.editProfile => 'y9n16127' /* Edit profile */,
-      // SettingScreenItems.language => 'y9n16027' /* MyQR */,
-      // SettingScreenItems.changePassword => 'i7c0zshr' /* Change Password */,
-      SettingScreenItems.logout => 'Logout' /* Logout */,
-      SettingScreenItems.deleteAccount => 'Delete Account' /* Delete Account */,
-    };
-
+  Widget _itemBuilder(BuildContext context, int index, String code) {
     return InkWell(
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
@@ -261,16 +319,6 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
       highlightColor: Colors.transparent,
       onTap: () async {
         switch (SettingScreenItems.values[index]) {
-          // case SettingScreenItems.language:
-          //   _onPressedLanguage();
-          //   break;
-
-          // case SettingScreenItems.changePassword:
-          //   _onPressedChangePassword();
-          //   break;
-          // case SettingScreenItems.editProfile:
-          //   _onPressedEditProfile(columnProfileResponse.jsonBody);
-          //   break;
           case SettingScreenItems.logout:
             await showDialog(
               context: context,
@@ -330,7 +378,7 @@ class _SettingScreenWidgetState extends State<SettingScreenWidget> {
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Nunito Sans',
                     fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     useGoogleFonts:
                         GoogleFonts.asMap().containsKey('Nunito Sans'),
                   ),
