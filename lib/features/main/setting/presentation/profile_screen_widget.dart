@@ -236,6 +236,41 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
                         child: Padding(
                           padding: EdgeInsets.all(8),
                           child: Text(
+                            'Help & Support',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Nunito Sans',
+                                  fontSize: 16.0,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey('Nunito Sans'),
+                                ),
+                          ),
+                        ),
+                      ),
+                      ListView.separated(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          String code =
+                              switch (SettingScreenItems.values[index]) {
+                            SettingScreenItems.logout => 'How DoorLink Works',
+                            SettingScreenItems.deleteAccount =>
+                              'Report an Issue',
+                          };
+                          return _itemBuilder(context, index, code);
+                        },
+                        separatorBuilder: _separatorBuilder,
+                        itemCount: SettingScreenItems.values.length,
+                      ),
+                      SizedBox(height: 16),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Text(
                             'My Account',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
@@ -265,41 +300,6 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
                         separatorBuilder: _separatorBuilder,
                         itemCount: SettingScreenItems.values.length,
                       ),
-                      SizedBox(height: 16),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Text(
-                            'Help & Support',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Nunito Sans',
-                                  fontSize: 16.0,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Nunito Sans'),
-                                ),
-                          ),
-                        ),
-                      ),
-                      ListView.separated(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          String code =
-                              switch (SettingScreenItems.values[index]) {
-                            SettingScreenItems.logout => 'How DoorLink Works',
-                            SettingScreenItems.deleteAccount =>
-                              'Report an Issue',
-                          };
-                          return _itemBuilder(context, index, code);
-                        },
-                        separatorBuilder: _separatorBuilder,
-                        itemCount: SettingScreenItems.values.length,
-                      )
                     ],
                   );
                 },
@@ -318,39 +318,40 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
       hoverColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onTap: () async {
-        switch (SettingScreenItems.values[index]) {
-          case SettingScreenItems.logout:
-            await showDialog(
-              context: context,
-              builder: (dialogContext) {
-                return Dialog(
-                  elevation: 1,
-                  insetPadding: EdgeInsets.zero,
-                  backgroundColor: Colors.transparent,
-                  alignment: const AlignmentDirectional(0.0, 0.0)
-                      .resolve(Directionality.of(context)),
-                  child: const LogoutDialogBoxWidget(),
-                );
+        switch (index) {
+          case 0:
+            context.pushNamed(
+              'webview_screen',
+              queryParameters: {
+                'title': serializeParam(
+                  code,
+                  ParamType.String,
+                ),
+              }.withoutNulls,
+              extra: <String, dynamic>{
+                kTransitionInfoKey: const TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 400),
+                ),
               },
             );
             break;
-          case SettingScreenItems.deleteAccount:
-            await showDialog(
-              context: context,
-              builder: (dialogContext) {
-                return Dialog(
-                  elevation: 1,
-                  insetPadding: EdgeInsets.zero,
-                  backgroundColor: Colors.transparent,
-                  alignment: const AlignmentDirectional(0.0, 0.0)
-                      .resolve(Directionality.of(context)),
-                  child: DeleteDialogBoxWidget(
-                    titile: 'Delete Account',
-                    subtitle: 'Do you want to delete your account?',
-                    deleteId: null,
-                    deleteType: '',
-                  ),
-                );
+          case 1:
+            context.pushNamed(
+              'webview_screen',
+              queryParameters: {
+                'title': serializeParam(
+                  code,
+                  ParamType.String,
+                ),
+              }.withoutNulls,
+              extra: <String, dynamic>{
+                kTransitionInfoKey: const TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 400),
+                ),
               },
             );
             break;
@@ -396,6 +397,7 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
 
   Widget _separatorBuilder(BuildContext context, int index) {
     return Divider(
+      height: 6,
       thickness: 0.5,
       color: Colors.white.withValues(alpha: .2),
     );
