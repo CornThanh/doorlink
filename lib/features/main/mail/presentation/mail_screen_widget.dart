@@ -19,9 +19,10 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final List<String> types = [
-    'All',
-    'Offers & Promotions',
+    'All Mail',
     'Government & City Updates',
+    'Offers & Promotions',
+    'Alerts',
     'Archived / Deleted'
   ];
 
@@ -113,36 +114,40 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
         ),
         body: SafeArea(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: types.length,
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  itemBuilder: (context, index) {
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: List.generate(types.length, (index) {
                     final isSelected = selectedIndex == index;
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      child: ChoiceChip(
-                        elevation: 0,
-                        pressElevation: 0,
-                        label: Text(
-                          types[index],
-                          style: TextStyle(
-                            color: isSelected ? Colors.white : Colors.black,
-                          ),
+                    return ChoiceChip(
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
+                      labelPadding: EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 0), // giảm padding
+                      materialTapTargetSize: MaterialTapTargetSize
+                          .shrinkWrap, // thu gọn tap target
+                      visualDensity: VisualDensity(
+                          horizontal: 0, vertical: 0), // giảm chiều cao
+                      label: Text(
+                        types[index],
+                        style: TextStyle(
+                          color: isSelected ? Colors.white : Colors.black,
                         ),
-                        selected: isSelected,
-                        selectedColor: Color(0xFF1A4572),
-                        onSelected: (_) {
-                          setState(() {
-                            selectedIndex = index;
-                          });
-                        },
                       ),
+                      selected: isSelected,
+                      selectedColor: Color(0xFF1A4572),
+                      onSelected: (_) {
+                        setState(() {
+                          selectedIndex = index;
+                        });
+                      },
                     );
-                  },
+                  }),
                 ),
               ),
               SizedBox(height: 8),
