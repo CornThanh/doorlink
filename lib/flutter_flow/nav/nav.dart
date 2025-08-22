@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:doorlink_mobile/features/main/coupon/presentation/coupon_screen_widget.dart';
+import 'package:doorlink_mobile/features/main/deal/presentation/deal_screen_widget.dart';
 import 'package:doorlink_mobile/features/main/mail/presentation/mail_detail_screen_widget.dart';
 import 'package:doorlink_mobile/features/main/notification/presentation/notification_screen_widget.dart';
-import 'package:doorlink_mobile/features/main/deal/presentation/deal_screen_widget.dart';
 import 'package:doorlink_mobile/features/main/onboarding/presentation/onboarding_screen_widget.dart';
 import 'package:doorlink_mobile/features/main/vcard/presentation/update_vcard_screen_widget.dart';
 import 'package:doorlink_mobile/webview/presentation/webview_screen_widget.dart';
@@ -15,6 +15,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 
 export 'package:go_router/go_router.dart';
+
 export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
@@ -199,7 +200,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'mail_detail_screen',
           path: '/mailDetailScreen',
-          builder: (context, params) => MailDetailScreenWidget(),
+          builder: (context, params) => MailDetailScreenWidget(
+            mailId: params.getParam('mailId', ParamType.String),
+            senderName: params.getParam('senderName', ParamType.String),
+            senderEmail: params.getParam('senderEmail', ParamType.String),
+            subject: params.getParam('subject', ParamType.String),
+            body: params.getParam('body', ParamType.String),
+            time: params.getParam('time', ParamType.String),
+            status: params.getParam('status', ParamType.String),
+            type: params.getParam('type', ParamType.String),
+          ),
         ),
         FFRoute(
           name: 'offer_screen',
@@ -216,6 +226,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/webviewScreen',
           builder: (context, params) => WebviewScreenWidget(
             title: params.getParam('title', ParamType.String),
+            url: params.getParam('url', ParamType.String),
           ),
         ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

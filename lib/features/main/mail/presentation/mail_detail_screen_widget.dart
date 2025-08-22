@@ -4,22 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MailDetailScreenWidget extends StatelessWidget {
-  final String senderName = "John Doe";
-  final String senderEmail = "john.doe@example.com";
-  final String subject = "Meeting Follow-up";
-  final String body = '''
-Hi team,
+  final String? mailId;
+  final String? senderName;
+  final String? senderEmail;
+  final String? subject;
+  final String? body;
+  final String? time;
+  final String? status;
+  final String? type;
 
-Thanks for the productive meeting today. Attached is the follow-up document with tasks and timelines.
-
-Let me know if you have any questions.
-
-Best regards,
-John
-''';
-  final String time = "10:30 AM";
-
-  const MailDetailScreenWidget({super.key});
+  const MailDetailScreenWidget({
+    super.key,
+    this.mailId,
+    this.senderName,
+    this.senderEmail,
+    this.subject,
+    this.body,
+    this.time,
+    this.status,
+    this.type,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -71,36 +75,54 @@ John
           children: [
             // Subject
             Text(
-              subject,
+              subject ?? 'No Subject',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
             // Sender info
             Row(
               children: [
-                CircleAvatar(child: Text(senderName[0])),
+                CircleAvatar(child: Text((senderName ?? 'U')[0])),
                 SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(senderName,
+                      Text(senderName ?? 'Unknown Sender',
                           style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text(senderEmail,
+                      Text(senderEmail ?? 'No email',
                           style: TextStyle(color: Colors.grey[600])),
                     ],
                   ),
                 ),
-                Text(time,
+                Text(time ?? 'Unknown time',
                     style: TextStyle(color: Colors.grey[600], fontSize: 12)),
               ],
             ),
+            if (type != null) ...[
+              SizedBox(height: 16),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: Color(0xFF1A4572).withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Text(
+                  type!,
+                  style: TextStyle(
+                    color: Color(0xFF1A4572),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
             Divider(height: 32),
             // Body
             Expanded(
               child: SingleChildScrollView(
                 child: Text(
-                  body,
+                  body ?? 'No content available',
                   style: TextStyle(fontSize: 16),
                 ),
               ),
