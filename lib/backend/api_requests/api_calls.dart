@@ -31,6 +31,10 @@ class VcardGroup {
   static GetBannersCall getBannersCall = GetBannersCall();
   static GetCouponsCall getCouponsCall = GetCouponsCall();
   static GetMailsCall getMailsCall = GetMailsCall();
+  static GetFcmNotificationsCall getFcmNotificationsCall =
+      GetFcmNotificationsCall();
+  static UpdateMailboxStatusCall updateMailboxStatusCall =
+      UpdateMailboxStatusCall();
 }
 
 class LogoutCall {
@@ -768,6 +772,90 @@ class GetMailsCall {
 
   List<dynamic>? data(dynamic response) =>
       castToType<List<dynamic>>(getJsonField(
+        response,
+        r'''$.data''',
+      ));
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+}
+
+class GetFcmNotificationsCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get FCM Notifications',
+      apiUrl: '${VcardGroup.baseUrl}/fcm-notifications',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+
+  List<dynamic>? data(dynamic response) =>
+      castToType<List<dynamic>>(getJsonField(
+        response,
+        r'''$.data''',
+      ));
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+}
+
+class UpdateMailboxStatusCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+    required int mailboxId,
+    required String status,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "status": "$status"
+}''';
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Update Mailbox Status',
+      apiUrl: '${VcardGroup.baseUrl}/mailboxes/$mailboxId',
+      callType: ApiCallType.PATCH,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+
+  Map<String, dynamic>? data(dynamic response) =>
+      castToType<Map<String, dynamic>>(getJsonField(
         response,
         r'''$.data''',
       ));

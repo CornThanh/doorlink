@@ -112,38 +112,50 @@ class MailViewModel extends FlutterFlowModel<MailScreenWidget> {
   /// Apply filter based on selected type
   void _applyFilter() {
     if (selectedType == 'All Mail') {
-      filteredMails = List.from(allMails);
+      filteredMails = allMails
+          .where((mail) => mail.status.toLowerCase() == 'unread')
+          .toList();
     } else if (selectedType == 'Archived / Deleted') {
+      // Show only archived or deleted mails
       filteredMails = allMails
           .where((mail) =>
               mail.status.toLowerCase() == 'archived' ||
               mail.status.toLowerCase() == 'deleted')
           .toList();
     } else if (selectedType == 'Government & City Updates') {
+      // Show only unread mails of this type
       filteredMails = allMails
           .where((mail) =>
-              mail.type.toLowerCase().contains('government') ||
-              mail.type.toLowerCase().contains('city') ||
-              mail.type.toLowerCase().contains('update'))
+              mail.status.toLowerCase() == 'unread' &&
+              (mail.type.toLowerCase().contains('government') ||
+                  mail.type.toLowerCase().contains('city') ||
+                  mail.type.toLowerCase().contains('update')))
           .toList();
     } else if (selectedType == 'Offers & Promotions') {
+      // Show only unread mails of this type
       filteredMails = allMails
           .where((mail) =>
-              mail.type.toLowerCase().contains('offer') ||
-              mail.type.toLowerCase().contains('promotion') ||
-              mail.type.toLowerCase().contains('deal'))
+              mail.status.toLowerCase() == 'unread' &&
+              (mail.type.toLowerCase().contains('offer') ||
+                  mail.type.toLowerCase().contains('promotion') ||
+                  mail.type.toLowerCase().contains('deal')))
           .toList();
     } else if (selectedType == 'Alerts') {
+      // Show only unread mails of this type
       filteredMails = allMails
           .where((mail) =>
-              mail.type.toLowerCase().contains('alert') ||
-              mail.type.toLowerCase().contains('notification') ||
-              mail.type.toLowerCase().contains('warning'))
+              mail.status.toLowerCase() == 'unread' &&
+              (mail.type.toLowerCase().contains('alert') ||
+                  mail.type.toLowerCase().contains('notification') ||
+                  mail.type.toLowerCase().contains('warning')))
           .toList();
     } else {
-      // Fallback: try exact match
-      filteredMails =
-          allMails.where((mail) => mail.type == selectedType).toList();
+      // Fallback: try exact match with unread status
+      filteredMails = allMails
+          .where((mail) =>
+              mail.type == selectedType &&
+              mail.status.toLowerCase() == 'unread')
+          .toList();
     }
     updatePage(() {});
   }
@@ -173,4 +185,48 @@ class MailViewModel extends FlutterFlowModel<MailScreenWidget> {
   }
 
   /// Additional helper methods are added here.
+
+  /// Update mailbox status (archive/delete)
+  Future<bool> updateMailboxStatus(int mailboxId, String status) async {
+    try {
+      final response = await VcardGroup.updateMailboxStatusCall.call(
+        authToken: FFAppState().authToken,
+        mailboxId: mailboxId,
+        status: status,
+      );
+
+      if (response.succeeded) {
+        final success =
+            VcardGroup.updateMailboxStatusCall.success(response.jsonBody);
+        if (success == true) {
+          // Refresh the entire list from API to get updated data
+          await _loadMails();
+          return true;
+        } else {
+          errorMessage =
+              VcardGroup.updateMailboxStatusCall.message(response.jsonBody) ??
+                  'Failed to update status';
+          return false;
+        }
+      } else {
+        errorMessage =
+            VcardGroup.updateMailboxStatusCall.message(response.jsonBody) ??
+                'Network error occurred';
+        return false;
+      }
+    } catch (e) {
+      errorMessage = 'Error updating status: $e';
+      return false;
+    }
+  }
+
+  /// Archive a mailbox
+  Future<bool> archiveMailbox(int mailboxId) async {
+    return await updateMailboxStatus(mailboxId, 'archived');
+  }
+
+  /// Delete a mailbox
+  Future<bool> deleteMailbox(int mailboxId) async {
+    return await updateMailboxStatus(mailboxId, 'deleted');
+  }
 }

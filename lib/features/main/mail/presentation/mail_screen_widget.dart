@@ -219,13 +219,55 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
           key: ValueKey(mail.subject + mail.time),
           background: slideLeftBackground(),
           secondaryBackground: slideRightBackground(),
-          onDismissed: (direction) {
-            // Handle dismiss action
+          onDismissed: (direction) async {
+            if (direction == DismissDirection.startToEnd) {
+              // Swipe left to right - Delete
+              final success = await _viewModel.deleteMailbox(mail.id!);
+              if (success) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Mail deleted successfully'),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+                // Refresh the list to show updated data
+                _viewModel.refreshMails();
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                        _viewModel.errorMessage ?? 'Failed to delete mail'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            } else if (direction == DismissDirection.endToStart) {
+              // Swipe right to left - Archive
+              final success = await _viewModel.archiveMailbox(mail.id!);
+              if (success) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Mail archived successfully'),
+                    backgroundColor: Colors.blue,
+                  ),
+                );
+                // Refresh the list to show updated data
+                _viewModel.refreshMails();
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                        _viewModel.errorMessage ?? 'Failed to archive mail'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            }
           },
           child: ListTile(
-            onTap: () {
+            onTap: () async {
               // Navigate to detail screen with mail data from the list
-              context.pushNamed(
+              final result = await context.pushNamed(
                 'mail_detail_screen',
                 queryParameters: {
                   'mailId': mail.id?.toString() ?? '',
@@ -238,6 +280,11 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
                   'type': mail.type,
                 }.withoutNulls,
               );
+
+              // Refresh the list if returning from detail screen with status update
+              if (result == 'refresh') {
+                _viewModel.refreshMails();
+              }
             },
             leading: CircleAvatar(
               backgroundColor: Color(0xFF1A4572),
