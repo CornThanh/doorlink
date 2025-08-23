@@ -63,6 +63,16 @@ class LogoutCall {
       alwaysAllowBody: false,
     );
   }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
 }
 
 class CreateAdminVcardCall {

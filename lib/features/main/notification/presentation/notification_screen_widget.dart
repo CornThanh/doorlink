@@ -93,17 +93,6 @@ class _NotificationScreenWidgetState extends State<NotificationScreenWidget> {
                 ),
                 centerTitle: true,
                 elevation: 0,
-                actions: [
-                  if (viewModel.isLoading)
-                    const Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      ),
-                    ),
-                ],
               ),
               backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
               body: SafeArea(
