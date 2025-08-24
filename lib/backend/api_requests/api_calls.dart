@@ -6,7 +6,7 @@ export 'api_manager.dart' show ApiCallResponse;
 /// Start Vcard Group Code
 
 class VcardGroup {
-  static String baseUrl = 'https://meu.ntiot.vn/api';
+  static String baseUrl = 'https://doorlinkconnect.com/api';
   static Map<String, String> headers = {};
   static NotificationCall notificationCall = NotificationCall();
   static LogoutCall logoutCall = LogoutCall();
@@ -27,6 +27,14 @@ class VcardGroup {
   static VcardQrCodeCall vcardQrCodeCall = VcardQrCodeCall();
   static DeleteGroupCall deleteGroupCall = DeleteGroupCall();
   static AdminGroupCreateCall adminGroupCreateCall = AdminGroupCreateCall();
+  static GetDealsCall getDealsCall = GetDealsCall();
+  static GetBannersCall getBannersCall = GetBannersCall();
+  static GetCouponsCall getCouponsCall = GetCouponsCall();
+  static GetMailsCall getMailsCall = GetMailsCall();
+  static GetFcmNotificationsCall getFcmNotificationsCall =
+      GetFcmNotificationsCall();
+  static UpdateMailboxStatusCall updateMailboxStatusCall =
+      UpdateMailboxStatusCall();
 }
 
 class LogoutCall {
@@ -55,6 +63,16 @@ class LogoutCall {
       alwaysAllowBody: false,
     );
   }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
 }
 
 class CreateAdminVcardCall {
@@ -624,6 +642,238 @@ class AdminGroupCreateCall {
       alwaysAllowBody: false,
     );
   }
+}
+
+class GetDealsCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Deals',
+      apiUrl: '${VcardGroup.baseUrl}/news',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+
+  List<dynamic>? data(dynamic response) =>
+      castToType<List<dynamic>>(getJsonField(
+        response,
+        r'''$.data''',
+      ));
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+}
+
+class GetBannersCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Banners',
+      apiUrl: '${VcardGroup.baseUrl}/banners',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+
+  List<dynamic>? data(dynamic response) =>
+      castToType<List<dynamic>>(getJsonField(
+        response,
+        r'''$.data''',
+      ));
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+}
+
+class GetCouponsCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Coupons',
+      apiUrl: '${VcardGroup.baseUrl}/coupon-codes',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+
+  List<dynamic>? data(dynamic response) =>
+      castToType<List<dynamic>>(getJsonField(
+        response,
+        r'''$.data''',
+      ));
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+}
+
+class GetMailsCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Mails',
+      apiUrl: '${VcardGroup.baseUrl}/mailboxes',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+
+  List<dynamic>? data(dynamic response) =>
+      castToType<List<dynamic>>(getJsonField(
+        response,
+        r'''$.data''',
+      ));
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+}
+
+class GetFcmNotificationsCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get FCM Notifications',
+      apiUrl: '${VcardGroup.baseUrl}/fcm-notifications',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+
+  List<dynamic>? data(dynamic response) =>
+      castToType<List<dynamic>>(getJsonField(
+        response,
+        r'''$.data''',
+      ));
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
+}
+
+class UpdateMailboxStatusCall {
+  Future<ApiCallResponse> call({
+    String? authToken = '',
+    required int mailboxId,
+    required String status,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "status": "$status"
+}''';
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'Update Mailbox Status',
+      apiUrl: '${VcardGroup.baseUrl}/mailboxes/$mailboxId',
+      callType: ApiCallType.PATCH,
+      headers: {
+        'Authorization': 'Bearer $authToken',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  bool? success(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
+
+  Map<String, dynamic>? data(dynamic response) =>
+      castToType<Map<String, dynamic>>(getJsonField(
+        response,
+        r'''$.data''',
+      ));
+
+  String? message(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.message''',
+      ));
 }
 
 /// End Vcard Group Code

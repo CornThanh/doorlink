@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'edit_profile_screen_widget.dart' show EditProfileScreenWidget;
-import 'package:flutter/material.dart';
 
 class EditProfileScreenModel extends FlutterFlowModel<EditProfileScreenWidget> {
   ///  State fields for stateful widgets in this page.
@@ -23,10 +24,6 @@ class EditProfileScreenModel extends FlutterFlowModel<EditProfileScreenWidget> {
   FocusNode? emailFocusNode;
   TextEditingController? emailController;
   String? Function(BuildContext, String?)? emailControllerValidator;
-  // State field(s) for contact widget.
-  FocusNode? contactFocusNode;
-  TextEditingController? contactController;
-  String? Function(BuildContext, String?)? contactControllerValidator;
   // Stores action output result for [Custom Action - emailValidation] action in Button widget.
   bool? emailRes;
   // Stores action output result for [Backend Call - API (Profile Update)] action in Button widget.
@@ -48,9 +45,6 @@ class EditProfileScreenModel extends FlutterFlowModel<EditProfileScreenWidget> {
 
     emailFocusNode?.dispose();
     emailController?.dispose();
-
-    contactFocusNode?.dispose();
-    contactController?.dispose();
   }
 
   /// Action blocks are added here.

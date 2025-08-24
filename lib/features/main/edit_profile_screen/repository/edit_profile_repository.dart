@@ -5,7 +5,6 @@ import 'package:doorlink_mobile/flutter_flow/uploaded_file.dart';
 class EditProfileRepository {
   static Future<ApiCallResponse> update({
     String? firstName = '',
-    String? contact = '',
     String? regionCode = '',
     String? email = '',
     FFUploadedFile? profile,
@@ -21,7 +20,6 @@ class EditProfileRepository {
       },
       params: {
         'first_name': firstName,
-        'contact': contact,
         'region_code': regionCode,
         'email': email,
         'profile': profile,

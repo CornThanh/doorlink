@@ -1,11 +1,11 @@
 import 'package:doorlink_mobile/features/main/deal/presentation/deal_view_model.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-import '../model/deal.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import '../model/deal.dart';
 
 class DealScreenWidget extends StatefulWidget {
   const DealScreenWidget({super.key});
@@ -31,37 +31,6 @@ class _DealScreenWidgetState extends State<DealScreenWidget> {
     super.dispose();
   }
 
-  final List<Deal> dealList = [
-    Deal(
-      title: 'Buy 1 Get 1 Free',
-      description: 'Valid for all coffee drinks until Aug 10.',
-      imageUrl: 'https://picsum.photos/id/1011/800/400',
-      createdDate: DateTime(2025, 7, 30),
-      expireDate: DateTime(2025, 8, 10),
-    ),
-    Deal(
-      title: 'Summer Sale 30% Off',
-      description: 'Enjoy a discount on selected items.',
-      imageUrl: 'https://picsum.photos/id/1011/800/400',
-      createdDate: DateTime(2025, 7, 28),
-      expireDate: DateTime(2025, 8, 5),
-    ),
-    Deal(
-      title: 'Free Shipping Weekend',
-      description: 'Applies to orders over 500K.',
-      imageUrl: 'https://picsum.photos/id/1011/800/400',
-      createdDate: DateTime(2025, 7, 26),
-      expireDate: DateTime(2025, 8, 2),
-    ),
-    Deal(
-      title: 'Back to School Promo',
-      description: 'Get up to 40% off on school supplies.',
-      imageUrl: 'https://picsum.photos/id/1011/800/400',
-      createdDate: DateTime(2025, 7, 25),
-      expireDate: DateTime(2025, 8, 15),
-    ),
-  ];
-
   void _onDealTap(Deal deal) {
     context.pushNamed(
       'webview_screen',
@@ -84,93 +53,196 @@ class _DealScreenWidgetState extends State<DealScreenWidget> {
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_viewModel.unfocusNode),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: true,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: FlutterFlowTheme.of(context).primaryText,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
-          titleSpacing: 0,
-          title: Text(
-            'Offers & Updates',
-            style: FlutterFlowTheme.of(context).titleLarge.override(
-                  fontFamily: 'Nunito Sans',
-                  color: Colors.black,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  useGoogleFonts:
-                      GoogleFonts.asMap().containsKey('Nunito Sans'),
+    return ChangeNotifierProvider.value(
+      value: _viewModel,
+      child: Consumer<DealViewModel>(
+        builder: (context, viewModel, child) {
+          return GestureDetector(
+            onTap: () =>
+                FocusScope.of(context).requestFocus(_viewModel.unfocusNode),
+            child: Scaffold(
+              appBar: AppBar(
+                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+                automaticallyImplyLeading: true,
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                  ),
+                  onPressed: () async {
+                    context.pop();
+                  },
                 ),
-          ),
-          centerTitle: true,
-          elevation: 0,
-        ),
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        body: ListView.builder(
-          itemCount: dealList.length,
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          itemBuilder: (context, index) {
-            final deal = dealList[index];
-            return GestureDetector(
-              onTap: () => _onDealTap(deal),
-              child: Card(
-                margin: const EdgeInsets.symmetric(vertical: 8.0),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-                elevation: 3,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius:
-                          const BorderRadius.vertical(top: Radius.circular(12)),
-                      child: Image.network(
-                        deal.imageUrl,
-                        height: 160,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
+                titleSpacing: 0,
+                title: Text(
+                  'Offers & Updates',
+                  style: FlutterFlowTheme.of(context).titleLarge.override(
+                        fontFamily: 'Nunito Sans',
+                        color: Colors.black,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        useGoogleFonts:
+                            GoogleFonts.asMap().containsKey('Nunito Sans'),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            deal.title,
-                            style: const TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w600),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            deal.description,
-                            style: const TextStyle(
-                                fontSize: 14, color: Colors.grey),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Expires: ${deal.createdDate.toLocal().toIso8601String().split("T").first}',
-                            style: const TextStyle(
-                                fontSize: 13, color: Colors.red),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
                 ),
+                centerTitle: true,
+                elevation: 0,
               ),
-            );
-          },
+              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+              body: _buildBody(viewModel),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildBody(DealViewModel viewModel) {
+    if (viewModel.isLoading && viewModel.deals.isEmpty) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    if (viewModel.errorMessage != null && viewModel.deals.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.error_outline,
+              size: 64,
+              color: Colors.grey[400],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Failed to load deals',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              viewModel.errorMessage!,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[500],
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: viewModel.refreshDeals,
+              child: const Text('Retry'),
+            ),
+          ],
         ),
+      );
+    }
+
+    if (viewModel.deals.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.local_offer_outlined,
+              size: 64,
+              color: Colors.grey[400],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'No deals available',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Check back later for new offers',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[500],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return RefreshIndicator(
+      onRefresh: viewModel.refreshDeals,
+      child: ListView.builder(
+        itemCount: viewModel.deals.length,
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        itemBuilder: (context, index) {
+          final deal = viewModel.deals[index];
+          return GestureDetector(
+            onTap: () => _onDealTap(deal),
+            child: Card(
+              margin: const EdgeInsets.symmetric(vertical: 8.0),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
+              elevation: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(12)),
+                    child: Image.network(
+                      deal.imageUrl,
+                      height: 160,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          height: 160,
+                          width: double.infinity,
+                          color: Colors.grey[300],
+                          child: Icon(
+                            Icons.image_not_supported,
+                            size: 48,
+                            color: Colors.grey[600],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          deal.title,
+                          style: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          deal.description,
+                          style:
+                              const TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Expires: ${deal.expireDate.toLocal().toIso8601String().split("T").first}',
+                          style:
+                              const TextStyle(fontSize: 13, color: Colors.red),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

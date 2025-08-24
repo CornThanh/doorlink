@@ -1,15 +1,14 @@
-import 'package:doorlink_mobile/component/delete_dialog_box/delete_dialog_box_widget.dart';
-import 'package:doorlink_mobile/component/logout_dialog_box/logout_dialog_box_widget.dart';
 import 'package:flutter/cupertino.dart';
-
-import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
+import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'profile_screen_model.dart';
+
 export 'profile_screen_model.dart';
 
 enum SettingScreenItems {
@@ -320,22 +319,8 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
       onTap: () async {
         switch (index) {
           case 0:
-            context.pushNamed(
-              'webview_screen',
-              queryParameters: {
-                'title': serializeParam(
-                  code,
-                  ParamType.String,
-                ),
-              }.withoutNulls,
-              extra: <String, dynamic>{
-                kTransitionInfoKey: const TransitionInfo(
-                  hasTransition: true,
-                  transitionType: PageTransitionType.fade,
-                  duration: Duration(milliseconds: 400),
-                ),
-              },
-            );
+            // Logout action
+            await _handleLogout(context);
             break;
           case 1:
             context.pushNamed(
@@ -455,5 +440,108 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
         ),
       },
     );
+  }
+
+  Future<void> _handleLogout(BuildContext context) async {
+    // Show confirmation dialog
+    final shouldLogout = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Logout'),
+          content: Text('Are you sure you want to logout?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF1A4572),
+              ),
+              child: Text(
+                'Logout',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldLogout == true) {
+      // Show loading indicator
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      );
+
+      try {
+        // Call logout API
+        final response = await VcardGroup.logoutCall.call(
+          authToken: FFAppState().authToken,
+          email: VcardGroup.profileCall.email(columnProfileResponse.jsonBody),
+        );
+
+        // Hide loading indicator
+        Navigator.of(context).pop();
+
+        if (response.succeeded) {
+          final success = VcardGroup.logoutCall.success(response.jsonBody);
+          if (success == true) {
+            // Clear auth token and navigate to login
+            FFAppState().authToken = '';
+
+            // Show success message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Logged out successfully'),
+                backgroundColor: Colors.green,
+              ),
+            );
+
+            // Navigate to login screen
+            context.goNamed('login_screen');
+          } else {
+            // Show error message
+            final errorMsg = VcardGroup.logoutCall.message(response.jsonBody) ??
+                'Failed to logout';
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(errorMsg),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        } else {
+          // Show network error
+          final errorMsg = VcardGroup.logoutCall.message(response.jsonBody) ??
+              'Network error occurred';
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(errorMsg),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      } catch (e) {
+        // Hide loading indicator
+        Navigator.of(context).pop();
+
+        // Show error message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }

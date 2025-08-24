@@ -2,19 +2,20 @@ import 'dart:developer';
 
 import 'package:doorlink_mobile/features/main/edit_profile_screen/repository/edit_profile_repository.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '/backend/api_requests/api_calls.dart';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import '/custom_code/actions/index.dart' as actions;
-import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'edit_profile_screen_model.dart';
+
 export 'edit_profile_screen_model.dart';
 
 class EditProfileScreenWidget extends StatefulWidget {
@@ -45,8 +46,6 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
     // _model.lastNameFocusNode ??= FocusNode();
 
     _model.emailFocusNode ??= FocusNode();
-
-    _model.contactFocusNode ??= FocusNode();
   }
 
   @override
@@ -718,60 +717,34 @@ class _EditProfileScreenWidgetState extends State<EditProfileScreenWidget> {
         if (_model.emailRes == true) {
           if ((_model.emailController.text != '') &&
               functions.textFieldValidator(_model.emailController.text)) {
-            if ((_model.contactController.text != '') &&
-                functions.textFieldValidator(_model.contactController.text)) {
-              _model.apiResultrga = await EditProfileRepository.update(
-                firstName: _model.firstNameController.text,
-                contact: _model.contactController.text,
-                email: _model.emailController.text,
-                regionCode: FFAppState().prefixCode,
-                profile: _model.uploadedLocalFile,
-                authToken: FFAppState().authToken,
-                lastName: '',
-              );
-              if (mounted) {
-                if ((_model.apiResultrga?.succeeded ?? true)) {
-                  context.safePop();
-                  await actions.customSnackbar(
-                    context,
-                    FFLocalizations.of(context).getVariableText(
-                      viText: 'Profile Update Successfully.',
-                      enText: 'Profile Update Successfully.',
-                    ),
-                    const Color(0xFF46A44D),
-                  );
-                } else {
-                  await actions.customSnackbar(
-                    context,
-                    FFLocalizations.of(context).getVariableText(
-                      viText: 'Cập nhật hồ sơ thất bại.',
-                      enText: 'Profile Update Failed.',
-                    ),
-                    FlutterFlowTheme.of(context).error,
-                  );
-                }
-              }
-            } else {
-              if (mounted) {
-                if (_model.contactController.text == '') {
-                  await actions.customSnackbar(
-                    context,
-                    FFLocalizations.of(context).getVariableText(
-                      viText: 'Vui lòng nhập thông tin liên hệ.',
-                      enText: 'Please Enter Contact no.',
-                    ),
-                    FlutterFlowTheme.of(context).error,
-                  );
-                } else {
-                  await actions.customSnackbar(
-                    context,
-                    FFLocalizations.of(context).getVariableText(
-                      viText: 'Vui lòng nhập thông tin liên hệ đúng.',
-                      enText: 'Please Enter Valid Contact no.',
-                    ),
-                    FlutterFlowTheme.of(context).error,
-                  );
-                }
+            _model.apiResultrga = await EditProfileRepository.update(
+              firstName: _model.firstNameController.text,
+              email: _model.emailController.text,
+              regionCode: FFAppState().prefixCode,
+              profile: _model.uploadedLocalFile,
+              authToken: FFAppState().authToken,
+              lastName: '',
+            );
+            if (mounted) {
+              if ((_model.apiResultrga?.succeeded ?? true)) {
+                context.safePop();
+                await actions.customSnackbar(
+                  context,
+                  FFLocalizations.of(context).getVariableText(
+                    viText: 'Profile Update Successfully.',
+                    enText: 'Profile Update Successfully.',
+                  ),
+                  const Color(0xFF46A44D),
+                );
+              } else {
+                await actions.customSnackbar(
+                  context,
+                  FFLocalizations.of(context).getVariableText(
+                    viText: 'Cập nhật hồ sơ thất bại.',
+                    enText: 'Profile Update Failed.',
+                  ),
+                  FlutterFlowTheme.of(context).error,
+                );
               }
             }
           } else {
