@@ -1,11 +1,11 @@
 import 'package:doorlink_mobile/webview/presentation/webview_view_model.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class WebviewScreenWidget extends StatefulWidget {
   const WebviewScreenWidget({super.key, required this.title, this.url});
@@ -26,7 +26,7 @@ class _WebviewScreenWidgetState extends State<WebviewScreenWidget> {
   void initState() {
     super.initState();
     _viewModel = createModel(context, () => WebviewViewModel());
-    
+
     // Initialize WebViewController with the URL from widget
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -48,9 +48,9 @@ class _WebviewScreenWidgetState extends State<WebviewScreenWidget> {
           },
         ),
       );
-    
+
     // Load the URL from widget or fallback to a default
-    final urlToLoad = widget.url ?? 'https://flutter.dev';
+    final urlToLoad = widget.url ?? 'https://doorlinkconnect.com';
     controller.loadRequest(Uri.parse(urlToLoad));
   }
 

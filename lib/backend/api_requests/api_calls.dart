@@ -687,7 +687,7 @@ class GetBannersCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'Get Banners',
-      apiUrl: '${VcardGroup.baseUrl}/banners',
+      apiUrl: '${VcardGroup.baseUrl}/app-banners',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': 'Bearer $authToken',

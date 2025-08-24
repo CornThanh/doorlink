@@ -11,9 +11,16 @@ import 'profile_screen_model.dart';
 
 export 'profile_screen_model.dart';
 
-enum SettingScreenItems {
+enum HelpSupportItems {
+  howItWork,
+  reportIssue,
+  // editProfile,
+  // language,
+  // changePassword,
+}
+
+enum MyAccountItems {
   logout,
-  deleteAccount,
   // editProfile,
   // language,
   // changePassword,
@@ -254,15 +261,14 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           String code =
-                              switch (SettingScreenItems.values[index]) {
-                            SettingScreenItems.logout => 'How DoorLink Works',
-                            SettingScreenItems.deleteAccount =>
-                              'Report an Issue',
+                              switch (HelpSupportItems.values[index]) {
+                            HelpSupportItems.howItWork => 'How DoorLink Works',
+                            HelpSupportItems.reportIssue => 'Report an Issue',
                           };
                           return _itemBuilder(context, index, code);
                         },
                         separatorBuilder: _separatorBuilder,
-                        itemCount: SettingScreenItems.values.length,
+                        itemCount: HelpSupportItems.values.length,
                       ),
                       SizedBox(height: 16),
                       Align(
@@ -288,16 +294,13 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          String code =
-                              switch (SettingScreenItems.values[index]) {
-                            SettingScreenItems.logout => 'Logout',
-                            SettingScreenItems.deleteAccount =>
-                              'Delete Account',
+                          String code = switch (MyAccountItems.values[index]) {
+                            MyAccountItems.logout => 'Logout',
                           };
                           return _itemBuilder(context, index, code);
                         },
                         separatorBuilder: _separatorBuilder,
-                        itemCount: SettingScreenItems.values.length,
+                        itemCount: MyAccountItems.values.length,
                       ),
                     ],
                   );
