@@ -470,7 +470,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   Widget _buildNewsAndDealsSection(HomeViewModel viewModel) {
     if (viewModel.isLoadingDeals) {
       return SizedBox(
-        height: 250,
+        height: 230,
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -479,7 +479,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
     if (viewModel.dealsErrorMessage != null && viewModel.deals.isEmpty) {
       return SizedBox(
-        height: 250,
+        height: 230,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -505,7 +505,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
     if (viewModel.deals.isEmpty) {
       return SizedBox(
-        height: 250,
+        height: 230,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -530,7 +530,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     }
 
     return SizedBox(
-      height: 250, // enough to fit image + texts
+      height: 230, // enough to fit image + texts
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         scrollDirection: Axis.horizontal,
@@ -627,7 +627,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   Widget _buildHotCouponsSection(HomeViewModel viewModel) {
     if (viewModel.isLoadingCoupons) {
       return SizedBox(
-        height: 250,
+        height: 230,
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -636,7 +636,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
     if (viewModel.couponsErrorMessage != null && viewModel.coupons.isEmpty) {
       return SizedBox(
-        height: 250,
+        height: 230,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -662,7 +662,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
     if (viewModel.coupons.isEmpty) {
       return SizedBox(
-        height: 250,
+        height: 230,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -687,7 +687,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     }
 
     return SizedBox(
-      height: 250, // enough to fit image + texts
+      height: 230, // enough to fit image + texts
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         scrollDirection: Axis.horizontal,
