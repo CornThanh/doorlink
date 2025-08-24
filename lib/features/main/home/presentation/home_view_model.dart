@@ -5,6 +5,7 @@ import '/component/drawer/drawer_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '../../coupon/model/coupon.dart';
 import '../../deal/model/deal.dart';
+import '../model/banner.dart' show BannerModel;
 import 'home_screen_widget.dart' show HomeScreenWidget;
 
 class HomeViewModel extends FlutterFlowModel<HomeScreenWidget>
@@ -46,7 +47,7 @@ class HomeViewModel extends FlutterFlowModel<HomeScreenWidget>
   ApiCallResponse? getDealsRes;
 
   // Banner-related state for carousel section
-  List<dynamic> banners = [];
+  List<BannerModel> banners = [];
   bool isLoadingBanners = false;
   String? bannersErrorMessage;
   ApiCallResponse? getBannersRes;
@@ -146,7 +147,9 @@ class HomeViewModel extends FlutterFlowModel<HomeScreenWidget>
           final bannersData = VcardGroup.getBannersCall.data(response.jsonBody);
 
           if (bannersData != null && bannersData.isNotEmpty) {
-            banners = bannersData;
+            // Parse banners and filter only active ones
+            banners =
+                bannersData.map((json) => BannerModel.fromJson(json)).toList();
           } else {
             // Fallback to empty list if no data
             banners = [];

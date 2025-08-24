@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:doorlink_mobile/features/main/coupon/model/coupon.dart';
+import 'package:doorlink_mobile/features/main/home/model/banner.dart'
+    show BannerModel;
 import 'package:doorlink_mobile/features/main/home/presentation/home_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -76,14 +78,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     );
   }
 
-  void _onBannerTap(Map<String, dynamic> banner) {
-    final url = banner['url']?.toString();
+  void _onBannerTap(BannerModel banner) {
+    final url = banner.url;
     if (url != null && url.isNotEmpty) {
       context.pushNamed(
         'webview_screen',
         queryParameters: {
           'title': serializeParam(
-            banner['title']?.toString() ?? '',
+            banner.title ?? '',
             ParamType.String,
           ),
           'url': serializeParam(
@@ -247,41 +249,44 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           items: viewModel.banners.map((banner) {
             return GestureDetector(
               onTap: () => _onBannerTap(banner),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  banner['image_url']?.toString() ?? '',
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 180,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: double.infinity,
-                      height: 180,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.image_not_supported,
-                            size: 48,
-                            color: Colors.grey[600],
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Image not available',
-                            style: TextStyle(
-                              fontSize: 14,
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    banner.imageUrl ?? '',
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: 180,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        width: double.infinity,
+                        height: 180,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.image_not_supported,
+                              size: 48,
                               color: Colors.grey[600],
                             ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+                            const SizedBox(height: 8),
+                            Text(
+                              'Image not available',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey[600],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             );
@@ -365,8 +370,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                     children: [
                       _buildCarouselSection(viewModel),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 16.0, top: 8.0, bottom: 8.0),
+                        padding: const EdgeInsets.only(left: 16.0, top: 8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -409,8 +413,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       ),
                       _buildHotCouponsSection(viewModel),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 16.0, top: 8.0, bottom: 8.0),
+                        padding: const EdgeInsets.only(left: 16.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -467,7 +470,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   Widget _buildNewsAndDealsSection(HomeViewModel viewModel) {
     if (viewModel.isLoadingDeals) {
       return SizedBox(
-        height: 200,
+        height: 250,
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -476,7 +479,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
     if (viewModel.dealsErrorMessage != null && viewModel.deals.isEmpty) {
       return SizedBox(
-        height: 200,
+        height: 250,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -502,7 +505,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
     if (viewModel.deals.isEmpty) {
       return SizedBox(
-        height: 200,
+        height: 250,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -527,9 +530,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     }
 
     return SizedBox(
-      height: 200, // enough to fit image + texts
+      height: 250, // enough to fit image + texts
       child: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         scrollDirection: Axis.horizontal,
         itemCount: viewModel.deals.length,
         separatorBuilder: (context, index) => const SizedBox(width: 12),
@@ -575,34 +578,40 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       },
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      deal.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      deal.description,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 2),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
-                    child: Text(
-                      '${deal.createdDate.year}',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            deal.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            deal.description,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const Spacer(),
+                          Text(
+                            '${deal.createdDate.year}',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -618,7 +627,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
   Widget _buildHotCouponsSection(HomeViewModel viewModel) {
     if (viewModel.isLoadingCoupons) {
       return SizedBox(
-        height: 200,
+        height: 250,
         child: Center(
           child: CircularProgressIndicator(),
         ),
@@ -627,7 +636,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
     if (viewModel.couponsErrorMessage != null && viewModel.coupons.isEmpty) {
       return SizedBox(
-        height: 200,
+        height: 250,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -653,7 +662,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 
     if (viewModel.coupons.isEmpty) {
       return SizedBox(
-        height: 200,
+        height: 250,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -678,9 +687,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     }
 
     return SizedBox(
-      height: 200, // enough to fit image + texts
+      height: 250, // enough to fit image + texts
       child: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         scrollDirection: Axis.horizontal,
         itemCount: viewModel.coupons.length,
         separatorBuilder: (context, index) => const SizedBox(width: 12),
@@ -726,38 +735,43 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       },
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      coupon.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            coupon.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            coupon.description,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const Spacer(),
+                          Text(
+                            '${coupon.expiryDate.year}-${coupon.expiryDate.month.toString().padLeft(2, '0')}-${coupon.expiryDate.day.toString().padLeft(2, '0')}',
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      coupon.description,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 2),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 4, 8, 8),
-                    child: Text(
-                      '${coupon.expiryDate.year}-${coupon.expiryDate.month.toString().padLeft(2, '0')}-${coupon.expiryDate.day.toString().padLeft(2, '0')}',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-
                 ],
               ),
             ),

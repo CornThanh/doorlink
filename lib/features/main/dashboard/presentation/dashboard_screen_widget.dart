@@ -173,11 +173,13 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   .end,
                                                           children: [
                                                             Text(
-                                                              getJsonField(
-                                                                listViewAdminDashboardResponse
-                                                                    .jsonBody,
-                                                                r'''$.data.activeVcard''',
-                                                              ).toString(),
+                                                              (getJsonField(
+                                                                        listViewAdminDashboardResponse
+                                                                            .jsonBody,
+                                                                        r'''$.data.activeVcard''',
+                                                                      ) ??
+                                                                      0)
+                                                                  .toString(),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
@@ -372,11 +374,13 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   .end,
                                                           children: [
                                                             Text(
-                                                              getJsonField(
-                                                                listViewAdminDashboardResponse
-                                                                    .jsonBody,
-                                                                r'''$.data.deActiveVcard''',
-                                                              ).toString(),
+                                                              (getJsonField(
+                                                                        listViewAdminDashboardResponse
+                                                                            .jsonBody,
+                                                                        r'''$.data.deActiveVcard''',
+                                                                      ) ??
+                                                                      0)
+                                                                  .toString(),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
@@ -581,11 +585,13 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   .end,
                                                           children: [
                                                             Text(
-                                                              getJsonField(
-                                                                listViewAdminDashboardResponse
-                                                                    .jsonBody,
-                                                                r'''$.data.enquiry''',
-                                                              ).toString(),
+                                                              (getJsonField(
+                                                                        listViewAdminDashboardResponse
+                                                                            .jsonBody,
+                                                                        r'''$.data.enquiry''',
+                                                                      ) ??
+                                                                      0)
+                                                                  .toString(),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
@@ -781,11 +787,13 @@ class _DashboardScreenWidgetState extends State<DashboardScreenWidget> {
                                                                   .end,
                                                           children: [
                                                             Text(
-                                                              getJsonField(
-                                                                listViewAdminDashboardResponse
-                                                                    .jsonBody,
-                                                                r'''$.data.appointment''',
-                                                              ).toString(),
+                                                              (getJsonField(
+                                                                        listViewAdminDashboardResponse
+                                                                            .jsonBody,
+                                                                        r'''$.data.appointment''',
+                                                                      ) ??
+                                                                      0)
+                                                                  .toString(),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
