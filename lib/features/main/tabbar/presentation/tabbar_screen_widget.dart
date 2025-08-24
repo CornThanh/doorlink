@@ -21,6 +21,13 @@ class TabBarScreenWidget extends StatefulWidget {
 class _TabBarScreenWidgetState extends State<TabBarScreenWidget> {
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
+  final TextEditingController _doorlinkCodeController = TextEditingController();
+
+  @override
+  void dispose() {
+    _doorlinkCodeController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -192,7 +199,7 @@ class _TabBarScreenWidgetState extends State<TabBarScreenWidget> {
                                         padding:
                                             MediaQuery.viewInsetsOf(context),
                                         child: NfcWriteSheetWidget(
-                                          url: 'widget.url!',
+                                          url: 'https://doorlinkconnect.com',
                                           name: 'NFC Write',
                                         ),
                                       );
@@ -250,7 +257,8 @@ class _TabBarScreenWidgetState extends State<TabBarScreenWidget> {
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 8.0, 0.0, 0.0),
                         child: TextFormField(
-                          textInputAction: TextInputAction.next,
+                          controller: _doorlinkCodeController,
+                          textInputAction: TextInputAction.done,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelStyle: FlutterFlowTheme.of(context)
@@ -321,9 +329,24 @@ class _TabBarScreenWidgetState extends State<TabBarScreenWidget> {
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 32.0, 0.0, 16.0),
                         child: FFButtonWidget(
-                          onPressed: () => {},
+                          onPressed: () async {
+                            final doorlinkCode =
+                                _doorlinkCodeController.text.trim();
+                            if (doorlinkCode.isNotEmpty) {
+                              final url =
+                                  'https://doorlinkconnect.com/$doorlinkCode';
+                              await launchURL(url);
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Please enter a DoorLink code'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
+                          },
                           text: FFLocalizations.of(context).getText(
-                            '0t2bd74t' /* Register */,
+                            '0t2bd74t',
                           ),
                           options: FFButtonOptions(
                             width: double.infinity,
