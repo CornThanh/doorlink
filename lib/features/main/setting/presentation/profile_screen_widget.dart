@@ -84,13 +84,13 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
             fit: BoxFit.cover,
           ),
           actions: [
-            IconButton(
-              icon:
-                  Icon(CupertinoIcons.settings, color: const Color(0xFF1A4572)),
-              onPressed: () {
-                context.pushNamed('notification_screen');
-              },
-            ),
+            // IconButton(
+            //   icon:
+            //       Icon(CupertinoIcons.settings, color: const Color(0xFF1A4572)),
+            //   onPressed: () {
+            //     context.pushNamed('notification_screen');
+            //   },
+            // ),
             IconButton(
               icon: Icon(CupertinoIcons.bell, color: const Color(0xFF1A4572)),
               onPressed: () {
@@ -297,7 +297,54 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
                           String code = switch (MyAccountItems.values[index]) {
                             MyAccountItems.logout => 'Logout',
                           };
-                          return _itemBuilder(context, index, code);
+                          return InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              _handleLogout(context);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: .1),
+                                    blurRadius: 1,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    code,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Nunito Sans',
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w500,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey('Nunito Sans'),
+                                        ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 16,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
                         },
                         separatorBuilder: _separatorBuilder,
                         itemCount: MyAccountItems.values.length,
@@ -323,7 +370,22 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
         switch (index) {
           case 0:
             // Logout action
-            await _handleLogout(context);
+            context.pushNamed(
+              'webview_screen',
+              queryParameters: {
+                'title': serializeParam(
+                  code,
+                  ParamType.String,
+                ),
+              }.withoutNulls,
+              extra: <String, dynamic>{
+                kTransitionInfoKey: const TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 400),
+                ),
+              },
+            );
             break;
           case 1:
             context.pushNamed(
