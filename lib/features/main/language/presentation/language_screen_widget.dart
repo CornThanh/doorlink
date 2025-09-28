@@ -74,7 +74,7 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget> {
                 icon: Icon(
                   Icons.arrow_back_ios_sharp,
                   color: FlutterFlowTheme.of(context).primaryText,
-                  size: 22.0,
+                  size: 18.0,
                 ),
                 onPressed: () async {
                   context.safePop();

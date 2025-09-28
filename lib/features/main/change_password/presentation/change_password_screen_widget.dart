@@ -69,7 +69,7 @@ class _ChangePasswordScreenWidgetState
             icon: const Icon(
               Icons.arrow_back_ios_rounded,
               color: Colors.white,
-              size: 24.0,
+              size: 18.0,
             ),
             onPressed: () async {
               context.pop();

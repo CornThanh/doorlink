@@ -64,70 +64,90 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
       child: GestureDetector(
         onTap: () =>
             FocusScope.of(context).requestFocus(_viewModel.unfocusNode),
-        child: Scaffold(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            automaticallyImplyLeading: false,
-            title: Image.asset(
-              'assets/images/app_icon_no_bg.png',
-              width: 64.0,
-              height: 64.0,
-              fit: BoxFit.cover,
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xFF003C7F),
+                Color(0xFF243291),
+                Color(0xFF3A299F),
+                Color(0xFF7427AF),
+              ], // 2 màu gradient
+              stops: [0.0, 0.25, 0.5, 1.0],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-            actions: [
-              IconButton(
-                icon: Icon(CupertinoIcons.bell, color: const Color(0xFF1A4572)),
-                onPressed: () {
-                  context.pushNamed('notification_screen');
-                },
-              )
-            ],
-            centerTitle: true,
-            elevation: 0.0,
           ),
-          body: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Wrap(
-                    spacing: 6,
-                    runSpacing: 6,
-                    children: List.generate(types.length, (index) {
-                      final isSelected =
-                          _viewModel.selectedType == types[index];
-                      return ChoiceChip(
-                        elevation: 0,
-                        shadowColor: Colors.transparent,
-                        labelPadding:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        visualDensity:
-                            VisualDensity(horizontal: 0, vertical: 0),
-                        label: Text(
-                          types[index],
-                          style: TextStyle(
-                            color: isSelected ? Colors.white : Colors.black,
-                          ),
-                        ),
-                        selected: isSelected,
-                        selectedColor: Color(0xFF1A4572),
-                        onSelected: (_) {
-                          _viewModel.changeType(types[index]);
-                        },
-                      );
-                    }),
-                  ),
-                ),
-                SizedBox(height: 8),
-                Divider(height: 1),
-                Expanded(
-                  child: _buildMailList(),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              automaticallyImplyLeading: false,
+              title: Image.asset(
+                'assets/images/app_icon_no_bg.png',
+                width: 64.0,
+                height: 64.0,
+                fit: BoxFit.cover,
+                color: Colors.white,
+              ),
+              actions: [
+                IconButton(
+                  icon: Icon(CupertinoIcons.bell, color: Colors.white),
+                  onPressed: () {
+                    context.pushNamed('notification_screen');
+                  },
                 )
               ],
+              centerTitle: true,
+              elevation: 0.0,
+            ),
+            body: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Wrap(
+                      spacing: 6,
+                      runSpacing: 6,
+                      children: List.generate(types.length, (index) {
+                        final isSelected =
+                            _viewModel.selectedType == types[index];
+                        return ChoiceChip(
+                          elevation: 0,
+                          shadowColor: Colors.transparent,
+                          labelPadding:
+                              EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          visualDensity:
+                              VisualDensity(horizontal: 0, vertical: 0),
+                          label: Text(
+                            types[index],
+                            style: TextStyle(
+                              color: isSelected ? Colors.white : Colors.black,
+                            ),
+                          ),
+                          selected: isSelected,
+                          selectedColor: Color(0xFF1A4572),
+                          onSelected: (_) {
+                            _viewModel.changeType(types[index]);
+                          },
+                        );
+                      }),
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Divider(
+                    height: 1,
+                    color: Colors.white10,
+                  ),
+                  Expanded(
+                    child: _buildMailList(),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -138,7 +158,7 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
   Widget _buildMailList() {
     if (_viewModel.isLoading && _viewModel.filteredMails.isEmpty) {
       return const Center(
-        child: CircularProgressIndicator(),
+        child: CupertinoActivityIndicator(),
       );
     }
 
@@ -212,7 +232,10 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
 
     return ListView.separated(
       itemCount: _viewModel.filteredMails.length,
-      separatorBuilder: (_, __) => Divider(height: 1),
+      separatorBuilder: (_, __) => Divider(
+        height: 1,
+        color: Colors.white10,
+      ),
       itemBuilder: (context, index) {
         final mail = _viewModel.filteredMails[index];
         return Dismissible(
@@ -297,9 +320,9 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
                   child: Text(
                     mail.sender,
                     style: TextStyle(
-                      fontWeight:
-                          mail.isRead ? FontWeight.normal : FontWeight.bold,
-                    ),
+                        fontWeight:
+                            mail.isRead ? FontWeight.normal : FontWeight.bold,
+                        color: Colors.white),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -320,16 +343,16 @@ class _MailScreenWidgetState extends State<MailScreenWidget> {
                 Text(
                   mail.subject,
                   style: TextStyle(
-                    fontWeight:
-                        mail.isRead ? FontWeight.normal : FontWeight.bold,
-                  ),
+                      fontWeight:
+                          mail.isRead ? FontWeight.normal : FontWeight.bold,
+                      color: Colors.white70),
                 ),
                 Text(
                   mail.snippet,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(
-                    color: Colors.grey[700],
+                    color: Colors.white54,
                   ),
                 ),
               ],
