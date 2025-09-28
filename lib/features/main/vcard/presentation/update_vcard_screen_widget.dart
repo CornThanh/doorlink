@@ -184,6 +184,7 @@ class _UpdateVcardScreenWidgetState extends State<UpdateVcardScreenWidget> {
                   ),
                   child: const Icon(
                     Icons.arrow_back_ios_new,
+                    size: 18.0,
                     color: Colors.white,
                   ),
                 ),

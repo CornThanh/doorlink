@@ -411,11 +411,23 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: const Color(0xffffffff),
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFF003C7F),
+                        Color(0xFF243291),
+                        Color(0xFF3A299F),
+                        Color(0xFF7427AF),
+                      ], // 2 màu gradient
+                      stops: [0.0, 0.25, 0.5, 1.0],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
                   child: Center(
                     child: Image.asset(
                       'assets/images/splash_image.png',
-                      width: MediaQuery.sizeOf(context).width * 0.7,
+                      width: MediaQuery.sizeOf(context).width * 0.9,
                       height: MediaQuery.sizeOf(context).height * 0.2,
                       fit: BoxFit.fitWidth,
                     ),
@@ -453,8 +465,8 @@ class FFRoute {
 class TransitionInfo {
   const TransitionInfo({
     required this.hasTransition,
-    this.transitionType = PageTransitionType.fade,
-    this.duration = const Duration(milliseconds: 300),
+    this.transitionType = PageTransitionType.leftToRight,
+    this.duration = const Duration(milliseconds: 200),
     this.alignment,
   });
 
@@ -464,9 +476,8 @@ class TransitionInfo {
   final Alignment? alignment;
 
   static TransitionInfo appDefault() => const TransitionInfo(
-        hasTransition: true,
-        transitionType: PageTransitionType.fade,
-        duration: Duration(milliseconds: 300),
+        hasTransition: false,
+        duration: Duration(milliseconds: 200),
       );
 }
 

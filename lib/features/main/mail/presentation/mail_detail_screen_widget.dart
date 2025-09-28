@@ -1,6 +1,7 @@
 import 'package:doorlink_mobile/backend/api_requests/api_calls.dart';
 import 'package:doorlink_mobile/flutter_flow/flutter_flow_theme.dart';
 import 'package:doorlink_mobile/flutter_flow/flutter_flow_util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
@@ -111,7 +112,7 @@ Shared from DoorLink Mobile App
       barrierDismissible: false,
       builder: (BuildContext context) {
         return Center(
-          child: CircularProgressIndicator(),
+          child: CupertinoActivityIndicator(),
         );
       },
     );
@@ -181,132 +182,161 @@ Shared from DoorLink Mobile App
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        title: Text(
-          'Mail Detail',
-          style: FlutterFlowTheme.of(context).titleLarge.override(
-                fontFamily: 'Nunito Sans',
-                color: Colors.black,
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-                useGoogleFonts: GoogleFonts.asMap().containsKey('Nunito Sans'),
-              ),
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color(0xFF003C7F),
+            Color(0xFF243291),
+            Color(0xFF3A299F),
+            Color(0xFF7427AF),
+          ], // 2 màu gradient
+          stops: [0.0, 0.25, 0.5, 1.0],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: FlutterFlowTheme.of(context).primaryText,
-          ),
-          onPressed: () async {
-            context.pop();
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.archive),
-            color: Color(0xFF1A4572),
-            onPressed: () => _archiveMail(context),
-            tooltip: 'Archive',
-          ),
-          IconButton(
-            color: Color(0xFF1A4572),
-            icon: Icon(Icons.delete),
-            onPressed: () => _deleteMail(context),
-            tooltip: 'Delete',
-          ),
-          IconButton(
-            icon: Icon(Icons.share),
-            color: Color(0xFF1A4572),
-            onPressed: () => _shareMail(context),
-            tooltip: 'Share',
-          ),
-        ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Subject
-            Text(
-              subject ?? 'No Subject',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Text(
+            'Mail Detail',
+            style: FlutterFlowTheme.of(context).titleLarge.override(
+                  fontFamily: 'Nunito Sans',
+                  color: Colors.white,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                  useGoogleFonts:
+                      GoogleFonts.asMap().containsKey('Nunito Sans'),
+                ),
+          ),
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 18,
+              color: Colors.white,
             ),
-            SizedBox(height: 16),
-            // Sender info
-            Row(
-              children: [
-                CircleAvatar(child: Text((senderName ?? 'U')[0])),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(senderName ?? 'Unknown Sender',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                      Text(senderEmail ?? 'No email',
-                          style: TextStyle(color: Colors.grey[600])),
-                    ],
-                  ),
-                ),
-                Text(time ?? 'Unknown time',
-                    style: TextStyle(color: Colors.grey[600], fontSize: 12)),
-              ],
+            onPressed: () async {
+              context.pop();
+            },
+          ),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.archive),
+              color: Colors.white,
+              onPressed: () => _archiveMail(context),
+              tooltip: 'Archive',
             ),
-            if (type != null) ...[
-              SizedBox(height: 16),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: Color(0xFF1A4572).withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Text(
-                  type!,
-                  style: TextStyle(
-                    color: Color(0xFF1A4572),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ],
-            Divider(height: 32),
-            // Body
-            Expanded(
-              child: SingleChildScrollView(
-                child: Text(
-                  body ?? 'No content available',
-                  style: TextStyle(fontSize: 16),
-                ),
-              ),
+            IconButton(
+              color: Colors.white,
+              icon: Icon(Icons.delete),
+              onPressed: () => _deleteMail(context),
+              tooltip: 'Delete',
             ),
-            Divider(height: 32),
-            // Actions
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.share),
-                  onPressed: () => _shareMail(context),
-                  tooltip: 'Share',
-                ),
-                IconButton(
-                  icon: Icon(Icons.delete_outline),
-                  onPressed: () => _deleteMail(context),
-                  tooltip: 'Delete',
-                ),
-                IconButton(
-                  icon: Icon(Icons.archive_outlined),
-                  onPressed: () => _archiveMail(context),
-                  tooltip: 'Archive',
-                ),
-              ],
+            IconButton(
+              icon: Icon(Icons.share),
+              color: Colors.white,
+              onPressed: () => _shareMail(context),
+              tooltip: 'Share',
             ),
           ],
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Subject
+              Text(
+                subject ?? 'No Subject',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              SizedBox(height: 16),
+              // Sender info
+              Row(
+                children: [
+                  CircleAvatar(child: Text((senderName ?? 'U')[0])),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(senderName ?? 'Unknown Sender',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
+                        Text(senderEmail ?? 'No email',
+                            style: TextStyle(color: Colors.white70)),
+                      ],
+                    ),
+                  ),
+                  Text(time ?? 'Unknown time',
+                      style: TextStyle(color: Colors.white70, fontSize: 12)),
+                ],
+              ),
+              if (type != null) ...[
+                SizedBox(height: 16),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF1A4572).withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    type!,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+              Divider(
+                height: 32,
+                color: Colors.white,
+              ),
+              // Body
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Text(
+                    body ?? 'No content available',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ),
+              ),
+              Divider(height: 32),
+              // Actions
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.share,
+                      color: Colors.white,
+                    ),
+                    onPressed: () => _shareMail(context),
+                    tooltip: 'Share',
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.delete_outline, color: Colors.white),
+                    onPressed: () => _deleteMail(context),
+                    tooltip: 'Delete',
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.archive_outlined, color: Colors.white),
+                    onPressed: () => _archiveMail(context),
+                    tooltip: 'Archive',
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

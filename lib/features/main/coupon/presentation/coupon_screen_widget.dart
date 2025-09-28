@@ -1,4 +1,5 @@
 import 'package:doorlink_mobile/features/main/coupon/presentation/coupon_view_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -67,6 +68,7 @@ class _CouponScreenWidgetState extends State<CouponScreenWidget> {
                 leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,
+                    size: 18,
                     color: FlutterFlowTheme.of(context).primaryText,
                   ),
                   onPressed: () async {
@@ -100,7 +102,7 @@ class _CouponScreenWidgetState extends State<CouponScreenWidget> {
   Widget _buildBody(CouponViewModel viewModel) {
     if (viewModel.isLoading && viewModel.coupons.isEmpty) {
       return const Center(
-        child: CircularProgressIndicator(),
+        child: CupertinoActivityIndicator(),
       );
     }
 
@@ -224,7 +226,6 @@ class _CouponScreenWidgetState extends State<CouponScreenWidget> {
                           style:
                               const TextStyle(fontSize: 13, color: Colors.red),
                         ),
-
                       ],
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:doorlink_mobile/features/main/notification/model/notification.dart';
 import 'package:doorlink_mobile/features/main/notification/presentation/notification_view_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -66,37 +67,53 @@ class _NotificationScreenWidgetState extends State<NotificationScreenWidget> {
           return GestureDetector(
             onTap: () =>
                 FocusScope.of(context).requestFocus(_viewModel.unfocusNode),
-            child: Scaffold(
-              appBar: AppBar(
-                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-                automaticallyImplyLeading: true,
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                  ),
-                  onPressed: () async {
-                    context.pop();
-                  },
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF003C7F),
+                    Color(0xFF243291),
+                    Color(0xFF3A299F),
+                    Color(0xFF7427AF),
+                  ], // 2 màu gradient
+                  stops: [0.0, 0.25, 0.5, 1.0],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                titleSpacing: 0,
-                title: Text(
-                  'Notifications',
-                  style: FlutterFlowTheme.of(context).titleLarge.override(
-                        fontFamily: 'Nunito Sans',
-                        color: Colors.black,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        useGoogleFonts:
-                            GoogleFonts.asMap().containsKey('Nunito Sans'),
-                      ),
-                ),
-                centerTitle: true,
-                elevation: 0,
               ),
-              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-              body: SafeArea(
-                child: _buildBody(viewModel),
+              child: Scaffold(
+                appBar: AppBar(
+                  backgroundColor: Colors.transparent,
+                  automaticallyImplyLeading: true,
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      size: 18,
+                      color: Colors.white,
+                    ),
+                    onPressed: () async {
+                      context.pop();
+                    },
+                  ),
+                  titleSpacing: 0,
+                  title: Text(
+                    'Notifications',
+                    style: FlutterFlowTheme.of(context).titleLarge.override(
+                          fontFamily: 'Nunito Sans',
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          useGoogleFonts:
+                              GoogleFonts.asMap().containsKey('Nunito Sans'),
+                        ),
+                  ),
+                  centerTitle: true,
+                  elevation: 0,
+                ),
+                backgroundColor: Colors.transparent,
+                body: SafeArea(
+                  child: _buildBody(viewModel),
+                ),
               ),
             ),
           );
@@ -107,7 +124,7 @@ class _NotificationScreenWidgetState extends State<NotificationScreenWidget> {
 
   Widget _buildBody(NotificationViewModel viewModel) {
     if (viewModel.isLoading && viewModel.notifications.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: CupertinoActivityIndicator());
     }
 
     if (viewModel.errorMessage != null && viewModel.notifications.isEmpty) {

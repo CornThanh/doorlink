@@ -1,4 +1,5 @@
 import 'package:doorlink_mobile/features/main/deal/presentation/deal_view_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -67,6 +68,7 @@ class _DealScreenWidgetState extends State<DealScreenWidget> {
                 leading: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios,
+                    size: 18,
                     color: FlutterFlowTheme.of(context).primaryText,
                   ),
                   onPressed: () async {
@@ -100,7 +102,7 @@ class _DealScreenWidgetState extends State<DealScreenWidget> {
   Widget _buildBody(DealViewModel viewModel) {
     if (viewModel.isLoading && viewModel.deals.isEmpty) {
       return const Center(
-        child: CircularProgressIndicator(),
+        child: CupertinoActivityIndicator(),
       );
     }
 

@@ -123,7 +123,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
               borderRadius: BorderRadius.circular(12),
             ),
             child: const Center(
-              child: CircularProgressIndicator(),
+              child: CupertinoActivityIndicator(),
             ),
           ),
           const SizedBox(height: 12),
@@ -263,7 +263,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         width: double.infinity,
                         height: 180,
                         decoration: BoxDecoration(
-                          color: Colors.grey[300],
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Column(
@@ -295,7 +294,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           options: CarouselOptions(
             height: 180,
             autoPlay: true,
-            enlargeCenterPage: true,
             viewportFraction: 0.9,
             onPageChanged: (index, reason) {
               setState(() {
@@ -317,8 +315,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                 margin: const EdgeInsets.symmetric(horizontal: 4.0),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color:
-                      _current == index ? Color(0xFF1A4572) : Colors.grey[300],
+                  color: _current == index ? Colors.white : Color(0xFF4A4592),
                 ),
               ),
             ),
@@ -338,31 +335,45 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           return GestureDetector(
             onTap: () =>
                 FocusScope.of(context).requestFocus(_viewModel.unfocusNode),
-            child: Scaffold(
-              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-              appBar: AppBar(
-                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-                automaticallyImplyLeading: false,
-                title: Image.asset(
-                  'assets/images/app_icon_no_bg.png',
-                  width: 64.0,
-                  height: 64.0,
-                  fit: BoxFit.cover,
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF003C7F),
+                    Color(0xFF243291),
+                    Color(0xFF3A299F),
+                    Color(0xFF7427AF),
+                  ], // 2 màu gradient
+                  stops: [0.0, 0.25, 0.5, 1.0],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-                actions: [
-                  IconButton(
-                    icon: Icon(CupertinoIcons.bell,
-                        color: const Color(0xFF1A4572)),
-                    onPressed: () {
-                      context.pushNamed('notification_screen');
-                    },
-                  )
-                ],
-                centerTitle: true,
-                elevation: 0.0,
               ),
-              body: SafeArea(
-                child: SingleChildScrollView(
+              child: Scaffold(
+                backgroundColor: Colors.transparent, // để không che gradient
+                appBar: AppBar(
+                  backgroundColor: Colors.transparent,
+                  automaticallyImplyLeading: false,
+                  title: Image.asset(
+                    'assets/images/app_icon_no_bg.png',
+                    width: 64.0,
+                    height: 64.0,
+                    fit: BoxFit.cover,
+                    color: Colors.white,
+                  ),
+                  actions: [
+                    IconButton(
+                      icon: Icon(CupertinoIcons.bell, color: Colors.white),
+                      onPressed: () {
+                        context.pushNamed('notification_screen');
+                      },
+                    )
+                  ],
+                  centerTitle: true,
+                  elevation: 0.0,
+                ),
+                body: SingleChildScrollView(
+                  padding: EdgeInsets.zero,
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -380,7 +391,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Nunito Sans',
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: GoogleFonts.asMap()
@@ -423,7 +434,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Nunito Sans',
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: GoogleFonts.asMap()
@@ -455,7 +466,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                         ),
                       ),
                       _buildNewsAndDealsSection(viewModel),
-                      const SizedBox(height: 12),
                     ],
                   ),
                 ),
@@ -472,7 +482,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       return SizedBox(
         height: 230,
         child: Center(
-          child: CircularProgressIndicator(),
+          child: CupertinoActivityIndicator(),
         ),
       );
     }
@@ -532,7 +542,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     return SizedBox(
       height: 230, // enough to fit image + texts
       child: ListView.separated(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16.0),
         scrollDirection: Axis.horizontal,
         itemCount: viewModel.deals.length,
         separatorBuilder: (context, index) => const SizedBox(width: 12),
@@ -629,7 +639,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       return SizedBox(
         height: 230,
         child: Center(
-          child: CircularProgressIndicator(),
+          child: CupertinoActivityIndicator(),
         ),
       );
     }

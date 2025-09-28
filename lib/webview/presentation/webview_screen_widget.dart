@@ -72,6 +72,7 @@ class _WebviewScreenWidgetState extends State<WebviewScreenWidget> {
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_ios,
+              size: 18.0,
               color: FlutterFlowTheme.of(context).primaryText,
             ),
             onPressed: () async {

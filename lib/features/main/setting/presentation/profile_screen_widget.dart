@@ -71,287 +71,307 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
       onTap: () => _viewModel.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_viewModel.unfocusNode)
           : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          title: Image.asset(
-            'assets/images/app_icon_no_bg.png',
-            width: 64.0,
-            height: 64.0,
-            fit: BoxFit.cover,
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF003C7F),
+              Color(0xFF243291),
+              Color(0xFF3A299F),
+              Color(0xFF7427AF),
+            ], // 2 màu gradient
+            stops: [0.0, 0.25, 0.5, 1.0],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          actions: [
-            // IconButton(
-            //   icon:
-            //       Icon(CupertinoIcons.settings, color: const Color(0xFF1A4572)),
-            //   onPressed: () {
-            //     context.pushNamed('notification_screen');
-            //   },
-            // ),
-            IconButton(
-              icon: Icon(CupertinoIcons.bell, color: const Color(0xFF1A4572)),
-              onPressed: () {
-                context.pushNamed('notification_screen');
-              },
-            )
-          ],
-          centerTitle: true,
-          elevation: 0.0,
         ),
-        body: SafeArea(
-          child: Padding(
-            padding:
-                const EdgeInsetsDirectional.fromSTEB(15.0, 20.0, 15.0, 20.0),
-            child: SingleChildScrollView(
-              child: FutureBuilder<ApiCallResponse>(
-                future: VcardGroup.profileCall.call(
-                  authToken: FFAppState().authToken,
-                ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return const Center(
-                      child: SizedBox(
-                        width: 50.0,
-                        height: 50.0,
-                        child: CupertinoActivityIndicator(color: Colors.grey),
-                      ),
-                    );
-                  }
-                  columnProfileResponse = snapshot.data!;
-                  return Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                            bottomLeft: Radius.circular(50.0),
-                            bottomRight: Radius.circular(50.0),
-                            topLeft: Radius.circular(50.0),
-                            topRight: Radius.circular(50.0),
-                          ),
-                          child: Image.network(
-                            VcardGroup.profileCall.image(
-                                  columnProfileResponse.jsonBody,
-                                ) ??
-                                '',
-                            width: 90.0,
-                            height: 90.0,
-                            fit: BoxFit.cover,
+        child: Scaffold(
+          key: scaffoldKey,
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            automaticallyImplyLeading: false,
+            title: Image.asset(
+              'assets/images/app_icon_no_bg.png',
+              width: 64.0,
+              height: 64.0,
+              fit: BoxFit.cover,
+              color: Colors.white,
+            ),
+            actions: [
+              // IconButton(
+              //   icon:
+              //       Icon(CupertinoIcons.settings, color: const Color(0xFF1A4572)),
+              //   onPressed: () {
+              //     context.pushNamed('notification_screen');
+              //   },
+              // ),
+              IconButton(
+                icon: Icon(CupertinoIcons.bell, color: Colors.white),
+                onPressed: () {
+                  context.pushNamed('notification_screen');
+                },
+              )
+            ],
+            centerTitle: true,
+            elevation: 0.0,
+          ),
+          body: SafeArea(
+            child: Padding(
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(15.0, 20.0, 15.0, 20.0),
+              child: SingleChildScrollView(
+                child: FutureBuilder<ApiCallResponse>(
+                  future: VcardGroup.profileCall.call(
+                    authToken: FFAppState().authToken,
+                  ),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return const Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CupertinoActivityIndicator(color: Colors.grey),
+                        ),
+                      );
+                    }
+                    columnProfileResponse = snapshot.data!;
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Align(
+                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(50.0),
+                              bottomRight: Radius.circular(50.0),
+                              topLeft: Radius.circular(50.0),
+                              topRight: Radius.circular(50.0),
+                            ),
+                            child: Image.network(
+                              VcardGroup.profileCall.image(
+                                    columnProfileResponse.jsonBody,
+                                  ) ??
+                                  '',
+                              width: 90.0,
+                              height: 90.0,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 10.0, 0.0, 0.0),
-                        child: Text(
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 10.0, 0.0, 0.0),
+                          child: Text(
+                            valueOrDefault<String>(
+                              VcardGroup.profileCall.firstName(
+                                columnProfileResponse.jsonBody,
+                              ),
+                              'firstName',
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Nunito Sans',
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey('Nunito Sans'),
+                                ),
+                          ),
+                        ),
+                        Text(
                           valueOrDefault<String>(
-                            VcardGroup.profileCall.firstName(
+                            VcardGroup.profileCall.email(
                               columnProfileResponse.jsonBody,
                             ),
-                            'firstName',
+                            'email',
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Nunito Sans',
-                                    color: Colors.black,
-                                    fontSize: 18.0,
+                                    color: Colors.white.withValues(alpha: 0.7),
+                                    fontSize: 14.0,
                                     fontWeight: FontWeight.bold,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey('Nunito Sans'),
                                   ),
                         ),
-                      ),
-                      Text(
-                        valueOrDefault<String>(
-                          VcardGroup.profileCall.email(
-                            columnProfileResponse.jsonBody,
-                          ),
-                          'email',
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Nunito Sans',
-                              color: const Color(0xFF79818A),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: GoogleFonts.asMap()
-                                  .containsKey('Nunito Sans'),
-                            ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 20.0, 0.0, 0.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () => _onPressedEditProfile(
-                              columnProfileResponse.jsonBody),
-                          child: Container(
-                            width: MediaQuery.sizeOf(context).width * 0.38,
-                            height: 35.0,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF1A4572),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            alignment: const AlignmentDirectional(0.0, 0.0),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 0.0, 10.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    FFLocalizations.of(context).getText(
-                                      'mg8rhguv' /* Edit Profile */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Nunito Sans',
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w600,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey('Nunito Sans'),
-                                        ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        15.0, 0.0, 0.0, 0.0),
-                                    child: Icon(
-                                      Icons.arrow_forward_ios_rounded,
-                                      color: Colors.white,
-                                      size: 15.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Text(
-                            'Help & Support',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Nunito Sans',
-                                  fontSize: 16.0,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Nunito Sans'),
-                                ),
-                          ),
-                        ),
-                      ),
-                      ListView.separated(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          String code =
-                              switch (HelpSupportItems.values[index]) {
-                            HelpSupportItems.howItWork => 'How DoorLink Works',
-                            HelpSupportItems.reportIssue => 'Report an Issue',
-                          };
-                          return _itemBuilder(context, index, code);
-                        },
-                        separatorBuilder: _separatorBuilder,
-                        itemCount: HelpSupportItems.values.length,
-                      ),
-                      SizedBox(height: 16),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Text(
-                            'My Account',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Nunito Sans',
-                                  fontSize: 16.0,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey('Nunito Sans'),
-                                ),
-                          ),
-                        ),
-                      ),
-                      ListView.separated(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          String code = switch (MyAccountItems.values[index]) {
-                            MyAccountItems.logout => 'Logout',
-                          };
-                          return InkWell(
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 20.0, 0.0, 0.0),
+                          child: InkWell(
                             splashColor: Colors.transparent,
                             focusColor: Colors.transparent,
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
-                            onTap: () async {
-                              _handleLogout(context);
-                            },
+                            onTap: () => _onPressedEditProfile(
+                                columnProfileResponse.jsonBody),
                             child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              height: 50,
+                              width: MediaQuery.sizeOf(context).width * 0.38,
+                              height: 35.0,
                               decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withValues(alpha: .1),
-                                    blurRadius: 1,
-                                    offset: const Offset(0, 1),
-                                  ),
-                                ],
+                                color: const Color(0xFF1A4572),
+                                borderRadius: BorderRadius.circular(30.0),
                               ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    code,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Nunito Sans',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey('Nunito Sans'),
-                                        ),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 16,
-                                  ),
-                                ],
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 0.0, 10.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      FFLocalizations.of(context).getText(
+                                        'mg8rhguv' /* Edit Profile */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Nunito Sans',
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey('Nunito Sans'),
+                                          ),
+                                    ),
+                                    const Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          15.0, 0.0, 0.0, 0.0),
+                                      child: Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        color: Colors.white,
+                                        size: 15.0,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          );
-                        },
-                        separatorBuilder: _separatorBuilder,
-                        itemCount: MyAccountItems.values.length,
-                      ),
-                    ],
-                  );
-                },
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Text(
+                              'Help & Support',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Nunito Sans',
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey('Nunito Sans'),
+                                  ),
+                            ),
+                          ),
+                        ),
+                        ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            String code =
+                                switch (HelpSupportItems.values[index]) {
+                              HelpSupportItems.howItWork =>
+                                'How DoorLink Works',
+                              HelpSupportItems.reportIssue => 'Report an Issue',
+                            };
+                            return _itemBuilder(context, index, code);
+                          },
+                          separatorBuilder: _separatorBuilder,
+                          itemCount: HelpSupportItems.values.length,
+                        ),
+                        SizedBox(height: 16),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Text(
+                              'My Account',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Nunito Sans',
+                                    fontSize: 16.0,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey('Nunito Sans'),
+                                  ),
+                            ),
+                          ),
+                        ),
+                        ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            String code =
+                                switch (MyAccountItems.values[index]) {
+                              MyAccountItems.logout => 'Logout',
+                            };
+                            return InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                _handleLogout(context);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withValues(alpha: .1),
+                                      blurRadius: 1,
+                                      offset: const Offset(0, 1),
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      code,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Nunito Sans',
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w500,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey('Nunito Sans'),
+                                          ),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 16,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          separatorBuilder: _separatorBuilder,
+                          itemCount: MyAccountItems.values.length,
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -542,7 +562,7 @@ class _ProfileScreenWidgetState extends State<ProfileScreenWidget> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: CupertinoActivityIndicator(),
           );
         },
       );
